@@ -1,0 +1,188 @@
+user_order:
+    resource: "@UserOrderBundle/Resources/config/routing.yml"
+    prefix:   /
+
+user_messages:
+    resource: "@UserMessagesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+user_friends:
+    resource: "@UserFriendsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+user_property:
+    resource: "@UserPropertyBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+user_registration:
+    resource: "@UserRegistrationBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+user_user:
+    resource: "@UserUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+manager_main:
+    resource: "@ManagerMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
+search_user:
+    resource: "@SearchUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+search_partners:
+    resource: "@SearchPartnersBundle/Resources/config/routing.yml"
+    prefix:   /
+
+search_shop:
+    resource: "@SearchShopBundle/Resources/config/routing.yml"
+    prefix:   /
+
+search_platform:
+    resource: "@SearchPlatformBundle/Resources/config/routing.yml"
+    prefix:   /
+
+manager_advertising:
+    resource: "@ManagerAdvertisingBundle/Resources/config/routing.yml"
+    prefix:   /
+
+manager_orders:
+    resource: "@ManagerOrdersBundle/Resources/config/routing.yml"
+    prefix:   /
+
+manager_partners:
+    resource: "@ManagerPartnersBundle/Resources/config/routing.yml"
+    prefix:   /
+
+manager_shops:
+    resource: "@ManagerShopsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+platform_products:
+    resource: "@PlatformProductsBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+platform_shops:
+    resource: "@PlatformShopsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+platform_news:
+    resource: "@PlatformNewsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+platform_main:
+    resource: "@PlatformMainBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+# captcha
+gregwar_captcha_routing:
+    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
+    prefix: /_gcb
+    
+# AvalancheImagineBundle
+_imagine:
+    resource: .
+    type:     imagine
+    
+_imagine_logo_shop:
+    resource: .
+    type:     imagine
+    
+_imagine_logo_shop_information:
+    resource: .
+    type:     imagine
+    
+_imagine_avatar:
+    resource: .
+    type:     imagine
+    
+_imagine_mini_avatar:
+    resource: .
+    type:     imagine
+
+_imagine_advertisingSliderPlatform:
+    resource: .
+    type:     imagine
+    
+_imagine_advertisingSliderShop:
+    resource: .
+    type:     imagine
+
+_imagine_advertisingSideOf:
+    resource: .
+    type:     imagine
+
+_imagine_product_image:
+    resource: .
+    type:     imagine
+    
+_imagine_main_product_image:
+    resource: .
+    type:     imagine
+    
+# my login form
+login:
+    path:   /login
+    defaults:  { _controller: UserUserBundle:Auth:login }
+    
+login_check:
+    path:   /login_check
+    
+logout:
+    path:   /logout
+    
+# HWI
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+    
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+    
+vkontakte_login:
+    pattern: /login/check-vkontakte
+    
+facebook_login:
+    pattern: /login/check-facebook
+    
+google_login:
+    pattern: /login/check-google
+    
+# upload image
+oneup_uploader:
+    resource: .
+    type: uploader
+    
+# shop route
+shop_order:
+    resource: "@ShopOrderBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+shop_product:
+    resource: "@ShopProductBundle/Resources/config/routing.yml"
+    prefix:   /
+
+shop_news:
+    resource: "@ShopNewsBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+shop_add_products:
+    resource: "@ShopAddProductsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+shop_information:
+    resource: "@ShopInformationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+shop_create:
+    resource: "@ShopCreateBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+shop_main:
+    resource: "@ShopMainBundle/Resources/config/routing.yml"
+    prefix:   /
