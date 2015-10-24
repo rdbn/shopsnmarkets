@@ -13,6 +13,11 @@
 !/app/AppKernel.php
 /bin/
 /vendor/
-/web/
-!/web/public/
+/web/bundles
+/web/.htaccess
+/web/app.php
+/web/app_dev.php
+/web/config.php
+/web/favicon.ico
+/web/apple-touch-icon.png
 composer.lock

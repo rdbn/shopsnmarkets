@@ -1,0 +1,295 @@
+/* style for header
+--------------------------------- */
+#header .menu {
+    margin-top: 20px;
+    float: left;
+    width: 190px;
+    position: relative;
+}
+#header .menu li {
+    float: left;
+    margin-bottom: 10px;
+    width: 190px;
+}
+#header .menu a {
+    display: block;
+    float: left;
+    width: 180px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 14px;
+    color: #2ab374;
+    box-shadow: 0 0 3px 0px #2ab374;
+}
+#header .menu a span {
+    margin-right: 5px;
+    float: right;
+    width: 15px;
+    height: 30px;
+    background: url('/public/images/menu_arrow.png') no-repeat center right;
+}
+#header .menu .hover a {
+    color: #fff;
+    background: #EE7600;
+    box-shadow: 0 0 3px 0px #EE7600;
+}
+#header .menu a:hover {
+    color: #fff;
+    background: #EE7600;
+}
+#header .menu .categoryWomen {
+    position: absolute;
+    top: 0px;
+    left: 190px;
+    padding: 5px;
+    width: 300px;
+    background: #fff;
+    box-shadow: 0 0 3px 0px #EE7600;
+    z-index: 100;
+}
+#header .menu .categoryWomen h3 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #b4b0b0;
+}
+#header .menu .categoryWomen a {
+    float: left;
+    width: auto;
+    padding: 10px;
+    line-height: normal;
+    height: auto;
+    text-decoration: none;
+    color: #2ab374;
+    font-size: 11px;
+    font-weight: normal;
+    background: #fff;
+    border: 0px;
+    box-shadow: 0px 0px 0px;
+}
+#header .menu .categoryWomen a:hover {
+    color: #2ab374;
+    background: #ddf3e9;
+}
+#header .menu .categoryMan {
+    position: absolute;
+    top: 0px;
+    left: 190px;
+    padding: 5px;
+    width: 300px;
+    background: #fff;
+    box-shadow: 0 0 3px 0px #EE7600;
+    z-index: 100;
+}
+#header .menu .categoryMan h3 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #b4b0b0;
+}
+#header .menu .categoryMan a {
+    float: left;
+    width: auto;
+    padding: 10px;
+    line-height: normal;
+    height: auto;
+    text-decoration: none;
+    color: #2ab374;
+    font-size: 11px;
+    font-weight: normal;
+    background: #fff;
+    border: 0px;
+    box-shadow: 0px 0px 0px;
+}
+#header .menu .categoryMan a:hover {
+    color: #2ab374;
+    background: #ddf3e9;
+}
+#header .menu .categoryAccessories {
+    position: absolute;
+    top: 0px;
+    left: 190px;
+    padding: 5px;
+    width: 300px;
+    background: #fff;
+    box-shadow: 0 0 3px 0px #EE7600;
+    z-index: 100;
+}
+#header .menu .categoryAccessories h3 {
+    margin-bottom: 10px;
+    float: left;
+    width: 140px;
+    font-size: 14px;
+    color: #b4b0b0;
+}
+#header .menu .categoryAccessories ul {
+    float: left;
+    width: 140px;
+}
+#header .menu .categoryAccessories ul li {
+    margin-bottom: 0px;
+}
+#header .menu .categoryAccessories a {
+    float: left;
+    width: 140px;
+    padding: 5px;
+    padding-left: 10px;
+    line-height: normal;
+    height: auto;
+    text-align: left;
+    text-decoration: none;
+    color: #2ab374;
+    font-size: 11px;
+    font-weight: normal;
+    background: #fff;
+    border: 0px;
+    box-shadow: 0px 0px 0px;
+}
+#header .menu .categoryAccessories a:hover {
+    color: #2ab374;
+    background: #ddf3e9;
+}
+#header .menu .categoryBoots {
+    position: absolute;
+    top: 0px;
+    left: 190px;
+    padding: 5px;
+    width: 300px;
+    background: #fff;
+    box-shadow: 0 0 3px 0px #EE7600;
+    z-index: 100;
+}
+#header .menu .categoryBoots h3 {
+    margin-bottom: 10px;
+    float: left;
+    width: 140px;
+    font-size: 14px;
+    color: #b4b0b0;
+}
+#header .menu .categoryBoots ul {
+    float: left;
+    width: 140px;
+}
+#header .menu .categoryBoots ul li {
+    margin-bottom: 0px;
+}
+#header .menu .categoryBoots a {
+    float: left;
+    width: 140px;
+    padding: 5px;
+    padding-left: 10px;
+    line-height: normal;
+    height: auto;
+    text-align: left;
+    text-decoration: none;
+    color: #2ab374;
+    font-size: 11px;
+    font-weight: normal;
+    background: #fff;
+    border: 0px;
+    box-shadow: 0px 0px 0px;
+}
+#header .menu .categoryBoots a:hover {
+    color: #2ab374;
+    background: #ddf3e9;
+}
+/* style for slider */
+#header .bx-wrapper {
+    margin-top: 20px;
+    float: right;
+    width: 790px;
+}
+/* style for header bottom
+----------------------------- */
+#headerBottom {
+    margin-top: 0px;
+    height: 56px;
+    background: url('/public/images/bg_header_bottom.png') repeat-x top left;
+}
+#headerBottom .content {
+    width: 1000px;
+}
+#headerBottom .content .topShop {
+    margin-top: 13px;
+    float: left;
+    display: block;
+    width: 158px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bolder;
+    text-decoration: none;
+    color: #ffffff;
+    background: #2ab374;
+}
+#headerBottom .content .howThe {
+    margin-top: 19px;
+    margin-right: 8px;
+    float: right;
+    display: block;
+    font-size: 11px;
+    color: #b4b0b0;
+}
+/* style for main content
+-------------------------------- */
+#mainContent {
+    margin-bottom: 80px;
+    min-height: 0;
+    background: #f8f7f7;
+}
+/* menu content */
+#content {
+    margin-bottom: 0px;
+    margin-top: 7px;
+}
+#content .content {
+    float: left;
+    border: 1px solid #f1f0f0;
+    border-bottom: 0px;
+    background: #ffffff;
+}
+#content .shop {
+    margin-top: 29px;
+    margin-left: 29px;
+    margin-bottom: 15px;
+    float: left;
+}
+#content .shop img {
+    float: left;
+    width: 110px;
+    height: 110px;
+    background: #e1e1e1;
+}
+#content .shop ul {
+    margin-left: 19px;
+    margin-top: 7px;
+    float: left;
+    width: 170px;
+}
+#content .shop ul li {
+    margin-bottom: 6px;
+}
+#content .shop ul a {
+    font-weight: bolder;
+    color: #2ab374;
+    text-decoration: none;
+}
+#content .shop ul p {
+    color: #b4b0b0;
+}
+/* style like */
+#content .shop ul .like {
+    font-weight: normal;
+}
+#content .shop ul .like {
+    float: left;
+    display: block;
+    width: 120px;
+}
+#content .shop ul .like .countLike {
+    float: right;
+    text-align: right;
+    width: 38px;
+    height: 14px;
+    background: url('/public/images/like.png') no-repeat center left;
+}

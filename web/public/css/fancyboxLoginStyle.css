@@ -1,0 +1,223 @@
+.fancybox-inner {
+    background: #fff;
+}
+.socialLogin {
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-left: 25px;
+    float: right;
+    width: 370px;
+    border-left: 1px solid #e1e1e1;
+}
+.socialLogin h3 {
+    margin-bottom: 20px;
+    float: left;
+    width: 300px;
+    font-size: 15px;
+    color: #585858;
+}
+.socialLogin .auth {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+    width: 190px;
+}
+.socialLogin .auth li {
+    margin-bottom: 19px;
+}
+.socialLogin .auth a {
+    display: block;
+    width: 190px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 12px;
+    text-shadow: 0px 0px 0px #e1e1e1;
+}
+.socialLogin .auth a span {
+    float: right;
+    width: 160px;
+}
+.socialLogin .auth .vk {
+    background: url('/public/images/vk.png') no-repeat center center;
+}
+.socialLogin .auth .fb {
+    background: url('/public/images/fb.png') no-repeat center center;
+}
+.socialLogin .auth .gl {
+    background: url('/public/images/gl.png') no-repeat center center;
+}
+/* style for login
+-------------------------------- */
+.loginForm {
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+    width: 370px;
+}
+.loginForm h3 {
+    margin-bottom: 20px;
+    float: left;
+    width: 300px;
+    font-size: 15px;
+    color: #585858;
+}
+.loginForm .login {
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+    width: 365px;
+}
+.loginForm .login li {
+    margin-bottom: 19px;
+}
+.loginForm .login label {
+    float: left;
+    display: block;
+    width: 40px;
+}
+.loginForm .login .button {
+    margin-right: 15px;
+    padding: 0px;
+}
+/* error */
+#errors {
+    margin-top: 0px;
+    float: left;
+}
+#errors h3 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    width: 550px;
+    font-size: 12px;
+    font-weight: bolder;
+    color: #b76262;
+    float: left;
+}
+#errors h3:last-child {
+    margin-bottom: 0px;
+}
+.login_error h3 {
+    margin-left: 0px;
+}
+/* message */
+.formFields {
+    margin-top: 10px;
+    width: 350px;
+}
+.formFields img {
+    float: left;
+}
+.formFields h3 {
+    color:  #2ab374;
+}
+.formFields li {
+    float: left;
+}
+.formFields label {
+    float: left;
+    text-align: left;
+}
+.formFields .button {
+    margin-top: 10px;
+    padding: 0px;
+}
+/* style for load button
+----------------------- */
+#load {
+    margin-top: 10px;
+    display: none;
+    width: 43px;
+}
+/* style for checkForm
+----------------------- */
+.checkForm {
+    margin-top: 20px;
+    width: 450px;
+}
+.checkForm li {
+    margin-bottom: 20px;
+}
+.checkForm label {
+    line-height: 26px;
+    height: 26px;
+    text-align: right;
+}
+.checkForm input {
+    margin-left: 20px;
+    float: left;
+}
+.checkForm select {
+    margin-left: 20px;
+    float: left;
+}
+.checkForm .button {
+    margin: auto;
+    float: none;
+}
+/* style for form preview
+-------------------------------- */
+.formPreview {
+    width: 350px;
+}
+.formPreview li {
+    float: left;
+}
+.formPreview li label {
+    float: left;
+    text-align: left;
+    width: 200px;
+}
+.formPreview li input {
+    float: left;
+}
+.formPreview .submit {
+    margin-top: 10px;
+    width: 350px;
+}
+.formPreview .submit input {
+    margin: auto;
+    float: none;
+}
+/* style for form delivery
+------------------------------- */
+.formDelivery {
+    width: 550px;
+}
+.formDelivery li {
+    float: left;
+    width: 550px;
+}
+.formDelivery li:first-child {
+    margin-top: 10px;
+}
+.formDelivery li label {
+    margin-left: 5px;
+    float: left;
+    text-align: left;
+    width: 150px;
+}
+.formDelivery li input {
+    margin-left: 10px;
+    float: left;
+    width: 100px;
+}
+.formDelivery li input[type="checkbox"] {
+    margin-left: 0px;
+    margin-top: 8px;
+    float: left;
+    width: auto;
+}
+.formDelivery li .required {
+    text-align: right;
+    width: 60px;
+}
+.formDelivery .submit {
+    margin-top: 20px;
+}
+.formDelivery .submit .button {
+    margin: auto;
+    float: none;
+}

@@ -1,0 +1,929 @@
+/* style for main eliments
+------------------------------------------------- */
+#mainContent { 
+    float: none;
+    width: 1000px;
+}
+#menu { 
+    float: left;
+    width: 165px;
+}
+#content { 
+    float: right;
+    width: 825px; 
+}
+/* style for manager menu 
+-------------------------------- */
+#menu {
+    margin-top: -2px;
+    border-right: 2px solid #ddf3e9;
+}
+#menu ul {
+    margin-top: 21px;
+    float: left;
+    width: 120px;
+}
+#menu ul li {
+    margin-bottom: 7px;
+}
+#menu ul a {
+    padding-left: 14px;
+    display: block;
+    line-height: 22px;
+    color: #2ab374;
+    text-decoration: none;
+}
+#menu ul a:hover {
+    background: #ddf3e9;
+}
+/* style for content
+-------------------------------- */
+#content .avatar {
+    margin-left: 15px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    float: left;
+    width: 200px;
+}
+#content .avatar a {
+    margin-top: 15px;
+    display: block;
+    width: 177px;
+    line-height: 32px;
+    text-align: center;
+    color: #312f2f;
+    text-decoration: none;
+    cursor: pointer;
+    background: #ececec;
+    border-radius: 4px;
+    /* не забудь проверить в ишаке 9 - 10 */
+    box-shadow: 0px 0px 1px 0px #cfcfcf;
+}
+#content .avatar a:hover {
+    background: #dcdcdc;
+}
+#content .avatar p {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 11px;
+    color: #b4b0b0;
+}
+#content .avatar img {
+    width: 200px;
+    height: 250px;
+    background: #f3f2f2;
+}
+#content .manager {
+    float: right;
+    width: 590px;
+}
+#content .manager h3 {
+    margin-top: 21px;
+    margin-left: 2px;
+    color: #2ab374;
+}
+#content .manager .short_text {
+    margin-top: 9px;
+    margin-left: 2px;
+    color: #b4b0b0;
+}
+#content .manager .information {
+    margin-top: 16px;
+    margin-left: 2px;
+    border-top: 1px solid #f8f7f7;
+}
+#content .manager .information li {
+    margin-top: 13px;
+}
+#content .manager .information li p {
+    color: #2ab374;
+}
+#content .manager .information li span {
+    width: 105px;
+    float: left;
+    color: #b4b0b0;
+}
+#content .manager .text {
+    margin-top: 19px;
+    margin-left: 3px;
+    color: #312f2f;
+    line-height: 16px;
+}
+/* style for content Order
+--------------------------------- */
+#content .orders {
+    float: left;
+}
+#content .order {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+    width: 790px;
+    border: 2px solid #ddf3e9;
+}
+#content .order .date {
+    float: left;
+    width: 790px;
+    height: 30px;
+    background: #ddf3e9;
+}
+#content .order img {
+    margin: 15px;
+    margin-right: 10px;
+    float: left;
+    width: 110px;
+    height: 123px;
+}
+#content .order h3 {
+    float: left;
+    width: 790px;
+    color: #2ab374;
+    font-size: 14px;
+}
+#content .order .address {
+    margin-top: 15px;
+    margin-right: 10px;
+    float: left;
+    width: 200px;
+}
+#content .order .address li {
+    float: left;
+    margin-bottom: 10px;
+}
+#content .order .address li a {
+    margin-left: 19px;
+    float: left;
+    display: block;
+    font-weight: bolder;
+    font-size: 11px;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background: #26a168;
+}
+#content .order .address li a:hover {
+    background: #EE7600;
+}
+#content .order .address p {
+    color: #585858;
+}
+#content .order .address p span {
+    float: left;
+    width: 70px;
+    color: #2ab374;
+}
+#content .order .products {
+    float: right;
+    width: 375px;
+    border-left: 2px solid #ddf3e9;
+}
+#content .order .product {
+    margin-right: 10px;
+    float: left;
+}
+#content .order .product img {
+    margin-right: 10px;
+    float: left;
+}
+#content .order .product ul {
+    margin-top: 10px;
+    float: left;
+    width: 150px;
+}
+#content .order .product ul li {
+    margin-bottom: 10px;
+    float: left;
+}
+#content .order .product ul p {
+    color: #585858;
+}
+#content .order .product ul p span {
+    float: left;
+    width: 70px;
+    color: #2ab374;
+}
+/* style for content Message
+-------------------------------- */
+#content .loadMessage {
+    float: left;
+    width: 150px;
+}
+#content .allMessage {
+    display: block;
+    margin-top: 10px;
+    float: left;
+    opacity: 1;
+}
+#content .user {
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: left;
+    display: block;
+    width: 700px;
+    border-bottom: 1px solid #dcdcdc;
+}
+#content .unread {
+    float: left;
+    width: 700px;
+}
+#content .unread a {
+    margin-top: 10px;
+    float: left;
+    color: #2ab374;
+}
+#content .unread a:hover {
+    text-decoration: none;
+}
+#content .user:hover {
+    background: #ddf3e9;
+}
+#content .allMessage .unread {
+    background: #ddf3e9;
+}
+#content .user img {
+    margin-right: 10px;
+    padding: 3px;
+    float: left;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    box-shadow: 0px 0px 5px -1px #585858;
+}
+#content .user .name {
+    margin-bottom: 10px;
+    float: left;
+    width: 500px;
+    font-weight: bolder;
+    color: #2ab374;
+}
+#content .user .delete {
+    margin-right: 5px;
+    float: right;
+    font-size: 19px;
+    font-weight: bolder;
+    color: #6dd3a6;
+    opacity: 0;
+}
+#content .user .delete:hover {
+    color: #2ab374;
+}
+#content .user .text {
+    float: left;
+    width: 610px;
+    line-height: 20px;
+    color: #585858;
+}
+#content .allMenu {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    float: left;
+    width: 825px;
+}
+#content .menuMessages {
+    width: 590px;
+}
+#content .menuMessages ul {
+    float: right;
+    width: 200px;
+}
+#content .menuMessages .addMenu {
+    margin-left: 43px;
+    float: left;
+    display: none;
+    width: 160px;
+    opacity: 0;
+}
+#content .menuMessages ul li {
+    float: right;
+}
+#content .menuMessages .addMenu li {
+    float: left;
+}
+#content .menuMessages ul a {
+    margin-left: 10px;
+    display: block;
+    padding: 5px;
+    color: #2ab374;
+    text-decoration: none;
+    background: #ddf3e9;
+}
+#content .menuMessages .addMenu a {
+    margin-left: 0px;
+    margin-right: 10px;
+}
+#content .menuMessages ul a:hover {
+    text-decoration: underline;
+    background: #c7ebdb;
+}
+#content .messageBasket {
+    margin-bottom: 20px;
+    display: none;
+    width: 590px;
+    opacity: 0;
+}
+#content .messages {
+    margin-top: 60px;
+    display: block;
+    width: 590px;
+    height: 320px;
+    overflow-y: hidden;
+    overflow-y: scroll;
+    opacity: 1;
+}
+#content .messages .unread {
+    background: #ddf3e9;
+}
+#messageId {
+    display: none;
+}
+#content .message {
+    display: block;
+    padding-top: 10px;
+    padding-right: 5px;
+    float: right;
+    position: relative;
+    width: 525px;
+    border-bottom: 1px dashed #cfcfcf;
+    cursor: pointer;
+    opacity: 1;
+}
+#content .click {
+    background: #ddf3e9;
+}
+#content .message:hover {
+    background: #ddf3e9;
+}
+#content .message .tick {
+    position: absolute;
+    top: 21px;
+    left: -43px;
+    width: 29px;
+    height: 23px;
+    background: url('/public/images/tick_message.png') no-repeat center center;
+    opacity: 0;
+}
+#content .message img {
+    margin-left: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 3px;
+    float: left;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 0px 5px -1px #585858;
+}
+#content .message h3 {
+    margin-bottom: 10px;
+    color: #29b273;
+}
+#content .message h3 span {
+    float: right;
+    color: #29b273;
+    font-weight: normal;
+}
+#content .message p {
+    margin-bottom: 10px;
+    float: left;
+    color:  #312f2f;
+}
+#content .formMessage {
+    margin-top: 20px;
+    display: block;
+    width: 590px;
+    opacity: 1;
+}
+#content .formMessage .imageRight {
+    margin-left: 0px;
+    margin-right: 0px;
+    float: right;
+}
+#content .formMessage .formFields {
+    margin-top: 0px;
+    float: left;
+    width: 391px;
+}
+#content .formMessage .formFields li {
+    margin-bottom: 0px;
+}
+#content .formMessage img {
+    margin-top: 5px;
+    margin-left: 49px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    padding: 3px;
+    float: left;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 0px 5px -1px #585858;
+}
+#content .formMessage label {
+    text-align: left;
+    line-height: 20px;
+}
+#content .formMessage textarea {
+    float: left;
+    width: 384px;
+    height: 100px;
+}
+#content .formMessage .formFields .button {
+    margin-top: 10px;
+}
+/* style for content friends
+-------------------------------- */
+#load {
+    margin-top: 30px;
+    display: none;
+    float: left;
+    width: 600px;
+}
+#load .processImage {
+    width: 31px;
+}
+#content .menu {
+    margin-top: -2px;
+    margin-left: -8px;
+    float: left;
+    width: 100%;
+    background: #ddf3e9;
+}
+#content .menu li {
+    float: left;
+}
+#content .menu .last {
+    float: right;
+}
+#content .menu a {
+    display: block;
+    padding: 13px;
+    font-weight: bolder;
+    color: #2ab374;
+    text-decoration: none;
+}
+#content .menu a:hover {
+    background: #c7ebdb;
+    text-decoration: underline;
+}
+#content .friends {
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    float: left;
+    width: 800px;
+    border-bottom: 1px solid #e6e6e6;
+}
+#content .friends h3 {
+    margin-top: 3px;
+    margin-left: 18px;
+    float: left;
+    color: #2ab374;
+}
+#content .friends img {
+    margin-bottom: 20px;
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: #f3f2f2;
+}
+#content .friends .load {
+    margin-top: 2px;
+    float: right;
+    opacity: 0;
+}
+#content .friends .load img {
+    margin-bottom: 0px;
+    width: 23px;
+    height: 11px;
+}
+#content .friends ul {
+    float: right;
+}
+#content .friends ul li {
+    margin-bottom: 5px;
+}
+#content .friends ul a {
+    display: block;
+    padding: 8px;
+    color: #2ab374;
+    text-decoration: none;
+}
+#content .friends a:hover {
+    background: #ddf3e9;
+}
+#content .typeFriends {
+    position: relative;
+}
+#content .typeFriends .target {
+    background: #ddf3e9;
+}
+#content .friends .type {
+    display: none;
+    position: absolute;
+    top: 37px;
+    left: 0px;
+    padding: 5px;
+    background: #fff;
+    box-shadow: 0 0 3px 0px #2ab374;
+}
+#content .friends .type a {
+    width: 105px;
+}
+/* style for searh friends */
+#content .search {
+    margin-top: 0px;
+    margin-bottom: 22px;
+    float: left;
+}
+#content .search input {
+    margin-left: 13px;
+    margin-top: 16px;
+    float: left;
+    display: block;
+    padding: 5px;
+    font-size: 14px;
+    color: #b4b0b0;
+    width: 758px;
+    height: 29px;
+    border: 1px solid #f1f1f1;
+    border-right: 0px;
+    box-shadow: -2px 0px 5px -2px #f1f1f1;
+}
+#content .search .button {
+    margin-left: 0px;
+    margin-top: 16px;
+    float: left;
+    display: block;
+    width: 35px;
+    height: 41px;
+    border: 1px solid #f1f1f1;
+    border-left: 0px;
+    background: url('/public/images/shop/button_search.png') no-repeat center center;
+    cursor: pointer;
+    border-radius: 0px;
+    box-shadow: 2px 0px 5px -2px #f1f1f1;
+}
+#content .seconderyMenuSearch {
+    margin-right: 9px;
+    float: right;
+}
+#content .seconderyMenuSearch li {
+    margin-bottom: 20px;
+}
+#content .seconderyMenuSearch select {    
+    width: 170px;
+}
+#resualtSearch {
+    margin-left: 13px;
+    float: left;
+    width: 600px;
+}
+#resualtSearch h3 {
+    float: left;
+    width: 600px;
+    color: #b4b0b0;
+}
+#resualtSearch .resultUser {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+    width: 600px;
+    border-bottom: 1px solid #e6e6e6;
+}
+#resualtSearch .resultUser img {
+    margin-bottom: 20px;
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: #f3f2f2; 
+}
+#resualtSearch .resultUser h3 {
+    margin-left: 15px;
+    float: left;
+    width: 300px;
+    color: #29b273;
+}
+#resualtSearch .resultUser ul {
+    float: right;
+    width: 177px;
+}
+#resualtSearch .resultUser ul li {
+    float: left;
+    margin-bottom: 10px;
+}
+#resualtSearch .resultUser ul a {
+    margin: 0px;
+    float: right;
+    display: block;
+    width: 177px;
+    line-height: 32px;
+    text-align: center;
+    color: #2ab374;
+    text-decoration: none;
+    background: #ddf3e9;
+    box-shadow: 0px 0px 0px;
+    border-radius: 0px;
+}
+#resualtSearch .resultUser ul a:hover {
+    background: #c7ebdb;
+}
+#resualtSearch .resultUser .addFriends .load {
+    margin-top: 10px;
+    margin-right: 5px;
+    float: right;
+    width: 16px;
+    height: 11px;
+    opacity: 0;
+}
+#resualtSearch .resultUser .addFriends .load img {
+    float: left;
+    width: 16px;
+    height: 11px;
+}
+/* style for content subscribe 
+------------------------------ */
+#content .shop {
+    margin-top: 29px;
+    margin-left: 29px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    float: left;
+}
+#content .shop img {
+    float: left;
+    width: 110px;
+    height: 110px;
+    background: #e1e1e1;
+}
+#content .shop ul {
+    margin-left: 19px;
+    margin-top: 7px;
+    margin-right: 20px;
+    float: left;
+}
+#content .shop ul li {
+    margin-bottom: 6px;
+}
+#content .shop ul a {
+    font-weight: bolder;
+    color: #2ab374;
+    text-decoration: none;
+}
+#content .shop ul p {
+    color: #b4b0b0;
+}
+#content .myApplication {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 700px;
+    border-bottom: 1px solid #e6e6e6;
+}
+#content .myApplication img {
+    margin-bottom: 20px;
+}
+#content .application {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 700px;
+    border-bottom: 1px solid #e6e6e6;
+}
+#content .application img {
+    margin-bottom: 20px;
+}
+#content .shop .button {
+    float: right;
+    display: block;
+    width: 177px;
+    line-height: 32px;
+    text-align: center;
+    color: #312f2f;
+    text-decoration: none;
+    cursor: pointer;
+    background: #ececec;
+    border-radius: 4px;
+    /* не забудь проверить в ишаке 9 - 10 */
+    box-shadow: 0px 0px 1px 0px #cfcfcf;
+}
+#content .shop .button:hover {
+    background: #dcdcdc;
+}
+/* style for property 
+-------------------------------- */
+#content .chapter {
+    margin-top: 10px;
+    margin-left: 5px;
+    float: left;
+    width: 100%;
+    color: #b4b0b0;
+    font-size: 14px;
+    font-weight: bolder;
+}
+#content .persUserInf {
+    margin-left: 5px;
+    margin-top: 10px;
+    float: left;
+}
+#content .persUserInf li {
+    margin-bottom: 10px;
+}
+#content .persUserInf p {
+    width: 220px;
+    color: #b4b0b0;
+}
+#content .persUserInf p span {
+    float: right;
+    width: 150px;
+    color: #29b273;
+}
+#content .propertyMe {
+    margin-top: 61px;
+    margin-bottom: 50px;
+    width: 533px;
+}
+#content .formFields {
+    float: left;
+}
+#content .formFields li {
+    float: left;
+    margin-bottom: 20px;
+}
+#content .formFields input {
+    margin-left: 30px;
+    float: left;
+}
+#content .formFields select {
+    margin-left: 33px;
+    float: left;
+}
+#content .formFields .submit {
+    width: 430px;
+}
+#content .formFields .submit .button {
+    float: none;
+    margin: auto;
+}
+#checkName {
+    margin-left: 4px;
+    float: left;
+    font-size: 20px;
+    font-weight: bolder;
+    height: 26px;
+    line-height: 26px;
+}
+#checkEmail {
+    margin-left: 4px;
+    float: left;
+    font-size: 20px;
+    font-weight: bolder;
+    height: 26px;
+    line-height: 26px;
+}
+#content .formAddationalImage {
+    margin-top: 10px;
+    margin-left: 2px;
+    margin-bottom: 50px;
+    float: left;
+    width: 370px;
+}
+#content .formFields li {
+    margin-bottom: 19px;
+}
+#content .formFields .captcha {
+    width: 430px;
+}
+#content .formFields .captcha .content {
+    width: 270px;
+}
+#content .formFields .captcha img {
+    margin-left: 31px;
+    margin-bottom: 10px;
+    padding: 4px;
+    display: block;
+    float: left;
+    box-shadow: 0px 0px 5px -1px #585858;
+}
+#content .formFields .captcha input {
+    width: 200px;
+}
+#content .formFields .captcha a {
+    content: "";
+    display: block;
+    float: left;
+    padding: 2px;
+    overflow: hidden;
+    color: transparent;
+    width: 20px;
+    height: 21px;
+    box-shadow: 0px 0px 5px -1px #585858;
+    background: url('/public/images/return.png') no-repeat center center;
+}
+#content .formFields label {
+    float: left;
+}
+#content .userInformation {
+    margin-top: 61px;
+    margin-bottom: 50px;
+    width: 533px;
+    float: none;
+}
+#content .userInformation .plus {
+    color: #29b273;
+}
+#content .userInformation .minus {
+    color: #29b273;
+}
+#content .userInformation .userLoad {
+    margin-top: 0px;
+    float: none;
+    width: 177px;
+    line-height: 32px;
+    background: #ddf3e9;
+}
+#content .userInformation .userLoad img {
+    margin-left: 67px;
+    width: 43px;
+}
+#content .formAddationalImage label {
+    margin-left: 0px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    float: left;
+    width: 200px;
+    font-weight: bolder;
+    text-align: center;
+    color: #fff;
+    background: #26a168;
+    cursor: pointer;
+}
+#content .formAddationalImage label:hover {
+    background: #EE7600;
+}
+#content .formAddationalImage input[type="file"] {
+    display: none;
+}
+#content .formAddationalPreview {
+    float: left;
+    width: 407px;
+}
+#content .formAddationalPreview li {
+    float: left;
+    margin-bottom: 10px;
+}
+#content .formAddationalPreview li label {
+    float: left;
+    text-align: left;
+    width: 200px;
+}
+#content .formAddationalPreview li input {
+    float: left;
+    width: 400px;
+}
+#content .formAddationalPreview li textarea {
+    float: left;
+    width: 400px;
+}
+#content .formAddationalPreview li .button {
+    margin-right: 10px;
+    float: left;
+}
+#content .formAddationalPreview li .savePreview {
+    float: left;
+    display: none;
+    width: 100px;
+    line-height: 30px;
+}
+#content .addationalPreview {
+    margin-top: 10px;
+    float: left;
+    width: 90px;
+}
+#content .addationalPreview li {
+    margin-bottom: 10px;
+}
+#content .addationalPreview a {
+    display: block;
+    width: 90px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bolder;
+    color: #fff;
+    background: #26a168;
+    font-size: 11px;
+}
+#content .addationalPreview a:hover {
+    background: #EE7600;
+}
+#error {
+    display: none;
+    opacity: 0;
+}
+#error h3 {
+    color: #b76262;
+    font-size: 13px;
+    border: 0px;
+    text-align: center;
+}

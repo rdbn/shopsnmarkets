@@ -1,0 +1,370 @@
+/* Зануление всех величин которые делают браузеры 
+---------------------------------------------------- */
+* { 
+    margin: 0 auto; 
+    padding: 0;
+    outline: none; 
+    font-size: 100%;
+    border: 0;
+    vertical-align: baseline;
+    list-style-type: none; 
+    background: transparent;
+}
+html, body {
+    font-family: Geneva, Arial, Helvetica, sans-serif;  
+    font-style: normal;
+    font-size: 12px;
+    /* цвет фона */
+    background: #d0d0d0;
+}
+blockquote, q {
+    quotes: none;
+}
+:focus {
+    outline: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+hr, .hide {
+    display: none;
+}
+/* установка стилей для ссылок 
+------------------------------------------------- */
+a, img {
+    border: none;
+}
+a:link, a:visited {
+    color: #252525;
+    outline: none;
+}
+a:hover {
+    color: #2a6ea8;
+}
+/* Стили для IE
+------------------------------------------------- */
+* html #selector { /* for IE<6 */
+    filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale src='img/image.png');
+    background-image: none;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+* html .group { /* IE6 */
+    height: 1%;
+}
+*:first-child+html .group { /* IE7 */
+    min-height: 1px;
+}
+/* Растояние между блоками 
+------------------------------------------------- */
+.disTopBlock {
+    margin-top: 20px;
+}
+.disBottomBlock {
+    margin-bottom: 20px;
+}
+.disLeftBlock {
+    margin-left: 20px;
+}
+.disRightBlock {
+    margin-right: 20px;
+}
+/* Разметка страници для твердего макета
+------------------------------------------------- */
+/* главная обертка */
+#wrapperTR { 
+    width: 1000px;
+}
+/* Главный контейнер для информации */
+#contentTR { 
+    width: 1000px; 
+    float: left;
+}
+/* Стили элиментов контейнеров
+------------------------------------------------ */
+#wrapperTR .formAuth {
+	margin-top: 150px;
+	width: 158px;
+}
+#wrapperTR .contUserInf {
+	margin-right: 20px;
+	float: left;
+	width: 310px;
+}
+#wrapperTR .userInf {
+	margin-bottom: 5px;
+	padding: 5px;
+	float: none;
+	background: #fff;
+	border-radius: 5px;
+}
+#wrapperTR .name {
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: #4d4d4d;
+}
+#wrapperTR .name span {
+	color: #42a2de;
+}
+#contentTR .insertToDB {
+	margin-left: 0px;
+	width: 100px;
+}
+#contentTR .insertToDB a {
+	display: block;
+	padding: 10px;
+	background: #fff;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bolder;
+	font-size: 16px;
+	color: #242424;
+}
+#contentTR .insertToDB a:hover {
+	color: #086ec4;
+}
+#contentTR .back {
+	display: block;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	padding: 5px;
+	width: 40px;
+	text-decoration: none;
+	background: #fff;
+	border-radius: 5px;
+}
+#contentTR .back:hover {
+	background: #2d2d2d;
+}
+#contentTR .menu {
+	width: 1000px;
+	margin-bottom: 10px;
+}
+#contentTR .menu li {
+	float: left;
+}
+#contentTR .menu a {
+	margin-right: 5px;
+}
+#contentTR ul {
+	float: left;
+}
+#contentTR .users {
+	margin-bottom: 5px;
+	float: left;
+}
+#contentTR .users .delete {
+	margin-left: 5px;
+	padding-left: 0px;
+	width: 90px;
+	line-height: 25px;
+	text-align: center;
+}
+#contentTR .users  a {
+	float: left;
+	display: block;
+	padding-left: 10px;
+	width: 200px;
+	line-height: 25px;
+	background: #fff;
+	border-radius: 5px;
+	text-decoration: none;
+}
+#contentTR .products {
+	margin-bottom: 5px;
+	float: left;
+}
+#contentTR ul  a .admin_username {
+	font-weight: bolder;
+	font-size: 16px;
+	color: #086ec4;
+}
+#contentTR .products a {
+	float: left;
+	display: block;
+	padding-left: 10px;
+	width: 200px;
+	line-height: 25px;
+	background: #fff;
+	border-radius: 5px;
+	text-decoration: none;
+}
+#contentTR .products .delete {
+	margin-left: 5px;
+	padding-left: 0px;
+	width: 90px;
+	line-height: 25px;
+	text-align: center;
+}
+#contentTR .insert {
+	float: left;
+	width: 1000px;
+}
+#contentTR .productProperty {
+	margin-top: 5px;
+	margin-right: 10px;
+	padding: 5px;
+	background: #fff;
+	border-radius: 5px;
+}
+#contentTR .productProperty label {
+	margin-top: 0px !important;
+	margin-bottom: 5px !important;
+	width: 55px !important;
+}
+#contentTR .productProperty .input {
+	width: 75px !important;
+}
+#contentTR .productProperty p {
+	margin-top: 5px;
+	padding: 5px;
+	border: 1px solid #d2d2d2;
+	border-radius: 5px;
+}
+#contentTR .productProperty .button {
+	margin-top: 0px !important;
+	margin-bottom: 5px;
+	width: 100%;
+}
+#contentTR .productProperty .input {
+	margin-top: 0px !important;
+	margin-bottom: 5px !important;
+}
+#contentTR .productProperty .delete {
+	display: block;
+	line-height: 25px;
+	text-align: center;
+	background: #d2d2d2;
+	text-decoration: none;
+	border-radius: 5px;
+}
+#contentTR .productProperty .delete:hover {
+	background: #2d2d2d;
+}
+#contentTR .groupProducts {
+	margin-top: 5px;
+	margin-right: 10px;
+	padding: 5px;
+	background: #fff;
+	border-radius: 5px;
+}
+#contentTR .groupProducts label {
+	border: 1px solid #d2d2d2;
+	line-height: 9px;
+	border-radius: 5px;
+}
+#contentTR .groupProducts .delete {
+	display: block;
+	margin-left: 5px;
+	margin-top: 5px;
+	float: left;
+	width: 90px;
+	line-height: 25px;
+	text-align: center;
+	background: #d2d2d2;
+	text-decoration: none;
+	border-radius: 5px;
+}
+#contentTR .groupProducts .delete:hover {
+	background: #2d2d2d;
+}
+#contentTR ul  a .admin_product {
+	font-weight: bolder;
+	font-size: 14px;
+	color: #086ec4;
+}
+#contentTR ul  a:hover  .admin_product{
+	color: #151515;
+}
+/* стили горизонтаоьного меню ссайта 
+------------------------------------------------ */
+#menuGorTR { 
+    width: 1000px; 
+    float: left;
+}
+#menuGorTR li {float: left;}
+#menuGorTR a {
+    display: block;
+    margin-right: 1px;
+    border-radius: 5px;
+    width: 150px;
+    color: #2a2a2a;
+    font-weight: bolder;
+    line-height: 25px;
+    text-align: center;
+    text-decoration: none;
+    background: #fff;
+}
+#menuGorTR a:hover {
+    color: #fff;
+    background: #2a2a2a;
+}
+/* Стили для форм
+------------------------------------------------ */
+#wrapperTR .form .options_first {
+	float: left;
+	width: 100%;
+}
+#wrapperTR .form .options_first ul {
+	padding: 5px;
+	background: #fff;
+	border-radius: 5px;
+}
+#wrapperTR .form .options_second {
+	margin-top: 5px;
+	padding: 5px;
+	float: left;
+	background: #fff;
+	border-radius: 5px;
+}
+#wrapperTR .form .description li {
+	margin-top: 8px;
+	padding: 5px;
+	text-align: right;
+}
+#wrapperTR .form label {
+	margin-top: 5px;
+	padding: 5px;
+	float: left;
+	width: 135px;
+}
+#wrapperTR .form .options_second label {
+	width: 100%;
+}
+#wrapperTR .form .input {
+	margin-top: 5px;
+	padding: 5px;
+	width: 135px;
+	border: 1px solid #d2d2d2;
+	border-radius: 5px;
+	background: #fff;
+}
+#wrapperTR .form .textarea {
+	margin-top: 5px;
+	padding: 5px;
+	width: 350px;
+	height: 250px;
+	border: 1px solid #d2d2d2;
+	border-radius: 5px;
+	background: #fff;
+}
+#wrapperTR .form .select {
+	margin-top: 5px;
+	padding: 5px;
+	width: 165px;
+	border: 1px solid #d2d2d2;
+	border-radius: 5px;
+	background: #fff;
+}
+#wrapperTR .form .button {
+	margin-top: 5px;
+	padding: 5px;
+	clear: both;
+	border-radius: 5px;
+	background: #d2d2d2;
+}
+#wrapperTR .form .button:hover {
+	color: #2a6ea8;
+	background: #2d2d2d;
+}
