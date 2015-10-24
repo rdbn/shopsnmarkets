@@ -1,0 +1,12 @@
+parameters:
+    shopSubscribe.class: User\UserBundle\Services\ShopSubscribe
+    bookmarks.class: User\UserBundle\Services\Bookmarks
+    
+services:        
+    shopSubscribe:
+        class: %shopSubscribe.class%
+        arguments: [ @doctrine.orm.entity_manager ]
+        
+    bookmarks:
+        class: %bookmarks.class%
+        arguments: [ @doctrine.orm.entity_manager ]

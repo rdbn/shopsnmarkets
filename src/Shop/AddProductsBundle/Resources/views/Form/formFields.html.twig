@@ -1,0 +1,48 @@
+{{ form_errors(form) }}
+{{ form_widget(form.typeThing) }}
+    <li>
+        {{ form_label(form.floor) }}
+        {{ form_errors(form.floor) }}
+        {{ form_widget(form.floor) }}
+    </li>
+    <li>
+        {{ form_label(form.category) }}
+        {{ form_errors(form.category) }}
+        {{ form_widget(form.category) }}
+    </li>
+    <li>
+        {{ form_label(form.subcategory) }}
+        {{ form_errors(form.subcategory) }}
+        {{ form_widget(form.subcategory) }}
+    </li>
+    <li>
+        {{ form_label(form.keywords) }}
+        {{ form_errors(form.keywords) }}
+        {{ form_widget(form.keywords) }}
+    </li>
+    <li>
+        {{ form_label(form.name) }}
+        {{ form_errors(form.name) }}
+        {{ form_widget(form.name) }}
+    </li>
+    <li class="size_chapter">
+        {{ form_label(form.size) }}
+    </li>
+    <li class="size">
+        {{ form_errors(form.size) }}
+        {{ form_widget(form.size) }}
+    </li>
+    <li>
+        {{ form_label(form.price) }}
+        {{ form_errors(form.price) }}
+        {{ form_widget(form.price) }}
+    </li>
+    <li>
+        {{ form_label(form.text) }}
+        {{ form_errors(form.text) }}
+        {{ form_widget(form.text) }}
+    </li>
+    <li class="save">
+        {{ form_widget(form.save) }}
+    </li>
+{{ form_rest(form) }}

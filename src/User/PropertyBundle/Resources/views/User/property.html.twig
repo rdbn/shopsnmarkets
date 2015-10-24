@@ -1,0 +1,26 @@
+{% extends '::userEditor.html.twig' %}
+
+{% block title %}Настройки{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    {{ include('UserPropertyBundle:User:menuProperty.html.twig') }}
+    <h3 class="chapter">Личная информация:</h3>
+    <ul class='persUserInf'>
+        <li><p>Email: <span>{{ user.getEmail }}</span></p></li>
+        <li><p>Имя: <span>{{ user.getRealname }}</span></p></li>
+    </ul>
+    <h3 class="chapter">Контактная информация:</h3>
+    <ul class='persUserInf'>
+        <li><p>Страна: <span>{% if user.getCity %}{{ user.getCity.getCountry.getName }}{% endif %}</span></p></li>
+        <li><p>Город: <span>{% if user.getCity %}{{ user.getCity.getName }}{% endif %}</span></p></li>
+        <li><p>Улица: <span>{% if user.street %}{{ user.street }}{% endif %}</span></p></li>
+        <li><p>Индекс: <span>{% if user.homeIndex %}{{ user.homeIndex }}{% endif %}</span></p></li>
+        <li><p>Телефон: <span>{% if user.phone %}{{ user.phone }}{% endif %}</span></p></li>
+        <li><p>Skype: <span>{% if user.skype %}{{ user.skype }}{% endif %}</span></p></li>
+    </ul>
+{% endblock %}

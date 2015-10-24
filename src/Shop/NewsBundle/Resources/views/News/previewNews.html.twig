@@ -1,0 +1,25 @@
+<p class="count">Всего записей: 517 
+    {% if is_granted('ROLE_MANAGER') %}
+        <a class="addNews" href="{{ path('_createNews', { 'nameShop' : nameShop }) }}">Добавить новость</a>
+    {% endif %}
+</p>
+{{ news }}
+<div class="newsShop">
+    <div class="news">
+        <img src="" />
+        <h3>Uclock - Магазин часов</h3>
+        <p class="text">
+            Немного информации о нашем товаре. Все представленные часы - лучшие копии Швейцарских моделей. 
+            Собираются в Арабских Эмиратах, поэтому цены на столько низкие.Немного информации о нашем товаре. 
+            Все представленные часы - лучшие копии Швейцарских моделей. Собираются в Арабских Эмиратах, поэтому цены на 
+            столько низкие.
+        </p>
+        <p class="addComment">
+            Час назад | <a href="">Комментировать</a>
+            <a class="like" href="#">Поравилось <span class="countLike">270</span></a>
+        </p>
+    </div>
+</div>
+<div class="addButton">
+    <a class="addNewsShow" href="">Показать еще</a>
+</div>

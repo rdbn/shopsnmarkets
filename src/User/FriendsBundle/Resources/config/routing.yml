@@ -1,0 +1,33 @@
+# route for UserFriends
+_friends:
+    pattern:  /firends
+    defaults: { _controller: UserFriendsBundle:UsersFriends:friends }
+    
+_userFriends:
+    pattern:  /firends/user/{id}
+    defaults: { _controller: UserFriendsBundle:UsersFriends:userFriends }
+    
+_myApplicationFriends:
+    pattern:  /firends/myApplication
+    defaults: { _controller: UserFriendsBundle:UsersFriends:myApplicationFriends }
+    
+_applicationFriends:
+    pattern:  /firends/application
+    defaults: { _controller: UserFriendsBundle:UsersFriends:applicationFriends }
+    
+# Ajax route for AddFriends
+_addFriends:
+    pattern:  /friends/addFriends
+    defaults: { _controller: UserFriendsBundle:AddFriends:addFriends } 
+    
+_checkFriends:
+    pattern:  /friends/addFriends/checkFriends
+    defaults: { _controller: UserFriendsBundle:AddFriends:checkFriends }
+    
+_addListMyFriends:
+    pattern:  /friends/addFriends/listTypeFriends
+    defaults: { _controller: UserFriendsBundle:AddFriends:listTypeFriends }
+    
+_deleteFriends:
+    pattern:  /friends/deleteFriends
+    defaults: { _controller: UserFriendsBundle:AddFriends:deleteFriends }

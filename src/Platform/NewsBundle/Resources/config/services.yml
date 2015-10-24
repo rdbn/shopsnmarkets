@@ -1,0 +1,7 @@
+parameters:
+#    news_news.example.class: News\NewsBundle\Example
+
+services:
+#    news_news.example:
+#        class: %news_news.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,22 @@
+# route for class Main
+_user:
+    pattern:  /user
+    defaults: { _controller: UserUserBundle:Main:main }
+    
+_userID:
+    pattern:  /id/{id}
+    defaults: { _controller: UserUserBundle:Main:user }
+    
+# route for class Auth    
+_enterSite:
+    pattern: /enter
+    defaults: { _controller: UserUserBundle:Auth:enter }
+    
+# route for class Bookmarks
+_subscribeShop:
+    pattern: /subscribeShop
+    defaults: { _controller: UserUserBundle:Bookmarks:subscribe }
+    
+_bookmarks:
+    pattern: /user/bookmarks
+    defaults: { _controller: UserUserBundle:Bookmarks:bookmarks }

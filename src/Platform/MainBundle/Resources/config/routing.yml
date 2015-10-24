@@ -1,0 +1,4 @@
+# route for controller Main
+_main:
+    pattern:  /
+    defaults: { _controller: PlatformMainBundle:Main:index }

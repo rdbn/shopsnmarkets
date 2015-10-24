@@ -1,0 +1,13 @@
+#routes for class AddInformationManager
+_register:
+    pattern:  /register
+    defaults: { _controller: UserRegistrationBundle:Registration:registration }
+    
+_createUser:
+    pattern:  /createUser
+    defaults: { _controller: UserRegistrationBundle:Registration:create }
+    
+# ajax check email
+_checkEmail:
+    pattern:  /checkEmail
+    defaults: { _controller: UserRegistrationBundle:Registration:checkEmail }

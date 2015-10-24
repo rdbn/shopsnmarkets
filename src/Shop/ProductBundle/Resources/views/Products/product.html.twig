@@ -1,0 +1,65 @@
+{% extends '::shop.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/shop/secondCategoryShop.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/shop/Like.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/shop/addOrder.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/user/AddSubscribe.js') }}" type="text/javascript"></script>
+    <!-- Fancy  -->
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.mousewheel-3.0.6.pack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox.js?v=2.1.5') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-buttons.js?v=1.0.5') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-thumbs.js?v=1.0.7') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-media.js?v=1.0.6') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/fancybox.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_MANAGER') %}
+        {% if manager %}
+            <ul class="menu">
+                <li><a href='{{ path('_formInsertProduct', { 'nameShop' : nameShop }) }}'>Добавить товар</a></li>
+                <li><a href='{{ path('_formUpdateProduct', { 'nameShop' : nameShop, 'id' : id }) }}'>Редактировать товар</a></li>
+            </ul>
+        {% endif %}
+    {% endif %}
+    <div class="chapterProduct">
+        <h3>{{ product.name }}</h3>
+    </div>
+    <div class='mainImg'>
+        <img src="{{ asset(product.path | apply_filter('main_product_image')) }}" alt="Product" />
+    </div>
+    <div class='options'>
+        <ul class="formFields addBasket">
+            <li><h3 class="chapter">Размеры:<h3></li>
+            {{ render(controller('ShopOrderBundle:FormAddBasket:form', { 'nameShop': nameShop, 'product': product })) }}
+        </ul>
+        <p class='text'>{{ product.text }}</p>
+    </div>
+    <div class="chapterProduct">
+        <h3>Похожие товары:</h3>
+    </div>
+    <div class='subcategoryProducts'>
+        {% for product in products %}
+            <ul class="products">
+                <li>
+                    <a href='{{ path('_productShop', {'nameShop' : nameShop, 'idFloor' : floor, 'idCategory' : idCategory, 'idSubcategory' : product.subcategory, 'idProduct' : product.id }) }}'>
+                        <span class="imgHover"></span>
+                        <img src="{{ asset(product.path | apply_filter('product_image')) }}" alt="Product" />
+                    </a>
+                </li>
+                <li>
+                    <h3>{{ product.name }}</h3>
+                </li>
+                <li>
+                    <p>{{ product.price }} руб.</p>
+                    <a class="like" href="{{ product.id }}">Хочу <span class="countLike">{{ product.likes }}</span></a>
+                </li>
+            </ul>
+        {% endfor %}
+    </div>
+{% endblock %}

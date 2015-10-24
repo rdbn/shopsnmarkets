@@ -1,0 +1,7 @@
+<div class='comment'>
+    <img src="{% if comment.comment.user_img != '' %}{{ asset(comment.comment.user_img) | apply_filter('mini_avatar') }}{% endif %}" />
+    <ul>
+        <li><h3>{{ comment.comment.user_name }}</h3></li>
+        <li><p>{{ comment.comment.text }}</p></li>
+    </ul>
+</div>

@@ -1,0 +1,53 @@
+{% extends '::platform.html.twig' %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/shop/addOrder.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/public/js/shop/secondCategory.js') }}" type="text/javascript"></script>
+    <!-- Fancy  -->
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.mousewheel-3.0.6.pack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox.js?v=2.1.5') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-buttons.js?v=1.0.5') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-thumbs.js?v=1.0.7') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-media.js?v=1.0.6') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/fancybox.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="chapterOrders">
+        <h3 class="chepter">Корзина:</h3>
+    </div>
+    {% if (products != '') %}
+        <div class="basket">
+            {% for product in products %}
+                <div class="order">
+                    <h3 class="chapter">{{ product.name }}</h3>
+                    <a href='{{ path('_productPlatform', 
+                            { 'idFloor' : product.floor, 'idCategory' : product.category, 'idSubcategory' : product.subcategory, 'id' : product.id }) 
+                        }}'>
+                        <img src="{{ asset(product.path | apply_filter('advertisingSideOf')) }}">
+                    </a>
+                    <ul>
+                        <li><p class='price'><span>Цена:</span> {{ product.price }} руб.</p></li>
+                        <li><p class='count'><span>Кол-во:</span> {{ product.number }}</p></li>
+                        <li><p class='count'><span>Размер:</span> {{ product.value }}</p></li>
+                    </ul>
+                    <a class="delete" href='{{ product.num_order }}'>
+                        Удалить из корзины <span class="load"><img src="/public/images/load/ajax-loader-button-second.gif" /></span>
+                    </a>
+                </div>
+            {% endfor %}
+            <div class="checkOrder">
+                <a class="check" href='{{ path('_deliveryOrder', { 'orderNumber' : orderNumber }) }}'>Оформить</a>
+                <ul>
+                    <li><p class="allCount">Общие количество: {{ count }}</p></li>
+                    <li><p class="send">Примерная стоимость отправки: 0</p></li>
+                    <li><p class="sum">Итого: {{ sum }} руб.</p></li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

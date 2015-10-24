@@ -1,0 +1,48 @@
+{% extends '::userEditor.html.twig' %}
+
+{% block title %}{{ user.getRealname }}{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="avatar">
+        <img src="{% if(user.getPath) %}{{ user.getPath | apply_filter('avatar') }}{% endif %}" />
+    </div>
+    <div class="manager">    
+        <h3>{{ user.getRealname }}</h3>
+        {% if(preview) %}<p class="short_text">{% if(preview.text_preview != '') %}{{ preview.text_preview }}{% endif %}</p>{% endif %}
+        <ul class='information'>
+            {% if user.getCity %}<li><p><span>Страна:</span> {{ user.getCity.getCountry.getName }}</p></li>{% endif %}
+            {% if user.getCity %}<li><p><span>Родной город:</span>{{ user.getCity.getName }}</p></li>{% endif %}
+            {% if user.street %}<li><p><span>Улица:</span> {{ user.street }}</p></li>{% endif %}
+            {% if user.homeIndex %}<li><p><span>Индекс:</span> {{ user.homeIndex }}</p></li>{% endif %}
+            {% if user.phone %}<li><p><span>Телефон:</span> {{ user.phone }}</p></li>{% endif %}
+            {% if user.skype %}<li><p><span>Skype:</span> {{ user.skype }}</p></li>{% endif %}
+            <li><p><span>Email:</span> {{ user.getEmail }}</p></li>
+        </ul>
+        <h3>Информация о продавце</h3>
+        {% if(preview) %}<p class="text">{% if(preview.text_main != '') %}{{ preview.text_main }}{% endif %}</p>{% endif %}
+    </div>
+    <div class="shops">
+        <p class="chapterShops">
+            Мои Магазины
+            <a class='name' href='{{ path('_createForm') }}'>Создать магазин</a>
+        </p>
+        {% for shop in shops %}
+            <div class="shop">
+                <a href='{{ path('_mainShop', { 'nameShop' : shop.unique_name }) }}'>
+                    <img src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" /></a>
+                </a>
+                <ul>
+                    <li><a href='{{ path('_mainShop', { 'nameShop' : shop.unique_name }) }}'>{{ shop.shopname }}</a></li>
+                    <li><p>Подписчиков: {{ shop.users }}</p></li>
+                    <li><p>Райтинг: {{ shop.rating }}</p></li>
+                    <li><p>Понравилось: {{ shop.likes }}</p></li>
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

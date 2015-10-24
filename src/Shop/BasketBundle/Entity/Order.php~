@@ -1,0 +1,87 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+namespace Shop\BasketBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
+
+/**
+ * @ORM\Entity(repositoryClass="Shop\CreateBundle\Repository\OrderRepository")
+ * @ORM\Table(name="order")
+ */
+
+class Order
+{   
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops")
+     * @ORM\JoinColumn(name="shops_id", referencedColumnName="id", nullable=false)
+     */
+    protected $shops;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users")
+     * @ORM\JoinColumn(name="users_id", referencedColumnName="id", nullable=false)
+     */
+    protected $users;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop\AddProductsBundle\Entity\Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
+     */
+    protected $product;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Delivery")
+     * @ORM\JoinColumn(name="delivery_id", referencedColumnName="id", nullable=false)
+     */
+    protected $delivery;
+    
+    /** 
+     * @ORM\OneToOne(targetEntity="JMS\Payment\CoreBundle\Entity\PaymentInstruction")
+     * @ORM\JoinColumn(name="payment_instructions_id", referencedColumnName="id", nullable=false)
+     */
+    protected $payment_instruction;
+    
+    /** 
+     * @ORM\Column(name="order_number", type="string", unique = true)
+     */
+    protected $orderNumber;
+
+    /** 
+     * @ORM\Column(name="amount", type="decimal", precision = 2)
+     */
+    protected $amount;
+
+    /**
+     * @ORM\Column(name="count", type="integer")
+     */
+    protected $count;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\Size", inversedBy="order")
+     * @ORM\JoinTable(name="order_size")
+     */
+    protected $size;
+    
+    /*
+     * constructor
+     */
+    public function __construct($amount, $orderNumber)
+    {
+        $this->amount = $amount;
+        $this->orderNumber = $orderNumber;
+        $this->size = new ArrayCollection();
+    }
+}

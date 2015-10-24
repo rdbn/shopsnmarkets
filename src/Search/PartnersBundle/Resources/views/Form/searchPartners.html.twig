@@ -1,0 +1,38 @@
+{% extends '::userEditor.html.twig' %}
+
+{% block title %}Поиск партнеров{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/location.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/searchPartner.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/listMyShops.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/addPartners.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    {{ include('ManagerPartnersBundle:Partners:partnersMenu.html.twig') }}
+    <form id='formSearchPartners' action="{{ path('_resualtSearch') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+            <div class='search'>
+                {{ form_label(form.keywords) }}
+                {{ form_errors(form.keywords) }}
+                {{ form_widget(form.keywords) }}
+                <input id='submit' class='button'  type="submit" value='' />
+            </div>
+            <ul class='seconderyMenuSearch'>
+                <li>
+                    {{ form_errors(form.country) }}
+                    {{ form_widget(form.country) }}
+                </li>
+                <li>
+                    {{ form_errors(form.city) }}
+                    {{ form_widget(form.city) }}
+                </li>
+            </ul>
+        {{form_rest(form)}}
+    </form>
+    <div id="load"><div class="processImage"><img src="/public/images/load/ajax-loader.gif"></div></div>
+    <div id='resualtSearch'></div>
+{% endblock %}

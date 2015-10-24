@@ -1,0 +1,27 @@
+{% if user %}
+    <div class="privateOffice">
+        <a class="showMenu" href="#">Личный кабинет</a>
+        <div class="profile">
+            <h3>ВАШ ПРОФИЛЬ <span class="time"></span></h3>
+            <ul>
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('_user') }}">Моя страница</a></li>
+                    <li><a href="{{ path('_userOrder') }}">Мои заказы</a></li>
+                    <li><a href="{{ path('_allMessage') }}">Мои сообщения</a></li>
+                    <li><a href="{{ path('_friends') }}">Мои друзья</a></li>
+                {% else %}
+                    <li><a href="{{ path('_manager') }}">Мой Профиль</a></li>
+                    <li><a href="{{ path('_allShopsManager') }}">Мои Магазины</a></li>
+                    <li><a href="{{ path('_managerOrder') }}">Заказы</a></li>
+                    <li><a href="{{ path('_allMessage') }}">Сообщения</a></li>
+                {% endif %}
+                <li><a href="{{ path('logout') }}">Выйти</a></li>
+            </ul>
+            <img src="{{ user.getPath }}" />
+            <a class="backTo" href="{{ path('_formPreviewInformation') }}">сменить</a>
+        </div>
+    </div>
+{% else %}
+    <a class="enter" href="#">Войти</a>
+    <a class="register" href="{{ path('_register') }}">Регистрация</a>
+{% endif %}

@@ -1,0 +1,30 @@
+# for class AdvertisingManager     
+_advertising:
+    pattern:  /advertising
+    defaults: { _controller: ManagerAdvertisingBundle:AdvertisingManager:advertising }
+
+# for class AjaxAdvertising
+_advertisingPlatform:
+    pattern:  /advertising/platform
+    defaults: { _controller: ManagerAdvertisingBundle:AjaxAdvertising:platform }
+    
+_advertisingShops:
+    pattern:  /advertising/shops
+    defaults: { _controller: ManagerAdvertisingBundle:AjaxAdvertising:shops }
+    
+_advertisingDelete:
+    pattern:  /advertising/delete
+    defaults: { _controller: ManagerAdvertisingBundle:AjaxAdvertising:delete }
+
+# for class CreateAdvertising 
+_formAdvertising: 
+    pattern:  /advertising/form
+    defaults: { _controller: ManagerAdvertisingBundle:CreateAdvertising:form }
+    
+_createPlatformAdvertising:
+    pattern:  /advertising/createPlatform
+    defaults: { _controller: ManagerAdvertisingBundle:CreateAdvertising:createPlatform }
+    
+_createShopAdvertising:
+    pattern:  /advertising/createShop
+    defaults: { _controller: ManagerAdvertisingBundle:CreateAdvertising:createShop }

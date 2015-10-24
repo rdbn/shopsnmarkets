@@ -1,0 +1,5 @@
+<ul class="slider">
+    {% for image in images %}
+        <li><a href="#"><img src="{{ image | apply_filter('advertisingSliderShop') }}"></a></li>
+    {% endfor %}
+</ul>

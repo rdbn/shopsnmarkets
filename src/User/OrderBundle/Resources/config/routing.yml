@@ -1,0 +1,3 @@
+_userOrder:
+    pattern:  /user/order
+    defaults: { _controller: UserOrderBundle:UserOrder:order }

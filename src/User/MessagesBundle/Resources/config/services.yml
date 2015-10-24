@@ -1,0 +1,18 @@
+parameters:
+    dialog.class: User\MessagesBundle\Services\Dialog
+    sendMessage.class: User\MessagesBundle\Services\SendMessage
+
+services:      
+    dialog:
+        class: %dialog.class%
+        arguments: [ @doctrine.orm.entity_manager ]
+        
+    sendMessage:
+        class: %sendMessage.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
+        
+    user.id.type.issue_selector:
+        class: User\MessagesBundle\Form\Type\UserIdType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: users }

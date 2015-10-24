@@ -1,0 +1,77 @@
+{% extends '::userEditor.html.twig' %}
+
+{% block title %}О себе{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/location.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/user/UserInformation.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    {{ include('UserPropertyBundle:User:menuProperty.html.twig') }}
+    <ul class="formFields userInformation">
+        <li id="error"></li>
+        <form id="UserInformation" action="#" method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+                <li>
+                    {{ form_label(form.realname) }}
+                    {{ form_errors(form.realname) }}
+                    {{ form_widget(form.realname) }}
+                </li>
+                <li>
+                    {{ form_label(form.email) }}
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email) }}
+                    <span id="checkEmail"></span>
+                </li>
+                <li>
+                    {{ form_label(form.country) }}
+                    {{ form_errors(form.country) }}
+                    {{ form_widget(form.country) }}
+                </li>
+                <li>
+                    {{ form_label(form.city) }}
+                    {{ form_errors(form.city) }}
+                    {{ form_widget(form.city) }}
+                </li>
+                <li>
+                    {{ form_label(form.street) }}
+                    {{ form_errors(form.street) }}
+                    {{ form_widget(form.street) }}
+                </li>
+                <li>
+                    {{ form_label(form.home_index) }}
+                    {{ form_errors(form.home_index) }}
+                    {{ form_widget(form.home_index) }}
+                </li>
+                <li>
+                    {{ form_label(form.phone) }}
+                    {{ form_errors(form.phone) }}
+                    {{ form_widget(form.phone) }}
+                </li>
+                <li>
+                    {{ form_label(form.skype) }}
+                    {{ form_errors(form.skype) }}
+                    {{ form_widget(form.skype) }}
+                </li>
+                <li class="captcha">
+                    <div class="content">
+                        {{ form_label(form.captcha) }}
+                        {{ form_errors(form.captcha) }}
+                        {{ form_widget(form.captcha) }}
+                    </div>
+                </li>
+                <li class="submit">
+                    {{ form_widget(form.save) }}
+                    <p id="load" class="userLoad">
+                        <img src="/public/images/load/ajax-loader-button.gif" />
+                    </p>
+                </li>
+            {{form_rest(form)}}
+        </form>
+    </ul>
+{% endblock %}
+
+    

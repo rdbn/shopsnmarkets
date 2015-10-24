@@ -1,0 +1,29 @@
+{% block stylesheets %}
+    <link href="{{ asset('public/css/main_style.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('public/css/fancyboxLoginStyle.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('public/css/form/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+        <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ asset('/public/js/fancybox/JSForWindow.js') }}"></script>
+{% endblock %}
+
+<div class="loginForm">
+    <h3>Вход для продавцов:</h3>
+    <ul class="login">
+        <li id="errors" class="login_error"></li>
+        <form action="{{ path('login_check') }}" method="post">
+            <li><label for="username">Email:</label><input id="username" type="text" name="_username" /></li>
+            <li><label for="password">Пароль:</label><input id="password" type="password" name="_password" /></li>
+            <li><input class="button" type="submit" value="Войти" /></li>
+        </form>
+    </ul>
+</div>
+<div class="socialLogin">
+    <h3>Вход для покупателей:</h3>
+    <ul class="auth">
+        <li><a class="vk" href="{{ hwi_oauth_login_url('vkontakte') }}"><span>Войти через ВКонтакте</span></a></li>
+        <li><a class="fb" href="{{ hwi_oauth_login_url('facebook') }}"><span>Войти через Facebook</span></a></li>
+        <li><a class="gl" href="{{ hwi_oauth_login_url('google') }}"><span>Войти через Google+</span></a></li>
+    </ul>
+</div>

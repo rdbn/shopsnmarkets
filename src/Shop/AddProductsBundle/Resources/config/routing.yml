@@ -1,0 +1,57 @@
+# route for controller AjaxValue    
+_category:
+    pattern:  /addProducts/category
+    defaults: { _controller: ShopAddProductsBundle:AjaxValue:category }
+    
+_subcategory:
+    pattern:  /addProducts/subcategory
+    defaults: { _controller: ShopAddProductsBundle:AjaxValue:subcategory }
+    
+_size:
+    pattern:  /addProducts/size
+    defaults: { _controller: ShopAddProductsBundle:AjaxValue:size }
+    
+_typeThing:
+    pattern:  /addProducts/typeThing
+    defaults: { _controller: ShopAddProductsBundle:AjaxValue:typeThing }
+    
+# route for controller AjaxProductLike
+_addLikeProduct:
+    pattern:  /addLikeProduct
+    defaults: { _controller: ShopAddProductsBundle:AjaxProductLike:addLike }
+    
+# route for class InsertProduct
+_formInsertProduct:
+    pattern:  /{nameShop}/addProducts/insertform
+    defaults: { _controller: ShopAddProductsBundle:InsertProduct:form }
+    
+_insertProduct:
+    pattern:  /{nameShop}/addProducts/insert
+    defaults: { _controller: ShopAddProductsBundle:InsertProduct:insertProduct }
+    
+# route for class updateProduct
+_formUpdateProduct:
+    pattern:  /{nameShop}/addProducts/updateform/{id}
+    defaults: { _controller: ShopAddProductsBundle:UpdateProduct:form }
+    
+_updateProduct:
+    pattern:  /{nameShop}/addProducts/update/{id}
+    defaults: { _controller: ShopAddProductsBundle:UpdateProduct:updateProduct }
+    
+# route for class ProductImage
+_formUploadImage:
+    pattern:  /{nameShop}/addProducts/formUpload
+    defaults: { _controller: ShopAddProductsBundle:ProductImage:form }
+    
+_uploadImage:
+    pattern:  /{nameShop}/addProducts/uploadImage
+    defaults: { _controller: ShopAddProductsBundle:ProductImage:upload }
+    
+_images:
+    pattern:  /addProducts/images
+    defaults: { _controller: ShopAddProductsBundle:ProductImage:images }
+    
+_imagesDelete:
+    pattern: /addProducts/imagesDelete
+    defaults: { _controller: ShopAddProductsBundle:ProductImage:delete }
+    

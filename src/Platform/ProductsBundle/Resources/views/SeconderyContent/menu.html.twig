@@ -1,0 +1,78 @@
+{% macro category(floor, category, idCategory, subcategory) %}
+    <ul class="secondMenu">
+        {% for cat in category %}
+            <li>
+                <a class="{% if idCategory == cat.id %}target{% endif %}" href="{{ path('_productsCategoryPlatform', { 'idFloor' : floor, 'idCategory' : cat.id }) }}">
+                    {{ cat.name }}
+                </a>
+                {% if idCategory == cat.id %}
+                    <ul class="secondMenu">
+                        {% for sub in subcategory %}
+                            <li>
+                                <a href="{{ path('_productsSubcategoryPlatform', { 'idFloor' : floor, 'idCategory' : cat.id, 'idSubcategory' : sub.id }) }}">
+                                    {{ sub.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif%}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% macro subcategory(idCategory, subcategory) %}
+    <ul class="secondMenu">
+        {% if idCategory == 9 or idCategory == 44 %}<li><h3>Мужские</h3></li>{% endif %}
+        {% if idCategory == 13 or idCategory == 45 %}<li><h3>Мужская</h3></li>{% endif %}
+        {% for sub in subcategory %}
+            {% if sub.floor == 2 %}
+                <li>
+                    <a class=""
+                       href="{{ path('_productsSubcategoryPlatform', { 'idFloor' : sub.floor, 'idCategory' : sub.category, 'idSubcategory' : sub.id }) }}">
+                        {{ sub.name }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if idCategory == 9 or idCategory == 44 %}<li><h3>Женские</h3></li>{% endif %}
+        {% if idCategory == 13 or idCategory == 45 %}<li><h3>Женская</h3></li>{% endif %}
+        {% for sub in subcategory %}
+            {% if sub.floor == 1 %}
+                <li>
+                    <a class=""
+                       href="{{ path('_productsSubcategoryPlatform', { 'idFloor' : sub.floor, 'idCategory' : sub.category, 'idSubcategory' : sub.id }) }}">
+                        {{ sub.name }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+<ul class="menu">
+    <li class="women">
+        <a class="click {% if floor is defined %}{% if floor == 1 %}hover{% endif %}{% endif %}" herf="#">Женская одежда</a>
+        {% if floor is defined %}{% if floor == 1 %}
+            {{ _self.category(floor, category, idCategory, subcategory) }}
+        {% endif %}{% endif %}
+    </li>
+    <li class="man">
+        <a class="click {% if floor is defined %}{% if floor == 2 %}hover{% endif %}{% endif %}" herf="#">Мужская одежда</a>
+        {% if floor is defined %}{% if floor == 2 %}
+            {{ _self.category(floor, category, idCategory, subcategory) }}
+        {% endif %}{% endif %}
+    </li>
+    <li class="accessories">
+        <a class="click {% if floor is defined %}{% if floor == 3 %}hover{% endif %}{% endif %}" herf="#">Аксесуары</a>
+        {% if floor is defined %}{% if floor == 3 %}
+            {{ _self.subcategory(idCategory, subcategory) }}
+        {% endif %}{% endif %}
+    </li>
+    <li class="boots">
+        <a class="click {% if floor is defined %}{% if floor == 4 %}hover{% endif %}{% endif %}" herf="#">Обувь</a>
+        {% if floor is defined %}{% if floor == 4 %}
+            {{ _self.subcategory(idCategory, subcategory) }}
+        {% endif %}{% endif %}
+    </li>
+</ul>

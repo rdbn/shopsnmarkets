@@ -1,0 +1,13 @@
+# route for ShopNews
+_priviewNewsShop:
+    pattern:  /{nameShop}/prviewNews
+    defaults: { _controller: ShopNewsBundle:ShopNews:priviewNews }
+    
+# route for CreateNews
+_createNews:
+    pattern:  /{nameShop}/formNews
+    defaults: { _controller: ShopNewsBundle:CreateNews:formNews }
+    
+_addNews:
+    pattern:  /{nameShop}/addNews
+    defaults: { _controller: ShopNewsBundle:CreateNews:addNews }

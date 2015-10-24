@@ -1,0 +1,56 @@
+{% extends '::userEditor.html.twig' %}
+
+{% block title %}Дополнительные настройки{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/user/uploadAvatar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/user/preview.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    {{ include('UserPropertyBundle:User:menuProperty.html.twig') }}
+    <div class="formAddationalImage">
+        <ul>
+            <form id='addAvatar' target='upload_image' action="{{ path('_addPreviewUpload') }}" method="post" {{ form_enctype(formUpload) }}>
+                {{ form_errors(formUpload) }}
+                    <li id='errors'>{{ form_errors(formUpload.file) }}</li>
+                    <li>
+                        {{ form_label(formUpload.file) }}
+                        {{ form_widget(formUpload.file) }}
+                        <p id="load" class="loadImage">
+                            <img src="/public/images/load/ajax-loader-button.gif" />
+                        </p>
+                    </li>
+                {{ form_rest(formUpload) }}
+            </form>
+        </ul>
+        <div id="contentIframe" class="property">
+            <img height="250" src="{% if(image) %}{{ image | apply_filter('avatar') }}{% endif %}" />
+        </div>
+        <iframe id='iframe' name='upload_image' ></iframe>
+    </div>
+    <ul class="formAddationalPreview">
+        <form id="preview" action="#" method="post" {{ form_enctype(formPreview) }}>
+            {{ form_errors(formPreview) }}
+                <li>
+                    {{ form_label(formPreview.text_preview) }}
+                    {{ form_errors(formPreview.text_preview) }}
+                    {{ form_widget(formPreview.text_preview) }}
+                </li>
+                <li>
+                    {{ form_label(formPreview.text_main) }}
+                    {{ form_errors(formPreview.text_main) }}
+                    {{ form_widget(formPreview.text_main) }}
+                </li>
+                <li>
+                    {{ form_widget(formPreview.save) }}
+                    <p class="savePreview">
+                        <img src="/public/images/load/ajax-loader-button.gif" />
+                    </p>
+                </li>
+            {{ form_rest(formPreview) }}
+        </form>
+    </ul>
+{% endblock %}

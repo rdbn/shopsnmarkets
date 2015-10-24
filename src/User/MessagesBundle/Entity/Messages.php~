@@ -1,0 +1,61 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+namespace User\MessagesBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="User\MessagesBundle\Repository\MessagesRepository")
+ * @ORM\Table(name="messages")
+ */
+
+class Messages
+{   
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User\MessagesBundle\Entity\Dialog")
+     * @ORM\JoinColumn(name="dialog_id", referencedColumnName="id")
+     */
+    protected $dialog;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users")
+     * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
+     */
+    protected $users;
+    
+    /**
+     * @ORM\Column(name="text", type="text")
+     */
+    protected $text;
+    
+    /**
+     * @ORM\Column(name="flags", type="boolean")
+     */
+    protected $flags;
+    
+    /**
+     * @ORM\Column(type="datetime", name="created_at")
+     *
+     * @var DateTime $createdAt
+     */
+    protected $createdAt;
+    
+    /**
+     * Consrtuct for class Messages
+     */
+    public function __construct() {
+        $this->createdAt = new \DateTime();
+        $this->check_message = false;
+    }
+}

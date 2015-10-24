@@ -1,0 +1,20 @@
+{% block stylesheets %}
+    <link href="{{ asset('public/css/main_style.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('public/css/shop/comments.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+<div id="content">
+    {% for shop in shops %}
+        <div class="shop">
+            <a>
+                <img src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" /></a>
+            </a>
+            <ul>
+                <li><a>{{ shop.shopname }}</a></li>
+                <li><p>Подписчиков: {{ shop.users }}</p></li>
+                <li><p>Рейтинг: {{ shop.rating }}</p></li>
+                <li><a class="like">Поравилось <span class="countLike">{{ shop.likes }}</span></a></li>
+            </ul>
+        </div>
+    {% endfor %}
+</div>

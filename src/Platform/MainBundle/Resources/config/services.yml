@@ -1,0 +1,7 @@
+parameters:
+    countShopProductUser.class: Platform\MainBundle\Services\CountShopProductUser
+
+services:
+    countShopProductUser:
+        class: %countShopProductUser.class%
+        arguments: [ @doctrine.orm.entity_manager ]

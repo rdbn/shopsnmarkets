@@ -1,0 +1,7 @@
+parameters:
+    managerOrders.class: Manager\OrdersBundle\Services\ManagerOrders
+
+services:               
+    managerOrders:
+        class: %managerOrders.class%
+        arguments: [ @doctrine.orm.entity_manager ]

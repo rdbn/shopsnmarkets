@@ -1,0 +1,73 @@
+{% extends '::shopMain.html.twig' %}
+
+{% block title %}{{ shop.shopname }}{% endblock %}
+{% block ogTitle %}{{ shop.shopname }}{% endblock %}
+{% block image %}{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% else %}{% endif %}{% endblock %}
+{% block ogImage %}{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% else %}{% endif %}{% endblock %}
+{% block description %}
+{% if (preview) %}{% if (preview.text_preview != '') %}{{ preview.text_preview }}{% else %}Продажа вещей!{% endif %}{% endif %}
+{% endblock %}
+{% block ogDescription %}
+{% if (preview) %}{% if (preview.text_preview != '') %}{{ preview.text_preview }}{% else %}Продажа вещей!{% endif %}{% endif %}
+{% endblock %}
+{% block keywords %}
+{% if (preview) %}{% if (preview.text_preview != '') %}{{ preview.text_preview }}{% else %}Продажа вещей!{% endif %}{% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="menuBok">
+        <img src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" />
+        {% if is_granted('ROLE_USER') %}
+            {% if user %}<a class="subscribe" href="{{ shop.id }}">Подписаться на новости</a>{% endif %}
+        {% endif %}
+        <p>Всего покупателей: <span class="count">{{ shop.users }}</span></p>
+        {{ include('ShopMainBundle:Main:menuProduct.html.twig') }}
+    </div>
+    <div class="content">
+        <div class="chapter">
+            <h3>{{ shop.shopname }}</h3>
+            <script>
+                /* uptolike share begin */
+                (function(d,c){
+                    var up=d.createElement('script'),
+                            s=d.getElementsByTagName('script')[0],
+                            r=Math.floor(Math.random() * 1000000);
+                    var cmp = c + Math.floor(Math.random() * 10000);
+                    var url = window.location.href;
+                    window["__uptolike_widgets_settings_"+cmp] = {
+
+
+                    };
+                    d.write("<div id='"+cmp+"' class='__uptlk' data-uptlkwdgtId='"+r+"'></div>");
+                    up.type = 'text/javascript'; up.async = true;
+                    up.src = "//w.uptolike.com/widgets/v1/widgets.js?b=fb.tw.ok.vk.gp.mr&id=1246021&o=1&m=1&sf=2&ss=2&sst=1&c1=ededed&c1a=0.0&c3=ff9300&c5=ffffff&mc=1&c2=000000&c4=ffffff&c4a=1.0&mcs=0&sel=1&fol=0&sel=1&scs=11&he=0&c=" + cmp + "&url="+encodeURIComponent(url);
+                    s.parentNode.insertBefore(up, s);
+                })(document,"__uptlk");
+                /* uptolike share end */
+            </script>
+        </div>
+        <p class="textPreview">{% if (preview) %}{% if (preview.text_preview != '') %}{{ preview.text_preview }}{% endif %}{% endif %}</p>
+        <div class="info">
+            {{ render(controller('SearchShopBundle:SearchShop:searchShop', { 'nameShop' : nameShop })) }}
+            <ul class="menu">
+                <li><a class="shopPayment" href="{{ path('_paymentShop', { 'nameShop' : nameShop }) }}">Оплата</a></li>
+                <li><a class="shopDelivery" href="{{ path('_deliveryShop', { 'nameShop' : nameShop }) }}">Доставка</a></li>
+                <li><a class="shopComments" href="{{ path('_commentsShop', { 'nameShop' : nameShop }) }}">Отзывы</a></li>
+                <li><a class="shopInformation" href="{{ path('_ajaxShop', { 'nameShop' : nameShop }) }}">Инфо о магазине</a></li>
+                <li><a class="shopPartners" href="{{ path('_partnersShop', { 'nameShop' : nameShop }) }}">Партнеры</a></li>
+                {% if is_granted('ROLE_MANAGER') %}
+                    {% if manager %}
+                        <li class="addProduct">
+                            <a href='{{ path('_formInsertProduct', { 'nameShop' : nameShop }) }}'>+&nbsp&nbspДобавить товар</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+        {{ render(controller('ManagerAdvertisingBundle:Advertising:sliderShop', { 'nameShop' : nameShop })) }}
+    </div>
+{% endblock %}
+
+{% block products %}
+    {{ render(controller('ShopProductBundle:Products:all', { 'nameShop' : nameShop })) }}
+{% endblock %}

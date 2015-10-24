@@ -1,0 +1,50 @@
+{% extends '::shop.html.twig' %}
+
+{% block title %}О нас{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/shop/secondCategoryShop.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/user/AddSubscribe.js') }}" type="text/javascript"></script>
+    <!-- Fancy  -->
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.mousewheel-3.0.6.pack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox.js?v=2.1.5') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-buttons.js?v=1.0.5') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-thumbs.js?v=1.0.7') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-media.js?v=1.0.6') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/fancybox.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <h3 class="chapter information">Информация о магазине</h3>
+    <div class="shopInformation">
+        <img src="{{ shop.path | apply_filter('logo_shop_information') }}" alt="{{ shop.shopname }}" />
+        <ul>
+            <li><p><span>Название:</span> {{ shop.shopname }}</p></li>
+            <li><p><span>Страна:</span> {{ shop.country }}</p></li>
+            <li><p><span>Город:</span> {{ shop.city }}</p></li>
+            <li><p><span>Улица:</span> {{ shop.street }}</p></li>
+            <li><p><span>Индекс:</span> {{ shop.home_index }}</p></li>
+            <li><p><span>Телефон:</span> {{ shop.phone }}</p></li>
+            <li><p><span>Факс:</span> {{ shop.fax }}</p></li>
+            <li><p><span>Email:</span> {{ shop.email }}</p></li>
+        </ul>
+    </div>
+    <div class="textInformation">
+        <h3>Краткое описание:</h3>
+        <p class="text">{% if preview %}{% if preview.text_preview %}{{ preview.text_preview }}{% endif %}{% endif %}</p>
+        <h3>Подробное описание:</h3>
+        <p class="text">{% if preview %}{% if preview.text_main %}{{ preview.text_main }}{% endif %}{% endif %}</p>
+    </div>
+    <div class="delivery">
+        <h3>Способы доставки:</h3>
+        {% for value in delivery %}
+            <ul>
+                <li><img src="{{ value.image }}" /><h3>{{ value.name }}</h3></li>
+                <li><p><span>Стоимость:</span> {{ value.price_duration }} руб.</p></li>
+                <li><p><span>Время:</span> {{ value.duration }}</p></li>
+            </ul>
+        {% endfor %}
+    </div>
+{% endblock %}

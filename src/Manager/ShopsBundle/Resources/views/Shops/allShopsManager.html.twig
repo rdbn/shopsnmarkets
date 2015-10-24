@@ -1,0 +1,28 @@
+{% extends '::userEditor.html.twig' %}
+
+{% block title %}Магазины{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    <ul class="menu">
+        <li><a class='name' href='{{ path('_createForm') }}'>Создать магазин</a></li>
+    </ul>
+    {% for shop in shops %}
+        <div class="shop">
+            <a href='{{ path('_mainShop', { 'nameShop' : shop.unique_name }) }}'>
+                <img src="{% if (shop['path'] != '') %}{{ shop['path'] | apply_filter('logo_shop') }}{% endif %}" />
+            </a>
+            <ul>
+                <li><a href='{{ path('_updateForm', { 'nameShop' : shop.unique_name }) }}'>Инменить информацию</a></li>
+                <li><a href='{{ path('_mainShop', { 'nameShop' : shop.unique_name }) }}'>{{ shop.shopname }}</a></li>
+                <li><p>Подписчиков: {{ shop.users }}</p></li>
+                <li><p>Райтинг: {{ shop.rating }}</p></li>
+                <li><p>Понравилось: {{ shop.likes }}</p></li>
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}

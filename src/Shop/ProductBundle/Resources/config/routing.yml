@@ -1,0 +1,30 @@
+# for class AjaxCategoryShop
+_categoryManShop:
+    pattern:  /categoryManShop
+    defaults: { _controller: ShopProductBundle:AjaxCategoryShop:man }
+    
+_categoryWomenShop:
+    pattern:  /categoryWomenShop
+    defaults: { _controller: ShopProductBundle:AjaxCategoryShop:women }
+
+# for class AjaxSubcategoryShop
+_subcategoryAccessoriesShop:
+    pattern:  /subcategoryAccessoriesShop
+    defaults: { _controller: ShopProductBundle:AjaxSubcategoryShop:accessories }
+    
+_subcategoryBootsShop:
+    pattern:  /subcategoryBootsShop
+    defaults: { _controller: ShopProductBundle:AjaxSubcategoryShop:boots }
+
+# for class Products
+_allProductsCategoryShop:
+    pattern:  /{nameShop}/allProduct/{idFloor}/{idCategory}
+    defaults: { _controller: ShopProductBundle:Products:allProductsCategory }
+    
+_allProductsSubcategoryShop:
+    pattern:  /{nameShop}/allProduct/{idFloor}/{idCategory}/{idSubcategory}
+    defaults: { _controller: ShopProductBundle:Products:allProductsSubcategory }
+    
+_productShop:
+    pattern:  /{nameShop}/allProduct/{idFloor}/{idCategory}/{idSubcategory}/{idProduct}
+    defaults: { _controller: ShopProductBundle:Products:product }

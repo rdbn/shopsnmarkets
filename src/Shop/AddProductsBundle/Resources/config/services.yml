@@ -1,0 +1,35 @@
+parameters:
+    addProduct.class: Shop\AddProductsBundle\Services\AddProduct
+    productImage.class: Shop\AddProductsBundle\Services\ProductImage
+    updateProduct.class: Shop\AddProductsBundle\Services\UpdateProduct
+    productLike.class: Shop\AddProductsBundle\Services\ProductLike
+
+services:                
+    addProduct:
+        class: %addProduct.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory, @session ]
+        
+    productImage:
+        class: %productImage.class%
+        arguments: [ @form.factory, @session ]
+        
+    updateProduct:
+        class: %updateProduct.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
+        
+    productLike:
+        class: %productLike.class%
+        arguments: [ @doctrine.orm.entity_manager ]
+        
+    shop.name.type.issue_selector:
+        class: Shop\AddProductsBundle\Form\Type\ShopsNameType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: shopname }
+            
+    type.thing.type.issue_selector:
+        class: Shop\AddProductsBundle\Form\Type\TypeThingType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: typeThing }
+    

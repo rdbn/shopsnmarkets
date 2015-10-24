@@ -1,0 +1,4 @@
+# for class Shop
+_mainShop:
+    pattern:  /{nameShop}
+    defaults: { _controller: ShopMainBundle:Shop:mainShop }

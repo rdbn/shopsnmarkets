@@ -1,0 +1,13 @@
+# for class Search
+_search:
+    pattern:  /search
+    defaults: { _controller: SearchPlatformBundle:Search:search }
+    
+_resultProduct:
+    pattern:  /resultProduct
+    defaults: { _controller: SearchPlatformBundle:Search:result }
+    
+# for class SearchMain    
+_resultProductPlatform:
+    pattern:  /resultProductPlatform
+    defaults: { _controller: SearchPlatformBundle:SearchMain:result }

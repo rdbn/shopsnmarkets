@@ -1,0 +1,34 @@
+# for class ShopInformation
+_shopInformation:
+    pattern: /{nameShop}/shopInformation
+    defaults: { _controller: ShopInformationBundle:ShopInformation:shop }
+    
+_ajaxShop:
+    pattern: /{nameShop}/ajaxShop
+    defaults: { _controller: ShopInformationBundle:ShopInformation:ajaxShop }
+    
+_partnersShop:
+    pattern: /{nameShop}/partnersShop
+    defaults: { _controller: ShopInformationBundle:ShopInformation:partnersShop }
+    
+_deliveryShop:
+    pattern: /{nameShop}/deliveryShop
+    defaults: { _controller: ShopInformationBundle:ShopInformation:deliveryShop }
+    
+_paymentShop:
+    pattern: /{nameShop}/paymentShop
+    defaults: { _controller: ShopInformationBundle:ShopInformation:paymentShop }
+    
+#for class ShopComments
+_commentsShop:
+    pattern: /{nameShop}/commentsShop
+    defaults: { _controller: ShopInformationBundle:ShopComments:formComments }
+    
+_addCommentsShop:
+    pattern: /addCommentsShop
+    defaults: { _controller: ShopInformationBundle:ShopComments:addComments }
+    
+# for class AjaxShopLike
+_addLikeShop:
+    pattern: /addLikeShop
+    defaults: { _controller: ShopInformationBundle:AjaxShopLike:addLike }

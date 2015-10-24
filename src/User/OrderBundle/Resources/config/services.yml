@@ -1,0 +1,12 @@
+parameters:
+    userOrder.class: User\OrderBundle\Services\UserOrder
+    userOrderShop.class: User\OrderBundle\Services\UserOrderShop
+
+services:
+    userOrder:
+        class: %userOrder.class%
+        arguments: [ @userOrderShop ]
+        
+    userOrderShop:
+        class: %userOrderShop.class%
+        arguments: [ @doctrine.orm.entity_manager ]

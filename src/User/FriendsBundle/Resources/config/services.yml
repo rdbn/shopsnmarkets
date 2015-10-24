@@ -1,0 +1,17 @@
+parameters:
+    addFriends.class: User\FriendsBundle\Services\AddFriends
+    checkFriends.class: User\FriendsBundle\Services\CheckFriends
+    deleteFriends.class: User\FriendsBundle\Services\DeleteFriends
+
+services:        
+    addFriends:
+        class: %addFriends.class%
+        arguments: [ @doctrine.orm.entity_manager ]
+        
+    checkFriends:
+        class: %checkFriends.class%
+        arguments: [ @doctrine.orm.entity_manager ]
+        
+    deleteFriends:
+        class: %deleteFriends.class%
+        arguments: [ @doctrine.orm.entity_manager ]

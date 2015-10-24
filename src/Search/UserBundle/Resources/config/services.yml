@@ -1,0 +1,7 @@
+parameters:
+    searchUsers.class: Search\UserBundle\Services\SearchUsers
+
+services:
+    searchUsers:
+        class: %searchUsers.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory ]

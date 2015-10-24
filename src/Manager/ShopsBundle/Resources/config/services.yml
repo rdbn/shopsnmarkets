@@ -1,0 +1,7 @@
+#parameters:
+#    allShopsUser.class: Manager\ShopsBundle\Services\AllShopsUser
+
+#services:
+#    allShopsUser:
+#        class: %allShopsUser.class%
+#       arguments: [ @doctrine.orm.entity_manager ]

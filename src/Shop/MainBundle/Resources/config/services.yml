@@ -1,0 +1,7 @@
+parameters:
+    nameShop.class: Shop\MainBundle\Services\NameShop
+
+services:
+    nameShop:
+        class: %nameShop.class%
+        arguments: [ @doctrine.orm.entity_manager ]

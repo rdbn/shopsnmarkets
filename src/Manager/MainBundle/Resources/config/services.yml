@@ -1,0 +1,7 @@
+parameters:
+    formManager.class: Manager\MainBundle\Services\FormManager
+
+services:
+    formManager:
+        class: %formManager.class%
+        arguments: [ @form.factory, @security.context, @formUserInformation ]

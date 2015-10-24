@@ -1,0 +1,8 @@
+# route for SearchPartners
+_searchPartner:
+    pattern:  /manager/searchPartner
+    defaults: { _controller: SearchPartnersBundle:SearchPartners:searchPartners }
+    
+_resualtSearch:
+    pattern:  /manager/resualtSearch
+    defaults: { _controller: SearchPartnersBundle:SearchPartners:resualtSearch }

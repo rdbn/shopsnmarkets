@@ -1,0 +1,17 @@
+{% extends '::userEditor.html.twig' %}
+
+{% block body %}
+    {{ include('UserFriendsBundle:Friends:friendsMenu.html.twig') }}
+    {% for user in resualt %}
+        <div class="friends">
+            <a href='{{ path('_userID', { 'id' : user.id }) }}'>
+                <img src="{% if (user.path != '') %}{{ asset(user.path) }}{% endif %}" />
+            </a>
+            <h3>{{ user.realname }}</h3>
+            <ul>
+                <li><a class="sendMessage" href="{{ path('_sendMessage', { 'id' : user.id }) }}">Отправить сообщение</a></li>
+                <li><a href="{{ path('_userFriends', { 'id' : user.id }) }}">Посмотреть друзей</a></li>
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}

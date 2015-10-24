@@ -1,0 +1,38 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+namespace Shop\OrderBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="order_product_size")
+ */
+
+class OrderProductSize
+{       
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Shop\OrderBundle\Entity\Order", inversedBy="order_product_size")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     */
+    protected $order;
+    
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Shop\AddProductsBundle\Entity\Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+    protected $product;
+    
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Shop\AddProductsBundle\Entity\Size")
+     * @ORM\JoinColumn(name="size_id", referencedColumnName="id")
+     */
+    protected $size;
+}

@@ -1,0 +1,9 @@
+{% if logo is defined %}
+    {{ logo }}
+{% else %}
+    <ul id="errors">
+    {% for erorr in erorrs %}
+        <li><p>{{ erorr }}</p></li>
+    {% endfor %}
+    </ul>
+{% endif %}

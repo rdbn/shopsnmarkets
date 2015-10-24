@@ -1,0 +1,44 @@
+{% extends '::userEditor.html.twig' %}
+
+{% block title %}Дополнительная информация{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/public/js/shop/uploadLogo.js') }}" type="text/javascript"></script>
+    <!-- Fancy  -->
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.mousewheel-3.0.6.pack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox.js?v=2.1.5') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-buttons.js?v=1.0.5') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-thumbs.js?v=1.0.7') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-media.js?v=1.0.6') }}"></script>
+    <script type="text/javascript" src="{{ asset('/public/js/fancybox/fancybox.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
+    <div class="formAddationalImage">
+        <ul>
+            <form id='logo' target='upload_image' action="{{ path('_addLogo', { 'nameShop' : nameShop }) }}" method="post" {{ form_enctype(form) }}>
+                {{ form_errors(form) }}
+                    <li id='errors'>{{ form_errors(form.file) }}</li>
+                    <li>
+                        {{ form_label(form.file) }}
+                        {{ form_widget(form.file) }}
+                        <p id="load" class="loadImage">
+                            <img src="/public/images/load/ajax-loader-button.gif" />
+                        </p>
+                    </li>
+                {{ form_rest(form) }}
+            </form>
+        </ul>
+        <div id="contentIframe" class="property">
+            <img width="200" src="{% if(image != '') %}{{ image | apply_filter('logo_shop') }}{% endif %}" />
+        </div>
+    </div>
+    <ul class="addationalPreview">
+        <li><a class="preview" href="{{ path('_formPreview', { 'nameShop' : nameShop }) }}">Описание</a></li>
+        <li><a class="payment" href="">Оплата</a></li>
+    </ul>
+    <iframe id='iframe' name='upload_image' ></iframe>
+{% endblock %}

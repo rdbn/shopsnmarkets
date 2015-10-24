@@ -1,0 +1,40 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+namespace Shop\OrderBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="order_delivery")
+ */
+
+class OrderDelivery
+{      
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Shop\OrderBundle\Entity\Order", inversedBy="delivery", cascade={"persist"})
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     */
+    protected $order;
+    
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops")
+     * @ORM\JoinColumn(name="shops_id", referencedColumnName="id")
+     */
+    protected $shops;
+    
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Delivery")
+     * @ORM\JoinColumn(name="delivery_id", referencedColumnName="id")
+     */
+    protected $delivery;
+}

@@ -1,0 +1,24 @@
+parameters:
+     hashPassword.class:        User\RegistrationBundle\Services\HashPassword
+     createDir.class:   User\RegistrationBundle\Services\CreateDir
+     register.class:     User\RegistrationBundle\Services\Register
+
+services:            
+    createDir:
+        class: %createDir.class%
+        
+    hashPassword:
+        class: %hashPassword.class%
+        
+    register:
+        class: %register.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory, @hashPassword, @createDir ]
+    
+    hwi_oauth.user.provider.entity:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+        
+    ib_user.oauth_user_provider:
+        class: User\RegistrationBundle\Auth\OAuthProvider
+        arguments: [@doctrine, @createDir, {vkontakte: vkontakte_id, facebook: facebook_id, google: google_id}]
+        
+    

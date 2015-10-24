@@ -1,0 +1,56 @@
+{% extends '::registration.html.twig' %}
+
+{% block body %}
+    <div class="socail">
+        <h3>Регистрация для покупателей:</h3>
+        <ul class="auth">
+            <li><a class="vk" href="{{ hwi_oauth_login_url('vkontakte') }}"><span>Регистрация через ВК</span></a></li>
+            <li><a class="fb" href="{{ hwi_oauth_login_url('facebook') }}"><span>Регистрация через FB</span></a></li>
+            <li><a class="gl" href="{{ hwi_oauth_login_url('google') }}"><span>Регистрация через G+</span></a></li>
+        </ul>
+    </div>
+    <div class="reg">
+        <h3>Регистрация для продавцов:</h3>
+        <ul class='formRegistretion'>
+            <form action="{{ path('_createUser') }}" method="post" {{ form_enctype(form) }}>
+                    <li id="errors">
+                        {% if (email == false) %}Данный Email уже используется.{% endif %}
+                        {{ form_errors(form) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.realname) }}
+                        {{ form_errors(form.realname) }}
+                        {{ form_widget(form.realname) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.email) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email) }}
+                         <span id="checkEmail"></span>
+                    </li>
+                    <li>
+                        {{ form_label(form.password.first) }}
+                        {{ form_errors(form.password.first) }}
+                        {{ form_widget(form.password.first) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.password.second) }}
+                        {{ form_errors(form.password.second) }}
+                        {{ form_widget(form.password.second) }}
+                        <span id="checkPassword"></span>
+                    </li>
+                    <li class="captcha">
+                        <div class="content">
+                            {{ form_label(form.captcha) }}
+                            {{ form_errors(form.captcha) }}
+                            {{ form_widget(form.captcha) }}
+                        </div>
+                    </li>
+                {{form_rest(form)}}
+                <li class="submit">
+                    <input id='submit' class='button'  type="submit" value="Зарегистрироваться" />  
+                </li>
+            </form>
+        </ul>
+    </div>
+{% endblock %}

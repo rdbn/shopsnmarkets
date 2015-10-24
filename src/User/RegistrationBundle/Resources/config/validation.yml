@@ -1,0 +1,6 @@
+User\RegistrationBundle\Entity\Users:
+    properties:
+        email:
+            - Email:
+                message: Email":{{ value }}" в веден не коректно.
+                checkMX: true

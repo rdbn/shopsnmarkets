@@ -1,0 +1,37 @@
+parameters:
+    formCreateShop.class: Shop\CreateBundle\Services\FormCreateShop
+    formDeliveryShop.class: Shop\CreateBundle\Services\FormDeliveryShop
+    formUpdateShop.class: Shop\CreateBundle\Services\FormUpdateShop
+    formUploadLogoShop.class: Shop\CreateBundle\Services\FormUploadLogoShop
+    formPreviewShop.class: Shop\CreateBundle\Services\FormPreviewShop
+    savePreviewShopXML.class: Shop\CreateBundle\Services\SavePreviewShopXML
+
+services:
+    savePreviewShopXML:
+        class: %savePreviewShopXML.class%
+        
+    formCreateShop:
+        class: %formCreateShop.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory, @createDir ]
+        
+    formUpdateShop:
+        class: %formUpdateShop.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory, @createDir ]
+        
+    formDeliveryShop:
+        class: %formDeliveryShop.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
+        
+    formPreviewShop:
+        class: %formPreviewShop.class%
+        arguments: [ @form.factory, @savePreviewShopXML ]
+        
+    formUploadLogoShop:
+        class: %formUploadLogoShop.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
+        
+    delivery.id.type.issue_selector:
+        class: Shop\CreateBundle\Form\Type\DeliveryIdType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: deliveryId }
