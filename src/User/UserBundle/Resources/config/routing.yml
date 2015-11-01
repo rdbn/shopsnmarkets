@@ -7,11 +7,6 @@ _userID:
     pattern:  /id/{id}
     defaults: { _controller: UserUserBundle:Main:user }
     
-# route for class Auth    
-_enterSite:
-    pattern: /enter
-    defaults: { _controller: UserUserBundle:Auth:enter }
-    
 # route for class Bookmarks
 _subscribeShop:
     pattern: /subscribeShop

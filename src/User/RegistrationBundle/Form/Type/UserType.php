@@ -15,13 +15,15 @@ Class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('realname', 'text', array(
-            'label' => 'Фамилия, Имя *:',
+            'label' => false,
+            'attr' => ["class" => "form-control", "placeholder" => "Фамилия, Имя"],
             'data' => isset($options['data']) ? $options['data']->getRealname() : NULL,
             'invalid_message' => 'Заполните поле: "Фамилия, Имя".',
             'error_bubbling' => true,
         ));
         $builder->add('email', 'email', array(
-            'label' => 'email *:',
+            'label' => false,
+            'attr' => ["class" => "form-control", "placeholder" => "email"],
             'data' => isset($options['data']) ? $options['data']->getEmail() : NULL,
             'invalid_message' => 'Заполните поле: "Email".',
             'error_bubbling'=>true,
@@ -29,10 +31,10 @@ Class UserType extends AbstractType
         $builder->add('password', 'repeated', array(
             'type' => 'password',
             'invalid_message' => 'Значение паролей не совпадает.',
-            'options' => array('attr' => array('class' => 'input')),
+            'options' => array('attr' => array('class' => 'form-control', "placeholder" => "Пароль")),
             'required' => true,
-            'first_options'  => array('label' => 'Пароль *:'),
-            'second_options' => array('label' => 'Повторить *:'),
+            'first_options'  => array('label' => false),
+            'second_options' => array('label' => false),
             'error_bubbling'=>true,
         ));
         $builder->add('captcha', 'captcha', array(
@@ -40,7 +42,12 @@ Class UserType extends AbstractType
             'mapped' => false,
             'label' => false,
             'error_bubbling' => true,
+            'attr' => ["class" => "form-control", "placeholder" => "Введите значение с картинки"],
         ));
+        $builder->add("save", "submit", [
+            "label" => "Зарегистрироваться",
+            'attr' => ["class" => "btn btn-success"],
+        ]);
     }
     
     public function setDefaultOptions(OptionsResolverInterface $resolver)

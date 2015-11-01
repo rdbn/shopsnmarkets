@@ -34,8 +34,9 @@ class AddCityFieldSubscriber implements EventSubscriberInterface
     {
         $form->add($this->factory->createNamed('city','entity', null, array(
             'class'         => 'UserRegistrationBundle:City',
-            'label'         => 'Город *:',
-            'empty_value'   => '--- Выберите город ---',
+            'label'         => false,
+            'attr' => ['class' => "form-control"],
+            'empty_value'   => '--- Выберите город* ---',
             'auto_initialize' => false,
             'query_builder' => function (EntityRepository $repository) use ($country) {
                 $qb = $repository->createQueryBuilder('city')

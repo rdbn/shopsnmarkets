@@ -13,10 +13,10 @@ class ShopsRepository extends EntityRepository
     public function findAllShops() {
         return $this->getEntityManager()
                 ->createQuery('
-                    SELECT s.id, s.shopname, s.unique_name, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like) as likes
+                    SELECT s.id, s.shopname, s.unique_name, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
                     FROM ShopCreateBundle:Shops s
                     LEFT JOIN s.users sub
-                    LEFT JOIN s.like_shop like
+                    LEFT JOIN s.like_shop like_shop
                     GROUP BY s
                     ORDER BY s.createdAt desc
                 ')->getResult();
@@ -25,11 +25,11 @@ class ShopsRepository extends EntityRepository
     public function findAllShopsManager($id) {
         return $this->getEntityManager()
                 ->createQuery('
-                    SELECT s.id, s.shopname, s.unique_name, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like) as likes
+                    SELECT s.id, s.shopname, s.unique_name, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
                     FROM ShopCreateBundle:Shops s
                     LEFT JOIN s.manager u
                     LEFT JOIN s.users sub
-                    LEFT JOIN s.like_shop like
+                    LEFT JOIN s.like_shop like_shop
                     WHERE u.id = :id
                     GROUP BY s
                 ')->setParameter('id', $id)

@@ -51,11 +51,16 @@ Class Shops
      * @ORM\Column(type="integer")
      */
     protected $rating;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $description;
     
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
     
@@ -714,5 +719,29 @@ Class Shops
     public function getShopsDelivery()
     {
         return $this->shops_delivery;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Shops
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

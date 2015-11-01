@@ -24,11 +24,6 @@ class AuthController extends CommonController
         ));
     }
     
-    public function enterAction()
-    {
-        return $this->render('UserUserBundle:Login:login_form.html.twig', array());
-    }
-    
     public function loginAction()
     {        
         $request = $this->getRequest();

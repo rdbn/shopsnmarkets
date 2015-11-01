@@ -1,22 +1,21 @@
 CheckUniqueName = {
     name : function() {
-        var value = $('#shops_uniqueName').val();
-        
-        return value;
+        return $('#shops_uniqueName').val();
     },
     sendName : function() {
         var check = $.post('/manager/createShop/uniqueName', { 'name' : this.name() });
         check.done(function(data) {
+            var element = $('#checkName');
             if (data === '0') {
-                $('#checkName').text('+').show();
-                $('#checkName').addClass('plus');
-                $('#checkName').removeClass('minus');
+                element.text('+').show();
+                element.addClass('plus');
+                element.removeClass('minus');
 
                 return true;
             } else {
-                $('#checkName').text('-').show();
-                $('#checkName').addClass('minus');
-                $('#checkName').removeClass('plus');
+                element.text('-').show();
+                element.addClass('minus');
+                element.removeClass('plus');
 
                 return false;
             }
@@ -32,15 +31,15 @@ CheckUniqueName = {
         }
     }
 };
-$(document).ready(function(){    
-    /* check unique_name */
-    $("#shops_uniqueName").focus(function(){
+$(document).ready(function() {
+    var element = $('#shops_uniqueName');
+    element.focus(function(){
         CheckUniqueName.checkName();
     });
-    $("#shops_uniqueName").keyup(function(){
+    element.keyup(function(){
         CheckUniqueName.checkName();
     });
-    $("#shops_uniqueName").blur(function(){
+    element.blur(function(){
         CheckUniqueName.checkName();
     });
 });

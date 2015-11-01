@@ -16,6 +16,8 @@ class UploadLogoShopType extends AbstractType {
     {
         $builder->add('file', 'file', array(
             'label' => 'Загрузить лого',
+            'label_attr' => ['class' => 'btn btn-success'],
+            'attr' => ["class" => "hide"],
             'data' => isset($options['data']) ? $options['data']->getFile() : NULL,
         ));
     }

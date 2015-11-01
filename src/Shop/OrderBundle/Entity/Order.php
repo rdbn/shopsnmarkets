@@ -25,11 +25,6 @@ class Order
     protected $id;
     
     /** 
-     * @ORM\OneToOne(targetEntity="JMS\Payment\CoreBundle\Entity\PaymentInstruction") 
-     */
-    protected $paymentInstruction;
-    
-    /** 
      * @ORM\Column(name="order_number", type="string", length=45)
      */
     protected $order_number;
@@ -178,29 +173,6 @@ class Order
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set paymentInstruction
-     *
-     * @param \JMS\Payment\CoreBundle\Entity\PaymentInstruction $paymentInstruction
-     * @return Order
-     */
-    public function setPaymentInstruction(\JMS\Payment\CoreBundle\Entity\PaymentInstruction $paymentInstruction = null)
-    {
-        $this->paymentInstruction = $paymentInstruction;
-    
-        return $this;
-    }
-
-    /**
-     * Get paymentInstruction
-     *
-     * @return \JMS\Payment\CoreBundle\Entity\PaymentInstruction 
-     */
-    public function getPaymentInstruction()
-    {
-        return $this->paymentInstruction;
     }
 
     /**

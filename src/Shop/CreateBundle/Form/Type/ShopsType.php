@@ -20,47 +20,60 @@ Class ShopsType extends AbstractType
             'data' => 0,
         ));
         $builder->add('keywords', 'text', array(
-            'label' => 'Для поиска *:',
+            'label' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "Для поиска *"],
             'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
         ));
         $builder->add('uniqueName', 'text', array(
-            'label' => 'Адресс магазина *:',
+            'label' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "Адресс магазина *"],
             'data' => isset($options['data']) ? $options['data']->getUniqueName() : NULL,
         ));
         $builder->add('shopname', 'text', array(
-            'label' => 'Название магазина *:',
+            'label' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "Название магазина *"],
             'data' => isset($options['data']) ? $options['data']->getShopname() : NULL,
         ));
         $builder->add('street', 'text', array(
-            'label' => 'Улица:',
+            'label' => false,
             'required' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "Улица"],
             'data' => isset($options['data']) ? $options['data']->getStreet() : NULL,
         ));
         $builder->add('home_index', 'number', array(
-            'label' => 'Индекс:',
+            'label' => false,
             'required' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "Индекс"],
             'data' => isset($options['data']) ? $options['data']->getHomeIndex() : NULL,
         ));
         $builder->add('phone', 'number', array(
-            'label' => 'Телефон:',
+            'label' => false,
             'required' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "Телефон"],
             'data' => isset($options['data']) ? $options['data']->getPhone() : NULL,
         ));
         $builder->add('fax', 'number', array(
-            'label' => 'Fax:',
+            'label' => false,
             'required' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "Fax"],
             'data' => isset($options['data']) ? $options['data']->getFax() : NULL,
         ));
         $builder->add('url', 'text', array(
-            'label' => 'URL сайта:',
+            'label' => false,
             'required' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "url"],
             'data' => isset($options['data']) ? $options['data']->getUrl() : NULL,
         ));
         $builder->add('email', 'email', array(
-            'label' => 'email:',
+            'label' => false,
             'required' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "email"],
             'data' => isset($options['data']) ? $options['data']->getEmail() : NULL,
         ));
+        $builder->add("save", "submit", [
+            "label" => "Создать",
+            'attr' => ["class" => "btn btn-success center-block"],
+        ]);
         
         $factory = $builder->getFormFactory();
         $citySubscriber = new AddCityFieldSubscriber($factory);

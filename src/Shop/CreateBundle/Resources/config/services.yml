@@ -1,5 +1,4 @@
 parameters:
-    formCreateShop.class: Shop\CreateBundle\Services\FormCreateShop
     formDeliveryShop.class: Shop\CreateBundle\Services\FormDeliveryShop
     formUpdateShop.class: Shop\CreateBundle\Services\FormUpdateShop
     formUploadLogoShop.class: Shop\CreateBundle\Services\FormUploadLogoShop
@@ -9,10 +8,6 @@ parameters:
 services:
     savePreviewShopXML:
         class: %savePreviewShopXML.class%
-        
-    formCreateShop:
-        class: %formCreateShop.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory, @createDir ]
         
     formUpdateShop:
         class: %formUpdateShop.class%

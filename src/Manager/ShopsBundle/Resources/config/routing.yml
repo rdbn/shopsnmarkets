@@ -1,4 +1,0 @@
-_allShopsManager:
-    pattern:  /manager/allShops
-    defaults: { _controller: ManagerShopsBundle:ShopsManager:allShopsManager }
-

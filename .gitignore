@@ -1,7 +1,6 @@
 /.idea/
 /app/cache/
 /app/logs/
-/app/Resources/
 /app/*.php
 /app/config/parameters.yml
 /app/bootstrap.php.cache
@@ -19,5 +18,7 @@
 /web/app_dev.php
 /web/config.php
 /web/favicon.ico
+/web/media
+/web/public/xml
 /web/apple-touch-icon.png
 composer.lock

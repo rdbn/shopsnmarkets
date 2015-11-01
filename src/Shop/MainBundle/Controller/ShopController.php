@@ -12,25 +12,15 @@ class ShopController extends Controller
 {
     public function mainShopAction($nameShop)
     {        
-        $userID = $this->getUser();
+        $user = $this->getUser();
+        $shop = $this->getDoctrine()->getRepository("ShopCreateBundle:Shops")
+            ->findOneBy(["unique_name" => $nameShop]);
+
         
-        $shop = $this->get('nameShop');
-        
-        if ($this->get('security.context')->isGranted('ROLE_USER')) {
-            $user = $shop->isUser($nameShop, $userID);
-        }
-        
-        if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
-            $manager = $shop->isManager($nameShop, $userID);
-        }
-        
-        return $this->render('ShopMainBundle:Main:index.html.twig', array(
+        return $this->render('ShopMainBundle:Main:index.html.twig', [
             'nameShop' => $nameShop,
-            'preview' => $shop->preview($nameShop),
-            'shop' => $shop->value($nameShop),
-            'user' => isset($user) ? $user : false,
-            'manager' => isset($manager) ? $manager : false,
-        ));
+            'shop' => $shop,
+        ]);
     }
 }
 ?>

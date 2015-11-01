@@ -1,4 +1,0 @@
-# for class News
-_news:
-    pattern: /news
-    defaults: { _controller: PlatformNewsBundle:News:news }

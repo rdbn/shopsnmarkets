@@ -1,4 +1,12 @@
 # route for controller Main
 _main:
     pattern:  /
-    defaults: { _controller: PlatformMainBundle:Main:index }
+    defaults: { _controller: PlatformMainBundle:Page:index }
+
+_shops:
+    pattern:  /shops
+    defaults: { _controller: PlatformMainBundle:Page:shops }
+
+_news:
+    pattern: /news
+    defaults: { _controller: PlatformMainBundle:Page:news }

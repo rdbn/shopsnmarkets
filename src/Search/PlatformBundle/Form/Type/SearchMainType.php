@@ -17,6 +17,7 @@ Class SearchMainType extends AbstractType
     {
         $builder->add('keywords', 'text', array(
             'label' => false,
+            'attr' => ["class" => "form-control"],
             'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
         ));
     }

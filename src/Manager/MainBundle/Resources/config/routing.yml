@@ -1,5 +1,9 @@
 # for class ManagerInformation
 _manager:
     pattern:  /manager
-    defaults: { _controller: ManagerMainBundle:ManagerInformation:manager }
+    defaults: { _controller: ManagerMainBundle:PageManager:manager }
+
+_allShopsManager:
+    pattern:  /manager/allShops
+    defaults: { _controller: ManagerMainBundle:PageManager:shops }
 

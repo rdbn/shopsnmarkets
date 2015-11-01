@@ -1,7 +1,0 @@
-parameters:
-    allShops.class: Platform\ShopsBundle\Services\AllShops
-
-services:        
-    allShops:
-        class: %allShops.class%
-        arguments: [ @doctrine.orm.entity_manager ]

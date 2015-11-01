@@ -1,4 +1,0 @@
-_shops:
-    pattern:  /shops
-    defaults: { _controller: PlatformShopsBundle:Shops:shopsPlatform }
-

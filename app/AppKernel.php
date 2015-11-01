@@ -26,8 +26,6 @@ class AppKernel extends Kernel
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
 
             new Platform\MainBundle\PlatformMainBundle(),
-            new Platform\NewsBundle\PlatformNewsBundle(),
-            new Platform\ShopsBundle\PlatformShopsBundle(),
             new Platform\ProductsBundle\PlatformProductsBundle(),
             new User\RegistrationBundle\UserRegistrationBundle(),
             new User\UserBundle\UserUserBundle(),
@@ -36,7 +34,6 @@ class AppKernel extends Kernel
             new User\MessagesBundle\UserMessagesBundle(),
             new User\OrderBundle\UserOrderBundle(),
             new Manager\MainBundle\ManagerMainBundle(),
-            new Manager\ShopsBundle\ManagerShopsBundle(),
             new Manager\PartnersBundle\ManagerPartnersBundle(),
             new Manager\OrdersBundle\ManagerOrdersBundle(),
             new Manager\AdvertisingBundle\ManagerAdvertisingBundle(),

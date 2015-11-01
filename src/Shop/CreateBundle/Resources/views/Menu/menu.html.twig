@@ -1,6 +1,6 @@
-<ul class="menu">
-    <li><a href="{{ path('_updateForm', { 'nameShop' : nameShop }) }}">Главная информация</a></li>
-    <li><a href="{{ path('_previewShop', { 'nameShop' : nameShop }) }}">Дополнительная информация</a></li>
-    <li><a href="{{ path('_delivery', { 'nameShop' : nameShop }) }}">Доставка</a></li>
-    <li><a href="{{ path('_mainShop', { 'nameShop' : nameShop }) }}">Перейти к магазину</a></li>
-</ul>
+<div class="btn-group">
+    <a class="btn btn-success btn-sm" href="{{ path('_updateShop', { 'shopname' : shopname }) }}">Главная информация</a>
+    <a class="btn btn-success btn-sm" href="{{ path('_previewShop', { 'shopname' : shopname }) }}">Дополнительная информация</a>
+    <a class="btn btn-success btn-sm" href="{{ path('_delivery', { 'shopname' : shopname }) }}">Доставка</a>
+    <a class="btn btn-success btn-sm" href="{{ path('_mainShop', { 'nameShop' : shopname }) }}">Перейти к магазину</a>
+</div>

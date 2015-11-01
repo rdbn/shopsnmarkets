@@ -1,4 +1,4 @@
-{% extends '::shopMain.html.twig' %}
+{% extends '::main_platform.html.twig' %}
 
 {% block title %}{{ shop.shopname }}{% endblock %}
 {% block ogTitle %}{{ shop.shopname }}{% endblock %}
@@ -20,7 +20,7 @@
         {% if is_granted('ROLE_USER') %}
             {% if user %}<a class="subscribe" href="{{ shop.id }}">Подписаться на новости</a>{% endif %}
         {% endif %}
-        <p>Всего покупателей: <span class="count">{{ shop.users }}</span></p>
+        {#<p>Всего покупателей: <span class="count">{{ shop.users }}</span></p>#}
         {{ include('ShopMainBundle:Main:menuProduct.html.twig') }}
     </div>
     <div class="content">
@@ -46,7 +46,6 @@
                 /* uptolike share end */
             </script>
         </div>
-        <p class="textPreview">{% if (preview) %}{% if (preview.text_preview != '') %}{{ preview.text_preview }}{% endif %}{% endif %}</p>
         <div class="info">
             {{ render(controller('SearchShopBundle:SearchShop:searchShop', { 'nameShop' : nameShop })) }}
             <ul class="menu">
@@ -56,15 +55,13 @@
                 <li><a class="shopInformation" href="{{ path('_ajaxShop', { 'nameShop' : nameShop }) }}">Инфо о магазине</a></li>
                 <li><a class="shopPartners" href="{{ path('_partnersShop', { 'nameShop' : nameShop }) }}">Партнеры</a></li>
                 {% if is_granted('ROLE_MANAGER') %}
-                    {% if manager %}
                         <li class="addProduct">
                             <a href='{{ path('_formInsertProduct', { 'nameShop' : nameShop }) }}'>+&nbsp&nbspДобавить товар</a>
                         </li>
-                    {% endif %}
                 {% endif %}
             </ul>
         </div>
-        {{ render(controller('ManagerAdvertisingBundle:Advertising:sliderShop', { 'nameShop' : nameShop })) }}
+        {#{{ render(controller('ManagerAdvertisingBundle:Advertising:sliderShop', { 'nameShop' : nameShop })) }}#}
     </div>
 {% endblock %}
 

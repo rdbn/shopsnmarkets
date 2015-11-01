@@ -37,7 +37,7 @@ class Roles implements RoleInterface
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
     

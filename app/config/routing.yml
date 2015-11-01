@@ -54,20 +54,8 @@ manager_partners:
     resource: "@ManagerPartnersBundle/Resources/config/routing.yml"
     prefix:   /
 
-manager_shops:
-    resource: "@ManagerShopsBundle/Resources/config/routing.yml"
-    prefix:   /
-
 platform_products:
     resource: "@PlatformProductsBundle/Resources/config/routing.yml"
-    prefix:   /
-    
-platform_shops:
-    resource: "@PlatformShopsBundle/Resources/config/routing.yml"
-    prefix:   /
-
-platform_news:
-    resource: "@PlatformNewsBundle/Resources/config/routing.yml"
     prefix:   /
 
 platform_main:
@@ -152,11 +140,6 @@ facebook_login:
     
 google_login:
     pattern: /login/check-google
-    
-# upload image
-oneup_uploader:
-    resource: .
-    type: uploader
     
 # shop route
 shop_order:

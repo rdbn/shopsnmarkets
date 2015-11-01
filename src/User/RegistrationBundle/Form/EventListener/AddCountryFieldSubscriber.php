@@ -32,10 +32,11 @@ class AddCountryFieldSubscriber implements EventSubscriberInterface
     {
         $form->add($this->factory->createNamed('country','entity', $country, array(
             'class'         => 'UserRegistrationBundle:Country',
-            'label'         => 'Страна *:',
-            'empty_value'   => '--- Выберите страну ---',
+            'label'         => false,
+            'empty_value'   => '--- Выберите страну* ---',
             'auto_initialize' => false,
             'mapped'        => false,
+            'attr' => ['class' => "form-control"],
             'query_builder' => function (EntityRepository $repository) {
                 $qb = $repository->createQueryBuilder('country');
 
