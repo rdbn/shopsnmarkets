@@ -3,7 +3,7 @@
 {% block body %}
     <ul class="formFields">
         <li><h3 class="chapter">Добавить товар:</h3></li>
-        <form action="{{ path('_updateProduct', { 'nameShop' : nameShop, 'id' : id }) }}" method="post" {{ form_enctype(form) }}>
+        <form action="{{ path('_updateProduct', { 'shopname' : shopname, 'id' : id }) }}" method="post" {{ form_enctype(form) }}>
             {{ include('ShopAddProductsBundle:Form:formFields.html.twig') }}
         </form>
     </ul>

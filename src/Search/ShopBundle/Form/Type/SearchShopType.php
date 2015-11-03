@@ -13,19 +13,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 Class SearchShopType extends AbstractType 
 {
-    private $shopname;
-    
-    public function __construct($nameShop) {
-        $this->shopname = $nameShop;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('shops', 'shopname', array(
-            'data' => $this->shopname,
-        ));
         $builder->add('keywords', 'text', array(
             'label' => false,
+            'attr' => ["class" => "form-control", "placeholder" => "Введите слова"],
             'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
         ));
     }

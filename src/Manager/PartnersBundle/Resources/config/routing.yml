@@ -4,7 +4,7 @@ _partners:
     defaults: { _controller: ManagerPartnersBundle:ManagerPartners:partners }
     
 _shopPartners:
-    pattern:  /manager/partners/shop/{nameShop}
+    pattern:  /manager/partners/shop/{shopname}
     defaults: { _controller: ManagerPartnersBundle:ManagerPartners:shopPartners }
     
 _myApplication:

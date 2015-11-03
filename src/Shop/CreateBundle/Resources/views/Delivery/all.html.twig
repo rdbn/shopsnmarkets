@@ -1,24 +1,23 @@
-{% extends '::userEditor.html.twig' %}
+{% extends 'ManagerMainBundle:Base:layout.html.twig' %}
 
 {% block title %}Доставка{% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/public/js/user/deliveryForm.js') }}" type="text/javascript"></script>
+{% block content %}
+    {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
+    {% for value in delivery %}
+        <div class="media">
+            <div class="media-left media-middle">
+                <a href="{{ shopname }}/{{ value.id }}">
+                    <img src="{{ asset(value.image) }}" alt="{{ value.name }}" />
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{ value.name }}</h4>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
 
-{% block body %}
-    {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
-    <ul class="delivery">
-        {% for value in delivery %}
-            <li>
-                <a href="{{ nameShop }}/{{ value.id }}">
-                    <img src="{{ value.image }}" alt="{{ value.name }}" />
-                    <span>{{ value.name }}</span>
-                    <img class="loadForm" src="/public/images/load/ajax-loader-button.gif" />
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+{% block javascripts %}
+    <script src="{{ asset('public/js/user/deliveryForm.js') }}" type="text/javascript"></script>
 {% endblock %}

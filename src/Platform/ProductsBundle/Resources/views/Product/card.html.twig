@@ -30,11 +30,11 @@
         </ul>
         <p class='text'>{{ product.text }}</p>
         <div class="shop">
-            <a href="{{ path('_mainShop', { 'nameShop' : product.unique_name }) }}">
+            <a href="{{ path('_mainShop', { 'shopname' : product.unique_name }) }}">
                 <img src="{% if (product.path != '') %}{{ product.logo | apply_filter('logo_shop') }}{% endif %}" /></a>
             </a>
             <ul>
-                <li><a href="{{ path('_mainShop', { 'nameShop' : product.unique_name }) }}">{{ product.shopname }}</a></li>
+                <li><a href="{{ path('_mainShop', { 'shopname' : product.unique_name }) }}">{{ product.shopname }}</a></li>
                 <li><p>Подписчиков: {{ product.users }}</p></li>
                 <li><p>Рейтинг: {{ product.rating }}</p></li>
                 <li><a class="like" href="{{ product.shop }}">Понравилось <span class="countLike">{{ product.likes }}</span></a></li>

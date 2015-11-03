@@ -39,7 +39,6 @@ class AppKernel extends Kernel
             new Manager\AdvertisingBundle\ManagerAdvertisingBundle(),
             new Shop\CreateBundle\ShopCreateBundle(),
             new Shop\InformationBundle\ShopInformationBundle(),
-            new Shop\MainBundle\ShopMainBundle(),
             new Shop\AddProductsBundle\ShopAddProductsBundle(),
             new Shop\NewsBundle\ShopNewsBundle(),
             new Shop\OrderBundle\ShopOrderBundle(),

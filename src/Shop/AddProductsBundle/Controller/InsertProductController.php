@@ -14,26 +14,26 @@ use Symfony\Component\HttpFoundation\Request;
 
 class InsertProductController extends Controller
 {
-    public function formAction($nameShop)
+    public function formAction($shopname)
     {
         if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
             if ($this->getRequest()->getSession()->has('image_product')) {
                 $image_product = $this->getRequest()->getSession()->get('image_product');
             }
             
-            $form = $this->createForm(new ProductType($nameShop), new Product());
+            $form = $this->createForm(new ProductType($shopname), new Product());
             
             return $this->render('ShopAddProductsBundle:Form:form.html.twig', array(
                 'image_product' => isset($image_product) ? $image_product : '',
                 'form' => $form->createView(),
-                'nameShop' => $nameShop,
+                'shopname' => $shopname,
             ));
         } else {
-            return $this->redirect($this->generateUrl('_mainShop', array('nameShop' => $nameShop)));
+            return $this->redirect($this->generateUrl('_mainShop', array('shopname' => $shopname)));
         }
     }
     
-    public function insertProductAction(Request $request, $nameShop)
+    public function insertProductAction(Request $request, $shopname)
     {
         if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
             if ($this->getRequest()->getSession()->has('image_product')) {
@@ -41,19 +41,19 @@ class InsertProductController extends Controller
             }
             
             $product = $this->get('addProduct');
-            $form = $product->form(new ProductType($nameShop), new Product());
+            $form = $product->form(new ProductType($shopname), new Product());
             
             if ($product->add($request)) {
-                return $this->redirect($this->generateUrl('_formInsertProduct', array('nameShop' => $nameShop)));
+                return $this->redirect($this->generateUrl('_formInsertProduct', array('shopname' => $shopname)));
             }
 
             return $this->render('ShopAddProductsBundle:Form:form.html.twig', array(
                 'image_product' => $image_product,
                 'form' => $form->createView(),
-                'nameShop' => $nameShop,
+                'shopname' => $shopname,
             ));
         } else {
-            return $this->redirect($this->generateUrl('_mainShop', array('nameShop' => $nameShop)));
+            return $this->redirect($this->generateUrl('_mainShop', array('shopname' => $shopname)));
         }
     }
 }

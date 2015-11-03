@@ -12,11 +12,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CommentsType extends AbstractType {
 
-    private $nameShop;
+    private $shopname;
     private $userID;
 
-    public function __construct($nameShop, $userID) {
-        $this->nameShop = $nameShop;
+    public function __construct($shopname, $userID) {
+        $this->shopname = $shopname;
         $this->userID = $userID;
     }
 
@@ -25,7 +25,7 @@ class CommentsType extends AbstractType {
             'data' => $this->userID,
         ));
         $builder->add('shopname', 'hidden', array(
-            'data' => $this->nameShop,
+            'data' => $this->shopname,
         ));
         $builder->add('text', 'textarea', array(
             'label' => 'Добавить коментарий:',

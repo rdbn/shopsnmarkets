@@ -16,16 +16,16 @@ class ShopInformation {
         $this->em = $em;
     }
     
-    public function information($nameShop) {
-        if ($nameShop != NULL && $nameShop != '') {            
-            return $this->textXML($nameShop);
+    public function information($shopname) {
+        if ($shopname != NULL && $shopname != '') {
+            return $this->textXML($shopname);
         } else {
             return false;
         }
     }
     
-    private function textXML($nameShop) {
-        $file = __DIR__.'/../../../../../Symfony/web/public/xml/Shops/'.$nameShop.'/preview.xml';
+    private function textXML($shopname) {
+        $file = __DIR__.'/../../../../../Symfony/web/public/xml/Shops/'.$shopname.'/preview.xml';
         
         if (file_exists($file)) {
             return simplexml_load_file($file);
@@ -34,8 +34,8 @@ class ShopInformation {
         }
     }
     
-    public function payment($nameShop) {
-        $file = __DIR__.'/../../../../web/public/xml/Shops/'.$nameShop.'/preview.xml';
+    public function payment($shopname) {
+        $file = __DIR__.'/../../../../web/public/xml/Shops/'.$shopname.'/preview.xml';
         
         $payment = '';
         if (file_exists($file)) {

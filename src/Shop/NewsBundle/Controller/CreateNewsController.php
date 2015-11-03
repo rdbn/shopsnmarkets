@@ -14,27 +14,27 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CreateNewsController extends Controller 
 {
-    public function formNewsAction($nameShop)
+    public function formNewsAction($shopname)
     {
         $form = $this->createForm(new NewsType(), new News());
         
         return $this->render('ShopNewsBundle:Form:createForm.html.twig', array(
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
             'form' => $form->createView(),
         ));
     }
     
-    public function addNewsAction(Request $request, $nameShop)
+    public function addNewsAction(Request $request, $shopname)
     {
         $news = $this->get('addNews');
         $form = $news->createForm(new NewsType(), new News());
         
-        if ($news->addInformation($request, $nameShop)) {
-            return $this->redirect($this->generateUrl('_formNews', array('nameShop' => $nameShop)));
+        if ($news->addInformation($request, $shopname)) {
+            return $this->redirect($this->generateUrl('_formNews', array('shopname' => $shopname)));
         }
         
         return $this->render('ShopNewsBundle:Form:createForm.html.twig', array(
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
             'form' => $form->createView(),
         ));
     }

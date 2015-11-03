@@ -28,15 +28,15 @@ class AjaxCreateShopController extends Controller {
         }
     }
     
-    public function addLogoAction(Request $request, $nameShop) 
+    public function addLogoAction(Request $request, $shopname)
     {
         $shop = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(array('unique_name' => $nameShop));
+                ->findOneBy(array('unique_name' => $shopname));
         
         $addLogo = $this->get('formUploadLogoShop');
         $addLogo->createForm(new UploadLogoShopType(), $shop);
         
-        if ($addLogo->upload($request, $nameShop)) {
+        if ($addLogo->upload($request, $shopname)) {
             return $this->render('ShopCreateBundle:Upload:frameContent.html.twig', array(
                 'logo' => $addLogo->getPath(),
             ));

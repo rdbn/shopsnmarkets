@@ -23,7 +23,7 @@
 </div>
 {% if (form != '') %}
     <ul class='formFields'>
-        <form id="addComments" action="{{ path('_addCommentsShop', { 'nameShop' : nameShop }) }}" method="post" {{ form_enctype(form) }}>
+        <form id="addComments" action="{{ path('_addCommentsShop', { 'shopname' : shopname }) }}" method="post" {{ form_enctype(form) }}>
             {{ form_errors(form) }}
                 <li>
                     {{ form_errors(form.text) }}

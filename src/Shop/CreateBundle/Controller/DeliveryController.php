@@ -11,19 +11,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DeliveryController extends Controller 
 {    
-    public function allAction($nameShop) {
+    public function allAction($shopname) {
         $delivery = $this->getDoctrine()->getRepository('ShopCreateBundle:Delivery')
                 ->findAll();
         
         return $this->render('ShopCreateBundle:Delivery:all.html.twig', array(
             'delivery' => $delivery,
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
         ));
     }
     
     public function formAction()
     {        
-        $request = $this->getRequest()->query->get('id');
+        $request = $this->get("request")->query->get('id');
         
         $delivery = $this->get('formDeliveryShop');
         $form = $delivery->createForm($request);
@@ -33,9 +33,9 @@ class DeliveryController extends Controller
         ));
     }
     
-    public function saveAction() 
+    public function saveAction()
     {
-        $request = $this->getRequest()->request->get('ShopsDelivery');
+        $request = $this->get("request")->request->get('ShopsDelivery');
         
         $delivery = $this->get('formDeliveryShop');
         $delivery->createForm($request);

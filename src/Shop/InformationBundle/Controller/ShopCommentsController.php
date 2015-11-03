@@ -15,20 +15,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ShopCommentsController extends Controller 
 {    
-    public function formCommentsAction($nameShop) 
+    public function formCommentsAction($shopname)
     {
         $userID = $this->getUser();
         $comments = $this->get('shopComments');
         $formComments = '';
         if ($userID != NULL) {
-            $form = $this->createForm(new CommentsType($nameShop, $userID->getId()), new Comments());
+            $form = $this->createForm(new CommentsType($shopname, $userID->getId()), new Comments());
             $formComments = $form->createView();
         }
         
         return $this->render('ShopInformationBundle:Shop:comments.html.twig', array(
-            'comments' => $comments->comments($nameShop),
+            'comments' => $comments->comments($shopname),
             'form' => $formComments,
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
         ));
     }
     

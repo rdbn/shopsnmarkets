@@ -15,11 +15,11 @@ class NewsXML {
         $this->doc->formatOutput = true;
     }
     
-    public function addInformation($data, $nameShop, $filename) {
+    public function addInformation($data, $shopname, $filename) {
         $arMas = array(
             'name' => $data->getName(),
             'text' => $data->getText(),
-            'filename' => '/public/xml/Shops/'.$nameShop.'/news/'.$filename,
+            'filename' => '/public/xml/Shops/'.$shopname.'/news/'.$filename,
         );
         
         $news = $this->doc->createElement('news');
@@ -33,7 +33,7 @@ class NewsXML {
             $name->appendChild($text);
         }
         
-        $dir = __DIR__.'/../../../../web/public/xml/Shops/'.$nameShop.'/news'.$filename.'.xml';
+        $dir = __DIR__.'/../../../../web/public/xml/Shops/'.$shopname.'/news'.$filename.'.xml';
         $this->doc->save($dir);
     }
 }

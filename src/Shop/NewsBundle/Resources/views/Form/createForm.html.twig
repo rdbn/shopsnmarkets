@@ -3,7 +3,7 @@
 {% block body %}
     <ul class="formFields">
         <li><h3 class="chapter">Добавить новость</h3></li>
-        <form action="{{ path('_addNews', { 'nameShop' : nameShop }) }}" method="post" {{ form_enctype(form) }}>
+        <form action="{{ path('_addNews', { 'shopname' : shopname }) }}" method="post" {{ form_enctype(form) }}>
             {{ form_errors(form) }}
                 <li>
                     {{ form_label(form.text) }}

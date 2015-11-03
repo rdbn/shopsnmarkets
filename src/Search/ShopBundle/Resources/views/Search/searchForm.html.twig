@@ -1,11 +1,1 @@
-<div class="search">
-    <form id="search" action="{{ path('_resultSearchShopProduct', { 'nameShop' : nameShop }) }}" method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
-            {{ form_widget(form.shops) }}
-            {{ form_label(form.keywords) }}
-            {{ form_errors(form.keywords) }}
-            {{ form_widget(form.keywords) }}
-        {{form_rest(form)}}
-        <input class="button" type="submit" value="" />
-    </form>
-</div>
+

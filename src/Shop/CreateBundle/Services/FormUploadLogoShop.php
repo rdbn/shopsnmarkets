@@ -25,14 +25,14 @@ class FormUploadLogoShop
         return $this->form;
     }
     
-    public function upload($request, $nameShop) {
+    public function upload($request, $shopname) {
         if ($request->getMethod('POST')) {
             $this->form->bind($request);
         
             if ($this->form->isValid()) {
-                $this->checkImage($nameShop);
-                $this->path = $this->form->getData()->preUpload($nameShop);
-                $this->form->getData()->upload($nameShop);
+                $this->checkImage($shopname);
+                $this->path = $this->form->getData()->preUpload($shopname);
+                $this->form->getData()->upload($shopname);
 
                 $addLogo = $this->em;
                 $addLogo->persist($this->model->setPath($this->path));
@@ -61,8 +61,8 @@ class FormUploadLogoShop
         return $arErrors;
     }
 
-    private function checkImage($nameShop) {
-        $dir = __DIR__.'/../../../../../Symfony/web/public/xml/Shops/'.$nameShop.'/logo';
+    private function checkImage($shopname) {
+        $dir = __DIR__.'/../../../../../Symfony/web/public/xml/Shops/'.$shopname.'/logo';
         
         $scandir = scandir($dir);
         unset($scandir['0']);

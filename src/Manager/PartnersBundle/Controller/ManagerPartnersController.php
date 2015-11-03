@@ -22,9 +22,9 @@ class ManagerPartnersController extends Controller {
         ));
     }
     
-    public function shopPartnersAction($nameShop) {
+    public function shopPartnersAction($shopname) {
         $shops = $this->getDoctrine()->getRepository('ManagerPartnersBundle:Partners')
-                ->findAllShopsPartners($nameShop);
+                ->findAllShopsPartners($shopname);
         
         return $this->render('ManagerPartnersBundle:Partners:partners.html.twig', array(
             'shops' => $shops,

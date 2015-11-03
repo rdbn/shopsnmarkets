@@ -35,7 +35,7 @@ class UserOrder
         }
         
         foreach ($value as $key => $product) {
-            $arName[$key] = $product['products']->product->nameShop;
+            $arName[$key] = $product['products']->product->shopname;
         }
         
         return $this->orderShop->getShop($arName);

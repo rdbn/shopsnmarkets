@@ -29,14 +29,14 @@ class AddNews {
         return $this->form;
     }
     
-    public function addInformation($request, $nameShop) {
+    public function addInformation($request, $shopname) {
         if ($request->getMethod('POST')) {
             $this->form->bind($request);
             
             if ($this->form->isValid()) {
                 $filename = $this->form->getData()->preUpload();
                 $this->form->getData()->upload();
-                $this->newsXML->addInformation($this->model, $nameShop, $filename);
+                $this->newsXML->addInformation($this->model, $shopname, $filename);
                 
                 return true;
             } else {

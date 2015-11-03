@@ -1,0 +1,51 @@
+{% extends '::main_platform.html.twig' %}
+
+{% block title %}{{ shop.shopname }}{% endblock %}
+
+{% block body %}
+    <div class="row top20">
+        <div class="col-lg-2">
+            <img class="img-thumbnail img-responsive" src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" />
+            {% if is_granted('ROLE_USER') %}
+                {% if user %}
+                    <a class="btn btn-success" href="{{ shop.id }}">Подписаться на новости</a>
+                {% endif %}
+            {% endif %}
+            {#<p>Всего покупателей: <span class="count">{{ shop.users }}</span></p>#}
+        </div>
+        <div class="col-lg-10">
+            <h3>{{ shop.shopname }}</h3>
+            <div class="row top20">
+                <div class="col-lg-12">
+                    <form id="search" method="post" {{ form_enctype(form) }}>
+                        <div class="input-group">
+                            {{ form_errors(form) }}
+                            {{ form_label(form.keywords) }}
+                            {{ form_errors(form.keywords) }}
+                            {{ form_widget(form.keywords) }}
+                            {{form_rest(form)}}
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Go!</button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </form>
+                </div>
+            </div>
+            <div class="btn-group top20">
+                <a class="btn btn-success" href="{{ path('_paymentShop', { 'shopname' : shopname }) }}">Оплата</a>
+                <a class="btn btn-success" href="{{ path('_deliveryShop', { 'shopname' : shopname }) }}">Доставка</a>
+                <a class="btn btn-success" href="{{ path('_commentsShop', { 'shopname' : shopname }) }}">Отзывы</a>
+                <a class="btn btn-success" href="{{ path('_ajaxShop', { 'shopname' : shopname }) }}">Инфо о магазине</a>
+                <a class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : shopname }) }}">Партнеры</a>
+                {% if is_granted('ROLE_MANAGER') %}
+                    <a class="btn btn-success" href='{{ path('_formInsertProduct', { 'shopname' : shopname }) }}'>+&nbsp&nbspДобавить товар</a>
+                {% endif %}
+            </div>
+            {{ render(controller('ManagerAdvertisingBundle:Advertising:sliderShop', { 'shopname' : shopname })) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block products %}
+    {{ render(controller('ShopProductBundle:Products:all', { 'shopname' : shopname })) }}
+{% endblock %}

@@ -19,7 +19,7 @@
 
 {% block body %}
     <div class="search">
-        <form id="search" action="{{ path('_resultSearchShopProduct', { 'nameShop' : nameShop }) }}" method="post" {{ form_enctype(form) }}>
+        <form id="search" action="{{ path('_resultSearchShopProduct', { 'shopname' : shopname }) }}" method="post" {{ form_enctype(form) }}>
             {{ form_errors(form) }}
                 {{ form_widget(form.shops) }}
                 {{ form_label(form.keywords) }}

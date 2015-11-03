@@ -14,8 +14,8 @@ class PaymentShopType extends AbstractType {
     
     protected $text_main;
     
-    public function __construct($nameShop) {
-        $file = __DIR__.'/../../../../../../Symfony/web/public/xml/Shops/'.$nameShop.'/preview.xml';
+    public function __construct($shopname) {
+        $file = __DIR__.'/../../../../../../Symfony/web/public/xml/Shops/'.$shopname.'/preview.xml';
         if (file_exists($file)) {
             $this->payment = simplexml_load_file($file)->payment;
         } else {

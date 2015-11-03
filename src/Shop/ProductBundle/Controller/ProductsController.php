@@ -10,73 +10,73 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProductsController extends Controller
 { 
-    public function allAction($nameShop) 
+    public function allAction($shopname)
     {
         $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
-                ->findAllProductShop($nameShop);
+                ->findAllProductShop($shopname);
         
         return $this->render('ShopProductBundle:All:products.html.twig', array(
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
             'products' => $products,
         ));
     }
     
-    public function allProductsCategoryAction($nameShop, $idFloor, $idCategory)
+    public function allProductsCategoryAction($shopname, $idFloor, $idCategory)
     {
         if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
             $userID = $this->getUser();
-            $manager = $this->get('nameShop')->isManager($nameShop, $userID);
+            $manager = $this->get('shopname')->isManager($shopname, $userID);
         }
         
         $product = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
-                ->findAllProductCategoryShop(array('name' => $nameShop, 'category' => $idCategory));
+                ->findAllProductCategoryShop(array('name' => $shopname, 'category' => $idCategory));
         
         return $this->render('ShopProductBundle:Products:allProducts.html.twig', array(
             'manager' => isset($manager) ? $manager : false,
             'floor' => $idFloor,
             'idCategory' => $idCategory,
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
             'products' => $product,
         ));
     }
     
-    public function allProductsSubcategoryAction($nameShop, $idFloor, $idCategory, $idSubcategory)
+    public function allProductsSubcategoryAction($shopname, $idFloor, $idCategory, $idSubcategory)
     {
         if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
             $userID = $this->getUser();
-            $manager = $this->get('nameShop')->isManager($nameShop, $userID);
+            $manager = $this->get('shopname')->isManager($shopname, $userID);
         }
         
         $product = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
-                ->findAllProductSubcategoryShop(array('name' => $nameShop, 'subcategory' => $idSubcategory));
+                ->findAllProductSubcategoryShop(array('name' => $shopname, 'subcategory' => $idSubcategory));
         
         return $this->render('ShopProductBundle:Products:allProducts.html.twig', array(
             'manager' => isset($manager) ? $manager : false,
             'floor' => $idFloor,
             'idCategory' => $idCategory,
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
             'products' => $product,
         ));
     }
     
-    public function productAction($nameShop, $idFloor, $idCategory, $idSubcategory, $idProduct)
+    public function productAction($shopname, $idFloor, $idCategory, $idSubcategory, $idProduct)
     {
         if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
             $userID = $this->getUser();
-            $manager = $this->get('nameShop')->isManager($nameShop, $userID);
+            $manager = $this->get('shopname')->isManager($shopname, $userID);
         }
         
         $product = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
                 ->findOneByProductShop($idProduct);
         
         $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
-                ->findByProductSubcategoryShop(array('name' => $nameShop, 'subcategory' => $idSubcategory, 'product' => $idProduct));
+                ->findByProductSubcategoryShop(array('name' => $shopname, 'subcategory' => $idSubcategory, 'product' => $idProduct));
         
         return $this->render('ShopProductBundle:Products:product.html.twig', array(
             'manager' => isset($manager) ? $manager : false,
             'floor' => $idFloor,
             'idCategory' => $idCategory,
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
             'id' => $idProduct,
             'product' => $product,
             'products' => $products,

@@ -8,21 +8,21 @@ namespace Manager\AdvertisingBundle\Services;
 
 class Advertising 
 {        
-    public function getImageShopSlider($nameShop)
+    public function getImageShopSlider($shopname)
     {
-        $dir = __DIR__.'/../../../../web/public/xml/Shops/'.$nameShop.'/advertising/slider';
+        $dir = __DIR__.'/../../../../web/public/advertising';
         
-        return $this->getImagesShop($dir, 'slider', $nameShop);
+        return $this->getImagesShop($dir, 'slider', $shopname);
     }
     
-    public function getImageShopSideOf($nameShop)
+    public function getImageShopSideOf($shopname)
     {
-        $dir = __DIR__.'/../../../../web/public/xml/Shops/'.$nameShop.'/advertising/side_of';
+        $dir = __DIR__.'/../../../../web/public/xml/Shops/'.$shopname.'/advertising/side_of';
         
-        return $this->getImagesShop($dir, 'side_of', $nameShop);
+        return $this->getImagesShop($dir, 'side_of', $shopname);
     }
     
-    private function getImagesShop($dir, $format, $nameShop)
+    private function getImagesShop($dir, $format, $shopname)
     {
         $files = scandir($dir);
         unset($files['0']);
@@ -32,7 +32,7 @@ class Advertising
             $arFiles = array();
             
             foreach ($files as $index => $file) {
-                $arFiles[$index] = '/public/xml/Shops/'.$nameShop.'/advertising/'.$format.'/'.$file;
+                $arFiles[$index] = '/public/xml/Shops/'.$shopname.'/advertising/'.$format.'/'.$file;
             }
             
             return $arFiles;

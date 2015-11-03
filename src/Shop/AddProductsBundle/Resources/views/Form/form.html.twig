@@ -19,7 +19,7 @@
 {% block body %}
     <h3 class="chapter">Добавить товар</h3>
     <div class="image">
-        <a class="button" href="{{ path('_formUploadImage', { 'nameShop' : nameShop }) }}">Добавить изображение</a>
+        <a class="button" href="{{ path('_formUploadImage', { 'shopname' : shopname }) }}">Добавить изображение</a>
         <img class="main preview_image_main" src="{% if image_product['0'] is defined %}{{ asset(image_product['0']) }}{% endif %}" />
         {% if image_product['0'] is defined %}<span class="delete_main">&times;</span>{% endif %}
         <ul class="mini">
@@ -38,7 +38,7 @@
         </ul>
     </div>
     <ul class="addProduct">
-        <form action="{{ path('_insertProduct', { 'nameShop' : nameShop }) }}" method="post" {{ form_enctype(form) }}>
+        <form action="{{ path('_insertProduct', { 'shopname' : shopname }) }}" method="post" {{ form_enctype(form) }}>
             {{ include('ShopAddProductsBundle:Form:formFields.html.twig') }}
         </form>
     </ul>

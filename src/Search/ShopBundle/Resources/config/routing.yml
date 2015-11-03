@@ -1,15 +1,15 @@
 # for class SearchShop
 _searchShopProduct:
-    pattern: /{nameShop}/searchProductShop
+    pattern: /{shopname}/searchProductShop
     defaults: { _controller: SearchShopBundle:SearchShop:searchShop }
     
 _resultSearchShopProduct:
-    pattern: /{nameShop}/resultSearchProductShop
+    pattern: /{shopname}/resultSearchProductShop
     defaults: { _controller: SearchShopBundle:SearchShop:resultShop }
     
 # for class AjaxSearchShop
 _searchShop:
-    pattern: /{nameShop}/searchShop
+    pattern: /{shopname}/searchShop
     defaults: { _controller: SearchShopBundle:AjaxSearchShop:searchShop }
     
 _resultShopProduct:

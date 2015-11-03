@@ -7,7 +7,7 @@
             <div class="order">
                 <div class="date"></div>
                 {% for shop in shops %}
-                    {% if shop.unique_name == order.products.product.nameShop %}
+                    {% if shop.unique_name == order.products.product.shopname %}
                         <img src="{{ asset(shop.path | apply_filter('logo_shop')) }}">
                         <ul class="address">
                             <li><h3>{{ shop.shopname }}</h3></li>

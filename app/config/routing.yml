@@ -165,7 +165,3 @@ shop_information:
 shop_create:
     resource: "@ShopCreateBundle/Resources/config/routing.yml"
     prefix:   /
-    
-shop_main:
-    resource: "@ShopMainBundle/Resources/config/routing.yml"
-    prefix:   /

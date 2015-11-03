@@ -23,7 +23,7 @@
     <script src="/public/js/upload/main.js"></script>
 {% endblock %}
 
-<form id="fileupload" action="{{ path('_uploadImage', { 'nameShop' : nameShop }) }}" method="post" {{ form_enctype(form) }}>
+<form id="fileupload" action="{{ path('_uploadImage', { 'shopname' : shopname }) }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">

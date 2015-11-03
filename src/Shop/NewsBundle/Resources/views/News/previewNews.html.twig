@@ -1,6 +1,6 @@
 <p class="count">Всего записей: 517 
     {% if is_granted('ROLE_MANAGER') %}
-        <a class="addNews" href="{{ path('_createNews', { 'nameShop' : nameShop }) }}">Добавить новость</a>
+        <a class="addNews" href="{{ path('_createNews', { 'shopname' : shopname }) }}">Добавить новость</a>
     {% endif %}
 </p>
 {{ news }}

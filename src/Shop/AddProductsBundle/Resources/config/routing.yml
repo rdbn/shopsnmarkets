@@ -22,29 +22,29 @@ _addLikeProduct:
     
 # route for class InsertProduct
 _formInsertProduct:
-    pattern:  /{nameShop}/addProducts/insertform
+    pattern:  /{shopname}/addProducts/insertform
     defaults: { _controller: ShopAddProductsBundle:InsertProduct:form }
     
 _insertProduct:
-    pattern:  /{nameShop}/addProducts/insert
+    pattern:  /{shopname}/addProducts/insert
     defaults: { _controller: ShopAddProductsBundle:InsertProduct:insertProduct }
     
 # route for class updateProduct
 _formUpdateProduct:
-    pattern:  /{nameShop}/addProducts/updateform/{id}
+    pattern:  /{shopname}/addProducts/updateform/{id}
     defaults: { _controller: ShopAddProductsBundle:UpdateProduct:form }
     
 _updateProduct:
-    pattern:  /{nameShop}/addProducts/update/{id}
+    pattern:  /{shopname}/addProducts/update/{id}
     defaults: { _controller: ShopAddProductsBundle:UpdateProduct:updateProduct }
     
 # route for class ProductImage
 _formUploadImage:
-    pattern:  /{nameShop}/addProducts/formUpload
+    pattern:  /{shopname}/addProducts/formUpload
     defaults: { _controller: ShopAddProductsBundle:ProductImage:form }
     
 _uploadImage:
-    pattern:  /{nameShop}/addProducts/uploadImage
+    pattern:  /{shopname}/addProducts/uploadImage
     defaults: { _controller: ShopAddProductsBundle:ProductImage:upload }
     
 _images:

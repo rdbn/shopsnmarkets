@@ -22,8 +22,8 @@
     {% if is_granted('ROLE_MANAGER') %}
         {% if manager %}
             <ul class="menu">
-                <li><a href='{{ path('_formInsertProduct', { 'nameShop' : nameShop }) }}'>Добавить товар</a></li>
-                <li><a href='{{ path('_formUpdateProduct', { 'nameShop' : nameShop, 'id' : id }) }}'>Редактировать товар</a></li>
+                <li><a href='{{ path('_formInsertProduct', { 'shopname' : shopname }) }}'>Добавить товар</a></li>
+                <li><a href='{{ path('_formUpdateProduct', { 'shopname' : shopname, 'id' : id }) }}'>Редактировать товар</a></li>
             </ul>
         {% endif %}
     {% endif %}
@@ -36,7 +36,7 @@
     <div class='options'>
         <ul class="formFields addBasket">
             <li><h3 class="chapter">Размеры:<h3></li>
-            {{ render(controller('ShopOrderBundle:FormAddBasket:form', { 'nameShop': nameShop, 'product': product })) }}
+            {{ render(controller('ShopOrderBundle:FormAddBasket:form', { 'shopname': shopname, 'product': product })) }}
         </ul>
         <p class='text'>{{ product.text }}</p>
     </div>
@@ -47,7 +47,7 @@
         {% for product in products %}
             <ul class="products">
                 <li>
-                    <a href='{{ path('_productShop', {'nameShop' : nameShop, 'idFloor' : floor, 'idCategory' : idCategory, 'idSubcategory' : product.subcategory, 'idProduct' : product.id }) }}'>
+                    <a href='{{ path('_productShop', {'shopname' : shopname, 'idFloor' : floor, 'idCategory' : idCategory, 'idSubcategory' : product.subcategory, 'idProduct' : product.id }) }}'>
                         <span class="imgHover"></span>
                         <img src="{{ asset(product.path | apply_filter('product_image')) }}" alt="Product" />
                     </a>

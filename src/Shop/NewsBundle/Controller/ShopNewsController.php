@@ -10,12 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ShopNewsController extends Controller 
 {
-    public function previewNewsAction($nameShop)
+    public function previewNewsAction($shopname)
     {
         $news = '';
         
         return $this->render('ShopNewsBundle:News:previewNews.html.twig', array(
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
             'news' => $news,
         ));
     }

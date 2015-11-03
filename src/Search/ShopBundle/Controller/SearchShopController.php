@@ -6,42 +6,31 @@
  */
 namespace Search\ShopBundle\Controller;
 
-use Shop\AddProductsBundle\Entity\Product;
-use Search\ShopBundle\Form\Type\SearchShopType;
+
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class SearchShopController extends Controller 
 {
-    public function searchShopAction($nameShop)
-    {
-        $form = $this->createForm(new SearchShopType($nameShop), new Product);
-        
-        return $this->render('SearchShopBundle:Search:searchForm.html.twig', array(
-            'form' => $form->createView(),
-            'nameShop' => $nameShop,
-        ));
-    }
-    
-    public function resultShopAction(Request $request, $nameShop)
+    public function resultShopAction(Request $request, $shopname)
     {        
         $search = $this->get('searchShopProduct');
-        $form = $search->createForm(new SearchShopType($nameShop), new Product());
+        $form = $search->createForm(new SearchShopType($shopname), new Product());
         
-        $value = $search->getResult($request->request->get('Search'), $nameShop);
+        $value = $search->getResult($request->request->get('Search'), $shopname);
         if ($value) {
             return $this->render('SearchShopBundle:Search:result.html.twig', array(
                 'form' => $form->createView(),
                 'products' => $value,
-                'nameShop' => $nameShop,
+                'shopname' => $shopname,
             ));
         }
         
         return $this->render('SearchShopBundle:Search:result.html.twig', array(
             'form' => $form->createView(),
             'products' => $value,
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
         ));
     }
 }

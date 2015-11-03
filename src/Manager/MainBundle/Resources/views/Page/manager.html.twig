@@ -34,13 +34,13 @@
                 <div class="col-lg-4">
                     <div class="media">
                         <div class="media-left col-lg-5">
-                            <a href="{{ path('_mainShop', { 'nameShop' : shop.unique_name }) }}">
+                            <a href="{{ path('_mainShop', { 'shopname' : shop.unique_name }) }}">
                                 <img class="media-object img-responsive" src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" />
                             </a>
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">
-                                <a class="text-success" href="{{ path('_mainShop', { 'nameShop' : shop.unique_name }) }}">{{ shop.shopname }}</a>
+                                <a class="text-success" href="{{ path('_mainShop', { 'shopname' : shop.unique_name }) }}">{{ shop.shopname }}</a>
                             </h4>
                             <p class="text-muted small">Подписчиков: {{ shop.users }}</p>
                             <p class="text-muted small">Рейтинг: {{ shop.rating }}</p>

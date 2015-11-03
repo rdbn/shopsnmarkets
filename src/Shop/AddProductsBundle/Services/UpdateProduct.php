@@ -25,13 +25,13 @@ class UpdateProduct
         return $this->form;
     }
     
-    public function addProduct($request, $nameShop) {
+    public function addProduct($request, $shopname) {
         if ($request->getMethod('POST')) {
             $this->form->bind($request);
             
             if ($this->form->isValid()) { 
-                $this->form->getData()->preUpload($nameShop, $this->model);
-                $this->form->getData()->upload($nameShop, $this->model);
+                $this->form->getData()->preUpload($shopname, $this->model);
+                $this->form->getData()->upload($shopname, $this->model);
 
                 $addProduct = $this->em;
                 $addProduct->flush();

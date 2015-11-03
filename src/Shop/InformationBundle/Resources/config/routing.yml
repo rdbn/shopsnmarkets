@@ -1,27 +1,27 @@
 # for class ShopInformation
 _shopInformation:
-    pattern: /{nameShop}/shopInformation
+    pattern: /{shopname}/shopInformation
     defaults: { _controller: ShopInformationBundle:ShopInformation:shop }
     
 _ajaxShop:
-    pattern: /{nameShop}/ajaxShop
+    pattern: /{shopname}/ajaxShop
     defaults: { _controller: ShopInformationBundle:ShopInformation:ajaxShop }
     
 _partnersShop:
-    pattern: /{nameShop}/partnersShop
+    pattern: /{shopname}/partnersShop
     defaults: { _controller: ShopInformationBundle:ShopInformation:partnersShop }
     
 _deliveryShop:
-    pattern: /{nameShop}/deliveryShop
+    pattern: /{shopname}/deliveryShop
     defaults: { _controller: ShopInformationBundle:ShopInformation:deliveryShop }
     
 _paymentShop:
-    pattern: /{nameShop}/paymentShop
+    pattern: /{shopname}/paymentShop
     defaults: { _controller: ShopInformationBundle:ShopInformation:paymentShop }
     
 #for class ShopComments
 _commentsShop:
-    pattern: /{nameShop}/commentsShop
+    pattern: /{shopname}/commentsShop
     defaults: { _controller: ShopInformationBundle:ShopComments:formComments }
     
 _addCommentsShop:

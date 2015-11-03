@@ -18,13 +18,13 @@ _subcategoryBootsShop:
 
 # for class Products
 _allProductsCategoryShop:
-    pattern:  /{nameShop}/allProduct/{idFloor}/{idCategory}
+    pattern:  /{shopname}/allProduct/{idFloor}/{idCategory}
     defaults: { _controller: ShopProductBundle:Products:allProductsCategory }
     
 _allProductsSubcategoryShop:
-    pattern:  /{nameShop}/allProduct/{idFloor}/{idCategory}/{idSubcategory}
+    pattern:  /{shopname}/allProduct/{idFloor}/{idCategory}/{idSubcategory}
     defaults: { _controller: ShopProductBundle:Products:allProductsSubcategory }
     
 _productShop:
-    pattern:  /{nameShop}/allProduct/{idFloor}/{idCategory}/{idSubcategory}/{idProduct}
+    pattern:  /{shopname}/allProduct/{idFloor}/{idCategory}/{idSubcategory}/{idProduct}
     defaults: { _controller: ShopProductBundle:Products:product }

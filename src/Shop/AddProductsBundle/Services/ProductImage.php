@@ -24,26 +24,26 @@ class ProductImage
         return $this->form;
     }
     
-    public function upload($request, $nameShop) {
+    public function upload($request, $shopname) {
         $this->form->bind($request);
         
         if ($this->form->isValid()) {
             $this->value['size'] = $this->form->getData()->getFile()->getClientSize();
             $this->value['type'] = $this->form->getData()->getFile()->guessExtension();
-            $this->value['name'] = $this->form->getData()->preUpload($nameShop);
+            $this->value['name'] = $this->form->getData()->preUpload($shopname);
             
             if ($this->session->has('image_product')) {
                 $value = $this->session->get('image_product');
                 
                 if (count($value) < 4) {
-                    $this->form->getData()->upload($nameShop);
+                    $this->form->getData()->upload($shopname);
                     
                     $value[count($value)] = '/'.$this->value['name'];
 
                     $this->session->set('image_product', $value);
                 }
             } else {
-                $this->form->getData()->upload($nameShop);
+                $this->form->getData()->upload($shopname);
                 
                 $value = array('/'.$this->value['name']);
                 

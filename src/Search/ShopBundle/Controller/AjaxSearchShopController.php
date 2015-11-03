@@ -14,13 +14,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AjaxSearchShopController extends Controller 
 {    
-    public function searchShopAction($nameShop)
+    public function searchShopAction($shopname)
     {
-        $form = $this->createForm(new SearchShopType($nameShop), new Product);
+        $form = $this->createForm(new SearchShopType($shopname), new Product);
         
         return $this->render('SearchShopBundle:Shop:search.html.twig', array(
             'form' => $form->createView(),
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
         ));
     }
     

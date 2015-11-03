@@ -190,32 +190,32 @@ Class Shops
             : $this->getUploadDir().'/'.$this->path;
     }
 
-    protected function getUploadRootDir($nameShop)
+    protected function getUploadRootDir($shopname)
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir($nameShop);
+        return __DIR__.'/../../../../web/'.$this->getUploadDir($shopname);
     }
 
-    protected function getUploadDir($nameShop)
+    protected function getUploadDir($shopname)
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.        
-        return 'public/xml/Shops/'.$nameShop.'/logo';
+        return 'public/xml/Shops/'.$shopname.'/logo';
     }
     
-    public function preUpload($nameShop)
+    public function preUpload($shopname)
     {   
         if (null !== $this->file) {
             // do whatever you want to generate a unique name
             $filename = sha1(uniqid(mt_rand(), true));
             $this->path = $filename.'.'.$this->file->guessExtension();
             
-            return $this->getUploadDir($nameShop).'/'.$this->path;
+            return $this->getUploadDir($shopname).'/'.$this->path;
         }
     }
     
-    public function upload($nameShop)
+    public function upload($shopname)
     {
         // the file property can be empty if the field is not required
         if (null === $this->file) {
@@ -228,7 +228,7 @@ Class Shops
         // move takes the target directory and then the
         // target filename to move to
         $this->getFile()->move(
-            $this->getUploadRootDir($nameShop),
+            $this->getUploadRootDir($shopname),
             $this->path
         );
 

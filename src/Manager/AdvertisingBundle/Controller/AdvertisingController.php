@@ -11,9 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AdvertisingController extends Controller
 {
-    public function sliderShopAction($nameShop)
+    public function sliderShopAction($shopname)
     {
-        $images = $this->get('advertising')->getImageShopSlider($nameShop);
+        $images = $this->get('advertising')->getImageShopSlider($shopname);
         
         return $this->render('ManagerAdvertisingBundle:AdvertisingShop:advertisingSlider.html.twig', array(
             'images' => $images,

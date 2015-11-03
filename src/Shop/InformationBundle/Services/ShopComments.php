@@ -45,8 +45,8 @@ class ShopComments {
         }
     }
 
-    public function comments($nameShop) {
-        $dir = __DIR__.'/../../../../web/public/xml/Shops/'.$nameShop.'/comments/comments.xml';
+    public function comments($shopname) {
+        $dir = __DIR__.'/../../../../web/public/xml/Shops/'.$shopname.'/comments/comments.xml';
         
         $comments = '';
         if (file_exists($dir)) {

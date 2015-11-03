@@ -16,22 +16,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProductImageController extends Controller
 {
-    public function formAction($nameShop)
+    public function formAction($shopname)
     {
         $form = $this->createForm(new ProductImageType(), new ProductImage());
 
         return $this->render('ShopAddProductsBundle:Form:formUpload.html.twig', array(
             'form' => $form->createView(),
-            'nameShop' => $nameShop,
+            'shopname' => $shopname,
         ));
     }
     
-    public function uploadAction(Request $request, $nameShop)
+    public function uploadAction(Request $request, $shopname)
     {
         $product = $this->get('productImage');
         $product->form(new ProductImageType(), new ProductImage());
 
-        if ($product->upload($request, $nameShop)) {
+        if ($product->upload($request, $shopname)) {
             return new JsonResponse($product->getValue());
         }
 
