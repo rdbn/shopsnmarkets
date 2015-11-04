@@ -30,23 +30,6 @@ Class Product
     protected $shops;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Shop\AddProductsBundle\Entity\Subcategory")
-     * @ORM\JoinColumn(name="subcategory_id", referencedColumnName="id")
-     */
-    protected $subcategory;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Shop\AddProductsBundle\Entity\Floor")
-     * @ORM\JoinColumn(name="floor_id", referencedColumnName="id")
-     */
-    protected $floor;
-    
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $keywords;
-    
-    /**
      * @ORM\Column(type="string", length=45)
      */
     protected $name;
@@ -57,11 +40,6 @@ Class Product
     protected $price;
     
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $path;
-    
-    /**
      * @ORM\Column(type="text")
      */
     protected $text;
@@ -70,18 +48,18 @@ Class Product
      * @ORM\Column(type="datetime")
      */
     protected $date;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\CacheTags", inversedBy="product")
+     * @ORM\JoinTable(name="product_tags")
+     */
+    protected $cacheTags;
     
     /**
      * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="product")
      * @ORM\JoinTable(name="product_like")
      */
     protected $like_product;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\Size", inversedBy="product")
-     * @ORM\JoinTable(name="product_size")
-     */
-    protected $size;
     
     /**
      * @ORM\OneToMany(targetEntity="Shop\AddProductsBundle\Entity\ProductImage", mappedBy="product", cascade={"persist"})
@@ -92,16 +70,17 @@ Class Product
      * Construct with Class Product
      */
     public function __construct() {
-        $this->size = new ArrayCollection();
         $this->image = new ArrayCollection();
         $this->like_product = new ArrayCollection();
+        $this->cacheTags = new ArrayCollection();
+
         $this->date = new \DateTime();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -109,45 +88,23 @@ Class Product
     }
 
     /**
-     * Set keywords
-     *
-     * @param string $keywords
-     * @return Product
-     */
-    public function setKeywords($keywords)
-    {
-        $this->keywords = $keywords;
-    
-        return $this;
-    }
-
-    /**
-     * Get keywords
-     *
-     * @return string 
-     */
-    public function getKeywords()
-    {
-        return $this->keywords;
-    }
-
-    /**
      * Set name
      *
      * @param string $name
+     *
      * @return Product
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -158,19 +115,20 @@ Class Product
      * Set price
      *
      * @param float $price
+     *
      * @return Product
      */
     public function setPrice($price)
     {
         $this->price = $price;
-    
+
         return $this;
     }
 
     /**
      * Get price
      *
-     * @return float 
+     * @return float
      */
     public function getPrice()
     {
@@ -178,45 +136,23 @@ Class Product
     }
 
     /**
-     * Set path
-     *
-     * @param string $path
-     * @return Product
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-    
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
      * Set text
      *
      * @param string $text
+     *
      * @return Product
      */
     public function setText($text)
     {
         $this->text = $text;
-    
+
         return $this;
     }
 
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -227,19 +163,20 @@ Class Product
      * Set date
      *
      * @param \DateTime $date
+     *
      * @return Product
      */
     public function setDate($date)
     {
         $this->date = $date;
-    
+
         return $this;
     }
 
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -250,19 +187,20 @@ Class Product
      * Set shops
      *
      * @param \Shop\CreateBundle\Entity\Shops $shops
+     *
      * @return Product
      */
     public function setShops(\Shop\CreateBundle\Entity\Shops $shops = null)
     {
         $this->shops = $shops;
-    
+
         return $this;
     }
 
     /**
      * Get shops
      *
-     * @return \Shop\CreateBundle\Entity\Shops 
+     * @return \Shop\CreateBundle\Entity\Shops
      */
     public function getShops()
     {
@@ -270,66 +208,55 @@ Class Product
     }
 
     /**
-     * Set subcategory
+     * Add cacheTag
      *
-     * @param \Shop\AddProductsBundle\Entity\Subcategory $subcategory
+     * @param \Shop\AddProductsBundle\Entity\CacheTags $cacheTag
+     *
      * @return Product
      */
-    public function setSubcategory(\Shop\AddProductsBundle\Entity\Subcategory $subcategory = null)
+    public function addCacheTag(\Shop\AddProductsBundle\Entity\CacheTags $cacheTag)
     {
-        $this->subcategory = $subcategory;
-    
+        $this->cacheTags[] = $cacheTag;
+
         return $this;
     }
 
     /**
-     * Get subcategory
+     * Remove cacheTag
      *
-     * @return \Shop\AddProductsBundle\Entity\Subcategory 
+     * @param \Shop\AddProductsBundle\Entity\CacheTags $cacheTag
      */
-    public function getSubcategory()
+    public function removeCacheTag(\Shop\AddProductsBundle\Entity\CacheTags $cacheTag)
     {
-        return $this->subcategory;
+        $this->cacheTags->removeElement($cacheTag);
     }
 
     /**
-     * Set floor
+     * Get cacheTags
      *
-     * @param \Shop\AddProductsBundle\Entity\Floor $floor
-     * @return Product
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setFloor(\Shop\AddProductsBundle\Entity\Floor $floor = null)
+    public function getCacheTags()
     {
-        $this->floor = $floor;
-    
-        return $this;
+        return $this->cacheTags;
     }
 
     /**
-     * Get floor
-     *
-     * @return \Shop\AddProductsBundle\Entity\Floor 
-     */
-    public function getFloor()
-    {
-        return $this->floor;
-    }
-
-    /**
-     * Add like_product
+     * Add likeProduct
      *
      * @param \User\RegistrationBundle\Entity\Users $likeProduct
+     *
      * @return Product
      */
     public function addLikeProduct(\User\RegistrationBundle\Entity\Users $likeProduct)
     {
         $this->like_product[] = $likeProduct;
-    
+
         return $this;
     }
 
     /**
-     * Remove like_product
+     * Remove likeProduct
      *
      * @param \User\RegistrationBundle\Entity\Users $likeProduct
      */
@@ -339,9 +266,9 @@ Class Product
     }
 
     /**
-     * Get like_product
+     * Get likeProduct
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLikeProduct()
     {
@@ -349,48 +276,16 @@ Class Product
     }
 
     /**
-     * Add size
-     *
-     * @param \Shop\AddProductsBundle\Entity\Size $size
-     * @return Product
-     */
-    public function addSize(\Shop\AddProductsBundle\Entity\Size $size)
-    {
-        $this->size[] = $size;
-    
-        return $this;
-    }
-
-    /**
-     * Remove size
-     *
-     * @param \Shop\AddProductsBundle\Entity\Size $size
-     */
-    public function removeSize(\Shop\AddProductsBundle\Entity\Size $size)
-    {
-        $this->size->removeElement($size);
-    }
-
-    /**
-     * Get size
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
-
-    /**
      * Add image
      *
      * @param \Shop\AddProductsBundle\Entity\ProductImage $image
+     *
      * @return Product
      */
     public function addImage(\Shop\AddProductsBundle\Entity\ProductImage $image)
     {
         $this->image[] = $image;
-    
+
         return $this;
     }
 
@@ -407,7 +302,7 @@ Class Product
     /**
      * Get image
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getImage()
     {

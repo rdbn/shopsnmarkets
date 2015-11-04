@@ -11,7 +11,7 @@ use Shop\InformationBundle\Form\DataTransformer\UsersToIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserIDType extends AbstractType {
     
@@ -34,7 +34,7 @@ class UserIDType extends AbstractType {
         $builder->addModelTransformer($transfomer);
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'invalid_message' => 'The selected issue does not exist',

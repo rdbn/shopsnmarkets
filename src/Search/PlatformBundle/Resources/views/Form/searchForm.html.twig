@@ -1,9 +1,9 @@
 <div class="search">
     <form id="search" action="#" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
-            {{ form_label(form.keywords) }}
-            {{ form_errors(form.keywords) }}
-            {{ form_widget(form.keywords) }}
+            {{ form_label(form.cacheTags) }}
+            {{ form_errors(form.cacheTags) }}
+            {{ form_widget(form.cacheTags) }}
         {{form_rest(form)}}
         <input class="button" type="submit" value="" />
     </form>

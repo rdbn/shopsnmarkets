@@ -30,7 +30,7 @@ class ShopsToNameTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  Issue|null $issue
+     * @param  issue|null $shops
      * @return string
      */
     public function transform($shops)
@@ -45,7 +45,7 @@ class ShopsToNameTransformer implements DataTransformerInterface
     /**
      * Transforms a string (number) to an object (issue).
      *
-     * @param  string $number
+     * @param string $unique_name
      *
      * @return Issue|null
      *
@@ -58,7 +58,7 @@ class ShopsToNameTransformer implements DataTransformerInterface
         }
 
         $shops = $this->om->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(array('unique_name' => $unique_name));
+                ->findOneBy(['unique_name' => $unique_name]);
 
         if (null === $shops) {
             throw new TransformationFailedException(sprintf(

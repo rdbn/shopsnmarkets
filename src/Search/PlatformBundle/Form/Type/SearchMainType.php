@@ -9,20 +9,20 @@ namespace Search\PlatformBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 Class SearchMainType extends AbstractType 
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('keywords', 'text', array(
+        $builder->add('cacheTags', 'text', array(
             'label' => false,
             'attr' => ["class" => "form-control"],
-            'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
+            'data' => isset($options['data']) ? $options['data']->getCacheTags() : NULL,
         ));
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Shop\AddProductsBundle\Entity\Product'

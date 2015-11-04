@@ -37,8 +37,3 @@ _uniqueName:
 _addLogo:
     pattern:  /manager/createShop/addLogo/{shopname}
     defaults: { _controller: ShopCreateBundle:AjaxCreateShop:addLogo }
-
-# for class Shop
-_mainShop:
-    pattern:  /{shopname}
-    defaults: { _controller: ShopCreateBundle:Main:index }

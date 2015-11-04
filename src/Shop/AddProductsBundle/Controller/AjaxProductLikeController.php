@@ -14,22 +14,15 @@ class AjaxProductLikeController extends Controller
     public function addLikeAction()
     {
         $user = $this->getUser();
+        $request = $this->get("request")->query->get('id');
         
-        $request = $this->getRequest()->query->get('id');
+        if ($user == null) return new Response('1');
+        $check = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+                ->isLikeProduct(['user' => $user->getId(), 'product' => $request]);
         
-        if ($user == null) {
-            return new Response('1');
-        }
-        
-        $ckeck = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
-                ->isLikeProduct(array('user' => $user->getId(), 'product' => $request));
-        
-        if ($ckeck) {
-            return new Response('1');
-        }
-        
+        if ($check) return new Response('1');
         $this->get('productLike')->addLike($request, $user);
-        
+
         return new Response('0');
     }
 }

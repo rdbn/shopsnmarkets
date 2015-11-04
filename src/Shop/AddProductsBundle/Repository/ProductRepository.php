@@ -114,16 +114,16 @@ class ProductRepository extends EntityRepository
      */
     public function findAllProductShop($name) {
         return $this->getEntityManager()
-                ->createQuery('
-                    SELECT p.id, p.name, p.price, p.path, sub.id as subcategory, c.id as category, f.id as floor, count(like) as likes 
-                    FROM ShopAddProductsBundle:Product p
-                    LEFT JOIN p.like_product like
-                    LEFT JOIN p.shops s
-                    LEFT JOIN p.floor f
-                    LEFT JOIN p.subcategory sub
-                    LEFT JOIN sub.category c
-                    WHERE s.unique_name = :name
-                    GROUP BY p
+            ->createQuery('
+                SELECT p.id, p.name, p.price, p.path, sub.id as subcategory, c.id as category, f.id as floor, count(likeProduct) as likes
+                FROM ShopAddProductsBundle:Product p
+                LEFT JOIN p.like_product likeProduct
+                LEFT JOIN p.shops s
+                LEFT JOIN p.floor f
+                LEFT JOIN p.subcategory sub
+                LEFT JOIN sub.category c
+                WHERE s.unique_name = :name
+                GROUP BY p
                 ')->setParameter('name', $name)
                 ->setFirstResult(0)
                 ->setMaxResults(16)

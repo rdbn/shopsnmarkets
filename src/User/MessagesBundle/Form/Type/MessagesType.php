@@ -10,7 +10,7 @@ use User\MessagesBundle\Form\Type\DialogType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 Class MessagesType extends AbstractType
 {
@@ -35,7 +35,7 @@ Class MessagesType extends AbstractType
         ));
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'User\MessagesBundle\Entity\Messages'

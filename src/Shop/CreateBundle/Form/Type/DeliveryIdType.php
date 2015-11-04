@@ -11,7 +11,7 @@ use Shop\CreateBundle\Form\DataTransformer\DeliveryToIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DeliveryIdType extends AbstractType {
     
@@ -34,7 +34,7 @@ class DeliveryIdType extends AbstractType {
         $builder->addModelTransformer($transfomer);
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'invalid_message' => 'The selected issue does not exist',

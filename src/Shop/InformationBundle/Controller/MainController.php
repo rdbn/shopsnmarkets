@@ -4,7 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Shop\CreateBundle\Controller;
+namespace Shop\InformationBundle\Controller;
 
 use Shop\AddProductsBundle\Entity\Product;
 use Search\ShopBundle\Form\Type\SearchShopType;
@@ -18,9 +18,13 @@ class MainController extends Controller
         $shop = $this->getDoctrine()->getRepository("ShopCreateBundle:Shops")
             ->findOneBy(["unique_name" => $shopname]);
 
-        return $this->render('ShopCreateBundle:Main:index.html.twig', [
+        $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+            ->findAllProductShop($shopname);
+
+        return $this->render('ShopInformationBundle:Main:index.html.twig', [
             'form' => $form->createView(),
             'shopname' => $shopname,
+            'products' => $products,
             'shop' => $shop,
         ]);
     }

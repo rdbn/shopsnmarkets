@@ -1,42 +1,17 @@
-# route for controller AjaxValue    
-_category:
-    pattern:  /addProducts/category
-    defaults: { _controller: ShopAddProductsBundle:AjaxValue:category }
-    
-_subcategory:
-    pattern:  /addProducts/subcategory
-    defaults: { _controller: ShopAddProductsBundle:AjaxValue:subcategory }
-    
-_size:
-    pattern:  /addProducts/size
-    defaults: { _controller: ShopAddProductsBundle:AjaxValue:size }
-    
-_typeThing:
-    pattern:  /addProducts/typeThing
-    defaults: { _controller: ShopAddProductsBundle:AjaxValue:typeThing }
-    
 # route for controller AjaxProductLike
 _addLikeProduct:
     pattern:  /addLikeProduct
     defaults: { _controller: ShopAddProductsBundle:AjaxProductLike:addLike }
     
 # route for class InsertProduct
-_formInsertProduct:
-    pattern:  /{shopname}/addProducts/insertform
-    defaults: { _controller: ShopAddProductsBundle:InsertProduct:form }
-    
-_insertProduct:
-    pattern:  /{shopname}/addProducts/insert
-    defaults: { _controller: ShopAddProductsBundle:InsertProduct:insertProduct }
-    
-# route for class updateProduct
-_formUpdateProduct:
-    pattern:  /{shopname}/addProducts/updateform/{id}
-    defaults: { _controller: ShopAddProductsBundle:UpdateProduct:form }
-    
+_addProduct:
+    pattern:  /{shopname}/addProducts
+    defaults: { _controller: ShopAddProductsBundle:Put:add }
+
 _updateProduct:
-    pattern:  /{shopname}/addProducts/update/{id}
-    defaults: { _controller: ShopAddProductsBundle:UpdateProduct:updateProduct }
+    pattern:  /{shopname}/updateProducts/{id}
+    defaults: { _controller: ShopAddProductsBundle:Put:update }
+
     
 # route for class ProductImage
 _formUploadImage:

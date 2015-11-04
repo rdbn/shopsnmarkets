@@ -11,7 +11,7 @@ use User\RegistrationBundle\Form\EventListener\AddCityFieldSubscriber;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserInformationType extends AbstractType {
     
@@ -63,7 +63,7 @@ class UserInformationType extends AbstractType {
         $builder->addEventSubscriber($citySubscriber);
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'User\RegistrationBundle\Entity\Users'

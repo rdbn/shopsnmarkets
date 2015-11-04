@@ -1,3 +1,8 @@
+# for class Shop
+_mainShop:
+    pattern:  /{shopname}
+    defaults: { _controller: ShopInformationBundle:Main:index }
+
 # for class ShopInformation
 _shopInformation:
     pattern: /{shopname}/shopInformation

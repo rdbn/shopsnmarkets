@@ -7,72 +7,50 @@
 namespace Shop\AddProductsBundle\Form\Type;
 
 use Shop\AddProductsBundle\Form\EventListener\AddCategoryFieldSubscriber;
-use Shop\AddProductsBundle\Form\EventListener\AddSubcategoryFieldSubscriber;
-use Shop\AddProductsBundle\Form\EventListener\AddSizeFieldSubscriber;
-use Shop\AddProductsBundle\Form\EventListener\AddTypeThingFieldSubscriber;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductType extends AbstractType {
-    
-    private $shop_name;
-    
-    public function __construct($shop_name) {
-        $this->shop_name = $shop_name;
-    }
-
+class ProductType extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('shops', 'shopname', array(
-            'data' => $this->shop_name,
-        ));
-        $builder->add('floor', 'entity', array(
-            'class' => 'ShopAddProductsBundle:Floor',
-            'property' => 'name',
-            'label' => 'Пол:',
-            'empty_value'   => '--- Выберите пол ---',
-        ));
-        $builder->add('keywords', 'text', array(
-            'label' => 'Для поиска:',
-            'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
+        $builder->add('cacheTags', 'text', array(
+            'label' => false,
+            'attr' => ["class" => "form-control", "placeholder" => "Хеш теги"],
+            'data' => isset($options['data']) ? $options['data']->getCacheTags() : NULL,
         ));
         $builder->add('name', 'text', array(
-            'label' => 'Название:',
+            'label' => false,
+            'attr' => ["class" => "form-control", "placeholder" => "Название"],
             'data' => isset($options['data']) ? $options['data']->getName() : NULL,
         ));
         $builder->add('price', 'number', array(
-            'label' => 'Цена:',
+            'label' => false,
+            'attr' => ["class" => "form-control", "placeholder" => "Цена"],
             'data' => isset($options['data']) ? $options['data']->getPrice() : NULL,
         ));
         $builder->add('text', 'textarea', array(
-            'label' => 'Описание:',
+            'label' => false,
+            'required' => false,
+            'attr' => ["class" => "form-control", "placeholder" => "Описание", "rows" => 10],
+            'data' => isset($options['data']) ? $options['data']->getText() : NULL,
         ));
         $builder->add('save', 'submit', array(
             'label' => 'Добавить',
-            'attr' => array('class' => 'button'),
+            'attr' => ['class' => 'btn btn-success center-block'],
         ));
-        
-        $factory = $builder->getFormFactory();
-        $categorySubscriber = new AddCategoryFieldSubscriber($factory);
-        $builder->addEventSubscriber($categorySubscriber);
-        $subcategorySubscriber = new AddSubcategoryFieldSubscriber($factory);
-        $builder->addEventSubscriber($subcategorySubscriber);
-        $sizeSubscriber = new AddSizeFieldSubscriber($factory);
-        $builder->addEventSubscriber($sizeSubscriber);
-        $typeThingSubscriber = new AddTypeThingFieldSubscriber($factory);
-        $builder->addEventSubscriber($typeThingSubscriber);
     }
     
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Shop\AddProductsBundle\Entity\Product'
         ));
     }
     
-    public function getName() 
+    public function getName()
     {
         return 'Product';
     }
