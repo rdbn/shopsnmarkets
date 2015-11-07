@@ -6,6 +6,7 @@
  */
 namespace Shop\AddProductsBundle\Form\Type;
 
+use Shop\AddProductsBundle\Form\Type\ProductImageType as ImageType;
 use Shop\AddProductsBundle\Form\EventListener\AddCategoryFieldSubscriber;
 
 use Symfony\Component\Form\AbstractType;
@@ -16,10 +17,14 @@ class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('cacheTags', 'text', array(
+        $builder->add('hashTags', 'text', array(
             'label' => false,
-            'attr' => ["class" => "form-control", "placeholder" => "Хеш теги"],
-            'data' => isset($options['data']) ? $options['data']->getCacheTags() : NULL,
+            'attr' => [
+                "class" => "form-control",
+                "placeholder" => "Хеш теги",
+                "value" => "одежда,"
+            ],
+            'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
         ));
         $builder->add('name', 'text', array(
             'label' => false,
@@ -37,6 +42,11 @@ class ProductType extends AbstractType
             'attr' => ["class" => "form-control", "placeholder" => "Описание", "rows" => 10],
             'data' => isset($options['data']) ? $options['data']->getText() : NULL,
         ));
+        $builder->add('image', 'collection', [
+            'label' => false,
+            "type" => new ImageType(),
+            'allow_add' => true,
+        ]);
         $builder->add('save', 'submit', array(
             'label' => 'Добавить',
             'attr' => ['class' => 'btn btn-success center-block'],

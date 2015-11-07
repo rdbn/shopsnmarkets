@@ -30,7 +30,7 @@ class UsersToIdTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  Issue|null $issue
+     * @param  Issue|null $users
      * @return string
      */
     public function transform($users)
@@ -45,7 +45,7 @@ class UsersToIdTransformer implements DataTransformerInterface
     /**
      * Transforms a string (number) to an object (issue).
      *
-     * @param  string $number
+     * @param  string $id
      *
      * @return Issue|null
      *

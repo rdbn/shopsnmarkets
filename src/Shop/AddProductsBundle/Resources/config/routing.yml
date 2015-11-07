@@ -1,9 +1,17 @@
 # route for controller AjaxProductLike
 _addLikeProduct:
     pattern:  /addLikeProduct
-    defaults: { _controller: ShopAddProductsBundle:AjaxProductLike:addLike }
+    defaults: { _controller: ShopAddProductsBundle:Ajax:like, _format: json }
+    requirements:
+        _method: GET
+
+_hashTags:
+    pattern:  /hashTags
+    defaults: { _controller: ShopAddProductsBundle:Ajax:hashTags, _format: json }
+    requirements:
+        _method: GET
     
-# route for class InsertProduct
+# route for class Put
 _addProduct:
     pattern:  /{shopname}/addProducts
     defaults: { _controller: ShopAddProductsBundle:Put:add }
@@ -14,17 +22,9 @@ _updateProduct:
 
     
 # route for class ProductImage
-_formUploadImage:
-    pattern:  /{shopname}/addProducts/formUpload
-    defaults: { _controller: ShopAddProductsBundle:ProductImage:form }
-    
 _uploadImage:
     pattern:  /{shopname}/addProducts/uploadImage
     defaults: { _controller: ShopAddProductsBundle:ProductImage:upload }
-    
-_images:
-    pattern:  /addProducts/images
-    defaults: { _controller: ShopAddProductsBundle:ProductImage:images }
     
 _imagesDelete:
     pattern: /addProducts/imagesDelete

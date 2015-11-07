@@ -78,6 +78,36 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+sensio_framework_extra:
+    view:
+        annotations: false
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+        view_response_listener: 'force'
+        formats:
+            rss: false
+            xml: false
+            json: true
+    routing_loader:
+        default_format: json
+
+nelmio_api_doc:
+    name: Api
+    sandbox:
+        request_format:
+            formats:
+                json: application/json
+
+jms_serializer:
+    metadata:
+        auto_detection: true
     
 # avalanche_imagine
 avalanche_imagine:
@@ -114,14 +144,6 @@ avalanche_imagine:
         main_product_image:
             type:    thumbnail
             options: { size: [300, 350], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
-            
-# capctha
-gregwar_captcha:
-    width: 200
-    height: 50
-    length: 6
-    as_url: true
-    reload: true
 
 # FOS
 fos_user:
@@ -156,9 +178,9 @@ hwi_oauth:
             scope:               offline,friends,groups,stats
                
         facebook:
-            type:          facebook
-            client_id:     204092453113554
-            client_secret: e700b5ff56839ec5fec9e41c4cc84302
+            type:                facebook
+            client_id:           204092453113554
+            client_secret:       e700b5ff56839ec5fec9e41c4cc84302
             scope:               email,user_photos,user_location
                 
         google:

@@ -50,10 +50,10 @@ Class Product
     protected $date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\CacheTags", inversedBy="product")
+     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\HashTags", inversedBy="product")
      * @ORM\JoinTable(name="product_tags")
      */
-    protected $cacheTags;
+    protected $hashTags;
     
     /**
      * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="product")
@@ -208,37 +208,37 @@ Class Product
     }
 
     /**
-     * Add cacheTag
+     * Add hashTag
      *
-     * @param \Shop\AddProductsBundle\Entity\CacheTags $cacheTag
+     * @param \Shop\AddProductsBundle\Entity\HashTags $hashTag
      *
      * @return Product
      */
-    public function addCacheTag(\Shop\AddProductsBundle\Entity\CacheTags $cacheTag)
+    public function addHashTag(\Shop\AddProductsBundle\Entity\HashTags $hashTag)
     {
-        $this->cacheTags[] = $cacheTag;
+        $this->hashTags[] = $hashTag;
 
         return $this;
     }
 
     /**
-     * Remove cacheTag
+     * Remove hashTag
      *
-     * @param \Shop\AddProductsBundle\Entity\CacheTags $cacheTag
+     * @param \Shop\AddProductsBundle\Entity\HashTags $hashTag
      */
-    public function removeCacheTag(\Shop\AddProductsBundle\Entity\CacheTags $cacheTag)
+    public function removeHashTag(\Shop\AddProductsBundle\Entity\HashTags $hashTag)
     {
-        $this->cacheTags->removeElement($cacheTag);
+        $this->hashTags->removeElement($hashTag);
     }
 
     /**
-     * Get cacheTags
+     * Get hashTags
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCacheTags()
+    public function getHashTags()
     {
-        return $this->cacheTags;
+        return $this->hashTags;
     }
 
     /**

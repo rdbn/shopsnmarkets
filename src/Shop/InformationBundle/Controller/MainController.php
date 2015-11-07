@@ -7,7 +7,7 @@
 namespace Shop\InformationBundle\Controller;
 
 use Shop\AddProductsBundle\Entity\Product;
-use Search\ShopBundle\Form\Type\SearchShopType;
+use Shop\InformationBundle\Form\Type\SearchShopType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MainController extends Controller

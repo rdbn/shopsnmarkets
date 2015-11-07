@@ -6,15 +6,15 @@
  */
 namespace Shop\AddProductsBundle\Entity;
 
-use \Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Shop\AddProductsBundle\Repository\CacheTagsRepository")
- * @ORM\Table(name="cache_tags")
+ * @ORM\Entity(repositoryClass="Shop\AddProductsBundle\Repository\HashTagsRepository")
+ * @ORM\Table(name="hash_tags")
  */
 
-Class CacheTags
+Class HashTags
 {
     /**
      * @ORM\Id
@@ -24,14 +24,15 @@ Class CacheTags
     protected $id;
     
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, unique=true)
      */
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\Product", mappedBy="cacheTags")
+     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\Product", mappedBy="hashTags")
      */
     protected $product;
+
     /**
      * Constructor
      */
@@ -55,7 +56,7 @@ Class CacheTags
      *
      * @param string $name
      *
-     * @return CacheTags
+     * @return HashTags
      */
     public function setName($name)
     {
@@ -79,7 +80,7 @@ Class CacheTags
      *
      * @param \Shop\AddProductsBundle\Entity\Product $product
      *
-     * @return CacheTags
+     * @return HashTags
      */
     public function addProduct(\Shop\AddProductsBundle\Entity\Product $product)
     {

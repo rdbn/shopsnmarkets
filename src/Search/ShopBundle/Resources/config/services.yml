@@ -1,7 +1,0 @@
-parameters:
-    searchShopProduct.class: Search\ShopBundle\Services\SearchShopProduct
-
-services:
-    searchShopProduct:
-        class: %searchShopProduct.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory ]

@@ -37,13 +37,6 @@ Class UserType extends AbstractType
             'second_options' => array('label' => false),
             'error_bubbling'=>true,
         ));
-        $builder->add('captcha', 'captcha', array(
-            'auto_initialize' => false,
-            'mapped' => false,
-            'label' => false,
-            'error_bubbling' => true,
-            'attr' => ["class" => "form-control", "placeholder" => "Введите значение с картинки"],
-        ));
         $builder->add("save", "submit", [
             "label" => "Зарегистрироваться",
             'attr' => ["class" => "btn btn-success"],

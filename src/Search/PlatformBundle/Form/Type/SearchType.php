@@ -15,9 +15,9 @@ Class SearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('keywords', 'text', array(
+        $builder->add('hashTags', 'text', array(
             'label' => false,
-            'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
+            'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
         ));
     }
     

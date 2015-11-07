@@ -10,6 +10,6 @@ namespace Shop\AddProductsBundle\Repository;
  */
 use \Doctrine\ORM\EntityRepository;
 
-class CacheTagsRepository extends EntityRepository
+class HashTagsRepository extends EntityRepository
 {
 }

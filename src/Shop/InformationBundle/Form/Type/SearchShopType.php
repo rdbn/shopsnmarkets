@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Search\ShopBundle\Form\Type;
+namespace Shop\InformationBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,10 +15,10 @@ Class SearchShopType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('keywords', 'text', array(
+        $builder->add('hashTags', 'text', array(
             'label' => false,
             'attr' => ["class" => "form-control", "placeholder" => "Введите слова"],
-            'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
+            'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
         ));
     }
     

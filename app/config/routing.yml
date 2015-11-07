@@ -34,10 +34,6 @@ search_partners:
     resource: "@SearchPartnersBundle/Resources/config/routing.yml"
     prefix:   /
 
-search_shop:
-    resource: "@SearchShopBundle/Resources/config/routing.yml"
-    prefix:   /
-
 search_platform:
     resource: "@SearchPlatformBundle/Resources/config/routing.yml"
     prefix:   /
@@ -61,11 +57,6 @@ platform_products:
 platform_main:
     resource: "@PlatformMainBundle/Resources/config/routing.yml"
     prefix:   /
-    
-# captcha
-gregwar_captcha_routing:
-    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
-    prefix: /_gcb
     
 # AvalancheImagineBundle
 _imagine:
@@ -140,6 +131,10 @@ facebook_login:
     
 google_login:
     pattern: /login/check-google
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /doc
     
 # shop route
 shop_order:

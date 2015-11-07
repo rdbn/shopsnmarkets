@@ -20,9 +20,9 @@
                     <form id="search" method="post" {{ form_enctype(form) }}>
                         <div class="input-group">
                             {{ form_errors(form) }}
-                            {{ form_label(form.keywords) }}
-                            {{ form_errors(form.keywords) }}
-                            {{ form_widget(form.keywords) }}
+                                {{ form_label(form.hashTags) }}
+                                {{ form_errors(form.hashTags) }}
+                                {{ form_widget(form.hashTags) }}
                             {{form_rest(form)}}
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">Go!</button>

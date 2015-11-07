@@ -29,6 +29,10 @@ class PutController extends Controller
 
             $em->persist($product);
             $em->flush();
+
+            return $this->redirect($this->generateUrl('_mainShop', [
+                'shopname' => $shopname,
+            ]));
         }
 
         return $this->render('ShopAddProductsBundle:Form:form.html.twig', array(
@@ -43,11 +47,15 @@ class PutController extends Controller
         $product = $em->getRepository("ShopAddProductsBundle:Product")
             ->findOneById($id);
 
-        $form = $this->createForm(new ProductType($shopname), $product);
+        $form = $this->createForm(new ProductType(), $product);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em->flush();
+
+            return $this->redirect($this->generateUrl('_mainShop', [
+                'shopname' => $shopname,
+            ]));
         }
 
         return $this->render('ShopAddProductsBundle:Form:form.html.twig', array(

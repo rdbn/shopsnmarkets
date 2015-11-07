@@ -16,55 +16,27 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 
 class OrderItem 
-{  
+{
     /**
      * @ORM\Id
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-    
-    /**
      * @ORM\ManyToOne(targetEntity="Shop\OrderBundle\Entity\Order", cascade={"persist"})
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
      */
     protected $order;
     
     /**
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops")
      * @ORM\JoinColumn(name="shops_id", referencedColumnName="id")
      */
     protected $shops;
     
     /**
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Shop\AddProductsBundle\Entity\Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     protected $product;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\Size", inversedBy="order")
-     * @ORM\JoinColumn(name="order_size")
-     */
-    protected $size;
-    
-    /*
-     * constructor
-     */
-    public function __construct()
-    {
-        $this->size = new ArrayCollection();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set order
@@ -133,38 +105,5 @@ class OrderItem
     public function getProduct()
     {
         return $this->product;
-    }
-
-    /**
-     * Add size
-     *
-     * @param \Shop\AddProductsBundle\Entity\Size $size
-     * @return OrderItem
-     */
-    public function addSize(\Shop\AddProductsBundle\Entity\Size $size)
-    {
-        $this->size[] = $size;
-    
-        return $this;
-    }
-
-    /**
-     * Remove size
-     *
-     * @param \Shop\AddProductsBundle\Entity\Size $size
-     */
-    public function removeSize(\Shop\AddProductsBundle\Entity\Size $size)
-    {
-        $this->size->removeElement($size);
-    }
-
-    /**
-     * Get size
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSize()
-    {
-        return $this->size;
     }
 }

@@ -20,10 +20,10 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
 
             new Platform\MainBundle\PlatformMainBundle(),
             new Platform\ProductsBundle\PlatformProductsBundle(),
@@ -44,7 +44,6 @@ class AppKernel extends Kernel
             new Shop\OrderBundle\ShopOrderBundle(),
             new Shop\ProductBundle\ShopProductBundle(),
             new Search\PlatformBundle\SearchPlatformBundle(),
-            new Search\ShopBundle\SearchShopBundle(),
             new Search\PartnersBundle\SearchPartnersBundle(),
             new Search\UserBundle\SearchUserBundle(),
         );

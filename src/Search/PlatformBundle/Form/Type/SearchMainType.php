@@ -15,10 +15,10 @@ Class SearchMainType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('cacheTags', 'text', array(
+        $builder->add('hashTags', 'text', array(
             'label' => false,
             'attr' => ["class" => "form-control"],
-            'data' => isset($options['data']) ? $options['data']->getCacheTags() : NULL,
+            'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
         ));
     }
     

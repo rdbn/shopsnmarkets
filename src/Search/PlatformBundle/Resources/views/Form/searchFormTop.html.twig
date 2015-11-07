@@ -1,9 +1,9 @@
 <div class="nav navbar-nav navbar-form navbar-right col-lg-4">
     <form class=" input-group" action="{{ path('_resultProductPlatform') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
-            {{ form_label(form.cacheTags) }}
-            {{ form_errors(form.cacheTags) }}
-            {{ form_widget(form.cacheTags) }}
+            {{ form_label(form.hashTags) }}
+            {{ form_errors(form.hashTags) }}
+            {{ form_widget(form.hashTags) }}
         {{form_rest(form)}}
         <span class="input-group-btn">
             <input class="btn btn-default" type="submit" value="Go!" />
