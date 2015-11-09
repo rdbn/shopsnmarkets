@@ -26,5 +26,5 @@ _allProductsSubcategoryShop:
     defaults: { _controller: ShopProductBundle:Products:allProductsSubcategory }
     
 _productShop:
-    pattern:  /{shopname}/allProduct/{idFloor}/{idCategory}/{idSubcategory}/{idProduct}
+    pattern:  /{shopname}/allProduct/{idProduct}
     defaults: { _controller: ShopProductBundle:Products:product }

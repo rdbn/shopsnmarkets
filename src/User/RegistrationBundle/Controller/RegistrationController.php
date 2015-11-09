@@ -33,7 +33,7 @@ class RegistrationController extends CommonController
         $form = $addInformation->createForm(new UserType(), new Users());
         
         if ($addInformation->addUser($request)) {
-            return $this->redirect($this->generateUrl('_main'));
+            return $this->redirectToRoute('_main');
         }
         
         return $this->render('UserRegistrationBundle:Form:registration.html.twig', array(
@@ -44,7 +44,7 @@ class RegistrationController extends CommonController
     
     public function checkEmailAction() 
     {
-        $mail = $this->getRequest()->request->get('email');
+        $mail = $this->get("request")->request->get('email');
         
         $email = new Email();
         $errors = $this->get('validator')->validateValue($mail, $email);

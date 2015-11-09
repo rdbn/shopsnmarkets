@@ -24,7 +24,6 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "avalanche123/imagine-bundle": "v2.1",
         "nelmio/api-doc-bundle": "^2.9",
-        "knplabs/knp-paginator-bundle": "dev-master",
         "hwi/oauth-bundle": "0.3.*@dev"
     },
     "require-dev": {

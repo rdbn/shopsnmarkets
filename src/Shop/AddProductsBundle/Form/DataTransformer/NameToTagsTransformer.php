@@ -10,9 +10,10 @@ namespace Shop\AddProductsBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
-use Shop\CreateBundle\Entity\Shops;
 
-class ShopsToNameTransformer implements DataTransformerInterface
+use Shop\AddProductsBundle\Entity\HashTags;
+
+class NameToTagsTransformer implements DataTransformerInterface
 {
     /**
      * @var ObjectManager
@@ -30,44 +31,45 @@ class ShopsToNameTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  issue|null $shops
+     * @param  issue|null $tags
      * @return string
      */
-    public function transform($shops)
+    public function transform($tags)
     {
-        if (null === $shops) {
+        if (null === $tags) {
             return "";
         }
 
-        return $shops;
+        return $tags;
     }
 
     /**
      * Transforms a string (number) to an object (issue).
      *
-     * @param string $unique_name
+     * @param string $tags
      *
      * @return Issue|null
      *
      * @throws TransformationFailedException if object (issue) is not found.
      */
-    public function reverseTransform($unique_name)
+    public function reverseTransform($tags)
     {
-        if (!$unique_name) {
+        if (!$tags) {
             return null;
         }
 
-        $shops = $this->om->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(['unique_name' => $unique_name]);
+        $tags = str_replace(" ", "", $tags);
+        $hashTags = $this->om->getRepository('ShopAddProductsBundle:HashTags')
+                ->findByNameTags(explode(",", $tags));
 
-        if (null === $shops) {
+        if (null === $hashTags) {
             throw new TransformationFailedException(sprintf(
                 'An issue with number "%s" does not exist!',
-                $unique_name
+                $tags
             ));
         }
 
-        return $shops;
+        return $hashTags;
     }
 }
 ?>

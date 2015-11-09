@@ -40,7 +40,7 @@ Class ProductImage
      *     maxSize = "1M",
      *     mimeTypes = {"image/jpeg", "image/gif", "image/png"},
      *     maxSizeMessage = "Максимальный вес картинки 1MB.",
-     *     mimeTypesMessage = "Только таких типов ихображений можно загрузитью"
+     *     mimeTypesMessage = "Только таких типов ихображений можно загрузить."
      * )
      */
     protected $file;
@@ -58,7 +58,7 @@ Class ProductImage
     /**
      * Get file.
      *
-     * @return ProductImage
+     * @return UploadedFile
      */
     public function getFile()
     {
@@ -67,9 +67,7 @@ Class ProductImage
     
     public function getAbsolutePath()
     {
-        return null === $this->path
-            ? null
-            : $this->getUploadRootDir().'/'.$this->path;
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
 
     public function getWebPath()
@@ -79,31 +77,33 @@ Class ProductImage
             : $this->getUploadDir().'/'.$this->path;
     }
 
-    protected function getUploadRootDir($shopName)
+    protected function getUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir($shopName);
+        $dir = __DIR__.'/../../../../web/'.$this->getUploadDir();
+
+        if (!file_exists($dir)) {
+            mkdir($dir, 0775);
+        }
+
+        return $dir;
     }
 
-    protected function getUploadDir($shopName)
+    protected function getUploadDir()
     {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.           
-        return 'public/xml/Shops/'.$shopName.'/product';
+        return 'public/images/product';
     }
     
-    public function preUpload($shopName)
+    public function preUpload()
     {
         if (null !== $this->file) {
             // do whatever you want to generate a unique name
-            $this->path = $this->getUploadDir($shopName).'/'.uniqid().'.'.$this->file->guessExtension();
+            $this->path = $this->getUploadDir().'/'.uniqid().'.'.$this->file->guessExtension();
             
             return $this->path;
         }
     }
     
-    public function upload($shopName)
+    public function upload()
     {
         // the file property can be empty if the field is not required
         if (null === $this->file) {
@@ -116,7 +116,7 @@ Class ProductImage
         // move takes the target directory and then the
         // target filename to move to
         $this->getFile()->move(
-            $this->getUploadRootDir($shopName),
+            $this->getUploadRootDir(),
             $this->path
         );
 

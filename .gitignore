@@ -19,6 +19,7 @@
 /web/config.php
 /web/favicon.ico
 /web/media
-/web/public/xml
+/web/public/images/product/
 /web/apple-touch-icon.png
 composer.lock
+*~

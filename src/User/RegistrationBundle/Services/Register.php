@@ -43,8 +43,6 @@ class Register {
                 $addUser = $this->em;
                 $addUser->persist($this->model);
                 $addUser->flush();
-                
-                $this->createDir();
 
                 return TRUE;
             } else {
@@ -64,14 +62,6 @@ class Register {
         } else {
             return FALSE;
         }
-    }
-    
-    private function createDir() {
-        $dir = __DIR__.'/../../../../../Symfony/web/public/xml/Users/'.$this->model->getId();
-        
-        $this->createDir->createDir($dir);
-        $this->createDir->createDir($dir.'/avatar');
-        $this->createDir->createDir($dir.'/message');
     }
     
     private function addRoleUser() {

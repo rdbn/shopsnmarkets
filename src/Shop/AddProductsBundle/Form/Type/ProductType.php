@@ -6,9 +6,6 @@
  */
 namespace Shop\AddProductsBundle\Form\Type;
 
-use Shop\AddProductsBundle\Form\Type\ProductImageType as ImageType;
-use Shop\AddProductsBundle\Form\EventListener\AddCategoryFieldSubscriber;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +14,7 @@ class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('hashTags', 'text', array(
+        $builder->add('hashTags', 'hashTags', array(
             'label' => false,
             'attr' => [
                 "class" => "form-control",
@@ -25,11 +22,6 @@ class ProductType extends AbstractType
                 "value" => "одежда,"
             ],
             'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
-        ));
-        $builder->add('name', 'text', array(
-            'label' => false,
-            'attr' => ["class" => "form-control", "placeholder" => "Название"],
-            'data' => isset($options['data']) ? $options['data']->getName() : NULL,
         ));
         $builder->add('price', 'number', array(
             'label' => false,
@@ -42,10 +34,12 @@ class ProductType extends AbstractType
             'attr' => ["class" => "form-control", "placeholder" => "Описание", "rows" => 10],
             'data' => isset($options['data']) ? $options['data']->getText() : NULL,
         ));
-        $builder->add('image', 'collection', [
-            'label' => false,
-            "type" => new ImageType(),
-            'allow_add' => true,
+        $builder->add('file', 'file', [
+            'label' => "Добавить картинки",
+            "label_attr" => ["class" => "btn btn-success"],
+            "multiple" => true,
+            'attr' => ["class" => "hide"],
+            'data_class' => null,
         ]);
         $builder->add('save', 'submit', array(
             'label' => 'Добавить',

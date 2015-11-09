@@ -19,7 +19,7 @@ class MainController extends Controller
             ->findOneBy(["unique_name" => $shopname]);
 
         $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
-            ->findAllProductShop($shopname);
+            ->findByProductShop($shopname);
 
         return $this->render('ShopInformationBundle:Main:index.html.twig', [
             'form' => $form->createView(),

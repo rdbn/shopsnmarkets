@@ -31,18 +31,30 @@ class AjaxController extends FOSRestController
         return $tags;
     }
 
+    /**
+     * @ApiDoc(
+     *     description="Список тегов",
+     *     statusCodes={
+     *         200="Нормальный ответ"
+     *     }
+     * )
+     *
+     * @Rest\View()
+     */
     public function likeAction()
     {
         $user = $this->getUser();
-        $request = $this->get("request")->query->get('id');
-        
         if ($user == null) return false;
 
-        $check = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
-                ->isLikeProduct(['user' => $user->getId(), 'product' => $request]);
+        $id = $this->get("request")->query->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository('ShopAddProductsBundle:Product')
+                ->findOneBy(['user' => $user->getId(), 'product' => $id]);
         
-        if ($check) return true;
-        $this->get('productLike')->addLike($request, $user);
+        if ($product) return false;
+
+        $em->persist($product->addLikeProduct($user));
+        $em->flush();
 
         return true;
     }

@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
             new Platform\MainBundle\PlatformMainBundle(),
             new Platform\ProductsBundle\PlatformProductsBundle(),

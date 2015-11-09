@@ -59,7 +59,7 @@ class ProductsController extends Controller
         ));
     }
     
-    public function productAction($shopname, $idFloor, $idCategory, $idSubcategory, $idProduct)
+    public function productAction($shopname, $idProduct)
     {
         if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
             $userID = $this->getUser();
@@ -70,12 +70,10 @@ class ProductsController extends Controller
                 ->findOneByProductShop($idProduct);
         
         $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
-                ->findByProductSubcategoryShop(array('name' => $shopname, 'subcategory' => $idSubcategory, 'product' => $idProduct));
+                ->findByProductSubcategoryShop(array('name' => $shopname, 'product' => $idProduct));
         
         return $this->render('ShopProductBundle:Products:product.html.twig', array(
             'manager' => isset($manager) ? $manager : false,
-            'floor' => $idFloor,
-            'idCategory' => $idCategory,
             'shopname' => $shopname,
             'id' => $idProduct,
             'product' => $product,

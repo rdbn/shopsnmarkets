@@ -26,13 +26,12 @@ class PutController extends Controller
                 ->findOneBy(["unique_name" => $shopname]);
 
             $product->setShops($shop);
+            $product->upload();
 
             $em->persist($product);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_mainShop', [
-                'shopname' => $shopname,
-            ]));
+            return $this->redirectToRoute('_mainShop', ['shopname' => $shopname]);
         }
 
         return $this->render('ShopAddProductsBundle:Form:form.html.twig', array(
@@ -53,9 +52,7 @@ class PutController extends Controller
         if ($form->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_mainShop', [
-                'shopname' => $shopname,
-            ]));
+            //return $this->redirectToRoute('_mainShop', ['shopname' => $shopname]);
         }
 
         return $this->render('ShopAddProductsBundle:Form:form.html.twig', array(

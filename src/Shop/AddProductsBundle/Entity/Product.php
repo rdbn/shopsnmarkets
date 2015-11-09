@@ -7,7 +7,11 @@
 namespace Shop\AddProductsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+
+use Shop\AddProductsBundle\Entity\ProductImage;
 
 /**
  * @ORM\Entity(repositoryClass="Shop\AddProductsBundle\Repository\ProductRepository")
@@ -30,24 +34,19 @@ Class Product
     protected $shops;
     
     /**
-     * @ORM\Column(type="string", length=45)
-     */
-    protected $name;
-    
-    /**
      * @ORM\Column(type="float", scale=2)
      */
     protected $price;
     
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $text;
     
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $date;
+    protected $created_at;
 
     /**
      * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\HashTags", inversedBy="product")
@@ -65,6 +64,11 @@ Class Product
      * @ORM\OneToMany(targetEntity="Shop\AddProductsBundle\Entity\ProductImage", mappedBy="product", cascade={"persist"})
      */
     protected $image;
+
+    /**
+     * @var UploadedFile
+    */
+    protected $file;
     
     /**
      * Construct with Class Product
@@ -74,7 +78,7 @@ Class Product
         $this->like_product = new ArrayCollection();
         $this->cacheTags = new ArrayCollection();
 
-        $this->date = new \DateTime();
+        $this->created_at = new \DateTime();
     }
 
     /**
@@ -85,30 +89,6 @@ Class Product
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Product
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -160,27 +140,27 @@ Class Product
     }
 
     /**
-     * Set date
+     * Set createdAt
      *
-     * @param \DateTime $date
+     * @param \DateTime $createdAt
      *
      * @return Product
      */
-    public function setDate($date)
+    public function setCreatedAt($createdAt)
     {
-        $this->date = $date;
+        $this->created_at = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get createdAt
      *
      * @return \DateTime
      */
-    public function getDate()
+    public function getCreatedAt()
     {
-        return $this->date;
+        return $this->created_at;
     }
 
     /**
@@ -307,5 +287,45 @@ Class Product
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param array $file
+     *
+     * @return Product
+     */
+    public function setFile(array $file = null)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\PreFlush()
+     */
+    public function upload()
+    {
+        foreach($this->file as $uploadedFile) {
+            $productImage = new ProductImage();
+            $productImage->setFile($uploadedFile);
+            $productImage->preUpload();
+            $productImage->upload();
+
+            $productImage->setProduct($this);
+            $this->addImage($productImage);
+        }
     }
 }
