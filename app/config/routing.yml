@@ -145,14 +145,6 @@ shop_product:
     resource: "@ShopProductBundle/Resources/config/routing.yml"
     prefix:   /
 
-shop_news:
-    resource: "@ShopNewsBundle/Resources/config/routing.yml"
-    prefix:   /
-    
-shop_add_products:
-    resource: "@ShopAddProductsBundle/Resources/config/routing.yml"
-    prefix:   /
-
 shop_information:
     resource: "@ShopInformationBundle/Resources/config/routing.yml"
     prefix:   /

@@ -31,7 +31,7 @@ class OrderItemType extends AbstractType {
             'data' => $this->shop,
         ));
         $builder->add('size', 'entity', array(
-            'class' => 'ShopAddProductsBundle:Size',
+            'class' => 'ShopProductBundle:Size',
             'property' => 'value',
             'label' => false,
             'expanded' => true,

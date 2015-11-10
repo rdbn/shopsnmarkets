@@ -42,7 +42,7 @@ class SearchProduct {
     
     private function getQuery() {
         if ($this->form->getData()->getKeywords() != '') {
-            $repository = $this->em->getRepository('ShopAddProductsBundle:Product');
+            $repository = $this->em->getRepository('ShopProductBundle:Product');
             $select = $repository->createQueryBuilder('p')
                     ->select('p.id, p.name, p.price, p.path, f.id as floor, c.id as category, s.id as subcategory')
                     ->innerJoin('p.floor', 'f')

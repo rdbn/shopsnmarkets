@@ -7,7 +7,7 @@
 
 namespace Search\PlatformBundle\Controller;
 
-use Shop\AddProductsBundle\Entity\Product;
+use Shop\ProductBundle\Entity\Product;
 use Search\PlatformBundle\Form\Type\SearchMainType;
 
 use Symfony\Component\HttpFoundation\Request;

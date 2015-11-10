@@ -33,7 +33,7 @@ class OrderItem
     
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shop\AddProductsBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="Shop\ProductBundle\Entity\Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     protected $product;
@@ -87,10 +87,10 @@ class OrderItem
     /**
      * Set product
      *
-     * @param \Shop\AddProductsBundle\Entity\Product $product
+     * @param \Shop\ProductBundle\Entity\Product $product
      * @return OrderItem
      */
-    public function setProduct(\Shop\AddProductsBundle\Entity\Product $product = null)
+    public function setProduct(\Shop\ProductBundle\Entity\Product $product = null)
     {
         $this->product = $product;
     
@@ -100,7 +100,7 @@ class OrderItem
     /**
      * Get product
      *
-     * @return \Shop\AddProductsBundle\Entity\Product 
+     * @return \Shop\ProductBundle\Entity\Product
      */
     public function getProduct()
     {

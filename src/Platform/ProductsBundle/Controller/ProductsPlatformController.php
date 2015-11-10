@@ -12,7 +12,7 @@ class ProductsPlatformController extends Controller
 {
     public function allAction() 
     {
-        $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findAllProductPlatform();
 
         return $this->render('PlatformProductsBundle:All:products.html.twig', array(
@@ -22,7 +22,7 @@ class ProductsPlatformController extends Controller
 
     public function categoryAction($idFloor, $idCategory)
     {
-        $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findAllProductCategoryPlatform($idCategory);
         
         return $this->render('PlatformProductsBundle:All:products.html.twig', array(
@@ -34,7 +34,7 @@ class ProductsPlatformController extends Controller
     
     public function subcategoryAction($idFloor, $idCategory, $idSubcategory)
     {
-        $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findAllProductSubcategoryPlatform($idSubcategory);
         
         return $this->render('PlatformProductsBundle:All:products.html.twig', array(
@@ -46,10 +46,10 @@ class ProductsPlatformController extends Controller
     
     public function productAction($idFloor, $idCategory, $idSubcategory, $id)
     {
-        $product = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findOneByProductPlatform($id);
         
-        $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findByProductSubcategoryPlatform(array('id' => $idSubcategory, 'product' => $id));
         
         return $this->render('PlatformProductsBundle:Product:card.html.twig', array(

@@ -155,7 +155,7 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     protected $shop;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\Product", mappedBy="like_product")
+     * @ORM\ManyToMany(targetEntity="Shop\ProductBundle\Entity\Product", mappedBy="like_product")
      *
      */
     protected $product;
@@ -960,10 +960,10 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * Add product
      *
-     * @param \Shop\AddProductsBundle\Entity\Product $product
+     * @param \Shop\ProductBundle\Entity\Product $product
      * @return Users
      */
-    public function addProduct(\Shop\AddProductsBundle\Entity\Product $product)
+    public function addProduct(\Shop\ProductBundle\Entity\Product $product)
     {
         $this->product[] = $product;
     
@@ -973,9 +973,9 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * Remove product
      *
-     * @param \Shop\AddProductsBundle\Entity\Product $product
+     * @param \Shop\ProductBundle\Entity\Product $product
      */
-    public function removeProduct(\Shop\AddProductsBundle\Entity\Product $product)
+    public function removeProduct(\Shop\ProductBundle\Entity\Product $product)
     {
         $this->product->removeElement($product);
     }

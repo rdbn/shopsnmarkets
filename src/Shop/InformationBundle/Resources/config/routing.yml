@@ -37,3 +37,18 @@ _addCommentsShop:
 _addLikeShop:
     pattern: /addLikeShop
     defaults: { _controller: ShopInformationBundle:AjaxShopLike:addLike }
+
+# route for ShopNews
+_priviewNewsShop:
+    pattern:  /{shopname}/prviewNews
+    defaults: { _controller: ShopInformationBundle:ShopNews:priviewNews }
+
+# route for CreateNews
+_createNews:
+    pattern:  /{shopname}/formNews
+    defaults: { _controller: ShopInformationBundle:CreateNews:formNews }
+
+_addNews:
+    pattern:  /{shopname}/addNews
+    defaults: { _controller: ShopInformationBundle:CreateNews:addNews }
+

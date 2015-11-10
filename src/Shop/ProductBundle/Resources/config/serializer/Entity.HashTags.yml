@@ -1,0 +1,6 @@
+Shop\ProductBundle\Entity\HashTags:
+    exclusion_policy: ALL
+    properties:
+        name:
+            expose: true
+            groups: [tags]

@@ -24,7 +24,7 @@ Class SearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Shop\AddProductsBundle\Entity\Product'
+            'data_class' => 'Shop\ProductBundle\Entity\Product'
         ));
     }
 

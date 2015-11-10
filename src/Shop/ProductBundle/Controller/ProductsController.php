@@ -12,7 +12,7 @@ class ProductsController extends Controller
 { 
     public function allAction($shopname)
     {
-        $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findAllProductShop($shopname);
         
         return $this->render('ShopProductBundle:All:products.html.twig', array(
@@ -23,12 +23,7 @@ class ProductsController extends Controller
     
     public function allProductsCategoryAction($shopname, $idFloor, $idCategory)
     {
-        if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
-            $userID = $this->getUser();
-            $manager = $this->get('shopname')->isManager($shopname, $userID);
-        }
-        
-        $product = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findAllProductCategoryShop(array('name' => $shopname, 'category' => $idCategory));
         
         return $this->render('ShopProductBundle:Products:allProducts.html.twig', array(
@@ -42,12 +37,7 @@ class ProductsController extends Controller
     
     public function allProductsSubcategoryAction($shopname, $idFloor, $idCategory, $idSubcategory)
     {
-        if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
-            $userID = $this->getUser();
-            $manager = $this->get('shopname')->isManager($shopname, $userID);
-        }
-        
-        $product = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findAllProductSubcategoryShop(array('name' => $shopname, 'subcategory' => $idSubcategory));
         
         return $this->render('ShopProductBundle:Products:allProducts.html.twig', array(
@@ -61,15 +51,10 @@ class ProductsController extends Controller
     
     public function productAction($shopname, $idProduct)
     {
-        if ($this->get('security.context')->isGranted('ROLE_MANAGER')) {
-            $userID = $this->getUser();
-            $manager = $this->get('shopname')->isManager($shopname, $userID);
-        }
-        
-        $product = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findOneByProductShop($idProduct);
         
-        $products = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Product')
+        $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
                 ->findByProductSubcategoryShop(array('name' => $shopname, 'product' => $idProduct));
         
         return $this->render('ShopProductBundle:Products:product.html.twig', array(

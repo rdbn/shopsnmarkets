@@ -13,22 +13,22 @@ class SeconderyContentController extends Controller
     public function menuAction($idFloor, $idCategory) 
     {
         if ($idFloor && $idCategory && $idCategory != '9' && $idCategory != '13' && $idCategory != '44' && $idCategory != '45') {
-            $category = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Category')
+            $category = $this->getDoctrine()->getRepository('ShopProductBundle:Category')
                 ->findByFloor($idFloor);
             
-            $subcategory = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Subcategory')
+            $subcategory = $this->getDoctrine()->getRepository('ShopProductBundle:Subcategory')
                     ->findAllSubcategoryPlatform($idCategory);
         }
         
         if ($idCategory == '9' || $idCategory == '44') {
             $idFloor = '4';
-            $subcategory = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Subcategory')
+            $subcategory = $this->getDoctrine()->getRepository('ShopProductBundle:Subcategory')
                     ->findAllBootsPaltform();
         }
         
         if ($idCategory == '13' || $idCategory == '45') {
             $idFloor = '3';
-            $subcategory = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Subcategory')
+            $subcategory = $this->getDoctrine()->getRepository('ShopProductBundle:Subcategory')
                     ->findAllAccessoriesPaltform();
         }
         

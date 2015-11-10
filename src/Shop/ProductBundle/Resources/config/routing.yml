@@ -1,21 +1,3 @@
-# for class AjaxCategoryShop
-_categoryManShop:
-    pattern:  /categoryManShop
-    defaults: { _controller: ShopProductBundle:AjaxCategoryShop:man }
-    
-_categoryWomenShop:
-    pattern:  /categoryWomenShop
-    defaults: { _controller: ShopProductBundle:AjaxCategoryShop:women }
-
-# for class AjaxSubcategoryShop
-_subcategoryAccessoriesShop:
-    pattern:  /subcategoryAccessoriesShop
-    defaults: { _controller: ShopProductBundle:AjaxSubcategoryShop:accessories }
-    
-_subcategoryBootsShop:
-    pattern:  /subcategoryBootsShop
-    defaults: { _controller: ShopProductBundle:AjaxSubcategoryShop:boots }
-
 # for class Products
 _allProductsCategoryShop:
     pattern:  /{shopname}/allProduct/{idFloor}/{idCategory}
@@ -28,3 +10,25 @@ _allProductsSubcategoryShop:
 _productShop:
     pattern:  /{shopname}/allProduct/{idProduct}
     defaults: { _controller: ShopProductBundle:Products:product }
+
+# route for controller Ajax
+_addLikeProduct:
+    pattern:  /addLikeProduct
+    defaults: { _controller: ShopProductBundle:Ajax:like, _format: json }
+    requirements:
+        _method: GET
+
+_hashTags:
+    pattern:  /hashTags
+    defaults: { _controller: ShopProductBundle:Ajax:hashTags, _format: json }
+    requirements:
+        _method: GET
+
+# route for class Put
+_addProduct:
+    pattern:  /{shopname}/addProducts
+    defaults: { _controller: ShopProductBundle:Put:add }
+
+_updateProduct:
+    pattern:  /{shopname}/updateProducts/{id}
+    defaults: { _controller: ShopProductBundle:Put:update }

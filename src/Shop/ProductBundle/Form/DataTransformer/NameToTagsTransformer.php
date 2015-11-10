@@ -5,14 +5,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Shop\OrderBundle\Form\DataTransformer;
+namespace Shop\ProductBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
-use Shop\ProductBundle\Entity\Product;
 
-class ProductToIdTransformer implements DataTransformerInterface
+use Shop\ProductBundle\Entity\HashTags;
+
+class NameToTagsTransformer implements DataTransformerInterface
 {
     /**
      * @var ObjectManager
@@ -30,44 +31,45 @@ class ProductToIdTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  Issue|null $issue
+     * @param  issue|null $tags
      * @return string
      */
-    public function transform($product)
+    public function transform($tags)
     {
-        if (null === $product) {
+        if (null === $tags) {
             return "";
         }
 
-        return $product;
+        return $tags;
     }
 
     /**
      * Transforms a string (number) to an object (issue).
      *
-     * @param  string $number
+     * @param string $tags
      *
      * @return Issue|null
      *
      * @throws TransformationFailedException if object (issue) is not found.
      */
-    public function reverseTransform($id)
+    public function reverseTransform($tags)
     {
-        if (!$id) {
+        if (!$tags) {
             return null;
         }
 
-        $product = $this->om->getRepository('ShopProductBundle:Product')
-                ->findOneById($id);
+        $tags = str_replace(" ", "", $tags);
+        $hashTags = $this->om->getRepository('ShopProductBundle:HashTags')
+                ->findByNameTags(explode(",", $tags));
 
-        if (null === $product) {
+        if (null === $hashTags) {
             throw new TransformationFailedException(sprintf(
                 'An issue with number "%s" does not exist!',
-                $id
+                $tags
             ));
         }
 
-        return $product;
+        return $hashTags;
     }
 }
 ?>

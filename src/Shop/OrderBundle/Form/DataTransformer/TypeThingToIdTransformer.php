@@ -5,12 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Shop\AddProductsBundle\Form\DataTransformer;
+namespace Shop\ProductBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
-use Shop\AddProductsBundle\Entity\TypeThing;
+use Shop\ProductBundle\Entity\TypeThing;
 
 class TypeThingToIdTransformer implements DataTransformerInterface
 {
@@ -57,7 +57,7 @@ class TypeThingToIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        $typeThing = $this->om->getRepository('ShopAddProductsBundle:TypeThing')
+        $typeThing = $this->om->getRepository('ShopProductBundle:TypeThing')
                 ->findOneBy(array('id' => $id));
 
         if (null === $typeThing) {

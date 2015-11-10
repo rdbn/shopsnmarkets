@@ -1,0 +1,8 @@
+parameters:
+
+services:
+    shop.name.type.issue_selector:
+        class: Shop\ProductBundle\Form\Type\HashTagsType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: hashTags }

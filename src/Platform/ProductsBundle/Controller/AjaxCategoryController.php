@@ -15,7 +15,7 @@ class AjaxCategoryController extends Controller {
     public function manAction() {
         $arCategory = array();
         
-        $category = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Category')
+        $category = $this->getDoctrine()->getRepository('ShopProductBundle:Category')
                 ->findByFloor('2');
         
         foreach ($category as $key => $value) {
@@ -32,7 +32,7 @@ class AjaxCategoryController extends Controller {
     public function womenAction() {        
         $arCategory = array();
         
-        $category = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Category')
+        $category = $this->getDoctrine()->getRepository('ShopProductBundle:Category')
                 ->findByFloor('1');
         
         foreach ($category as $key => $value) {
@@ -47,14 +47,14 @@ class AjaxCategoryController extends Controller {
     }
     
     public function accessoriesAction() {        
-        $subcategory = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Subcategory')
+        $subcategory = $this->getDoctrine()->getRepository('ShopProductBundle:Subcategory')
                 ->findAllAccessoriesPaltform();
         
         return new JsonResponse($subcategory);
     }
     
     public function bootsAction() {
-        $subcategory = $this->getDoctrine()->getRepository('ShopAddProductsBundle:Subcategory')
+        $subcategory = $this->getDoctrine()->getRepository('ShopProductBundle:Subcategory')
                 ->findAllBootsPaltform();
         
         return new JsonResponse($subcategory);
