@@ -35,7 +35,7 @@ class SearchController extends Controller
     
     public function resultAction()
     {
-        $request = $this->getRequest()->request->get('Search');
+        $request = $this->get("request")->request->get('Search');
         
         $search = $this->get('searchProduct');
         $search->createForm(new SearchType(), new Product());

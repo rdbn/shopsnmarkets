@@ -50,10 +50,6 @@ manager_partners:
     resource: "@ManagerPartnersBundle/Resources/config/routing.yml"
     prefix:   /
 
-platform_products:
-    resource: "@PlatformProductsBundle/Resources/config/routing.yml"
-    prefix:   /
-
 platform_main:
     resource: "@PlatformMainBundle/Resources/config/routing.yml"
     prefix:   /

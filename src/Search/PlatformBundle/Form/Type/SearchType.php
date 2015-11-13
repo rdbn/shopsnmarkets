@@ -17,7 +17,12 @@ Class SearchType extends AbstractType
     {
         $builder->add('hashTags', 'text', array(
             'label' => false,
+            'attr' => ["class" => "form-control"],
             'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
+        ));
+        $builder->add('save', 'submit', array(
+            'label' => "Go!",
+            'attr' => ["class" => "btn btn-default"],
         ));
     }
     

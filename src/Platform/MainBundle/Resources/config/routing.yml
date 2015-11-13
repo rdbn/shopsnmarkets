@@ -10,3 +10,12 @@ _shops:
 _news:
     pattern: /news
     defaults: { _controller: PlatformMainBundle:Page:news }
+
+#route for class ProductsPlatform
+_productsPlatform:
+    pattern:  /products
+    defaults: { _controller: PlatformMainBundle:Products:all }
+
+_productPlatform:
+    pattern:  /product/{id}
+    defaults: { _controller: PlatformMainBundle:Products:product }

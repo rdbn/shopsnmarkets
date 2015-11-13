@@ -1,7 +1,0 @@
-parameters:
-    pagination.class: Platform\ProductsBundle\Services\Pagination
-
-services:
-    pagination:
-        class: %pagination.class%
-        arguments: [ @doctrine.orm.entity_manager ]

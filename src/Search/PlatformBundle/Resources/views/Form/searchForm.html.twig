@@ -1,10 +1,12 @@
-<div class="search">
-    <form id="search" action="#" method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
+<form id="search" action="#" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+        <div class="input-group">
             {{ form_label(form.hashTags) }}
             {{ form_errors(form.hashTags) }}
             {{ form_widget(form.hashTags) }}
-        {{form_rest(form)}}
-        <input class="button" type="submit" value="" />
-    </form>
-</div>
+            <span class="input-group-btn">
+                {{ form_widget(form.save) }}
+            </span>
+        </div>
+    {{form_rest(form)}}
+</form>
