@@ -1,0 +1,18 @@
+{% extends '::main_platform.html.twig' %}
+
+{% block body %}
+    <div class="row top20">
+        <div class="col-lg-2">
+            <img class="img-thumbnail" src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" />
+            {% if is_granted('ROLE_USER') %}
+                {% if user %}
+                    <a class="btn btn-success" href="{{ shop.id }}">Подписаться на новости</a>
+                {% endif %}
+            {% endif %}
+            {#<p>Всего покупателей: <span class="count">{{ shop.users }}</span></p>#}
+        </div>
+        <div class="col-lg-10">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

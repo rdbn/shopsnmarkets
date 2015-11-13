@@ -1,50 +1,56 @@
-{% extends '::shop.html.twig' %}
+{% extends 'ShopProductBundle::layout.html.twig' %}
 
-{% block title %}{{ product.name }}{% endblock %}
+{% block title %}{% endblock %}
 
-{% block body %}
+{% block content %}
     {% if is_granted('ROLE_MANAGER') %}
-        {% if manager %}
-            <ul class="menu">
-                <li><a href='{{ path('_formInsertProduct', { 'shopname' : shopname }) }}'>Добавить товар</a></li>
-                <li><a href='{{ path('_formUpdateProduct', { 'shopname' : shopname, 'id' : id }) }}'>Редактировать товар</a></li>
-            </ul>
-        {% endif %}
+        <div class="btn-group">
+            <a class="btn btn-success btn-sm" href='{{ path('_addProduct', { 'shopname' : shopname }) }}'>
+                Добавить товар
+            </a>
+            <a class="btn btn-success btn-sm" href='{{ path('_updateProduct', { 'shopname' : shopname, 'id' : product.id }) }}'>
+                Редактировать товар
+            </a>
+        </div>
     {% endif %}
-    <div class="chapterProduct">
-        <h3>{{ product.name }}</h3>
+    <div class="media">
+        <div class="media-left">
+            {% for image in images %}
+                <img class="media-object" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
+            {% endfor %}
+        </div>
+        <div class="media-body">
+            <h3 class="alert alert-success top0">{% for tag in tags %}{{ tag.name }} {% endfor %}</h3>
+            <form id="orderItem" action="#" method="post" {{ form_enctype(form) }}>
+                {{ form_errors(form) }}
+                    <p class="price">
+                        {{ product.price }} руб.
+                    </p>
+                    {{ form_widget(form.save) }}
+                {{ form_rest(form) }}
+            </form>
+            <p class='text'>{{ product.text }}</p>
+        </div>
     </div>
-    <div class='mainImg'>
-        <img src="{{ asset(product.path | apply_filter('main_product_image')) }}" alt="Product" />
-    </div>
-    <div class='options'>
-        <ul class="formFields addBasket">
-            <li><h3 class="chapter">Размеры:<h3></li>
-            {{ render(controller('ShopOrderBundle:FormAddBasket:form', { 'shopname': shopname, 'product': product })) }}
-        </ul>
-        <p class='text'>{{ product.text }}</p>
-    </div>
-    <div class="chapterProduct">
-        <h3>Похожие товары:</h3>
-    </div>
-    <div class='subcategoryProducts'>
-        {% for product in products %}
-            <ul class="products">
-                <li>
-                    <a href='{{ path('_productShop', {'shopname' : shopname, 'idFloor' : floor, 'idCategory' : idCategory, 'idSubcategory' : product.subcategory, 'idProduct' : product.id }) }}'>
-                        <span class="imgHover"></span>
+    <h3 class="alert alert-success">Похожие товары:</h3>
+    <div class="row top20">
+        {#{% for product in products %}
+            <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                    <a href='{{ path('_productShop', {'shopname' : shopname, 'id' : product.id }) }}'>
                         <img src="{{ asset(product.path | apply_filter('product_image')) }}" alt="Product" />
                     </a>
-                </li>
-                <li>
-                    <h3>{{ product.name }}</h3>
-                </li>
-                <li>
-                    <p>{{ product.price }} руб.</p>
-                    <a class="like" href="{{ product.id }}">Хочу <span class="countLike">{{ product.likes }}</span></a>
-                </li>
-            </ul>
-        {% endfor %}
+                    <div class="caption">
+                        <h4>
+                            <span class="text-danger">{{ product.price }}</span> <span class="label label-danger">руб.</span>
+                            <button id="product-like" class="btn btn-success btn-xs pull-right">
+                                Хочу <span class="badge">{{ product.likes }}</span>
+                            </button>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}#}
     </div>
 {% endblock %}
 

@@ -48,17 +48,21 @@
     </div>
     <div class="row top20">
         {% for product in products %}
-            <ul class="products">
-                <li>
-                    <a href='{{ path('_productShop', {'shopname' : shopname, 'idProduct' : product.id }) }}'>
-                        {#<img src="{{ asset(product.image.path | apply_filter('product_image')) }}" alt="Product" />#}
+            <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                    <a href='{{ path('_productShop', {'shopname' : shopname, 'id' : product.id }) }}'>
+                        <img src="{{ asset(product.path | apply_filter('product_image')) }}" alt="Product" />
                     </a>
-                </li>
-                <li>
-                    <p>{{ product.price }} руб.</p>
-                    <a class="like" href="{{ product.id }}">Хочу <span class="countLike">{{ product.likes }}</span></a>
-                </li>
-            </ul>
+                    <div class="caption">
+                        <h4>
+                            <span class="text-danger">{{ product.price }}</span> <span class="label label-danger">руб.</span>
+                            <button id="product-like" class="btn btn-success btn-xs pull-right">
+                                Хочу <span class="badge">{{ product.likes }}</span>
+                            </button>
+                        </h4>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

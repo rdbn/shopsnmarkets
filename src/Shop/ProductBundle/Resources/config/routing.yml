@@ -1,14 +1,10 @@
 # for class Products
-_allProductsCategoryShop:
-    pattern:  /{shopname}/allProduct/{idFloor}/{idCategory}
-    defaults: { _controller: ShopProductBundle:Products:allProductsCategory }
-    
-_allProductsSubcategoryShop:
-    pattern:  /{shopname}/allProduct/{idFloor}/{idCategory}/{idSubcategory}
-    defaults: { _controller: ShopProductBundle:Products:allProductsSubcategory }
+_allProductsShop:
+    pattern:  /{shopname}/products/{tags}
+    defaults: { _controller: ShopProductBundle:Products:tagsProduct }
     
 _productShop:
-    pattern:  /{shopname}/allProduct/{idProduct}
+    pattern:  /{shopname}/product/{id}
     defaults: { _controller: ShopProductBundle:Products:product }
 
 # route for controller Ajax

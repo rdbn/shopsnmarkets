@@ -6,29 +6,25 @@
  */
 namespace Shop\OrderBundle\Controller;
 
-use Shop\OrderBundle\Form\Type\OrderItemType;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
 
 class FormAddBasketController extends Controller
 {
-    public function formAction($product)
+    public function formAction($shopname, $product)
     {
-        $cookies = $this->getRequest()->cookies;
+        $cookies = $this->get("request")->cookies;
             
         $id_order = null;
-        if ($cookies->has('idOrder')) {
-            $id_order = $cookies->get('idOrder');
-        }
-        
-        $basket = $this->get('formBasket');
-        $form = $basket->createForm(new OrderItemType($product), $id_order, $product);
+        if ($cookies->has('idOrder')) $id_order = $cookies->get('idOrder');
+
+
 
         return $this->render('ShopOrderBundle:Form:product.html.twig', array(
             'price' => $product['price'],
-            'form' => $form->createView(),
+
+            'shopname' => $shopname,
         ));
     }
     

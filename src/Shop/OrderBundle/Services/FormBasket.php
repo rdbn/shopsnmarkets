@@ -35,23 +35,6 @@ class FormBasket
         return $this->form;
     }
     
-    private function getModel(array $value) {
-        $repository = $this->em->getRepository('ShopOrderBundle:OrderItem');
-        $query = $repository->createQueryBuilder('oi')
-                ->innerJoin('oi.order', 'o')
-                ->where('o.order_number = :order')
-                ->andWhere('oi.product = :product')
-                ->setParameters($value);
-        
-        $model = $query->getQuery()->getResult();
-        
-        if (isset($model['0'])) {
-            return $model['0'];
-        } else {
-            return new OrderItem();
-        }
-    }
-    
     public function add($request, $id_order) {
         if (gettype($request) == 'array') {
             $this->form->bind($request);

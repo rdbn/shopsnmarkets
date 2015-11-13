@@ -30,4 +30,24 @@ class HashTagsRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    /**
+     * Ищем все перечисленные теги у продукта
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function findByTags($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                    SELECT h FROM ShopProductBundle:HashTags h
+                    LEFT JOIN h.product p
+                    WHERE p.id = :id
+                ')->setParameter('id', $id);
+
+
+        return $query->getResult();
+    }
 }

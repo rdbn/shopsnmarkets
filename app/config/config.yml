@@ -140,7 +140,7 @@ avalanche_imagine:
             options: { size: [100, 100], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
         product_image:
             type:    thumbnail
-            options: { size: [185, 285], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            options: { size: [250, 385], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
         main_product_image:
             type:    thumbnail
             options: { size: [300, 350], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }

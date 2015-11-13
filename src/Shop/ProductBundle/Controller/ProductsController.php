@@ -6,64 +6,48 @@
  */
 namespace Shop\ProductBundle\Controller;
 
+use Shop\OrderBundle\Entity\OrderItem;
+use Shop\OrderBundle\Form\Type\OrderItemType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProductsController extends Controller
-{ 
-    public function allAction($shopname)
-    {
-        $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
-                ->findAllProductShop($shopname);
-        
-        return $this->render('ShopProductBundle:All:products.html.twig', array(
-            'shopname' => $shopname,
-            'products' => $products,
-        ));
-    }
-    
-    public function allProductsCategoryAction($shopname, $idFloor, $idCategory)
+{
+    public function tagsProductAction($shopname)
     {
         $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
-                ->findAllProductCategoryShop(array('name' => $shopname, 'category' => $idCategory));
+                ->findByProductShop($shopname);
         
         return $this->render('ShopProductBundle:Products:allProducts.html.twig', array(
             'manager' => isset($manager) ? $manager : false,
-            'floor' => $idFloor,
-            'idCategory' => $idCategory,
             'shopname' => $shopname,
             'products' => $product,
         ));
     }
     
-    public function allProductsSubcategoryAction($shopname, $idFloor, $idCategory, $idSubcategory)
+    public function productAction($shopname, $id)
     {
         $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
-                ->findAllProductSubcategoryShop(array('name' => $shopname, 'subcategory' => $idSubcategory));
+                ->findOneByProductId($id);
+
+        $images = $this->getDoctrine()->getRepository('ShopProductBundle:ProductImage')
+            ->findByProduct($id);
+
+        $tags = $this->getDoctrine()->getRepository('ShopProductBundle:HashTags')
+            ->findByTags($id);
+
+        $shop = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
+            ->findOneByShop($shopname);
+
+        $form = $this->createForm(new OrderItemType(), new OrderItem());
         
-        return $this->render('ShopProductBundle:Products:allProducts.html.twig', array(
-            'manager' => isset($manager) ? $manager : false,
-            'floor' => $idFloor,
-            'idCategory' => $idCategory,
+        return $this->render('ShopProductBundle:Products:product.html.twig', [
+            'form' => $form->createView(),
             'shopname' => $shopname,
-            'products' => $product,
-        ));
-    }
-    
-    public function productAction($shopname, $idProduct)
-    {
-        $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
-                ->findOneByProductShop($idProduct);
-        
-        $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
-                ->findByProductSubcategoryShop(array('name' => $shopname, 'product' => $idProduct));
-        
-        return $this->render('ShopProductBundle:Products:product.html.twig', array(
-            'manager' => isset($manager) ? $manager : false,
-            'shopname' => $shopname,
-            'id' => $idProduct,
             'product' => $product,
-            'products' => $products,
-        ));
+            'images' => $images,
+            'tags' => $tags,
+            'shop' => $shop,
+        ]);
     }
 }
 ?>

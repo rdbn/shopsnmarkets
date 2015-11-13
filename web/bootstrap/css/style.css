@@ -21,6 +21,10 @@ body {
 
 /* Style for pages
 -------------------------------------------------- */
+.top0 {
+    margin-top: 0px;
+}
+
 .top10 {
     margin-top: 10px;
 }
@@ -35,6 +39,10 @@ body {
 
 .bottom20 {
     margin-bottom: 20px;
+}
+
+.font24 {
+    font-size: 24px;
 }
 
 .media-body {

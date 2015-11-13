@@ -63,9 +63,10 @@ class ProductRepository extends EntityRepository
     public function findByProductShop($name) {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT p.id, p.price, count(likeProduct) as likes FROM ShopProductBundle:Product p
+                SELECT p.id, p.price, count(likeProduct) as likes, im.path FROM ShopProductBundle:Product p
                 LEFT JOIN p.like_product likeProduct
                 LEFT JOIN p.shops s
+                LEFT JOIN p.image im
                 WHERE s.unique_name = :name
                 GROUP BY p
             ')
@@ -83,13 +84,12 @@ class ProductRepository extends EntityRepository
      *
      * @return array
      */
-    public function findOneById($id) {
+    public function findOneByProductId($id) {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT p.id, p.price, p.text, count(likes) as likes, s.unique_name as shops
+                SELECT p.id, p.price, p.text, count(like_product) as likes
                 FROM ShopProductBundle:Product p
-                LEFT JOIN p.like_product likes
-                LEFT JOIN p.shops s
+                LEFT JOIN p.like_product like_product
                 WHERE p.id = :id
             ')
             ->setParameter('id', $id)
