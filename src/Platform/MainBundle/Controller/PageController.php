@@ -9,9 +9,10 @@ namespace Platform\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class PageController extends Controller {
-
-    public function indexAction() {        
+class PageController extends Controller
+{
+    public function indexAction()
+    {
         $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
                 ->findAllShops();
 

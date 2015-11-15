@@ -36,7 +36,7 @@ _addCommentsShop:
 # for class AjaxShopLike
 _addLikeShop:
     pattern: /addLikeShop
-    defaults: { _controller: ShopInformationBundle:AjaxShopLike:addLike }
+    defaults: { _controller: ShopInformationBundle:Ajax:addLike }
 
 # route for ShopNews
 _priviewNewsShop:

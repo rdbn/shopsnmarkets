@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -8,11 +8,13 @@ namespace Shop\CreateBundle\Controller;
 
 use Shop\CreateBundle\Entity\Shops;
 use Shop\CreateBundle\Form\Type\ShopsType;
+use Shop\CreateBundle\Form\Type\DescriptionType;
+use Shop\CreateBundle\Form\Type\UploadLogoType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class ShopController extends Controller
+class PutController extends Controller
 {
     public function addAction(Request $request)
     {
@@ -72,6 +74,22 @@ class ShopController extends Controller
             'shopname' => $shopname,
             'isCreate' => false,
             'errors' => true,
+        ));
+    }
+
+    public function previewAction($shopname)
+    {
+        $shop = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
+            ->findOneBy(['unique_name' => $shopname]);
+
+        $formUpload = $this->createForm(new UploadLogoType(), $shop);
+        $formShop = $this->createForm(new DescriptionType($shopname), $shop);
+
+        return $this->render('ShopCreateBundle:Preview:additional.html.twig', array(
+            'formUpload' => $formUpload->createView(),
+            'formShop' => $formShop->createView(),
+            'image' => $shop->getPath(),
+            'shopname' => $shopname,
         ));
     }
 }

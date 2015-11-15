@@ -15,54 +15,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 Class ShopsType extends AbstractType 
 {
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('rating', 'hidden', array(
-            'data' => 0,
-        ));
-        $builder->add('keywords', 'text', array(
-            'label' => false,
-            'attr' => ['class' => "form-control", "placeholder" => "Для поиска *"],
-            'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
-        ));
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add('uniqueName', 'text', array(
             'label' => false,
             'attr' => ['class' => "form-control", "placeholder" => "Адресс магазина *"],
             'data' => isset($options['data']) ? $options['data']->getUniqueName() : NULL,
+        ));
+        $builder->add('keywords', 'text', array(
+            'label' => false,
+            'attr' => ['class' => "form-control", "placeholder" => "Теги магазина *"],
+            'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
         ));
         $builder->add('shopname', 'text', array(
             'label' => false,
             'attr' => ['class' => "form-control", "placeholder" => "Название магазина *"],
             'data' => isset($options['data']) ? $options['data']->getShopname() : NULL,
         ));
-        $builder->add('street', 'text', array(
-            'label' => false,
-            'required' => false,
-            'attr' => ['class' => "form-control", "placeholder" => "Улица"],
-            'data' => isset($options['data']) ? $options['data']->getStreet() : NULL,
-        ));
-        $builder->add('home_index', 'number', array(
-            'label' => false,
-            'required' => false,
-            'attr' => ['class' => "form-control", "placeholder" => "Индекс"],
-            'data' => isset($options['data']) ? $options['data']->getHomeIndex() : NULL,
-        ));
         $builder->add('phone', 'number', array(
             'label' => false,
             'required' => false,
             'attr' => ['class' => "form-control", "placeholder" => "Телефон"],
             'data' => isset($options['data']) ? $options['data']->getPhone() : NULL,
-        ));
-        $builder->add('fax', 'number', array(
-            'label' => false,
-            'required' => false,
-            'attr' => ['class' => "form-control", "placeholder" => "Fax"],
-            'data' => isset($options['data']) ? $options['data']->getFax() : NULL,
-        ));
-        $builder->add('url', 'text', array(
-            'label' => false,
-            'required' => false,
-            'attr' => ['class' => "form-control", "placeholder" => "url"],
-            'data' => isset($options['data']) ? $options['data']->getUrl() : NULL,
         ));
         $builder->add('email', 'email', array(
             'label' => false,

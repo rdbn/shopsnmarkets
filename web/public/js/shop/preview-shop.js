@@ -1,4 +1,4 @@
-$(document).ready(function(){    
+$(document).ready(function(){
     /* Ajax for upload logo */
     $('#logo').change(function() {
         $(this).submit();
@@ -23,6 +23,23 @@ $(document).ready(function(){
             } else {
                 $('#contentIframe').html(error).show();
             }
+        });
+    });
+
+    /**
+     * Добавляем описание для магазина
+     */
+    $("#Description_save").click(function () {
+        var value = {
+            "Description": {
+                "description": $("#Description_description").val(),
+                "_token": $("#Description__token").val()
+            }
+        };
+
+        $(this).add("disabled");
+        $.post("/app_dev.php/manager/createShop/addDescription", value, function () {
+            $("#Description_save").removeClass("disabled");
         });
     });
 });

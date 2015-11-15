@@ -3,8 +3,6 @@ parameters:
     shopComments.class: Shop\InformationBundle\Services\ShopComments
     shopCommentsXML.class: Shop\InformationBundle\Services\ShopCommentsXML
     shopLike.class: Shop\InformationBundle\Services\ShopLike
-    addNews.class: Shop\InformationBundle\Services\AddNews
-    newsXML.class: Shop\InformationBundle\Services\NewsXML
 
 services:
     shopCommentsXML:
@@ -27,11 +25,4 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: userID }
-
-    newsXML:
-        class: %newsXML.class%
-
-    addNews:
-        class: %addNews.class%
-        arguments: [ @form.factory, @newsXML ]
 

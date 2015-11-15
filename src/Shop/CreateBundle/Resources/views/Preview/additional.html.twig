@@ -1,0 +1,35 @@
+{% extends 'ManagerMainBundle:Base:layout.html.twig' %}
+
+{% block title %}Дополнительная информация{% endblock %}
+
+{% block content %}
+    {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
+    <div class="row top20">
+        <div class="col-lg-6">
+            <form method="post" {{ form_enctype(formUpload) }}>
+                {{ form_errors(formUpload) }}
+                <div class="form-group">
+                    {{ form_label(formUpload.file) }}
+                    {{ form_errors(formUpload.file) }}
+                    {{ form_widget(formUpload.file) }}
+                </div>
+                {{ form_rest(formUpload) }}
+            </form>
+            <img class="img-thumbnail" src="{% if(image != '') %}{{ image | apply_filter('logo_shop') }}{% endif %}" />
+        </div>
+        <div class="col-lg-6">
+            {{ form_errors(formShop) }}
+            <div class="form-group">
+                {{ form_label(formShop.description) }}
+                {{ form_errors(formShop.description) }}
+                {{ form_widget(formShop.description) }}
+            </div>
+            {{ form_widget(formShop.save) }}
+            {{ form_rest(formShop) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/shop/preview-shop.js') }}" type="text/javascript"></script>
+{% endblock %}

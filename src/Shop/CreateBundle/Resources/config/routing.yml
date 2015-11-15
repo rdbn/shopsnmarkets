@@ -1,20 +1,15 @@
 # for class Shop
 _createShop:
     pattern:  /manager/createShop
-    defaults: { _controller: ShopCreateBundle:Shop:add }
+    defaults: { _controller: ShopCreateBundle:Put:add }
 
 _updateShop:
     pattern:  /manager/updateShop/{shopname}
-    defaults: { _controller: ShopCreateBundle:Shop:update }
+    defaults: { _controller: ShopCreateBundle:Put:update }
 
-# for class PreviewShop
 _previewShop:
     pattern:  /manager/shop/preview/{shopname}
-    defaults: { _controller: ShopCreateBundle:PreviewShop:preview }
-    
-_savePreview:
-    pattern:  /manager/shop/previewSave
-    defaults: { _controller: ShopCreateBundle:PreviewShop:save }
+    defaults: { _controller: ShopCreateBundle:Put:preview }
     
 # for class Delivery
 _delivery: 
@@ -32,8 +27,12 @@ _saveDelivery:
 # for class AjaxCreateShop
 _uniqueName:
     pattern:  /manager/createShop/uniqueName
-    defaults: { _controller: ShopCreateBundle:AjaxCreateShop:uniqueName }
+    defaults: { _controller: ShopCreateBundle:Ajax:uniqueName }
     
 _addLogo:
     pattern:  /manager/createShop/addLogo/{shopname}
-    defaults: { _controller: ShopCreateBundle:AjaxCreateShop:addLogo }
+    defaults: { _controller: ShopCreateBundle:Ajax:addLogo }
+
+_savePreview:
+    pattern:  /manager/createShop/addDescription
+    defaults: { _controller: ShopCreateBundle:Ajax:description }

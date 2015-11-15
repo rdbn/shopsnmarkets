@@ -14,8 +14,8 @@ class ShopsDeliveryType extends AbstractType {
 
     protected $shops, $id;
 
-    public function __construct($shopsname, $id) {
-        $this->shops = $shopsname;
+    public function __construct($shopname, $id) {
+        $this->shops = $shopname;
         $this->id = $id;
     }
 

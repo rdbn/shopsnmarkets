@@ -30,8 +30,8 @@ class DeliveryIdType extends AbstractType {
     
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $transfomer = new DeliveryToIdTransformer($this->om);
-        $builder->addModelTransformer($transfomer);
+        $transformer = new DeliveryToIdTransformer($this->om);
+        $builder->addModelTransformer($transformer);
     }
     
     public function configureOptions(OptionsResolver $resolver)

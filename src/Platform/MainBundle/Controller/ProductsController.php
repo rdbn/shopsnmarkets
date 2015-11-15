@@ -29,7 +29,7 @@ class ProductsController extends Controller
                 ->findOneByProductPlatform($id);
 
         $images = $this->getDoctrine()->getRepository('ShopProductBundle:ProductImage')
-            ->findOneByProduct($id);
+            ->findByProduct($id);
 
         $tags = $this->getDoctrine()->getRepository('ShopProductBundle:HashTags')
             ->findByTags($id);

@@ -20,24 +20,24 @@
                 {{ form_rest(form) }}
             </form>
             <p class='text'>{{ product.text }}</p>
-        </div>
-        <div class="shop">
-            <div class="col-lg-3">
-                <div class="media">
-                    <div class="media-left col-lg-5">
-                        <a href="{{ path('_mainShop', { 'shopname' : product.unique_name }) }}">
-                            <img class="media-object img-responsive" src="{% if (product.logo != '') %}{{ product.logo | apply_filter('logo_shop') }}{% endif %}" />
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            <a class="text-success" href="{{ path('_mainShop', { 'shopname' : product.unique_name }) }}">{{ product.shopname }}</a>
-                        </h4>
-                        <p class="text-muted small">Подписчиков: {{ product.users }}</p>
-                        <p class="text-muted small">Рейтинг: {{ product.rating }}</p>
-                        <button class="btn btn-success btn-xs" type="button">
-                            Понравилось <span class="badge">{{ product.likes }}</span>
-                        </button>
+            <div class="shop">
+                <div class="col-lg-3">
+                    <div class="media">
+                        <div class="media-left col-lg-5">
+                            <a href="{{ path('_mainShop', { 'shopname' : product.unique_name }) }}">
+                                <img class="media-object img-responsive" src="{% if (product.logo != '') %}{{ product.logo | apply_filter('logo_shop') }}{% endif %}" />
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <a class="text-success" href="{{ path('_mainShop', { 'shopname' : product.unique_name }) }}">{{ product.shopname }}</a>
+                            </h4>
+                            <p class="text-muted small">Подписчиков: {{ product.users }}</p>
+                            <p class="text-muted small">Рейтинг: {{ product.rating }}</p>
+                            <button class="btn btn-success btn-xs" type="button">
+                                Понравилось <span class="badge">{{ product.likes }}</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

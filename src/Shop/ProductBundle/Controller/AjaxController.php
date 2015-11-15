@@ -33,7 +33,7 @@ class AjaxController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     description="Список тегов",
+     *     description="Лайк товара",
      *     statusCodes={
      *         200="Нормальный ответ"
      *     }

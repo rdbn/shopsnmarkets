@@ -10,18 +10,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PreviewShopType extends AbstractType {
+class DescriptionType extends AbstractType {
     
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('shopname', 'hidden', array(
-            'data' => isset($options['data']) ? $options['data']->getShopname() : NULL,
-        ));
-        $builder->add('description', 'textarea', array(
+        $builder->add('description', 'textarea', [
             'label' => false,
             'attr' => ['class' => 'form-control', 'rows' => '10', 'placeholder' => 'кратко о магазине'],
             'data' => isset($options['data']) ? $options['data']->getDescription() : NULL,
-        ));
+        ]);
         $builder->add("save", "submit", [
             'label' => 'Сохранить',
             'attr' => ['class' => 'btn btn-success btn-sm'],
@@ -37,7 +34,7 @@ class PreviewShopType extends AbstractType {
     
     public function getName() 
     {
-        return 'PreviewShop';
+        return 'Description';
     }
 }
 ?>

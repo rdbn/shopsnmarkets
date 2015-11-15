@@ -34,7 +34,7 @@ class ShopCommentsController extends Controller
     
     public function addCommentsAction() 
     {
-        $request = $this->getRequest()->request->get('Comments');
+        $request = $this->get("request")->request->get('Comments');
         
         $addComments = $this->get('shopComments');
         $addComments->createForm(new CommentsType($request['shopname'], $request['users']), new Comments());
