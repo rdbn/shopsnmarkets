@@ -135,7 +135,7 @@ Class Shops
     }
     
     /**
-     * toString for class Contry
+     * toString for class Country
      */
     public function __toString() {
         return $this->shopname;
@@ -195,7 +195,7 @@ Class Shops
         if (null !== $this->file) {
             $filename = sha1(uniqid(mt_rand(), true));
             $this->path = $filename.'.'.$this->file->guessExtension();
-            
+
             return $this->getUploadDir().'/'.$this->path;
         }
     }
@@ -209,7 +209,7 @@ Class Shops
             $this->path
         );
 
-        $this->path = $this->getFile()->getClientOriginalName();
+        $this->path = $this->getUploadDir()."/".$this->path;
         $this->file = null;
     }
     

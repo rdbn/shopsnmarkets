@@ -15,7 +15,7 @@
                 </div>
                 {{ form_rest(formUpload) }}
             </form>
-            <img class="img-thumbnail" src="{% if(image != '') %}{{ image | apply_filter('logo_shop') }}{% endif %}" />
+            <img id="preview-img" class="img-thumbnail" src="{% if(image != '') %}{{ image | apply_filter('logo_shop') }}{% endif %}" />
         </div>
         <div class="col-lg-6">
             {{ form_errors(formShop) }}

@@ -20,6 +20,7 @@
 /web/favicon.ico
 /web/media
 /web/public/images/product/
+/web/public/images/logo/
 /web/apple-touch-icon.png
 composer.lock
 *~

@@ -27,12 +27,18 @@ _saveDelivery:
 # for class AjaxCreateShop
 _uniqueName:
     pattern:  /manager/createShop/uniqueName
-    defaults: { _controller: ShopCreateBundle:Ajax:uniqueName }
-    
+    defaults: { _controller: ShopCreateBundle:Ajax:uniqueName, _format: json }
+    requirements:
+        _method: GET
+
 _addLogo:
     pattern:  /manager/createShop/addLogo/{shopname}
-    defaults: { _controller: ShopCreateBundle:Ajax:addLogo }
+    defaults: { _controller: ShopCreateBundle:Ajax:addLogo, _format: json }
+    requirements:
+        _method: POST
 
-_savePreview:
-    pattern:  /manager/createShop/addDescription
-    defaults: { _controller: ShopCreateBundle:Ajax:description }
+_saveDescription:
+    pattern:  /manager/createShop/description/{shopname}
+    defaults: { _controller: ShopCreateBundle:Ajax:description, _format: json }
+    requirements:
+        _method: POST

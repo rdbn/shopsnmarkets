@@ -1,27 +1,30 @@
 $(document).ready(function(){
-    /* Ajax for upload logo */
-    $('#logo').change(function() {
-        $(this).submit();
-        
-        $('#contentIframe').animate({'opacity' : '0'}, 200, function() {
-            $(this).css('display', 'none');
-            $('#load').css({'display' : 'block', 'opacity' : '0' });
-            $('#load').animate({'opacity' : '1'}, 200);
-        });
-        
-        $('#iframe').load(function(){
-            var error = $(this).contents().find('#errors').html();
-            if (error === undefined) {
-                var path = $(this).contents().find('body').html();                
-                $('#contentIframe').html('<img width="200" src="/'+path+'" />');
-                
-                $('#load').animate({'opacity' : '0'}, 200, function() {
-                    $(this).css('display', 'none');
-                    $('#contentIframe').css({'display' : 'block', 'opacity' : '0' });
-                    $('#contentIframe').animate({'opacity' : '1'}, 200);
-                });
-            } else {
-                $('#contentIframe').html(error).show();
+    var path = window.location.pathname.split("/");
+    var shopname = path[path.length-1];
+
+    /**
+     *  Ajax for upload logo
+     */
+    $('#UploadLogoShop_file').change(function() {
+        var formData = new FormData(),
+            file = $(this).prop("files")[0],
+            token = $("#UploadLogoShop__token").val();
+
+        formData.append("UploadLogoShop[file]", file);
+        formData.append("UploadLogoShop[_token]", token);
+
+        $.ajax({
+            url: "/app_dev.php/manager/createShop/addLogo/"+shopname,
+            type: "post",
+            dataType: "text",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            enctype: 'multipart/form-data',
+            success: function (data) {
+                var path = JSON.parse(data).path;
+                $("#preview-img").attr("src", path);
             }
         });
     });
@@ -37,8 +40,8 @@ $(document).ready(function(){
             }
         };
 
-        $(this).add("disabled");
-        $.post("/app_dev.php/manager/createShop/addDescription", value, function () {
+        $(this).addClass("disabled");
+        $.post("/app_dev.php/manager/createShop/description/"+shopname, value, function () {
             $("#Description_save").removeClass("disabled");
         });
     });

@@ -94,9 +94,17 @@ class AjaxController extends FOSRestController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $shop->preUpload();
+            $shop->upload();
+
             $em->flush();
 
-            return true;
+            $avalancheService = $this->get('imagine.cache.path.resolver');
+            $cachedImage = $avalancheService->getBrowserPath($shop->getPath(), 'logo_shop');
+
+            return [
+                "path" => $cachedImage
+            ];
         }
 
         return $form->getErrors();
