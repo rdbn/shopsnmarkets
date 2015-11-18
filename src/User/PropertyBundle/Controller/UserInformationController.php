@@ -6,10 +6,10 @@
  */
 namespace User\PropertyBundle\Controller;
 
+use User\PropertyBundle\Form\Type\PasswordType;
 use User\PropertyBundle\Form\Type\UserInformationType;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserInformationController extends Controller 
@@ -23,30 +23,34 @@ class UserInformationController extends Controller
         ));
     }
     
-    public function formInformationAction() 
+    public function formInformationAction(Request $request)
     {        
         $user = $this->getUser();
-        $form = $this->createForm(new UserInformationType(), $user);
+        $form = $this->createForm(new UserInformationType(), $user, [
+            "action" => $this->generateUrl("_formInformation")
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute("_property");
+        }
         
-        return $this->render('UserPropertyBundle:Form:userInformationForm.html.twig',array(
+        return $this->render('UserPropertyBundle:Form:userInformation.html.twig',array(
             'form' => $form->createView(),
         ));
     }
-    
-    public function addInformationAction() 
+
+    public function formPasswordAction()
     {
-        $request = $this->getRequest()->request->get('UserInformation');
-        
         $user = $this->getUser();
-        
-        $information = $this->get('formUserInformation');
-        $information->createForm(new UserInformationType(), $user);
-        
-        if ($information->add($request)) {
-            return new Response('0');
-        }
-        
-        return new JsonResponse($information->getError());
+        $form = $this->createForm(new PasswordType, $user);
+
+        return $this->render('UserPropertyBundle:Form:password.html.twig',array(
+            'form' => $form->createView(),
+        ));
     }
 }
 ?>

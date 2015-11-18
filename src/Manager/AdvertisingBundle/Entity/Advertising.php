@@ -55,14 +55,14 @@ class Advertising
     /**
      * @ORM\Column(type="datetime", name="date_start")
      *
-     * @var DateTime $date_start
+     * @var \DateTime $date_start
      */
     protected $date_start;
     
     /**
      * @ORM\Column(type="datetime", name="date_end")
      *
-     * @var DateTime $date_end
+     * @var \DateTime $date_end
      */
     protected $date_end;
     

@@ -18,41 +18,29 @@ class UserInformationType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
         $builder->add('realname', 'text', array(
-            'label' => 'Фамилия/Имя *:',
+            'label' => false,
+            "attr" => ["class" => "form-control", "placeholder" => "Фамилия/Имя*"],
             'data' => isset($options['data']) ? $options['data']->getRealname() : NULL,
         ));
         $builder->add('email', 'email', array(
-            'label' => 'Email *:',
+            'label' => false,
+            "attr" => ["class" => "form-control", "placeholder" => "Email*"],
             'data' => isset($options['data']) ? $options['data']->getEmail() : NULL,
         ));
-        $builder->add('street', 'text', array(
-            'label' => 'Улица:',
-            'required' => false,
-            'data' => isset($options['data']) ? $options['data']->getStreet() : NULL,
-        ));
-        $builder->add('home_index', 'number', array(
-            'label' => 'Индекс:',
-            'required' => false,
-            'data' => isset($options['data']) ? $options['data']->getHomeIndex() : NULL,
-        ));
         $builder->add('phone', 'number', array(
-            'label' => 'Телефон:',
+            'label' => false,
+            "attr" => ["class" => "form-control", "placeholder" => "Телефон"],
             'required' => false,
             'data' => isset($options['data']) ? $options['data']->getPhone() : NULL,
         ));
         $builder->add('skype', 'text', array(
-            'label' => 'Skype:',
+            'label' => false,
+            "attr" => ["class" => "form-control", "placeholder" => "Skype"],
             'required' => false,
             'data' => isset($options['data']) ? $options['data']->getSkype() : NULL,
         ));
-        $builder->add('captcha', 'captcha', array(
-            'quality' => '30',
-            'auto_initialize' => false,
-            'mapped' => false,
-            'label' => false,
-        ));
         $builder->add('save', 'submit', array(
-            'attr' => array('class' => 'button'),
+            'attr' => array('class' => 'btn btn-success btn-sm center-block'),
             'label' => 'Сохранить'
         ));
         

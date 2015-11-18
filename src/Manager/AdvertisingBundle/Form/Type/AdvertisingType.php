@@ -30,11 +30,11 @@ class AdvertisingType extends AbstractType
         $id = $this->id;
         
         $builder->add('adFormat', 'choice', array(
-            'label'     => false,
-            'choices' => array(
+            'label' => false,
+            'choices' => [
                 'platform' => 'Реклама на платформе',
                 'shop' => 'Реклама в магазине',
-                ),
+            ],
             'multiple' => false,
             'expanded' => true,
             'mapped' => false,

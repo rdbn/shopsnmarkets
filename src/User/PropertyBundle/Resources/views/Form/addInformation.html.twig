@@ -1,10 +1,8 @@
-{% extends '::userEditor.html.twig' %}
+{% extends 'ManagerMainBundle:Base:layout.html.twig' %}
 
 {% block title %}Дополнительные настройки{% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/js/user/uploadAvatar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/js/user/preview.js') }}" type="text/javascript"></script>
 {% endblock %}

@@ -7,7 +7,7 @@
     {% for value in delivery %}
         <div class="media">
             <div class="media-left media-middle">
-                <a href="{{ shopname }}/{{ value.id }}">
+                <a href="{{ value.id }}">
                     <img src="{{ asset(value.image) }}" alt="{{ value.name }}" />
                 </a>
             </div>

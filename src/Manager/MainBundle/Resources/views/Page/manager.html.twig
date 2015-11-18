@@ -9,7 +9,6 @@
         </div>
         <div class="media-body text-success">
             <h4 class="media-heading">{{ user.getRealname }}</h4>
-            {% if(preview) %}<p>{% if(preview.text_preview != '') %}{{ preview.text_preview }}{% endif %}</p>{% endif %}
             {% if user.getCity %}<p><span class="text-muted">Страна:</span> {{ user.getCity.getCountry.getName }}</p>{% endif %}
             {% if user.getCity %}<p><span class="text-muted">Город:</span> {{ user.getCity.getCountry.getName }}</p>{% endif %}
             {% if user.street %}<p><span class="text-muted">Улица:</span> {{ user.getCity.getCountry.getName }}</p>{% endif %}
@@ -23,7 +22,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h4>Информация о продавце</h4>
-            {% if(preview) %}<p class="text">{% if(preview.text_main != '') %}{{ preview.text_main }}{% endif %}</p>{% endif %}
+            {#{% if(preview) %}<p class="text">{% if(preview.text_main != '') %}{{ preview.text_main }}{% endif %}</p>{% endif %}#}
         </div>
     </div>
     <div class="row top20 bottom20">

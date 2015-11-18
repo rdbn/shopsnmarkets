@@ -1,16 +1,6 @@
 parameters:
-    formDeliveryShop.class: Shop\CreateBundle\Services\FormDeliveryShop
-    formUploadLogoShop.class: Shop\CreateBundle\Services\FormUploadLogoShop
 
 services:
-    formDeliveryShop:
-        class: %formDeliveryShop.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
-        
-    formUploadLogoShop:
-        class: %formUploadLogoShop.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
-        
     delivery.id.type.issue_selector:
         class: Shop\CreateBundle\Form\Type\DeliveryIdType
         arguments: ["@doctrine.orm.entity_manager"]

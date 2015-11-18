@@ -1,14 +1,8 @@
-{% extends '::userEditor.html.twig' %}
+{% extends 'ManagerMainBundle:Base:layout.html.twig' %}
 
 {% block title %}Реклама{% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/user/Advertising.js') }}" type="text/javascript"></script>
-{% endblock %}
-
-{% block body %}
+{% block content %}
     {{ include('ManagerAdvertisingBundle:Advertising:advertisingMenu.html.twig') }}
     <ul class="menuAdvertising">
         <li><a class="paltform" href="#">Реклама на платформе</a></li>
@@ -37,4 +31,8 @@
             {% endfor %}
         {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/user/Advertising.js') }}" type="text/javascript"></script>
 {% endblock %}

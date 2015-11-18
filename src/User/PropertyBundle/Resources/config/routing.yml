@@ -4,12 +4,12 @@ _property:
     defaults: { _controller: UserPropertyBundle:UserInformation:property }
         
 _formInformation:
-    pattern:  /property/formInformation
+    pattern:  /property/information
     defaults: { _controller: UserPropertyBundle:UserInformation:formInformation }
 
-_addInformation:
-    pattern:  /property/addInformation
-    defaults: { _controller: UserPropertyBundle:UserInformation:addInformation }
+_formPassword:
+    pattern:  /property/password
+    defaults: { _controller: UserPropertyBundle:UserInformation:formPassword }
     
 # routes for class PreviewUserController
 _formPreviewInformation:
@@ -23,15 +23,6 @@ _addPreviewInformation:
 _addPreviewUpload:
     pattern:  /property/uploadAvatar
     defaults: { _controller: UserPropertyBundle:PreviewUser:upload }
-    
-# rotes for class ChangePasswordController
-_formPassword:
-    pattern:  /property/formPassword
-    defaults: { _controller: UserPropertyBundle:ChangePassword:formPassword }
-    
-_changePassword:
-    pattern:  /property/changePassword
-    defaults: { _controller: UserPropertyBundle:ChangePassword:changePassword }
     
 # route for class AjaxCity
 _city:

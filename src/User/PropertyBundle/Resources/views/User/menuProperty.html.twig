@@ -1,8 +1,8 @@
-<ul class='menu'>
-    <li><a href='{{ path('_property') }}'>Настройки</a></li>
+<div class="btn-group">
+    <a class="btn btn-success btn-sm" href='{{ path('_property') }}'>Настройки</a>
     {% if is_granted('ROLE_MANAGER') %}
-        <li><a href='{{ path('_formPassword') }}'>Изменить пароль</a></li>
+        <a class="btn btn-success btn-sm" href='{{ path('_formPassword') }}'>Изменить пароль</a>
     {% endif %}
-    <li><a href='{{ path('_formInformation') }}'>О себе</a></li>
-    <li><a href='{{ path('_formPreviewInformation') }}'>Дополнительные настройки</a></li>
-</ul>
+    <a class="btn btn-success btn-sm" href='{{ path('_formInformation') }}'>О себе</a>
+    <a class="btn btn-success btn-sm" href='{{ path('_formPreviewInformation') }}'>Дополнительные настройки</a>
+</div>

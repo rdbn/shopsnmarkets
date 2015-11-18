@@ -82,12 +82,12 @@ class PutController extends Controller
         $shop = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
             ->findOneBy(['unique_name' => $shopname]);
 
-        $formUpload = $this->createForm(new UploadLogoType(), $shop);
-        $formShop = $this->createForm(new DescriptionType($shopname), $shop);
+        $upload = $this->createForm(new UploadLogoType(), $shop);
+        $description = $this->createForm(new DescriptionType($shopname), $shop);
 
         return $this->render('ShopCreateBundle:Preview:additional.html.twig', array(
-            'formUpload' => $formUpload->createView(),
-            'formShop' => $formShop->createView(),
+            'upload' => $upload->createView(),
+            'description' => $description->createView(),
             'image' => $shop->getPath(),
             'shopname' => $shopname,
         ));

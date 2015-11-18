@@ -10,30 +10,30 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PasswordType extends AbstractType {
-
+class PasswordType extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
         $builder->add('old_password', 'password', array(
-            'label' => 'старый пароль',
+            'label' => false,
+            "attr" => ["class" => "form-control", "placeholder" => "Старый пароль*"],
             'mapped' => false,
         ));
         $builder->add('password', 'repeated', array(
             'type' => 'password',
             'invalid_message' => 'Ошибка введите парольеще раз!',
-            'options' => array('attr' => array('class' => 'input')),
             'required' => true,
-            'first_options'  => array('label' => 'Пароль:'),
-            'second_options' => array('label' => 'Повторить:'),
-        ));
-        $builder->add('captcha', 'captcha', array(
-            'quality' => '30',
-            'auto_initialize' => false,
-            'mapped' => false,
-            'label' => false,
+            'first_options'  => [
+                'label' => false,
+                "attr" => ["class" => "form-control", "placeholder" => "Пароль*"],
+            ],
+            'second_options' => [
+                'label' => false,
+                "attr" => ["class" => "form-control", "placeholder" => "Повторить*"],
+            ],
         ));
         $builder->add('save', 'submit', array(
-            'attr' => array('class' => 'button'),
+            'attr' => ['class' => 'btn btn-success btn-sm center-block'],
             'label' => 'Сохранить'
         ));
     }

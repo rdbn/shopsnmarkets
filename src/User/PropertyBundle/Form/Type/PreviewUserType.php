@@ -14,11 +14,6 @@ class PreviewUserType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('text_preview', 'text', array(
-            'required' => false,
-            'label' => 'кратко о себе:',
-            'data' => isset($options['data']) ? $options['data']->getTextPreview() : '',
-        ));
         $builder->add('text_main', 'textarea', array(
             'required' => false,
             'label' => 'Подробно о себе:',

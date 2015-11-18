@@ -6,26 +6,26 @@
     {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
     <div class="row top20">
         <div class="col-lg-6">
-            <form method="post" {{ form_enctype(formUpload) }}>
-                {{ form_errors(formUpload) }}
+            <form method="post" {{ form_enctype(upload) }}>
+                {{ form_errors(upload) }}
                 <div class="form-group">
-                    {{ form_label(formUpload.file) }}
-                    {{ form_errors(formUpload.file) }}
-                    {{ form_widget(formUpload.file) }}
+                    {{ form_label(upload.file) }}
+                    {{ form_errors(upload.file) }}
+                    {{ form_widget(upload.file) }}
                 </div>
-                {{ form_rest(formUpload) }}
+                {{ form_rest(upload) }}
             </form>
             <img id="preview-img" class="img-thumbnail" src="{% if(image != '') %}{{ image | apply_filter('logo_shop') }}{% endif %}" />
         </div>
         <div class="col-lg-6">
-            {{ form_errors(formShop) }}
+            {{ form_errors(description) }}
             <div class="form-group">
-                {{ form_label(formShop.description) }}
-                {{ form_errors(formShop.description) }}
-                {{ form_widget(formShop.description) }}
+                {{ form_label(description.description) }}
+                {{ form_errors(description.description) }}
+                {{ form_widget(description.description) }}
             </div>
-            {{ form_widget(formShop.save) }}
-            {{ form_rest(formShop) }}
+            {{ form_widget(description.save) }}
+            {{ form_rest(description) }}
         </div>
     </div>
 {% endblock %}

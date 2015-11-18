@@ -10,8 +10,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ShopsDeliveryType extends AbstractType {
-
+class DeliveryType extends AbstractType
+{
     protected $shops, $id;
 
     public function __construct($shopname, $id) {
