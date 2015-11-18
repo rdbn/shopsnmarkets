@@ -20,7 +20,7 @@ class PageController extends Controller
             ->findByAdvertising(array('date' => date("Y-m-d H:i:s"), 'id' => '1'));
 
         if (null == $advertising) {
-            $advertising['0']['path'] = '/public/images/shop/slider.png';
+            $advertising['0']['path'] = '/public/images/slider.png';
         }
         
         return $this->render('PlatformMainBundle:Page:index.html.twig', array(

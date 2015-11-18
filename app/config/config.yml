@@ -126,12 +126,9 @@ avalanche_imagine:
         avatar:
             type:    thumbnail
             options: { size: [200, 250], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
-        mini_avatar:
-            type:    thumbnail
-            options: { size: [60, 60], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
         advertisingSliderPlatform:
             type:    thumbnail
-            options: { size: [790, 250], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            options: { size: [1140, 250], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
         advertisingSliderShop:
             type:    thumbnail
             options: { size: [770, 250], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
