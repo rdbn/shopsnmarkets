@@ -64,6 +64,10 @@ body {
 
 .preview-img {
     margin-right: 20px;
-    min-width: 150px;
-    min-height: 150px;
+    width: 150px;
+    height: 150px;
+}
+
+.font-center {
+    font-size: 102px;
 }

@@ -14,7 +14,7 @@ $(document).ready(function(){
         formData.append("UploadLogoShop[_token]", token);
 
         $.ajax({
-            url: "/app_dev.php/manager/createShop/addLogo/"+shopname,
+            url: "/manager/createShop/addLogo/"+shopname,
             type: "post",
             dataType: "text",
             cache: false,
@@ -41,7 +41,7 @@ $(document).ready(function(){
         };
 
         $(this).addClass("disabled");
-        $.post("/app_dev.php/manager/createShop/description/"+shopname, value, function () {
+        $.post("/manager/createShop/description/"+shopname, value, function () {
             $("#Description_save").removeClass("disabled");
         });
     });

@@ -25,6 +25,13 @@ Class Shops
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopManager")
+     * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
+     * )
+     */
+    protected $manager;
     
     /**
      * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\City")
@@ -99,13 +106,6 @@ Class Shops
     protected $keywords;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopManager")
-     * @ORM\JoinTable(name="manager_shops")
-     * )
-     */
-    protected $manager;
-    
-    /**
      * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopUsers")
      * @ORM\JoinTable(name="users_shops")
      */
@@ -122,6 +122,11 @@ Class Shops
     protected $shops_delivery;
 
     /**
+     * @ORM\OneToMany(targetEntity="Manager\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
+     */
+    protected $advertising_shop;
+
+    /**
      * Construct for class Shops
      */
     public function __construct() {
@@ -131,11 +136,13 @@ Class Shops
         $this->users = new ArrayCollection();
         $this->partners = new ArrayCollection();
         $this->shops_delivery = new ArrayCollection();
+        $this->advertising_shop = new ArrayCollection();
+
         $this->createdAt = new \DateTime();
     }
     
     /**
-     * toString for class Contry
+     * toString for class Country
      */
     public function __toString() {
         return $this->shopname;
@@ -195,7 +202,7 @@ Class Shops
         if (null !== $this->file) {
             $filename = sha1(uniqid(mt_rand(), true));
             $this->path = $filename.'.'.$this->file->guessExtension();
-            
+
             return $this->getUploadDir().'/'.$this->path;
         }
     }
@@ -209,7 +216,7 @@ Class Shops
             $this->path
         );
 
-        $this->path = $this->getFile()->getClientOriginalName();
+        $this->path = $this->getUploadDir()."/".$this->path;
         $this->file = null;
     }
     

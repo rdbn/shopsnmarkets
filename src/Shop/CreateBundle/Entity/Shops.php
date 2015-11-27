@@ -25,6 +25,13 @@ Class Shops
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopManager")
+     * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
+     * )
+     */
+    protected $manager;
     
     /**
      * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\City")
@@ -99,13 +106,6 @@ Class Shops
     protected $keywords;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopManager")
-     * @ORM\JoinTable(name="manager_shops")
-     * )
-     */
-    protected $manager;
-    
-    /**
      * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopUsers")
      * @ORM\JoinTable(name="users_shops")
      */
@@ -122,6 +122,11 @@ Class Shops
     protected $shops_delivery;
 
     /**
+     * @ORM\OneToMany(targetEntity="Manager\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
+     */
+    protected $advertising_shop;
+
+    /**
      * Construct for class Shops
      */
     public function __construct() {
@@ -131,6 +136,8 @@ Class Shops
         $this->users = new ArrayCollection();
         $this->partners = new ArrayCollection();
         $this->shops_delivery = new ArrayCollection();
+        $this->advertising_shop = new ArrayCollection();
+
         $this->createdAt = new \DateTime();
     }
     
@@ -423,6 +430,30 @@ Class Shops
     }
 
     /**
+     * Set manager
+     *
+     * @param \User\RegistrationBundle\Entity\Users $manager
+     *
+     * @return Shops
+     */
+    public function setManager(\User\RegistrationBundle\Entity\Users $manager = null)
+    {
+        $this->manager = $manager;
+
+        return $this;
+    }
+
+    /**
+     * Get manager
+     *
+     * @return \User\RegistrationBundle\Entity\Users
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
      * Set city
      *
      * @param \User\RegistrationBundle\Entity\City $city
@@ -512,40 +543,6 @@ Class Shops
     public function getKeywords()
     {
         return $this->keywords;
-    }
-
-    /**
-     * Add manager
-     *
-     * @param \User\RegistrationBundle\Entity\Users $manager
-     *
-     * @return Shops
-     */
-    public function addManager(\User\RegistrationBundle\Entity\Users $manager)
-    {
-        $this->manager[] = $manager;
-
-        return $this;
-    }
-
-    /**
-     * Remove manager
-     *
-     * @param \User\RegistrationBundle\Entity\Users $manager
-     */
-    public function removeManager(\User\RegistrationBundle\Entity\Users $manager)
-    {
-        $this->manager->removeElement($manager);
-    }
-
-    /**
-     * Get manager
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getManager()
-    {
-        return $this->manager;
     }
 
     /**
@@ -648,5 +645,39 @@ Class Shops
     public function getShopsDelivery()
     {
         return $this->shops_delivery;
+    }
+
+    /**
+     * Add advertisingShop
+     *
+     * @param \Manager\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop
+     *
+     * @return Shops
+     */
+    public function addAdvertisingShop(\Manager\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop)
+    {
+        $this->advertising_shop[] = $advertisingShop;
+
+        return $this;
+    }
+
+    /**
+     * Remove advertisingShop
+     *
+     * @param \Manager\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop
+     */
+    public function removeAdvertisingShop(\Manager\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop)
+    {
+        $this->advertising_shop->removeElement($advertisingShop);
+    }
+
+    /**
+     * Get advertisingShop
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdvertisingShop()
+    {
+        return $this->advertising_shop;
     }
 }

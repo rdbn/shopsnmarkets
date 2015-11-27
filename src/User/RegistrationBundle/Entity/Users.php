@@ -150,7 +150,6 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     
     /**
      * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Shops", mappedBy="like_shop")
-     *
      */
     protected $shop;
     
@@ -167,16 +166,15 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     protected $order;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Shops", mappedBy="manager")
-     *
-     */
-    protected $shopManager;
-    
-    /**
      * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Shops", mappedBy="users")
      *
      */
     protected $shopUsers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\CreateBundle\Entity\Shops", mappedBy="manager")
+     */
+    protected $shopManager;
     
     /**
      * @ORM\OneToMany(targetEntity="User\FriendsBundle\Entity\Friends", mappedBy="users")
@@ -212,7 +210,7 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * Get file.
      *
-     * @return Product
+     * @return UploadedFile
      */
     public function getFile()
     {
@@ -233,52 +231,41 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
             : $this->getUploadDir().'/'.$this->path;
     }
 
-    protected function getUploadRootDir($id)
+    protected function getUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir($id);
+        $dir = __DIR__.'/../../../../web/'.$this->getUploadDir();
+
+        if (!file_exists($dir)) {
+            mkdir($dir, 0775);
+        }
+
+        return $dir;
     }
 
-    protected function getUploadDir($id)
+    protected function getUploadDir()
     {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.        
-        return '/public/xml/Users/'.$id.'/avatar';
+        return '/public/images/avatar';
     }
     
-    public function preUpload($id)
+    public function preUpload()
     {   
         if (null !== $this->file) {
-            // do whatever you want to generate a unique name
             $filename = sha1(uniqid(mt_rand(), true));
             $this->path = $filename.'.'.$this->file->guessExtension();
             
-            return $this->getUploadDir($id).'/'.$this->path;
+            return $this->getUploadDir().'/'.$this->path;
         }
     }
     
-    public function upload($id)
+    public function upload()
     {
-        // the file property can be empty if the field is not required
-        if (null === $this->file) {
-            return;
-        }
+        if (null === $this->file) return;
 
-        // use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-
-        // move takes the target directory and then the
-        // target filename to move to
         $this->getFile()->move(
-            $this->getUploadRootDir($id),
+            $this->getUploadRootDir(),
             $this->path
         );
 
-        // set the path property to the filename where you've saved the file
-        $this->path = $this->getFile()->getClientOriginalName();
-
-        // clean up the file property as you won't need it anymore
         $this->file = null;
     }
     

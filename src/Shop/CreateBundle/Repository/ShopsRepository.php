@@ -22,7 +22,7 @@ class ShopsRepository extends EntityRepository
                 ')->getResult();
     }
     
-    public function findAllShopsManager($id) {
+    public function findByShopsManager($id) {
         return $this->getEntityManager()
                 ->createQuery('
                     SELECT s.id, s.shopname, s.unique_name, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes

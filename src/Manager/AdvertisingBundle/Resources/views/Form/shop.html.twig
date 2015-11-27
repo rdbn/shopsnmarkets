@@ -1,0 +1,70 @@
+{% extends 'ManagerMainBundle:Base:layout.html.twig' %}
+
+{% block title %}Создать рекламу{% endblock %}
+
+{% block content %}
+    {{ include('ManagerAdvertisingBundle:Advertising:advertisingMenu.html.twig') }}
+    <div class="row">
+        <div class="col-md-12">
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <h4 class="text-success top20">Выберите место</h4>
+            <div class="row top20">
+                <div id="format" class="col-md-12 text-center" data-toggle="buttons">
+                    <label class="btn btn-success btn-sm">
+                        {{ form_errors(form.format.1) }}
+                        {{ form_widget(form.format.1) }}
+                        Реклама на слайдере
+                    </label>
+                    <label class="btn btn-success btn-sm">
+                        {{ form_errors(form.format.2) }}
+                        {{ form_widget(form.format.2) }}
+                        Реклама с боку
+                    </label>
+                </div>
+            </div>
+            <h4 class="text-success top20">Выберите магазин</h4>
+            <div class="row top20">
+                {{ form_errors(form.shops) }}
+                {{ form_widget(form.shops) }}
+                {% for shop in shops %}
+                    <label class="col-md-3" for="AdvertisingShop_shops_{{ shop.id }}">
+                        <span class="thumbnail">
+                            <img src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" />
+                            <span class="caption small">
+                                <span class="text-success">
+                                    {{ shop.shopname }}
+                                </span><br>
+                                <span class="text-muted">
+                                    Подписчиков: <span class="text-success">{{ shop.users }}</span>
+                                </span><br>
+                                <span class="text-muted">
+                                    Понравилось: <span class="text-success">{{ shop.likes }}</span>
+                                </span>
+                            </span>
+                        </span>
+                    </label>
+                {% endfor %}
+            </div>
+            <h4 class="text-success top20">Добавить изображение</h4>
+            <div class="row top20">
+                <div class="col-md-12">
+                    {{ form_label(form.files) }}
+                    {{ form_errors(form.files) }}
+                    {{ form_widget(form.files) }}
+                </div>
+                <div id="preview-img" class="col-md-12 top20">
+                    <canvas class="img-thumbnail preview-img"></canvas>
+                </div>
+            </div>
+            {{ form_widget(form.save) }}
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+        </div>
+    </div>
+    <div id="result"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bootstrap/js/create-advertising.js') }}" type="text/javascript"></script>
+{% endblock %}

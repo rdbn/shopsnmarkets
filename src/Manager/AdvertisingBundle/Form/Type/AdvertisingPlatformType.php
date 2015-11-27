@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -11,11 +11,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdvertisingShopType extends AbstractType
+class AdvertisingPlatformType extends AbstractType
 {
     /**
      * @var int
-     */
+    */
     protected $id;
 
     public function __construct($id)
@@ -23,9 +23,10 @@ class AdvertisingShopType extends AbstractType
         $this->id = $id;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options) 
     {
         $id = $this->id;
+
         $builder->add('format', 'entity', [
             'class' => 'ManagerAdvertisingBundle:AdvertisingFormat',
             'choice_label' => 'name',
@@ -47,9 +48,26 @@ class AdvertisingShopType extends AbstractType
                     ->setParameter('id', $id);
             },
         ]);
-        $builder->add('files', 'file', [
-            'label' => 'Добавить изображения',
-            "multiple" => "multiple",
+        $builder->add('watch', 'entity', [
+            'class' => 'ManagerAdvertisingBundle:AdvertisingWatch',
+            'choice_label' => 'name',
+            'label' => false,
+            'mapped' => false,
+            "attr" => ["class" => "form-control"],
+            'required' => false,
+            'empty_value'   => 'Время начала',
+        ]);
+        $builder->add('duration', 'entity', [
+            'class' => 'ManagerAdvertisingBundle:AdvertisingDuration',
+            'choice_label' => 'name',
+            'label' => false,
+            'mapped' => false,
+            "attr" => ["class" => "form-control"],
+            'required' => false,
+            'empty_value'   => 'Длительность',
+        ]);
+        $builder->add('file', 'file', [
+            'label' => 'Добавить изображение',
             'label_attr' => ["class" => "btn btn-success btn-sm"],
             "attr" => ["class" => "hide"],
         ]);
@@ -62,7 +80,7 @@ class AdvertisingShopType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Manager\AdvertisingBundle\Entity\AdvertisingShop'
+            'data_class' => 'Manager\AdvertisingBundle\Entity\AdvertisingPlatform'
         ));
     }
     

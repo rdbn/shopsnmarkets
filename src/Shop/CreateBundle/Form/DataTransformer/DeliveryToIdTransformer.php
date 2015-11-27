@@ -30,7 +30,7 @@ class DeliveryToIdTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  Issue|null $issue
+     * @param  Issue|null $delivery
      * @return string
      */
     public function transform($delivery)
@@ -45,7 +45,7 @@ class DeliveryToIdTransformer implements DataTransformerInterface
     /**
      * Transforms a string (number) to an object (issue).
      *
-     * @param  string $number
+     * @param  string $id
      *
      * @return Issue|null
      *

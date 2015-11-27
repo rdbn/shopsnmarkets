@@ -96,7 +96,6 @@ Class ProductImage
     public function preUpload()
     {
         if (null !== $this->file) {
-            // do whatever you want to generate a unique name
             $this->path = $this->getUploadDir().'/'.uniqid().'.'.$this->file->guessExtension();
             
             return $this->path;
@@ -105,22 +104,15 @@ Class ProductImage
     
     public function upload()
     {
-        // the file property can be empty if the field is not required
         if (null === $this->file) {
             return;
         }
 
-        // use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-
-        // move takes the target directory and then the
-        // target filename to move to
         $this->getFile()->move(
             $this->getUploadRootDir(),
             $this->path
         );
 
-        // clean up the file property as you won't need it anymore
         $this->file = null;
     }
     
