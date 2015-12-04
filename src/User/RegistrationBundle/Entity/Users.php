@@ -122,6 +122,11 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     protected $isActive;
+
+    /**
+     * @ORM\Column(name="description", type="string", length=255, nullable=true, options={"default":""})
+     */
+    protected $description;
     
     /**
      * @var integer
@@ -1008,5 +1013,29 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     public function getOrder()
     {
         return $this->order;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Users
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

@@ -29,7 +29,7 @@ Class City
     protected $country;
     
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, unique=true)
      */
     protected $name;
 

@@ -6,10 +6,10 @@
  */
 namespace User\UserBundle\Controller;
 
-use User\UserBundle\Controller\CommonController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
-class AuthController extends CommonController
+class AuthController extends Controller
 {
     public function authFormAction()
     {

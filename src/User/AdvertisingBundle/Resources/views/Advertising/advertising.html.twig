@@ -1,0 +1,35 @@
+{% extends 'ManagerMainBundle:Base:layout.html.twig' %}
+
+{% block title %}Реклама{% endblock %}
+
+{% block content %}
+    {{ include('UserAdvertisingBundle:Advertising:advertisingMenu.html.twig') }}
+    <div class="row top20">
+        <div class="col-md-12">
+            <div class="btn-group">
+                <button id="platform" class="btn btn-success btn-sm">Реклама на платформе</button>
+                <button id="shops" class="btn btn-success btn-sm">Реклама в магазине</button>
+            </div>
+        </div>
+        {% if advertising != null %}
+            {% for value in advertising %}
+                <div class="col-md-12 text-muted small">
+                    <h3 class="text-success">{{ value.shopname }}</h3>
+                    <p>Место показа: <span class="text-success">{{ value.name }}</span></p>
+                    <p>Время начала показа: <span class="text-success">{{ value.date_start.format("Y-m-d H:i:s") }}.</span></p>
+                    <p>Время окончания показа: <span class="text-success">в {{ value.date_end.format("Y-m-d H:i:s") }}.</span></p>
+                    <a class="btn btn-success btn-sm bottom20" href="#">Показать картинку</a>
+                    {% if value.format == '1' %}
+                        <img class="img-thumbnail" src="{{ value.path | apply_filter('advertisingSliderPlatform') }}" />
+                    {% else %}
+                        <img src="{{ value.path | apply_filter('advertisingSideOf') }}" />
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/Manager/Advertising.js') }}" type="text/javascript"></script>
+{% endblock %}

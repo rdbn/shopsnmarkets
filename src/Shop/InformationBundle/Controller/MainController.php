@@ -21,8 +21,12 @@ class MainController extends Controller
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
             ->findByProductShop($shopname);
 
+        $advertising = $this->getDoctrine()->getRepository('UserAdvertisingBundle:AdvertisingShop')
+            ->findByShops($shop->getId());
+
         return $this->render('ShopInformationBundle:Main:index.html.twig', [
             'form' => $form->createView(),
+            'advertising' => $advertising,
             'shopname' => $shopname,
             'products' => $products,
             'shop' => $shop,

@@ -122,7 +122,7 @@ Class Shops
     protected $shops_delivery;
 
     /**
-     * @ORM\OneToMany(targetEntity="Manager\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
+     * @ORM\OneToMany(targetEntity="User\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
      */
     protected $advertising_shop;
 
@@ -650,11 +650,11 @@ Class Shops
     /**
      * Add advertisingShop
      *
-     * @param \Manager\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop
+     * @param \User\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop
      *
      * @return Shops
      */
-    public function addAdvertisingShop(\Manager\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop)
+    public function addAdvertisingShop(\User\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop)
     {
         $this->advertising_shop[] = $advertisingShop;
 
@@ -664,9 +664,9 @@ Class Shops
     /**
      * Remove advertisingShop
      *
-     * @param \Manager\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop
+     * @param \User\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop
      */
-    public function removeAdvertisingShop(\Manager\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop)
+    public function removeAdvertisingShop(\User\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop)
     {
         $this->advertising_shop->removeElement($advertisingShop);
     }

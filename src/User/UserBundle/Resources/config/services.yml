@@ -1,12 +1,17 @@
 parameters:
-    shopSubscribe.class: User\UserBundle\Services\ShopSubscribe
+    shop.subscribe.class: User\UserBundle\Services\ShopSubscribe
     bookmarks.class: User\UserBundle\Services\Bookmarks
+    change.password.class: User\UserBundle\Services\ChangePassword
     
 services:        
-    shopSubscribe:
-        class: %shopSubscribe.class%
+    shop.subscribe:
+        class: %shop.subscribe.class%
         arguments: [ @doctrine.orm.entity_manager ]
         
     bookmarks:
         class: %bookmarks.class%
         arguments: [ @doctrine.orm.entity_manager ]
+
+    change.password:
+        class: %change.password.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory, @hashPassword ]

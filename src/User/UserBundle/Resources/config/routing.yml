@@ -15,3 +15,33 @@ _subscribeShop:
 _bookmarks:
     pattern: /user/bookmarks
     defaults: { _controller: UserUserBundle:Bookmarks:bookmarks }
+
+# routes for class UserInformationController
+_property:
+    pattern:  /property
+    defaults: { _controller: UserUserBundle:UserInformation:property }
+
+_formInformation:
+    pattern:  /property/information
+    defaults: { _controller: UserUserBundle:UserInformation:formInformation }
+
+_formPassword:
+    pattern:  /property/password
+    defaults: { _controller: UserUserBundle:UserInformation:formPassword }
+
+_formPreviewInformation:
+    pattern:  /property/formPreviewInformation
+    defaults: { _controller: UserUserBundle:UserInformation:formPreview }
+
+# route for class AjaxCity
+_city:
+    pattern:  /city/{id}
+    defaults: { _controller: UserUserBundle:AjaxProperty:city, _format: json }
+    requirements:
+        _method: GET
+
+_emailProperty:
+    pattern:  /emailProperty/{mail}
+    defaults: { _controller: UserUserBundle:AjaxProperty:email, _format: json }
+    requirements:
+        _method: GET

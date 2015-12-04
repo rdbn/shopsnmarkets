@@ -1,0 +1,43 @@
+# for class Advertising
+_advertising:
+    pattern:  /advertising
+    defaults: { _controller: UserAdvertisingBundle:Advertising:advertising }
+
+_shopAdvertising:
+    pattern:  /advertising/shop
+    defaults: { _controller: UserAdvertisingBundle:Advertising:shop }
+
+_platformAdvertising:
+    pattern:  /advertising/platform
+    defaults: { _controller: UserAdvertisingBundle:Advertising:platform }
+    
+# for class AjaxAdvertising
+_advertisingPlatform:
+    pattern:  /advertising/platform
+    defaults: { _controller: UserAdvertisingBundle:Ajax:platform, _format: json }
+    requirements:
+        _method: GET
+
+_advertisingShops:
+    pattern:  /advertising/shops
+    defaults: { _controller: UserAdvertisingBundle:Ajax:shops, _format: json }
+    requirements:
+        _method: GET
+
+_advertisingDelete:
+    pattern:  /advertising/remove
+    defaults: { _controller: UserAdvertisingBundle:Ajax:remove, _format: json }
+    requirements:
+        _method: GET
+
+_createPlatformAdvertising:
+    pattern:  /advertising/createPlatform
+    defaults: { _controller: UserAdvertisingBundle:Ajax:addPlatform, _format: json }
+    requirements:
+        _method: POST
+    
+_createShopAdvertising:
+    pattern:  /advertising/createShop
+    defaults: { _controller: UserAdvertisingBundle:Ajax:addShop, _format: json }
+    requirements:
+        _method: POST

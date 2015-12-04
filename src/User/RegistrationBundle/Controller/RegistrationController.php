@@ -10,12 +10,12 @@ namespace User\RegistrationBundle\Controller;
 use User\RegistrationBundle\Entity\Users;
 use User\RegistrationBundle\Form\Type\UserType;
 
-use User\UserBundle\Controller\CommonController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Email;
 
-class RegistrationController extends CommonController
+class RegistrationController extends Controller
 {    
     public function registrationAction()
     {       

@@ -1,8 +1,8 @@
 function locations(send, take) {
     $('#'+send).change(function() {
-        $.post("/city", { country : $(this).val() }, function(data){
+        $.get("/app_dev.php/city/"+$(this).val(), function(data){
             if (data !== '') {
-                var html = '<option value>--- Выберите город ---</option>';
+                var html = '<option value>Выберите город*</option>';
                 
                 for (var value in data) {
                     html += '<option value="'+data[value]['id']+'">'+data[value]['name']+'</option>';

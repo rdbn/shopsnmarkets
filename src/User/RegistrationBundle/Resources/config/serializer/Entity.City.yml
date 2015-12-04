@@ -1,0 +1,9 @@
+User\RegistrationBundle\Entity\City:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [city]
+        name:
+            expose: true
+            groups: [city]

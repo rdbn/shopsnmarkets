@@ -9,10 +9,6 @@ user_messages:
 user_friends:
     resource: "@UserFriendsBundle/Resources/config/routing.yml"
     prefix:   /
-
-user_property:
-    resource: "@UserPropertyBundle/Resources/config/routing.yml"
-    prefix:   /
     
 user_registration:
     resource: "@UserRegistrationBundle/Resources/config/routing.yml"
@@ -20,6 +16,10 @@ user_registration:
     
 user_user:
     resource: "@UserUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+user_advertising:
+    resource: "@UserAdvertisingBundle/Resources/config/routing.yml"
     prefix:   /
 
 manager_main:
@@ -36,10 +36,6 @@ search_partners:
 
 search_platform:
     resource: "@SearchPlatformBundle/Resources/config/routing.yml"
-    prefix:   /
-
-manager_advertising:
-    resource: "@ManagerAdvertisingBundle/Resources/config/routing.yml"
     prefix:   /
 
 manager_orders:
