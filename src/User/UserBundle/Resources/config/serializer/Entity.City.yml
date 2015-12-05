@@ -1,4 +1,4 @@
-User\RegistrationBundle\Entity\City:
+User\UserBundle\Entity\City:
     exclusion_policy: ALL
     properties:
         id:

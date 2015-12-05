@@ -61,13 +61,14 @@ var Check = {
 };
 $(document).ready(function(){
     /* check email */
-    $("#Registration_email").focus(function(){
+    var registrationEmail = $("#Registration_email");
+    registrationEmail.focus(function() {
         CheckMail.checkMail();
     });
-    $("#Registration_email").keyup(function(){
+    registrationEmail.keyup(function() {
         CheckMail.checkMail();
     });
-    $("#Registration_email").blur(function(){
+    registrationEmail.blur(function() {
         CheckMail.checkMail();
     });
     /* Check password */
@@ -75,7 +76,7 @@ $(document).ready(function(){
         Check.password();
     });
     /* Ajax for next Step Form Registration */
-    $('.formRegistretion form').submit(function() {
+    $('.formRegistration form').submit(function() {
         if (!Check.form()) {
             $('#Registration_password_second').focus();
             

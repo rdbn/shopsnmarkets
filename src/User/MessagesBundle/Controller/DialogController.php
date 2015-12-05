@@ -14,7 +14,7 @@ class DialogController extends Controller
     {        
         $user = $this->getUser();
         
-        $path = $this->getDoctrine()->getRepository('UserRegistrationBundle:Users')
+        $path = $this->getDoctrine()->getRepository('UserUserBundle:Users')
                 ->findOneById($users)->getPath();
         
         $messages = $this->getDoctrine()->getRepository('UserMessagesBundle:Messages')

@@ -24,7 +24,7 @@ class Friends
     
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="friends")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users", inversedBy="friends")
      * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
      */
     protected $users;
@@ -97,10 +97,10 @@ class Friends
     /**
      * Set users
      *
-     * @param \User\RegistrationBundle\Entity\Users $users
+     * @param \User\UserBundle\Entity\Users $users
      * @return Friends
      */
-    public function setUsers(\User\RegistrationBundle\Entity\Users $users)
+    public function setUsers(\User\UserBundle\Entity\Users $users)
     {
         $this->users = $users;
     
@@ -110,7 +110,7 @@ class Friends
     /**
      * Get users
      *
-     * @return \User\RegistrationBundle\Entity\Users 
+     * @return \User\UserBundle\Entity\Users
      */
     public function getUsers()
     {

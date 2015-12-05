@@ -10,10 +10,6 @@ user_friends:
     resource: "@UserFriendsBundle/Resources/config/routing.yml"
     prefix:   /
     
-user_registration:
-    resource: "@UserRegistrationBundle/Resources/config/routing.yml"
-    prefix:   /
-    
 user_user:
     resource: "@UserUserBundle/Resources/config/routing.yml"
     prefix:   /

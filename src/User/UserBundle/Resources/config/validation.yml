@@ -1,4 +1,4 @@
-User\RegistrationBundle\Entity\Users:
+User\UserBundle\Entity\Users:
     properties:
         email:
             - Email:

@@ -24,13 +24,13 @@ class Dialog
     protected $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users")
      * @ORM\JoinColumn(name="send_id", referencedColumnName="id")
      */
     protected $send;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users")
      * @ORM\JoinColumn(name="take_id", referencedColumnName="id")
      */
     protected $take;
@@ -120,10 +120,10 @@ class Dialog
     /**
      * Set send
      *
-     * @param \User\RegistrationBundle\Entity\Users $send
+     * @param \User\UserBundle\Entity\Users $send
      * @return Dialog
      */
-    public function setSend(\User\RegistrationBundle\Entity\Users $send = null)
+    public function setSend(\User\UserBundle\Entity\Users $send = null)
     {
         $this->send = $send;
     
@@ -133,7 +133,7 @@ class Dialog
     /**
      * Get send
      *
-     * @return \User\RegistrationBundle\Entity\Users 
+     * @return \User\UserBundle\Entity\Users
      */
     public function getSend()
     {
@@ -143,10 +143,10 @@ class Dialog
     /**
      * Set take
      *
-     * @param \User\RegistrationBundle\Entity\Users $take
+     * @param \User\UserBundle\Entity\Users $take
      * @return Dialog
      */
-    public function setTake(\User\RegistrationBundle\Entity\Users $take = null)
+    public function setTake(\User\UserBundle\Entity\Users $take = null)
     {
         $this->take = $take;
     
@@ -156,7 +156,7 @@ class Dialog
     /**
      * Get take
      *
-     * @return \User\RegistrationBundle\Entity\Users 
+     * @return \User\UserBundle\Entity\Users
      */
     public function getTake()
     {

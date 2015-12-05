@@ -14,7 +14,7 @@ function locations(send, take) {
     });
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
     locations('shops_country', 'shops_city');
     locations('RegistrationUser_country', 'RegistrationUser_city');
     locations('SearchPartners_country', 'SearchPartners_city');

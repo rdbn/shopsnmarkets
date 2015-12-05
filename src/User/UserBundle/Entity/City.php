@@ -4,7 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace User\RegistrationBundle\Entity;
+namespace User\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -76,10 +76,10 @@ Class City
     /**
      * Set country
      *
-     * @param \User\RegistrationBundle\Entity\Country $country
+     * @param \User\UserBundle\Entity\Country $country
      * @return City
      */
-    public function setCountry(\User\RegistrationBundle\Entity\Country $country = null)
+    public function setCountry(\User\UserBundle\Entity\Country $country = null)
     {
         $this->country = $country;
     
@@ -89,7 +89,7 @@ Class City
     /**
      * Get country
      *
-     * @return \User\RegistrationBundle\Entity\Country 
+     * @return \User\UserBundle\Entity\Country
      */
     public function getCountry()
     {

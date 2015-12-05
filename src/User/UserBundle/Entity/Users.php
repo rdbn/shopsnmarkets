@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-namespace User\RegistrationBundle\Entity;
+namespace User\UserBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="User\RegistrationBundle\Repository\UserRepository")
+ * @ORM\Entity()
  * @ORM\Table(name="users")
  */
 
@@ -64,7 +64,7 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     protected $username;
     
     /**
-     * @ORM\Column(name="realname", type="string", length=255)
+     * @ORM\Column(name="realname", type="string", length=255, nullable=true)
      */
     protected $realname;
 
@@ -191,6 +191,9 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
      */
     public function __construct()
     {
+        $this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+
         $this->roles = new ArrayCollection();
         $this->shopManager = new ArrayCollection();
         $this->shopUsers = new ArrayCollection();
@@ -198,8 +201,6 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
         $this->friends = new ArrayCollection();
         $this->shop = new ArrayCollection();
         $this->orders = new ArrayCollection();
-        $this->isActive = true;
-        $this->salt = md5(uniqid(null, true));
     }
     
     /**
@@ -774,10 +775,10 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * Set city
      *
-     * @param \User\RegistrationBundle\Entity\City $city
+     * @param \User\UserBundle\Entity\City $city
      * @return Users
      */
-    public function setCity(\User\RegistrationBundle\Entity\City $city = null)
+    public function setCity(\User\UserBundle\Entity\City $city = null)
     {
         $this->city = $city;
     
@@ -787,7 +788,7 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * Get city
      *
-     * @return \User\RegistrationBundle\Entity\City 
+     * @return \User\UserBundle\Entity\City
      */
     public function getCity()
     {
@@ -797,10 +798,10 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * Add roles
      *
-     * @param \User\RegistrationBundle\Entity\Roles $roles
+     * @param \User\UserBundle\Entity\Roles $roles
      * @return Users
      */
-    public function addRole(\User\RegistrationBundle\Entity\Roles $roles)
+    public function addRole(\User\UserBundle\Entity\Roles $roles)
     {
         $this->roles[] = $roles;
     
@@ -810,9 +811,9 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * Remove roles
      *
-     * @param \User\RegistrationBundle\Entity\Roles $roles
+     * @param \User\UserBundle\Entity\Roles $roles
      */
-    public function removeRole(\User\RegistrationBundle\Entity\Roles $roles)
+    public function removeRole(\User\UserBundle\Entity\Roles $roles)
     {
         $this->roles->removeElement($roles);
     }

@@ -1,7 +1,7 @@
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: sha512
-        User\RegistrationBundle\Entity\Users: sha512
+        User\UserBundle\Entity\Users: sha512
 
     role_hierarchy:
         ROLE_ANONIM_USER: IS_AUTHENTICATED_FULLY
@@ -13,8 +13,8 @@ security:
             id: ib_user.oauth_user_provider
         main:
             entity:
-                class: UserRegistrationBundle:Users
-                property: email
+                class: UserUserBundle:Users
+                property: username
 
     firewalls:            
         dev:

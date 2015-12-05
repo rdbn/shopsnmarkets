@@ -6,13 +6,13 @@
  * Date: 24.10.15
  * Time: 16:57
  */
-namespace User\RegistrationBundle\Command;
+namespace User\UserBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use User\RegistrationBundle\Entity\Roles;
+use User\UserBundle\Entity\Roles;
 
 class AddRoleCommand extends ContainerAwareCommand
 {

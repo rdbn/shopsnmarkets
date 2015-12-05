@@ -4,7 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace User\RegistrationBundle\Entity;
+namespace User\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -84,10 +84,10 @@ Class Country
     /**
      * Add city
      *
-     * @param \User\RegistrationBundle\Entity\City $city
+     * @param \User\UserBundle\Entity\City $city
      * @return Country
      */
-    public function addCity(\User\RegistrationBundle\Entity\City $city)
+    public function addCity(\User\UserBundle\Entity\City $city)
     {
         $this->city[] = $city;
     
@@ -97,9 +97,9 @@ Class Country
     /**
      * Remove city
      *
-     * @param \User\RegistrationBundle\Entity\City $city
+     * @param \User\UserBundle\Entity\City $city
      */
-    public function removeCity(\User\RegistrationBundle\Entity\City $city)
+    public function removeCity(\User\UserBundle\Entity\City $city)
     {
         $this->city->removeElement($city);
     }

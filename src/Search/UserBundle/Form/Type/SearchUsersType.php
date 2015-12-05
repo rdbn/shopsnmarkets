@@ -20,7 +20,7 @@ Class SearchUsersType extends AbstractType
             'mapped' => FALSE,
         ));
         $builder->add('country', 'entity', array(
-            'class' => 'UserRegistrationBundle:Country',
+            'class' => 'UserUserBundle:Country',
             'property' => 'name',
             'empty_value'   => '--- Выберите страну ---',
             'required' => false,
@@ -28,7 +28,7 @@ Class SearchUsersType extends AbstractType
             'label' => 'Страна:',
         ));
         $builder->add('city', 'entity', array(
-            'class' => 'UserRegistrationBundle:City',
+            'class' => 'UserUserBundle:City',
             'property' => 'name',
             'empty_value'   => '--- Выберите город ---',
             'required' => false,
@@ -39,7 +39,7 @@ Class SearchUsersType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'User\RegistrationBundle\Entity\Users'
+            'data_class' => 'User\UserBundle\Entity\Users'
         ));
     }
 

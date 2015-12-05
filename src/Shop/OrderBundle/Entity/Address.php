@@ -30,7 +30,7 @@ class Address
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\City")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\City")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      */
     protected $city;
@@ -243,10 +243,10 @@ class Address
     /**
      * Set city
      *
-     * @param \User\RegistrationBundle\Entity\City $city
+     * @param \User\UserBundle\Entity\City $city
      * @return Address
      */
-    public function setCity(\User\RegistrationBundle\Entity\City $city = null)
+    public function setCity(\User\UserBundle\Entity\City $city = null)
     {
         $this->city = $city;
     
@@ -256,7 +256,7 @@ class Address
     /**
      * Get city
      *
-     * @return \User\RegistrationBundle\Entity\City 
+     * @return \User\UserBundle\Entity\City
      */
     public function getCity()
     {

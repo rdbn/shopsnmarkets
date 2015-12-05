@@ -55,7 +55,7 @@ class Order
     protected $delivery;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="order")
+     * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="order")
      * @ORM\JoinColumn(name="order_user")
      */
     protected $users;
@@ -201,10 +201,10 @@ class Order
     /**
      * Add users
      *
-     * @param \User\RegistrationBundle\Entity\Users $users
+     * @param \User\UserBundle\Entity\Users $users
      * @return Order
      */
-    public function addUser(\User\RegistrationBundle\Entity\Users $users)
+    public function addUser(\User\UserBundle\Entity\Users $users)
     {
         $this->users[] = $users;
     
@@ -214,9 +214,9 @@ class Order
     /**
      * Remove users
      *
-     * @param \User\RegistrationBundle\Entity\Users $users
+     * @param \User\UserBundle\Entity\Users $users
      */
-    public function removeUser(\User\RegistrationBundle\Entity\Users $users)
+    public function removeUser(\User\UserBundle\Entity\Users $users)
     {
         $this->users->removeElement($users);
     }

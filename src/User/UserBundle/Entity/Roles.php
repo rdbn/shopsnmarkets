@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-namespace User\RegistrationBundle\Entity;
+namespace User\UserBundle\Entity;
  
 use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -37,7 +37,7 @@ class Roles implements RoleInterface
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
     
@@ -132,10 +132,10 @@ class Roles implements RoleInterface
     /**
      * Add users
      *
-     * @param \User\RegistrationBundle\Entity\Users $users
+     * @param \User\UserBundle\Entity\Users $users
      * @return Roles
      */
-    public function addUser(\User\RegistrationBundle\Entity\Users $users)
+    public function addUser(\User\UserBundle\Entity\Users $users)
     {
         $this->users[] = $users;
     
@@ -145,9 +145,9 @@ class Roles implements RoleInterface
     /**
      * Remove users
      *
-     * @param \User\RegistrationBundle\Entity\Users $users
+     * @param \User\UserBundle\Entity\Users $users
      */
-    public function removeUser(\User\RegistrationBundle\Entity\Users $users)
+    public function removeUser(\User\UserBundle\Entity\Users $users)
     {
         $this->users->removeElement($users);
     }

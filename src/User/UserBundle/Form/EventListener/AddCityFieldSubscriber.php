@@ -4,15 +4,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace User\RegistrationBundle\Form\EventListener;
+namespace User\UserBundle\Form\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Doctrine\ORM\EntityRepository;
+use User\UserBundle\Entity\Country;
 
-class AddCountryFieldSubscriber implements EventSubscriberInterface 
+class AddCityFieldSubscriber implements EventSubscriberInterface 
 {
     private $factory;
     
@@ -25,20 +26,31 @@ class AddCountryFieldSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::PRE_BIND     => 'preBind',
         );
     }
     
     public function addCityForm($form, $country)
     {
-        $form->add($this->factory->createNamed('country','entity', $country, array(
-            'class'         => 'UserRegistrationBundle:Country',
+        $form->add($this->factory->createNamed('city','entity', null, array(
+            'class'         => 'UserUserBundle:City',
             'label'         => false,
-            'empty_value'   => 'Выберите страну*',
-            'auto_initialize' => false,
-            'mapped'        => false,
             'attr' => ['class' => "form-control"],
-            'query_builder' => function (EntityRepository $repository) {
-                $qb = $repository->createQueryBuilder('country');
+            'empty_value'   => 'Выберите город*',
+            'auto_initialize' => false,
+            'query_builder' => function (EntityRepository $repository) use ($country) {
+                $qb = $repository->createQueryBuilder('city')
+                    ->innerJoin('city.country', 'country');
+                if ($country instanceof Country) {
+                    $qb->where('city.country = :country')
+                    ->setParameter('country', $country);
+                } elseif (is_numeric($country)) {
+                    $qb->where('country.id = :country')
+                    ->setParameter('country', $country);
+                } else {
+                    $qb->where('country.name = :country')
+                    ->setParameter('country', null);
+                }
 
                 return $qb;
             }

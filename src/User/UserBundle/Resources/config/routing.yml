@@ -1,3 +1,12 @@
+#routes for class Registration
+_register:
+    pattern:  /register
+    defaults: { _controller: UserUserBundle:Registration:registration }
+
+_checkEmail:
+    pattern:  /checkEmail
+    defaults: { _controller: UserUserBundle:Registration:checkEmail }
+
 # route for class Main
 _user:
     pattern:  /user

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -28,7 +28,7 @@ class AjaxPropertyController extends FOSRestController
      */
     public function cityAction($id)
     {
-        $city = $this->getDoctrine()->getRepository('UserRegistrationBundle:City')
+        $city = $this->getDoctrine()->getRepository('UserUserBundle:City')
             ->findByCountry($id);
 
         return $city;
@@ -52,7 +52,7 @@ class AjaxPropertyController extends FOSRestController
         $errors = $this->get('validator')->validateValue($mail, $email);
         
         if (count($errors) == 0) {
-            $check = $this->getDoctrine()->getRepository('UserRegistrationBundle:Users')
+            $check = $this->getDoctrine()->getRepository('UserUserBundle:Users')
                 ->findOneByEmail($mail);
             
             if ($check == NULL || $check->getId() == $this->getUser()->getId()) {
@@ -65,4 +65,3 @@ class AjaxPropertyController extends FOSRestController
         }
     }
 }
-?>

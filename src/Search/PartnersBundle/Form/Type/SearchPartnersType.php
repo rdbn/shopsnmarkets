@@ -20,7 +20,7 @@ Class SearchPartnersType extends AbstractType
             'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
         ));
         $builder->add('country', 'entity', array(
-            'class' => 'UserRegistrationBundle:Country',
+            'class' => 'UserUserBundle:Country',
             'property' => 'name',
             'mapped'        => false,
             'empty_value'   => '--- Выберите страну ---',
@@ -28,7 +28,7 @@ Class SearchPartnersType extends AbstractType
             'label' => 'Страна:',
         ));
         $builder->add('city', 'entity', array(
-            'class' => 'UserRegistrationBundle:City',
+            'class' => 'UserUserBundle:City',
             'property' => 'name',
             'empty_value'   => '--- Выберите город ---',
             'required' => false,

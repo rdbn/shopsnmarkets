@@ -6,20 +6,20 @@
     <div class="row">
         <div class="col-lg-6">
             <h3>Регистрация для продавцов:</h3>
-            <form action="{{ path('_createUser') }}" method="post" {{ form_enctype(form) }}>
-                <div id="errors">
-                    {% if (email == false) %}Данный Email уже используется.{% endif %}
-                    {{ form_errors(form) }}
-                </div>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+                {% if (email) %}
+                    <div id="errors">Данный Email уже используется.</div>
+                {% endif %}
                 <div class="form-group">
                     {{ form_label(form.realname) }}
                     {{ form_errors(form.realname) }}
                     {{ form_widget(form.realname) }}
                 </div>
                 <div class="form-group">
-                    {{ form_label(form.email) }}
-                    {{ form_errors(form.email) }}
-                    {{ form_widget(form.email) }}
+                    {{ form_label(form.username) }}
+                    {{ form_errors(form.username) }}
+                    {{ form_widget(form.username) }}
                     <span id="checkEmail"></span>
                 </div>
                 <div class="form-group">
@@ -33,8 +33,8 @@
                     {{ form_widget(form.password.second) }}
                     <span id="checkPassword"></span>
                 </div>
-                {{form_rest(form)}}
-            </form>
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
         </div>
         <div class="col-lg-6">
             <h3>Регистрация для покупателей:</h3>

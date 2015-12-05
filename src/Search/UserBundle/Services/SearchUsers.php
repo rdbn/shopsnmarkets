@@ -64,7 +64,7 @@ class SearchUsers {
 
             $qb = $this->em->createQueryBuilder();
             $query = $qb->select('u.id, u.realname, u.path')
-                    ->from('UserRegistrationBundle:Users', 'u')
+                    ->from('UserUserBundle:Users', 'u')
                     ->where('u.id <> :id')
                     ->setParameter('id', $userID);
 

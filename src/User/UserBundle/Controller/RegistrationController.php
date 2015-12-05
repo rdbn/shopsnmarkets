@@ -5,10 +5,10 @@
  * and open the template in the editor.
  */
 
-namespace User\RegistrationBundle\Controller;
+namespace User\UserBundle\Controller;
 
-use User\RegistrationBundle\Entity\Users;
-use User\RegistrationBundle\Form\Type\UserType;
+use User\UserBundle\Entity\Users;
+use User\UserBundle\Form\Type\UserType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,29 +17,36 @@ use Symfony\Component\Validator\Constraints\Email;
 
 class RegistrationController extends Controller
 {    
-    public function registrationAction()
-    {       
-        $form = $this->createForm(new UserType(), new Users());
-        
-        return $this->render('UserRegistrationBundle:Form:registration.html.twig', array(
-            'email' => true,
-            'form' => $form->createView(),
-        ));
-    }
-    
-    public function createAction(Request $request)
-    {        
-        $addInformation = $this->get('register');
-        $form = $addInformation->createForm(new UserType(), new Users());
-        
-        if ($addInformation->addUser($request)) {
+    public function registrationAction(Request $request)
+    {
+        $user = new Users();
+        $form = $this->createForm(new UserType(), $user, [
+            'action' => $this->generateUrl('_register'),
+            'method' => 'POST',
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $hash = $this->get("hash.password");
+            $hash->password($user, $user->getPassword());
+
+            $em = $this->getDoctrine()->getManager();
+            $role = $em->getRepository("UserUserBundle:Roles")
+                ->findOneByRole("ROLE_MANAGER");
+
+            $user->addRole($role);
+
+            $em->persist($user);
+            $em->flush();
+
             return $this->redirectToRoute('_main');
         }
         
-        return $this->render('UserRegistrationBundle:Form:registration.html.twig', array(
+        return $this->render('UserUserBundle:Form:registration.html.twig', [
+            'email' => false,
             'form' => $form->createView(),
-            'email' => $addInformation->isEmail(),
-        ));
+        ]);
     }
     
     public function checkEmailAction() 
@@ -50,7 +57,7 @@ class RegistrationController extends Controller
         $errors = $this->get('validator')->validateValue($mail, $email);
         
         if (count($errors) == 0) {
-            $check = $this->getDoctrine()->getRepository('UserRegistrationBundle:Users')
+            $check = $this->getDoctrine()->getRepository('UserUserBundle:Users')
                 ->findOneByEmail($mail);
             
             if ($check == NULL) {

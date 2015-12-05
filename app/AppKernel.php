@@ -25,7 +25,6 @@ class AppKernel extends Kernel
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
 
             new Platform\MainBundle\PlatformMainBundle(),
-            new User\RegistrationBundle\UserRegistrationBundle(),
             new User\UserBundle\UserUserBundle(),
             new User\FriendsBundle\UserFriendsBundle(),
             new User\MessagesBundle\UserMessagesBundle(),

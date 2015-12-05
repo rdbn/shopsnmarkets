@@ -27,14 +27,14 @@ Class Shops
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopManager")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users", inversedBy="shopManager")
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      * )
      */
     protected $manager;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\City")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\City")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      */
     protected $city;
@@ -94,7 +94,7 @@ Class Shops
     protected $path;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shop")
+     * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="shop")
      * @ORM\JoinTable(name="shops_like")
      */
     protected $like_shop;
@@ -106,7 +106,7 @@ Class Shops
     protected $keywords;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopUsers")
+     * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="shopUsers")
      * @ORM\JoinTable(name="users_shops")
      */
     protected $users;
@@ -432,11 +432,11 @@ Class Shops
     /**
      * Set manager
      *
-     * @param \User\RegistrationBundle\Entity\Users $manager
+     * @param \User\UserBundle\Entity\Users $manager
      *
      * @return Shops
      */
-    public function setManager(\User\RegistrationBundle\Entity\Users $manager = null)
+    public function setManager(\User\UserBundle\Entity\Users $manager = null)
     {
         $this->manager = $manager;
 
@@ -446,7 +446,7 @@ Class Shops
     /**
      * Get manager
      *
-     * @return \User\RegistrationBundle\Entity\Users
+     * @return \User\UserBundle\Entity\Users
      */
     public function getManager()
     {
@@ -456,11 +456,11 @@ Class Shops
     /**
      * Set city
      *
-     * @param \User\RegistrationBundle\Entity\City $city
+     * @param \User\UserBundle\Entity\City $city
      *
      * @return Shops
      */
-    public function setCity(\User\RegistrationBundle\Entity\City $city = null)
+    public function setCity(\User\UserBundle\Entity\City $city = null)
     {
         $this->city = $city;
 
@@ -470,7 +470,7 @@ Class Shops
     /**
      * Get city
      *
-     * @return \User\RegistrationBundle\Entity\City
+     * @return \User\UserBundle\Entity\City
      */
     public function getCity()
     {
@@ -480,11 +480,11 @@ Class Shops
     /**
      * Add likeShop
      *
-     * @param \User\RegistrationBundle\Entity\Users $likeShop
+     * @param \User\UserBundle\Entity\Users $likeShop
      *
      * @return Shops
      */
-    public function addLikeShop(\User\RegistrationBundle\Entity\Users $likeShop)
+    public function addLikeShop(\User\UserBundle\Entity\Users $likeShop)
     {
         $this->like_shop[] = $likeShop;
 
@@ -494,9 +494,9 @@ Class Shops
     /**
      * Remove likeShop
      *
-     * @param \User\RegistrationBundle\Entity\Users $likeShop
+     * @param \User\UserBundle\Entity\Users $likeShop
      */
-    public function removeLikeShop(\User\RegistrationBundle\Entity\Users $likeShop)
+    public function removeLikeShop(\User\UserBundle\Entity\Users $likeShop)
     {
         $this->like_shop->removeElement($likeShop);
     }
@@ -548,11 +548,11 @@ Class Shops
     /**
      * Add user
      *
-     * @param \User\RegistrationBundle\Entity\Users $user
+     * @param \User\UserBundle\Entity\Users $user
      *
      * @return Shops
      */
-    public function addUser(\User\RegistrationBundle\Entity\Users $user)
+    public function addUser(\User\UserBundle\Entity\Users $user)
     {
         $this->users[] = $user;
 
@@ -562,9 +562,9 @@ Class Shops
     /**
      * Remove user
      *
-     * @param \User\RegistrationBundle\Entity\Users $user
+     * @param \User\UserBundle\Entity\Users $user
      */
-    public function removeUser(\User\RegistrationBundle\Entity\Users $user)
+    public function removeUser(\User\UserBundle\Entity\Users $user)
     {
         $this->users->removeElement($user);
     }

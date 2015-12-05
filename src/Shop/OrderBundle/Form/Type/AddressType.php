@@ -6,8 +6,8 @@
  */
 namespace Shop\OrderBundle\Form\Type;
 
-use User\RegistrationBundle\Form\EventListener\AddCountryFieldSubscriber;
-use User\RegistrationBundle\Form\EventListener\AddCityFieldSubscriber;
+use User\UserBundle\Form\EventListener\AddCountryFieldSubscriber;
+use User\UserBundle\Form\EventListener\AddCityFieldSubscriber;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

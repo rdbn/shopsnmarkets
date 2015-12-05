@@ -14,7 +14,7 @@ class FriendsRepository extends EntityRepository
         return $this->getEntityManager()
                 ->createQuery(
                     'SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
-                    LEFT JOIN UserRegistrationBundle:Users u WITH u.id = f.id
+                    LEFT JOIN UserUserBundle:Users u WITH u.id = f.id
                     WHERE f.users = :id AND f.check_friends = 0
                     GROUP BY u'
                 )->setParameter('id', $id)
@@ -25,7 +25,7 @@ class FriendsRepository extends EntityRepository
         return $this->getEntityManager()
                 ->createQuery(
                     'SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
-                    LEFT JOIN UserRegistrationBundle:Users u WITH u.id = f.users
+                    LEFT JOIN UserUserBundle:Users u WITH u.id = f.users
                     WHERE f.id = :id AND f.check_friends = 0
                     GROUP BY u'
                 )->setParameter('id', $id)
@@ -36,7 +36,7 @@ class FriendsRepository extends EntityRepository
         return $this->getEntityManager()
                 ->createQuery(
                     'SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
-                    LEFT JOIN UserRegistrationBundle:Users u WITH u.id = f.id
+                    LEFT JOIN UserUserBundle:Users u WITH u.id = f.id
                     WHERE f.users = :id AND f.check_friends = 1
                     GROUP BY u'
                 )->setParameter('id', $id)

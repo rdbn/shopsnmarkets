@@ -6,7 +6,7 @@
  */
 namespace Search\UserBundle\Controller;
 
-use User\RegistrationBundle\Entity\Users;
+use User\UserBundle\Entity\Users;
 use Search\UserBundle\Form\Type\SearchUsersType;
 
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -55,7 +55,7 @@ Class Product
     protected $hashTags;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="product")
+     * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="product")
      * @ORM\JoinTable(name="product_like")
      */
     protected $like_product;
@@ -224,11 +224,11 @@ Class Product
     /**
      * Add likeProduct
      *
-     * @param \User\RegistrationBundle\Entity\Users $likeProduct
+     * @param \User\UserBundle\Entity\Users $likeProduct
      *
      * @return Product
      */
-    public function addLikeProduct(\User\RegistrationBundle\Entity\Users $likeProduct)
+    public function addLikeProduct(\User\UserBundle\Entity\Users $likeProduct)
     {
         $this->like_product[] = $likeProduct;
 
@@ -238,9 +238,9 @@ Class Product
     /**
      * Remove likeProduct
      *
-     * @param \User\RegistrationBundle\Entity\Users $likeProduct
+     * @param \User\UserBundle\Entity\Users $likeProduct
      */
-    public function removeLikeProduct(\User\RegistrationBundle\Entity\Users $likeProduct)
+    public function removeLikeProduct(\User\UserBundle\Entity\Users $likeProduct)
     {
         $this->like_product->removeElement($likeProduct);
     }

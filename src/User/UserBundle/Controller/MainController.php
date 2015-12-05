@@ -23,7 +23,7 @@ class MainController extends Controller
     public function userAction($id) 
     {
         $userID = $this->getUser()->getId();
-        $user = $this->getDoctrine()->getRepository('UserRegistrationBundle:Users')
+        $user = $this->getDoctrine()->getRepository('UserUserBundle:Users')
                 ->findOneById($id);
         
         $check = $this->getDoctrine()->getRepository('UserFriendsBundle:Friends')

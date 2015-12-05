@@ -6,14 +6,14 @@
  * Time: 13:47
  */
 
-namespace User\RegistrationBundle\Command;
+namespace User\UserBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use User\RegistrationBundle\Entity\Country;
-use User\RegistrationBundle\Entity\City;
+use User\UserBundle\Entity\Country;
+use User\UserBundle\Entity\City;
 
 class AddCityCommand extends ContainerAwareCommand
 {

@@ -29,7 +29,7 @@ class Messages
     protected $dialog;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users")
      * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
      */
     protected $users;
@@ -164,10 +164,10 @@ class Messages
     /**
      * Set users
      *
-     * @param \User\RegistrationBundle\Entity\Users $users
+     * @param \User\UserBundle\Entity\Users $users
      * @return Messages
      */
-    public function setUsers(\User\RegistrationBundle\Entity\Users $users = null)
+    public function setUsers(\User\UserBundle\Entity\Users $users = null)
     {
         $this->users = $users;
     
@@ -177,7 +177,7 @@ class Messages
     /**
      * Get users
      *
-     * @return \User\RegistrationBundle\Entity\Users 
+     * @return \User\UserBundle\Entity\Users
      */
     public function getUsers()
     {

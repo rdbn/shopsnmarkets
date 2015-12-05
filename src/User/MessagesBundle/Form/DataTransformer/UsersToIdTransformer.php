@@ -57,7 +57,7 @@ class UsersToIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        $user = $this->om->getRepository('UserRegistrationBundle:Users')
+        $user = $this->om->getRepository('UserUserBundle:Users')
                 ->findOneById($id);
 
         if (null === $user) {

@@ -18,7 +18,7 @@ class CreateDialogController extends Controller
     {
         $user = $this->getUser();
         
-        $userID = $this->getDoctrine()->getRepository('UserRegistrationBundle:Users')
+        $userID = $this->getDoctrine()->getRepository('UserUserBundle:Users')
                 ->findOneById($id);
         
         $form = $this->createForm(new MessagesType($userID->getId(), $user->getId()), new Messages());

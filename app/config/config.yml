@@ -146,7 +146,7 @@ avalanche_imagine:
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: User\RegistrationBundle\Entity\Users
+    user_class: User\UserBundle\Entity\Users
 
 # HWI
 hwi_oauth:

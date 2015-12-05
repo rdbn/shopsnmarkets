@@ -10,7 +10,7 @@ namespace Shop\InformationBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
-use User\RegistrationBundle\Entity\Users;
+use User\UserBundle\Entity\Users;
 
 class UsersToIdTransformer implements DataTransformerInterface
 {
@@ -58,7 +58,7 @@ class UsersToIdTransformer implements DataTransformerInterface
         }
 
         $users = $this->om
-            ->getRepository('UserRegistrationBundle:Users')
+            ->getRepository('UserUserBundle:Users')
             ->findOneById($id)
         ;
 

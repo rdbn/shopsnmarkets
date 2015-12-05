@@ -6,18 +6,18 @@
  */
 namespace User\UserBundle\Services;
 
-use User\RegistrationBundle\Services\HashPassword;
+use User\UserBundle\Services\hash.password;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class ChangePassword {
     
-    protected $em, $formFactory, $model, $form, $hashPassword;
+    protected $em, $formFactory, $model, $form, $hash.password;
 
-    public function __construct(EntityManager $em, FormFactoryInterface $formFactory, HashPassword $hashPassword) {
+    public function __construct(EntityManager $em, FormFactoryInterface $formFactory, hash.password $hash.password) {
         $this->em = $em;
         $this->formFactory = $formFactory;
-        $this->hashPassword = $hashPassword;
+        $this->hash.password = $hash.password;
     }
 
     public function createForm($type, $user) {
@@ -35,9 +35,9 @@ class ChangePassword {
         if ($this->form->isValid()) {
             $oldPassword = $request->request->get('password');
 
-            $oldPass = $this->hashPassword->checkOldPassword($this->model, $userPassword, $oldPassword['old_password']);
+            $oldPass = $this->hash.password->checkOldPassword($this->model, $userPassword, $oldPassword['old_password']);
             if ($oldPass) {
-                $this->hashPassword->password($this->model, $this->model->getPassword());
+                $this->hash.password->password($this->model, $this->model->getPassword());
             }
 
             $newPassword = $this->em;

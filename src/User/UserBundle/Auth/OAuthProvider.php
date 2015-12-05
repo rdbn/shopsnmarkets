@@ -1,18 +1,20 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace User\RegistrationBundle\Auth;
+namespace User\UserBundle\Auth;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use User\RegistrationBundle\Entity\Users;
-use User\RegistrationBundle\Services\CreateDir;
+
+use User\UserBundle\Entity\Users;
 
 class OAuthProvider extends OAuthUserProvider
 {
@@ -20,26 +22,27 @@ class OAuthProvider extends OAuthUserProvider
      * @var array
      */
     protected $properties;
-    
-    private $doctrine, $createDir;
 
-    public function __construct($doctrine, CreateDir $createDir, array $properties)
+    /**
+     * @var Registry
+    */
+    private $doctrine;
+
+    public function __construct(Registry $doctrine, array $properties)
     {
         $this->properties = $properties;
-        $this->createDir = $createDir;
-        $this->doctrine=$doctrine;
+        $this->doctrine = $doctrine;
     }
 
     public function loadUserByUsername($username)
     {
         if(empty($username)){
-            return;
+            return null;
         }
-        // получаем данные о пользователе
-        /** @var $user \User\RegistrationBundle\Entity\Users */
-        $user=$this->getUserByUsername($username);
 
-        if($user&&$user->getId()){
+        /** @var $user \User\UserBundle\Entity\Users */
+        $user = $this->getUserByUsername($username);
+        if($user && $user->getId()){
             return $user;
         }
 
@@ -48,8 +51,8 @@ class OAuthProvider extends OAuthUserProvider
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $name=$response->getRealName();// имя пользователя на стороне oAuth-сервера, например:Nikolay Lebedenko
-        $username=$response->getUsername();// уникальный ID пользователя на стороне oAuth-сервера, например:8d86a051742940e3
+        $name = $response->getRealName();// имя пользователя на стороне oAuth-сервера, например:Nikolay Lebedenko
+        $username = $response->getUsername();// уникальный ID пользователя на стороне oAuth-сервера, например:8d86a051742940e3
         $token = $response->getAccessToken();// токен (уникальный идентификатор) для авторизации, например:ZxC1/2+3 (более 255 символов)
         $path = $response->getProfilePicture();// изображение профиля, может не быть, например:пусто
 
@@ -58,37 +61,33 @@ class OAuthProvider extends OAuthUserProvider
         }
         
         $user=$this->getUserByUsername($username);// находим пользователя
-        /** @var $user \User\RegistrationBundle\Entity\Users */
+        /** @var $user \User\UserBundle\Entity\Users */
 
         // если пользователя нет в базе данных - добавим его
-        if(!$user||!$user->getId()){
+        if(!$user || !$user->getId()){
             $service = $response->getResourceOwner()->getName();
             $setter = 'set'.ucfirst($service);
             $setter_id = $setter.'Id';
             $setter_token = $setter.'AccessToken';
             
-            $user=new Users();
+            $user = new Users();
             $user->setRealname($name);
             $user->setUsername($username);
             $user->$setter_id($username);
             $user->$setter_token($token);
             $user->setPassword(sha1($username));
             
-            $roles = $this->doctrine->getRepository('UserRegistrationBundle:Roles')
-                    ->findOneBy(array('role' => 'ROLE_USER'));
+            $roles = $this->doctrine->getRepository('UserUserBundle:Roles')
+                    ->findOneBy(['role' => 'ROLE_USER']);
             
             $user->addRole($roles);
             
             $this->doctrine->getManager()->persist($user);
             $this->doctrine->getManager()->flush();
-            
-            $dir = __DIR__.'/../../../../web/public/xml/Users/'.$user->getId();
-            $this->createDir->createDir($dir);
-            $this->createDir->createDir($dir.'/avatar');
 
-            $user_id=$user->getId();
+            $user_id = $user->getId();
         }else{
-            $user_id=$user->getId();
+            $user_id = $user->getId();
         }
 
         if(!$user_id){
@@ -108,12 +107,13 @@ class OAuthProvider extends OAuthUserProvider
 
     public function supportsClass($class)
     {
-        return $class === 'User\\RegistrationBundle\\Entity\\Users';
+        return $class === 'User\\UserBundle\\Entity\\Users';
     }
     
-    private function getUserByUsername($username='')
+    private function getUserByUsername($username = '')
     {
-        return $user = $this->doctrine->getRepository('UserRegistrationBundle:Users')->findOneBy(array('username'=>$username));
+        return $user = $this->doctrine->getRepository('UserUserBundle:Users')
+            ->findOneBy(['username' => $username]);
     }
     
     /**
@@ -136,4 +136,3 @@ class OAuthProvider extends OAuthUserProvider
         return $this->properties[$resourceOwnerName];
     }
 }
-?>
