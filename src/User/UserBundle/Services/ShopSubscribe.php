@@ -9,15 +9,17 @@ namespace User\UserBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 
-class ShopSubscribe {
-    
+class ShopSubscribe
+{
     protected $em;
     
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
     
-    public function isUsers($idUser, $idShop) {
+    public function isUsers($idUser, $idShop)
+    {
         $repository = $this->em->getRepository('ShopCreateBundle:Shops');
         $query = $repository->createQueryBuilder('s')
                 ->select('u.id')
@@ -32,7 +34,8 @@ class ShopSubscribe {
         return $user;
     }
 
-    public function addSubscribe($idShop, $user) {
+    public function addSubscribe($idShop, $user)
+    {
         $shop = $this->em->getRepository('ShopCreateBundle:Shops')
                 ->findOneById($idShop);
         
@@ -41,4 +44,3 @@ class ShopSubscribe {
         $addLike->flush();
     }
 }
-?>

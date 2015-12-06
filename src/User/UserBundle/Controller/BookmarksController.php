@@ -12,6 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BookmarksController extends Controller
 {
+    public function bookmarksAction() {
+        $id = $this->getUser()->getId();
+
+        $shops = $this->get('bookmarks')->getShops($id);
+
+        return $this->render('UserUserBundle:Bookmarks:bookmarks.html.twig', array(
+            'shops' => $shops,
+        ));
+    }
+
     public function subscribeAction() {
         $user = $this->getUser();
         
@@ -29,15 +39,4 @@ class BookmarksController extends Controller
         
         return new Response('0');
     }
-    
-    public function bookmarksAction() {
-        $id = $this->getUser()->getId();
-        
-        $shops = $this->get('bookmarks')->getShops($id);
-        
-        return $this->render('UserUserBundle:Bookmarks:bookmarks.html.twig', array(
-            'shops' => $shops,
-        ));
-    }
 }
-

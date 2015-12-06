@@ -31,7 +31,6 @@ class UploadLogoType extends AbstractType
     
     public function getName() 
     {
-        return 'Upload';
+        return 'UploadLogoUser';
     }
 }
-?>

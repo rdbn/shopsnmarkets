@@ -1,11 +1,7 @@
 #routes for class Registration
 _register:
     pattern:  /register
-    defaults: { _controller: UserUserBundle:Registration:registration }
-
-_checkEmail:
-    pattern:  /checkEmail
-    defaults: { _controller: UserUserBundle:Registration:checkEmail }
+    defaults: { _controller: UserUserBundle:Auth:registration }
 
 # route for class Main
 _user:
@@ -45,12 +41,30 @@ _formPreviewInformation:
 # route for class AjaxCity
 _city:
     pattern:  /city/{id}
-    defaults: { _controller: UserUserBundle:AjaxProperty:city, _format: json }
+    defaults: { _controller: UserUserBundle:Ajax:city, _format: json }
     requirements:
         _method: GET
 
 _emailProperty:
     pattern:  /emailProperty/{mail}
-    defaults: { _controller: UserUserBundle:AjaxProperty:email, _format: json }
+    defaults: { _controller: UserUserBundle:Ajax:email, _format: json }
     requirements:
         _method: GET
+
+_checkEmail:
+    pattern:  /checkEmail/{mail}
+    defaults: { _controller: UserUserBundle:Ajax:checkEmail, _format: json }
+    requirements:
+        _method: GET
+
+_descriptionUser:
+    pattern:  /add/description
+    defaults: { _controller: UserUserBundle:Ajax:description, _format: json }
+    requirements:
+        _method: POST
+
+_uploadAvatar:
+    pattern:  /avatar/upload
+    defaults: { _controller: UserUserBundle:Ajax:upload, _format: json }
+    requirements:
+        _method: POST

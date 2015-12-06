@@ -77,11 +77,6 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
      * @ORM\Column(type="string", length=255)
      */
     protected $salt;
-
-    /**
-     * @ORM\Column(name="email", type="string", length=60, nullable=true)
-     */
-    protected $email;
     
     /**
      * @ORM\Column(name="street", type="string", length=45, nullable=true, options={"default":""})
@@ -272,6 +267,7 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
             $this->path
         );
 
+        $this->path = $this->getUploadDir()."/".$this->path;
         $this->file = null;
     }
     
@@ -586,29 +582,6 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     public function getRealname()
     {
         return $this->realname;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Users
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**

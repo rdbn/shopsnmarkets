@@ -22,10 +22,10 @@ class UserInformationType extends AbstractType {
             "attr" => ["class" => "form-control", "placeholder" => "Фамилия/Имя*"],
             'data' => isset($options['data']) ? $options['data']->getRealname() : NULL,
         ));
-        $builder->add('email', 'email', array(
+        $builder->add('username', 'email', array(
             'label' => false,
             "attr" => ["class" => "form-control", "placeholder" => "Email*"],
-            'data' => isset($options['data']) ? $options['data']->getEmail() : NULL,
+            'data' => isset($options['data']) ? $options['data']->getUsername() : NULL,
         ));
         $builder->add('phone', 'number', array(
             'label' => false,

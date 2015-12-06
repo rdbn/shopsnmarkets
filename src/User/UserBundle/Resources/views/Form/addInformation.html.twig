@@ -13,7 +13,7 @@
                     {{ form_widget(formUpload.file) }}
                 {{ form_rest(formUpload) }}
             {{ form_end(formUpload) }}
-            <img class="img-thumbnail top20" src="{% if(image) %}{{ image | apply_filter('avatar') }}{% endif %}" />
+            <img id="preview-img" class="img-thumbnail top20" src="{% if(image) %}{{ image | apply_filter('avatar') }}{% endif %}" />
         </div>
         <div class="col-md-6">
             {{ form_start(formUpload) }}
@@ -28,6 +28,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('public/js/user/uploadAvatar.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/user/preview.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/preview-user.js') }}" type="text/javascript"></script>
 {% endblock %}

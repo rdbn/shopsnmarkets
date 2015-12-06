@@ -27,7 +27,7 @@ class MainController extends Controller
                 ->findOneById($id);
         
         $check = $this->getDoctrine()->getRepository('UserFriendsBundle:Friends')
-                ->checkFriends(array('id' => $id, 'user' => $userID));
+                ->checkFriends(['id' => $id, 'user' => $userID]);
         
         return $this->render('UserUserBundle:User:user.html.twig', array(
             'user' => $user,

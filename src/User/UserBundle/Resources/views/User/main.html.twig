@@ -2,11 +2,6 @@
 
 {% block title %}{{ user.getRealname }}{% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
-{% endblock %}
-
 {% block body %}
     <div class="avatar">
         <img src="{% if(user.getPath) %}{{ user.getPath | apply_filter('avatar') }}{% endif %}" />
@@ -17,9 +12,14 @@
         <ul class='information'>
             {% if user.getCity %}<li><p><span>Страна:</span> {{ user.getCity.getCountry.getName }}</p></li>{% endif %}
             {% if user.getCity %}<li><p><span>Родной город:</span>{{ user.getCity.getName }}</p></li>{% endif %}
-            <li><p><span>Email:</span> {{ user.getEmail }}</p></li>
+            <li><p><span>Email:</span> {{ user.getUsername }}</p></li>
         </ul>
         <h3>Информация о покупателе</h3>
         {% if(preview) %}<p class="text">{% if(preview.text_main != '') %}{{ preview.text_main }}{% endif %}</p>{% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
 {% endblock %}

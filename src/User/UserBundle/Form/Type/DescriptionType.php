@@ -34,7 +34,7 @@ class DescriptionType extends AbstractType {
     
     public function getName() 
     {
-        return 'Preview';
+        return 'Description';
     }
 }
 ?>
