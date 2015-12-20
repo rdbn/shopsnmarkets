@@ -13,10 +13,10 @@ class ShopsRepository extends EntityRepository
     public function findAllShops() {
         return $this->getEntityManager()
                 ->createQuery('
-                    SELECT s.id, s.shopname, s.unique_name, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
+                    SELECT s.id, s.shopname, s.uniqueName, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
                     FROM ShopCreateBundle:Shops s
                     LEFT JOIN s.users sub
-                    LEFT JOIN s.like_shop like_shop
+                    LEFT JOIN s.likeShop like_shop
                     GROUP BY s
                     ORDER BY s.createdAt desc
                 ')->getResult();
@@ -25,11 +25,11 @@ class ShopsRepository extends EntityRepository
     public function findByShopsManager($id) {
         return $this->getEntityManager()
                 ->createQuery('
-                    SELECT s.id, s.shopname, s.unique_name, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
+                    SELECT s.id, s.shopname, s.uniqueName, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
                     FROM ShopCreateBundle:Shops s
                     LEFT JOIN s.manager u
                     LEFT JOIN s.users sub
-                    LEFT JOIN s.like_shop like_shop
+                    LEFT JOIN s.likeShop like_shop
                     WHERE u.id = :id
                     GROUP BY s
                 ')->setParameter('id', $id)
@@ -43,7 +43,7 @@ class ShopsRepository extends EntityRepository
                     FROM ShopCreateBundle:Shops s
                     LEFT JOIN s.city ci
                     LEFT JOIN ci.country c
-                    WHERE s.unique_name = :name
+                    WHERE s.uniqueName = :name
                     GROUP BY s
                 ')->setParameter('name', $name)
                 ->setFirstResult('0')
@@ -76,7 +76,7 @@ class ShopsRepository extends EntityRepository
                     SELECT s.id, s.shopname, s.path, count(DISTINCT u) as users
                     FROM ShopCreateBundle:Shops s
                     LEFT JOIN s.users u
-                    WHERE s.unique_name = :name
+                    WHERE s.uniqueName = :name
                     GROUP BY s
                 ')->setParameter('name', $name)
                 ->getResult();
@@ -88,4 +88,3 @@ class ShopsRepository extends EntityRepository
         }
     }
 }
-?>

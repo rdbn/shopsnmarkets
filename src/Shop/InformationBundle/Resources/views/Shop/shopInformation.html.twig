@@ -42,7 +42,7 @@
         {% for value in delivery %}
             <ul>
                 <li><img src="{{ value.image }}" /><h3>{{ value.name }}</h3></li>
-                <li><p><span>Стоимость:</span> {{ value.price_duration }} руб.</p></li>
+                <li><p><span>Стоимость:</span> {{ value.price }} руб.</p></li>
                 <li><p><span>Время:</span> {{ value.duration }}</p></li>
             </ul>
         {% endfor %}

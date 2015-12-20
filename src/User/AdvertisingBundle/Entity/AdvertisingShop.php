@@ -25,7 +25,7 @@ class AdvertisingShop
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="advertising_shop")
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="advertisingShop")
      * @ORM\JoinColumn(name="shops_id", referencedColumnName="id")
      */
     protected $shops;

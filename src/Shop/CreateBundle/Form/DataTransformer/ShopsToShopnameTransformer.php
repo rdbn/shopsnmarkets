@@ -5,16 +5,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Shop\ProductBundle\Form\DataTransformer;
+namespace Shop\CreateBundle\Form\DataTransformer;
 
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Shop\ProductBundle\Entity\HashTags;
+use Shop\CreateBundle\Entity\Shops;
 
-class NameToTagsTransformer implements DataTransformerInterface
+class ShopsToShopnameTransformer implements DataTransformerInterface
 {
     /**
      * @var ObjectManager
@@ -32,46 +31,37 @@ class NameToTagsTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  HashTags|Collection $tags
-     *
-     * @return string|null
+     * @param Shops $shop
+     * @return string
      */
-    public function transform($tags)
+    public function transform($shop)
     {
-        if (null === $tags)
-            return "одежда,";
-
-        $tags = array_map(function (HashTags $data) {
-            return $data->getName();
-        }, $tags->toArray());
-
-        return implode(", ", $tags);
+        return $shop->getShopname();
     }
 
     /**
      * Transforms a string (number) to an object (issue).
      *
-     * @param string $tags
+     * @param string $shopname
      *
-     * @return array|null
+     * @return Shops
      *
      * @throws TransformationFailedException if object (issue) is not found.
      */
-    public function reverseTransform($tags)
+    public function reverseTransform($shopname)
     {
-        if (!$tags) return null;
+        if (!$shopname) return null;
 
-        $tags = str_replace("  ", " ", $tags);
-        $hashTags = $this->om->getRepository('ShopProductBundle:HashTags')
-                ->findByNameTags(explode(",", $tags));
-
-        if (null === $hashTags) {
+        $shop = $this->om->getRepository('ShopCreateBundle:Shops')
+                ->findOneBy(["uniqueName" => $shopname]);
+        
+        if (null === $shop) {
             throw new TransformationFailedException(sprintf(
                 'An issue with number "%s" does not exist!',
-                $tags
+                $shopname
             ));
         }
 
-        return $hashTags;
+        return $shop;
     }
 }

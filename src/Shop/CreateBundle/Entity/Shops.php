@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -40,17 +40,17 @@ Class Shops
     protected $city;
     
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(name="shopname", type="string", length=45)
      */
     protected $shopname;
     
     /**
-     * @ORM\Column(type="string", length=45, unique=true)
+     * @ORM\Column(name="unique_name", type="string", length=45, unique=true)
      */
-    protected $unique_name;
+    protected $uniqueName;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="rating", type="integer")
      */
     protected $rating;
 
@@ -97,7 +97,7 @@ Class Shops
      * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="shop")
      * @ORM\JoinTable(name="shops_like")
      */
-    protected $like_shop;
+    protected $likeShop;
 
     /**
      * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Keywords", inversedBy="shop")
@@ -119,17 +119,18 @@ Class Shops
     /**
      * @ORM\OneToMany(targetEntity="Shop\CreateBundle\Entity\ShopsDelivery", mappedBy="shops")
      */
-    protected $shops_delivery;
+    protected $shopsDelivery;
 
     /**
      * @ORM\OneToMany(targetEntity="User\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
      */
-    protected $advertising_shop;
+    protected $advertisingShop;
 
     /**
      * Construct for class Shops
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->rating = 0;
 
         $this->manager = new ArrayCollection();
@@ -270,7 +271,7 @@ Class Shops
      */
     public function setUniqueName($uniqueName)
     {
-        $this->unique_name = $uniqueName;
+        $this->uniqueName = $uniqueName;
 
         return $this;
     }
@@ -282,7 +283,7 @@ Class Shops
      */
     public function getUniqueName()
     {
-        return $this->unique_name;
+        return $this->uniqueName;
     }
 
     /**
@@ -486,7 +487,7 @@ Class Shops
      */
     public function addLikeShop(\User\UserBundle\Entity\Users $likeShop)
     {
-        $this->like_shop[] = $likeShop;
+        $this->likeShop[] = $likeShop;
 
         return $this;
     }
@@ -498,7 +499,7 @@ Class Shops
      */
     public function removeLikeShop(\User\UserBundle\Entity\Users $likeShop)
     {
-        $this->like_shop->removeElement($likeShop);
+        $this->likeShop->removeElement($likeShop);
     }
 
     /**
@@ -508,7 +509,7 @@ Class Shops
      */
     public function getLikeShop()
     {
-        return $this->like_shop;
+        return $this->likeShop;
     }
 
     /**
@@ -622,7 +623,7 @@ Class Shops
      */
     public function addShopsDelivery(\Shop\CreateBundle\Entity\ShopsDelivery $shopsDelivery)
     {
-        $this->shops_delivery[] = $shopsDelivery;
+        $this->shopsDelivery[] = $shopsDelivery;
 
         return $this;
     }
@@ -634,7 +635,7 @@ Class Shops
      */
     public function removeShopsDelivery(\Shop\CreateBundle\Entity\ShopsDelivery $shopsDelivery)
     {
-        $this->shops_delivery->removeElement($shopsDelivery);
+        $this->shopsDelivery->removeElement($shopsDelivery);
     }
 
     /**
@@ -644,7 +645,7 @@ Class Shops
      */
     public function getShopsDelivery()
     {
-        return $this->shops_delivery;
+        return $this->shopsDelivery;
     }
 
     /**
@@ -656,7 +657,7 @@ Class Shops
      */
     public function addAdvertisingShop(\User\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop)
     {
-        $this->advertising_shop[] = $advertisingShop;
+        $this->advertisingShop[] = $advertisingShop;
 
         return $this;
     }
@@ -668,7 +669,7 @@ Class Shops
      */
     public function removeAdvertisingShop(\User\AdvertisingBundle\Entity\AdvertisingShop $advertisingShop)
     {
-        $this->advertising_shop->removeElement($advertisingShop);
+        $this->advertisingShop->removeElement($advertisingShop);
     }
 
     /**
@@ -678,6 +679,6 @@ Class Shops
      */
     public function getAdvertisingShop()
     {
-        return $this->advertising_shop;
+        return $this->advertisingShop;
     }
 }

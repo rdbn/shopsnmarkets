@@ -44,9 +44,9 @@ Class Product
     protected $text;
     
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="Shop\ProductBundle\Entity\HashTags", inversedBy="product")
@@ -58,7 +58,7 @@ Class Product
      * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="product")
      * @ORM\JoinTable(name="product_like")
      */
-    protected $like_product;
+    protected $likeProduct;
     
     /**
      * @ORM\OneToMany(targetEntity="Shop\ProductBundle\Entity\ProductImage", mappedBy="product", cascade={"persist"})
@@ -79,6 +79,46 @@ Class Product
         $this->cacheTags = new ArrayCollection();
 
         $this->created_at = new \DateTime();
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param array $file
+     *
+     * @return Product
+     */
+    public function setFile(array $file = null)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\PreFlush()
+     */
+    public function upload()
+    {
+        foreach($this->file as $uploadedFile) {
+            $productImage = new ProductImage();
+            $productImage->setFile($uploadedFile);
+            $productImage->preUpload();
+            $productImage->upload();
+
+            $productImage->setProduct($this);
+            $this->addImage($productImage);
+        }
     }
 
     /**
@@ -287,45 +327,5 @@ Class Product
     public function getImage()
     {
         return $this->image;
-    }
-
-    /**
-     * Sets file.
-     *
-     * @param array $file
-     *
-     * @return Product
-     */
-    public function setFile(array $file = null)
-    {
-        $this->file = $file;
-
-        return $this;
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @ORM\PreFlush()
-     */
-    public function upload()
-    {
-        foreach($this->file as $uploadedFile) {
-            $productImage = new ProductImage();
-            $productImage->setFile($uploadedFile);
-            $productImage->preUpload();
-            $productImage->upload();
-
-            $productImage->setProduct($this);
-            $this->addImage($productImage);
-        }
     }
 }

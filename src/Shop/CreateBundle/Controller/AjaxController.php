@@ -1,11 +1,12 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace Shop\CreateBundle\Controller;
 
+use Shop\CreateBundle\Form\Type\DeliveryType;
 use Shop\CreateBundle\Form\Type\DescriptionType;
 use Shop\CreateBundle\Form\Type\UploadLogoType;
 
@@ -31,7 +32,7 @@ class AjaxController extends FOSRestController
     {
         $name = $this->get('request')->request->get('name');
         $uniqueName = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(['unique_name' => $name]);
+                ->findOneBy(['uniqueName' => $name]);
         
         if ($uniqueName) {
             return false;
@@ -57,7 +58,7 @@ class AjaxController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $shop = $em->getRepository("ShopCreateBundle:Shops")
-            ->findOneBy(["unique_name" => $shopname]);
+            ->findOneBy(["uniqueName" => $shopname]);
 
         $form = $this->createForm(new DescriptionType(), $shop);
         $form->handleRequest($request);
@@ -88,7 +89,7 @@ class AjaxController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $shop = $em->getRepository("ShopCreateBundle:Shops")
-            ->findOneBy(["unique_name" => $shopname]);
+            ->findOneBy(["uniqueName" => $shopname]);
 
         $form = $this->createForm(new UploadLogoType(), $shop);
         $form->handleRequest($request);
@@ -109,5 +110,35 @@ class AjaxController extends FOSRestController
 
         return $form->getErrors();
     }
+
+    /**
+     * @ApiDoc(
+     *     description="Добавление способа доставки",
+     *     statusCodes={
+     *         200="Нормальный ответ"
+     *     }
+     * )
+     *
+     * @param Request $request
+     * @param string $shopname
+     *
+     * @Rest\View()
+     */
+    public function addDeliveryAction(Request $request, $shopname)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $shop = $em->getRepository("ShopCreateBundle:Shops")
+            ->findOneBy(["uniqueName" => $shopname]);
+
+        $form = $this->createForm(new DeliveryType(), $shop);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->flush();
+
+            return true;
+        }
+
+        return $form->getErrors();
+    }
 }
-?>

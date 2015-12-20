@@ -16,7 +16,7 @@ class MainController extends Controller
     {
         $form = $this->createForm(new SearchShopType(), new Product);
         $shop = $this->getDoctrine()->getRepository("ShopCreateBundle:Shops")
-            ->findOneBy(["unique_name" => $shopname]);
+            ->findOneBy(["uniqueName" => $shopname]);
 
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
             ->findByProductShop($shopname);

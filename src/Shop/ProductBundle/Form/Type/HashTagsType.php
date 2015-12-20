@@ -17,6 +17,9 @@ use Shop\ProductBundle\Form\DataTransformer\NameToTagsTransformer;
 
 class HashTagsType extends AbstractType
 {
+    /**
+     * @var ObjectManager
+    */
     private $om;
 
     public function __construct(ObjectManager $om)
@@ -27,23 +30,23 @@ class HashTagsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $transformer = new NameToTagsTransformer($this->om);
-        $builder->addModelTransformer($transformer);
+        $builder->addViewTransformer($transformer);
     }
 
-    public function getDefaultOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'invalid_message' => 'The selected issue does not exist',
-        ));
+        ]);
     }
 
     public function getParent()
     {
-        return 'text';
+        return "text";
     }
 
     public function getName()
     {
-        return 'hashTags';
+        return 'tags';
     }
 }

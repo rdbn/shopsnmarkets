@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -27,30 +27,30 @@ Class Shops
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopManager")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users", inversedBy="shopManager")
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      * )
      */
     protected $manager;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\City")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\City")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      */
     protected $city;
     
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(name="shopname", type="string", length=45)
      */
     protected $shopname;
     
     /**
-     * @ORM\Column(type="string", length=45, unique=true)
+     * @ORM\Column(name="unique_name", type="string", length=45, unique=true)
      */
-    protected $unique_name;
+    protected $uniqueName;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="rating", type="integer")
      */
     protected $rating;
 
@@ -94,10 +94,10 @@ Class Shops
     protected $path;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shop")
+     * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="shop")
      * @ORM\JoinTable(name="shops_like")
      */
-    protected $like_shop;
+    protected $likeShop;
 
     /**
      * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Keywords", inversedBy="shop")
@@ -106,7 +106,7 @@ Class Shops
     protected $keywords;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User\RegistrationBundle\Entity\Users", inversedBy="shopUsers")
+     * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="shopUsers")
      * @ORM\JoinTable(name="users_shops")
      */
     protected $users;
@@ -119,17 +119,18 @@ Class Shops
     /**
      * @ORM\OneToMany(targetEntity="Shop\CreateBundle\Entity\ShopsDelivery", mappedBy="shops")
      */
-    protected $shops_delivery;
+    protected $shopsDelivery;
 
     /**
-     * @ORM\OneToMany(targetEntity="Manager\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
+     * @ORM\OneToMany(targetEntity="User\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
      */
-    protected $advertising_shop;
+    protected $advertisingShop;
 
     /**
      * Construct for class Shops
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->rating = 0;
 
         $this->manager = new ArrayCollection();

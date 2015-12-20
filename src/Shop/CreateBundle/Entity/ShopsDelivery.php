@@ -18,7 +18,7 @@ class ShopsDelivery
 {     
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="shops_delivery")
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="shopsDelivery")
      * @ORM\JoinColumn(name="shops_id", referencedColumnName="id")
      */
     protected $shops;
@@ -31,9 +31,9 @@ class ShopsDelivery
     protected $delivery;
     
     /**
-     * @ORM\Column(name="price_duartion", type="float", scale=2)
+     * @ORM\Column(name="price", type="float", scale=2)
      */
-    protected $price_duration;
+    protected $price;
     
     /**
      * @ORM\Column(name="duration", type="string", length=255)
@@ -41,45 +41,56 @@ class ShopsDelivery
     protected $duration;
 
     /**
-     * Set price_duration
+     * Construct for class ShopsDelivery
+     */
+    public function __construct()
+    {
+        $this->shops = new ArrayCollection();
+        $this->delivery = new ArrayCollection();
+    }
+
+    /**
+     * Set price
      *
-     * @param float $priceDuration
+     * @param float $price
+     *
      * @return ShopsDelivery
      */
-    public function setPriceDuration($priceDuration)
+    public function setPrice($price)
     {
-        $this->price_duration = $priceDuration;
-    
+        $this->price = $price;
+
         return $this;
     }
 
     /**
-     * Get price_duration
+     * Get price
      *
-     * @return float 
+     * @return float
      */
-    public function getPriceDuration()
+    public function getPrice()
     {
-        return $this->price_duration;
+        return $this->price;
     }
 
     /**
      * Set duration
      *
      * @param string $duration
+     *
      * @return ShopsDelivery
      */
     public function setDuration($duration)
     {
         $this->duration = $duration;
-    
+
         return $this;
     }
 
     /**
      * Get duration
      *
-     * @return string 
+     * @return string
      */
     public function getDuration()
     {
@@ -90,19 +101,20 @@ class ShopsDelivery
      * Set shops
      *
      * @param \Shop\CreateBundle\Entity\Shops $shops
+     *
      * @return ShopsDelivery
      */
-    public function setShops(\Shop\CreateBundle\Entity\Shops $shops = null)
+    public function setShops(\Shop\CreateBundle\Entity\Shops $shops)
     {
         $this->shops = $shops;
-    
+
         return $this;
     }
 
     /**
      * Get shops
      *
-     * @return \Shop\CreateBundle\Entity\Shops 
+     * @return \Shop\CreateBundle\Entity\Shops
      */
     public function getShops()
     {
@@ -113,19 +125,20 @@ class ShopsDelivery
      * Set delivery
      *
      * @param \Shop\CreateBundle\Entity\Delivery $delivery
+     *
      * @return ShopsDelivery
      */
-    public function setDelivery(\Shop\CreateBundle\Entity\Delivery $delivery = null)
+    public function setDelivery(\Shop\CreateBundle\Entity\Delivery $delivery)
     {
         $this->delivery = $delivery;
-    
+
         return $this;
     }
 
     /**
      * Get delivery
      *
-     * @return \Shop\CreateBundle\Entity\Delivery 
+     * @return \Shop\CreateBundle\Entity\Delivery
      */
     public function getDelivery()
     {

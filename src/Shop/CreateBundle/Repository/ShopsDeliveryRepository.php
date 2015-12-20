@@ -12,24 +12,25 @@ class ShopsDeliveryRepository extends EntityRepository
 {
     public function findAllShopsDelivery($name) {
         return $this->getEntityManager()
-                ->createQuery('
-                    SELECT sd.price_duration, sd.duration, d.name, d.image FROM ShopCreateBundle:ShopsDelivery sd
-                    LEFT JOIN sd.delivery d
-                    LEFT JOIN sd.shops s
-                    WHERE s.unique_name = :name
-                ')->setParameter('name', $name)
-                ->getResult();
+            ->createQuery('
+                SELECT sd.price, sd.duration, d.name, d.image FROM ShopCreateBundle:ShopsDelivery sd
+                LEFT JOIN sd.delivery d
+                LEFT JOIN sd.shops s
+                WHERE s.uniqueName = :name
+            ')
+            ->setParameter('name', $name)
+            ->getResult();
     }
     
     public function findOneByShopsDelivery(array $value) 
     {
         $repository = $this->getEntityManager()->getRepository('ShopCreateBundle:ShopsDelivery');
         $query = $repository->createQueryBuilder('sd')
-                ->innerJoin('sd.shops', 's')
-                ->where('s.unique_name = :name')
-                ->setParameter('name', $value['shops'])
-                ->andWhere('sd.delivery = :delivery')
-                ->setParameter('delivery', $value['delivery']);
+            ->innerJoin('sd.shops', 's')
+            ->where('s.uniqueName = :name')
+            ->setParameter('name', $value['shops'])
+            ->andWhere('sd.delivery = :delivery')
+            ->setParameter('delivery', $value['delivery']);
         
         $shopsDelivery = $query->getQuery()->getResult();
         
@@ -40,4 +41,3 @@ class ShopsDeliveryRepository extends EntityRepository
         }
     }
 }
-?>

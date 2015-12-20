@@ -24,14 +24,14 @@ class UserOrderShop
         if (isset($shopname['0'])) {
             $repository = $this->em->getRepository('ShopCreateBundle:Shops');
             $query = $repository->createQueryBuilder('s')
-                    ->select('s.id, s.unique_name, s.shopname, s.path, u.realname, u.email, u.phone')
+                    ->select('s.id, s.uniqueName, s.shopname, s.path, u.realname, u.email, u.phone')
                     ->innerJoin('s.manager', 'u');
 
             if (count($shopname) > 1) {
-                $query->where('s.unique_name IN (:name)')
+                $query->where('s.uniqueName IN (:name)')
                         ->setParameter('name', $shopname);
             } else {
-                $query->where('s.unique_name = :name')
+                $query->where('s.uniqueName = :name')
                         ->setParameter('name', $shopname);
             }
 

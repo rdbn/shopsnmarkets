@@ -3,13 +3,13 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <div class="media">
-        <div class="media-left">
+    <div class="row top20">
+        <div class="col-md-4">
             {% for image in images %}
-                <img class="media-object" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
+                <img class="img-thumbnail" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
             {% endfor %}
         </div>
-        <div class="media-body">
+        <div class="col-md-8">
             <h3 class="alert alert-success top0">{% for tag in tags %}{{ tag.name }} {% endfor %}</h3>
             <form id="orderItem" action="#" method="post" {{ form_enctype(form) }}>
                 {{ form_errors(form) }}
@@ -20,17 +20,17 @@
                 {{ form_rest(form) }}
             </form>
             <p class='text'>{{ product.text }}</p>
-            <div class="shop">
-                <div class="col-lg-3">
+            <div class="row">
+                <div class="col-lg-5">
                     <div class="media">
-                        <div class="media-left col-lg-5">
-                            <a href="{{ path('_mainShop', { 'shopname' : product.unique_name }) }}">
+                        <div class="media-left">
+                            <a href="{{ path('_mainShop', { 'shopname' : product.uniqueName }) }}">
                                 <img class="media-object img-responsive" src="{% if (product.logo != '') %}{{ product.logo | apply_filter('logo_shop') }}{% endif %}" />
                             </a>
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">
-                                <a class="text-success" href="{{ path('_mainShop', { 'shopname' : product.unique_name }) }}">{{ product.shopname }}</a>
+                                <a class="text-success" href="{{ path('_mainShop', { 'shopname' : product.uniqueName }) }}">{{ product.shopname }}</a>
                             </h4>
                             <p class="text-muted small">Подписчиков: {{ product.users }}</p>
                             <p class="text-muted small">Рейтинг: {{ product.rating }}</p>

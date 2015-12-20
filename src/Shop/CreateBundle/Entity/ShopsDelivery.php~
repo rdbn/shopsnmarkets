@@ -31,9 +31,9 @@ class ShopsDelivery
     protected $delivery;
     
     /**
-     * @ORM\Column(name="price_duartion", type="float", scale=2)
+     * @ORM\Column(name="price", type="float", scale=2)
      */
-    protected $price_duration;
+    protected $price;
     
     /**
      * @ORM\Column(name="duration", type="string", length=255)
@@ -41,94 +41,11 @@ class ShopsDelivery
     protected $duration;
 
     /**
-     * Set price_duration
-     *
-     * @param float $priceDuration
-     * @return ShopsDelivery
+     * Construct for class ShopsDelivery
      */
-    public function setPriceDuration($priceDuration)
+    public function __construct()
     {
-        $this->price_duration = $priceDuration;
-    
-        return $this;
-    }
-
-    /**
-     * Get price_duration
-     *
-     * @return float 
-     */
-    public function getPriceDuration()
-    {
-        return $this->price_duration;
-    }
-
-    /**
-     * Set duration
-     *
-     * @param string $duration
-     * @return ShopsDelivery
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-    
-        return $this;
-    }
-
-    /**
-     * Get duration
-     *
-     * @return string 
-     */
-    public function getDuration()
-    {
-        return $this->duration;
-    }
-
-    /**
-     * Set shops
-     *
-     * @param \Shop\CreateBundle\Entity\Shops $shops
-     * @return ShopsDelivery
-     */
-    public function setShops(\Shop\CreateBundle\Entity\Shops $shops = null)
-    {
-        $this->shops = $shops;
-    
-        return $this;
-    }
-
-    /**
-     * Get shops
-     *
-     * @return \Shop\CreateBundle\Entity\Shops 
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * Set delivery
-     *
-     * @param \Shop\CreateBundle\Entity\Delivery $delivery
-     * @return ShopsDelivery
-     */
-    public function setDelivery(\Shop\CreateBundle\Entity\Delivery $delivery = null)
-    {
-        $this->delivery = $delivery;
-    
-        return $this;
-    }
-
-    /**
-     * Get delivery
-     *
-     * @return \Shop\CreateBundle\Entity\Delivery 
-     */
-    public function getDelivery()
-    {
-        return $this->delivery;
+        $this->shops = new ArrayCollection();
+        $this->delivery = new ArrayCollection();
     }
 }

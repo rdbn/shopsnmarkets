@@ -41,7 +41,13 @@
                     {{ form_widget(form.file) }}
                     <div class="row top10">
                         <div id="preview-img" class="col-md-12">
-                            <canvas class="img-thumbnail preview-img" width="150" height="150"></canvas>
+                            {% if images is defined %}
+                                {% for image in images %}
+                                    <canvas class="img-thumbnail preview-img" width="150" height="150"></canvas>
+                                {% endfor %}
+                            {% else %}
+                                <canvas class="img-thumbnail preview-img" width="150" height="150"></canvas>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -57,5 +63,5 @@
 {% block javascripts %}
     <script src="{{ asset('bootstrap/js/bootstrap-tokenfield.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bootstrap/js/typeahead.bundle.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/shop/addProducts.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/add-products.js') }}" type="text/javascript"></script>
 {% endblock %}

@@ -26,7 +26,7 @@ class PutController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $isName = $em->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(array('unique_name' => $shops->getUniqueName()));
+                ->findOneBy(array('uniqueName' => $shops->getUniqueName()));
 
             if ($isName) {
                 $shops->addManager($user);
@@ -51,14 +51,14 @@ class PutController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $shops = $em->getRepository('ShopCreateBundle:Shops')
-            ->findOneBy(array('unique_name' => $shopname));
+            ->findOneBy(array('uniqueName' => $shopname));
 
         $form = $this->createForm(new ShopsType(), $shops);
         $form->handleRequest($request);
 
         if ($form->isValid() && $shopname == $shops->getUniqueName()) {
             $isName = $em->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(array('unique_name' => $shops->getUniqueName()));
+                ->findOneBy(array('uniqueName' => $shops->getUniqueName()));
 
             if ($isName) {
                 $em->flush();
@@ -80,7 +80,7 @@ class PutController extends Controller
     public function previewAction($shopname)
     {
         $shop = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
-            ->findOneBy(['unique_name' => $shopname]);
+            ->findOneBy(['uniqueName' => $shopname]);
 
         $upload = $this->createForm(new UploadLogoType(), $shop);
         $description = $this->createForm(new DescriptionType($shopname), $shop);

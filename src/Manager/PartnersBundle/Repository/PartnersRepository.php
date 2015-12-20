@@ -13,7 +13,7 @@ class PartnersRepository extends EntityRepository
     public function findAllMyApplication($id) {
         return $this->getEntityManager()
                 ->createQuery('
-                    SELECT s.id, s.unique_name, s.shopname, s.rating, s.path, count(DISTINCT user) as users, 
+                    SELECT s.id, s.uniqueName, s.shopname, s.rating, s.path, count(DISTINCT user) as users,
                     count(DISTINCT like) as likes, shop.id as shops
                     FROM ManagerPartnersBundle:Partners p
                     LEFT JOIN ShopCreateBundle:Shops s WITH s.id = p.id
@@ -32,7 +32,7 @@ class PartnersRepository extends EntityRepository
     public function findAllApplication($id) {
         return $this->getEntityManager()
                 ->createQuery('
-                    SELECT s.id, s.unique_name, s.shopname, s.rating, s.path, count(DISTINCT user) as users, 
+                    SELECT s.id, s.uniqueName, s.shopname, s.rating, s.path, count(DISTINCT user) as users,
                     count(DISTINCT like) as likes, shop.id as shops
                     FROM ManagerPartnersBundle:Partners p
                     LEFT JOIN p.shops s
@@ -51,14 +51,14 @@ class PartnersRepository extends EntityRepository
     public function findAllShopsPartners($name) {
         return $this->getEntityManager()
                 ->createQuery('
-                    SELECT s.id, s.unique_name, s.shopname, s.rating, s.path, count(DISTINCT user) as users,
+                    SELECT s.id, s.uniqueName, s.shopname, s.rating, s.path, count(DISTINCT user) as users,
                     count(DISTINCT like) as likes, shop.id as shops
                     FROM ManagerPartnersBundle:Partners p
                     LEFT JOIN ShopCreateBundle:Shops s WITH s.id = p.id
                     LEFT JOIN s.users user
                     LEFT JOIN s.like_shop like
                     LEFT JOIN p.shops shop
-                    WHERE shop.unique_name = :name AND p.check_partners = 1
+                    WHERE shop.uniqueName = :name AND p.check_partners = 1
                     GROUP BY s
                 ')->setParameter('name', $name)
                 ->setFirstResult('0')
@@ -69,7 +69,7 @@ class PartnersRepository extends EntityRepository
     public function findAllPartners($id) {
         return $this->getEntityManager()
                 ->createQuery('
-                    SELECT s.id, s.unique_name, s.shopname, s.rating, s.path, count(DISTINCT user) as users,
+                    SELECT s.id, s.uniqueName, s.shopname, s.rating, s.path, count(DISTINCT user) as users,
                     count(DISTINCT like) as likes, shop.id as shops
                     FROM ManagerPartnersBundle:Partners p
                     LEFT JOIN ShopCreateBundle:Shops s WITH s.id = p.id

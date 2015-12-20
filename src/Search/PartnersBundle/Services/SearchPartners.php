@@ -60,7 +60,7 @@ class SearchPartners {
                     ->setParameter('id', $userID);
 
             $qb = $this->em->createQueryBuilder();
-            $query = $qb->select('s.id, s.unique_name, s.shopname, s.rating, s.path, '
+            $query = $qb->select('s.id, s.uniqueName, s.shopname, s.rating, s.path, '
                     . 'count(DISTINCT user) as users, count(DISTINCT shop_like) as likes')
                     ->from('ShopCreateBundle:Shops', 's')
                     ->leftJoin('s.manager', 'u')

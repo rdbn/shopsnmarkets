@@ -1,10 +1,9 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 namespace User\UserBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -18,7 +17,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity()
  * @ORM\Table(name="users")
  */
-
 Class Users implements UserInterface, EquatableInterface, \Serializable
 {
     /**
@@ -31,32 +29,32 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * @ORM\Column(name="vkontakte_id", type="string", nullable=true, options={"default":""})
      */
-    protected $vkontakte_id;
+    protected $vkontakte;
     
     /** 
      * @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true, options={"default":""}) 
      */
-    protected $vkontakte_access_token;
+    protected $vkontakteAccessToken;
     
     /** 
      * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true, options={"default":""}) 
      */
-    protected $facebook_id;
+    protected $facebook;
  
     /** 
      * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true, options={"default":""}) 
      */
-    protected $facebook_access_token;
+    protected $facebookAccessToken;
  
     /** 
      * @ORM\Column(name="google_id", type="string", length=255, nullable=true, options={"default":""}) 
      */
-    protected $google_id;
+    protected $google;
  
     /** 
      * @ORM\Column(name="google_access_token", type="string", length=255, nullable=true, options={"default":""}) 
      */
-    protected $google_access_token;
+    protected $googleAccessToken;
     
     /**
      * @ORM\Column(name="username", type="string", length=255, unique=true)
@@ -77,16 +75,6 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
      * @ORM\Column(type="string", length=255)
      */
     protected $salt;
-    
-    /**
-     * @ORM\Column(name="street", type="string", length=45, nullable=true, options={"default":""})
-     */
-    protected $street;
-    
-    /**
-     * @ORM\Column(name="home_index", type="integer", nullable=true)
-     */
-    protected $home_index;
     
     /**
      * @ORM\Column(name="phone", type="bigint", nullable=true)
@@ -149,12 +137,12 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     protected $roles;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Shops", mappedBy="like_shop")
+     * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Shops", mappedBy="likeShop")
      */
     protected $shop;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\ProductBundle\Entity\Product", mappedBy="like_product")
+     * @ORM\ManyToMany(targetEntity="Shop\ProductBundle\Entity\Product", mappedBy="likeProduct")
      *
      */
     protected $product;
@@ -416,7 +404,7 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -424,160 +412,167 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     }
 
     /**
-     * Set vkontakte_id
+     * Set vkontakte
      *
-     * @param string $vkontakteId
+     * @param string $vkontakte
+     *
      * @return Users
      */
-    public function setVkontakteId($vkontakteId)
+    public function setVkontakte($vkontakte)
     {
-        $this->vkontakte_id = $vkontakteId;
-    
+        $this->vkontakte = $vkontakte;
+
         return $this;
     }
 
     /**
-     * Get vkontakte_id
+     * Get vkontakte
      *
-     * @return string 
+     * @return string
      */
-    public function getVkontakteId()
+    public function getVkontakte()
     {
-        return $this->vkontakte_id;
+        return $this->vkontakte;
     }
 
     /**
-     * Set vkontakte_access_token
+     * Set vkontakteAccessToken
      *
      * @param string $vkontakteAccessToken
+     *
      * @return Users
      */
     public function setVkontakteAccessToken($vkontakteAccessToken)
     {
-        $this->vkontakte_access_token = $vkontakteAccessToken;
-    
+        $this->vkontakteAccessToken = $vkontakteAccessToken;
+
         return $this;
     }
 
     /**
-     * Get vkontakte_access_token
+     * Get vkontakteAccessToken
      *
-     * @return string 
+     * @return string
      */
     public function getVkontakteAccessToken()
     {
-        return $this->vkontakte_access_token;
+        return $this->vkontakteAccessToken;
     }
 
     /**
-     * Set facebook_id
+     * Set facebook
      *
-     * @param string $facebookId
+     * @param string $facebook
+     *
      * @return Users
      */
-    public function setFacebookId($facebookId)
+    public function setFacebook($facebook)
     {
-        $this->facebook_id = $facebookId;
-    
+        $this->facebook = $facebook;
+
         return $this;
     }
 
     /**
-     * Get facebook_id
+     * Get facebook
      *
-     * @return string 
+     * @return string
      */
-    public function getFacebookId()
+    public function getFacebook()
     {
-        return $this->facebook_id;
+        return $this->facebook;
     }
 
     /**
-     * Set facebook_access_token
+     * Set facebookAccessToken
      *
      * @param string $facebookAccessToken
+     *
      * @return Users
      */
     public function setFacebookAccessToken($facebookAccessToken)
     {
-        $this->facebook_access_token = $facebookAccessToken;
-    
+        $this->facebookAccessToken = $facebookAccessToken;
+
         return $this;
     }
 
     /**
-     * Get facebook_access_token
+     * Get facebookAccessToken
      *
-     * @return string 
+     * @return string
      */
     public function getFacebookAccessToken()
     {
-        return $this->facebook_access_token;
+        return $this->facebookAccessToken;
     }
 
     /**
-     * Set google_id
+     * Set google
      *
-     * @param string $googleId
+     * @param string $google
+     *
      * @return Users
      */
-    public function setGoogleId($googleId)
+    public function setGoogle($google)
     {
-        $this->google_id = $googleId;
-    
+        $this->google = $google;
+
         return $this;
     }
 
     /**
-     * Get google_id
+     * Get google
      *
-     * @return string 
+     * @return string
      */
-    public function getGoogleId()
+    public function getGoogle()
     {
-        return $this->google_id;
+        return $this->google;
     }
 
     /**
-     * Set google_access_token
+     * Set googleAccessToken
      *
      * @param string $googleAccessToken
+     *
      * @return Users
      */
     public function setGoogleAccessToken($googleAccessToken)
     {
-        $this->google_access_token = $googleAccessToken;
-    
+        $this->googleAccessToken = $googleAccessToken;
+
         return $this;
     }
 
     /**
-     * Get google_access_token
+     * Get googleAccessToken
      *
-     * @return string 
+     * @return string
      */
     public function getGoogleAccessToken()
     {
-        return $this->google_access_token;
+        return $this->googleAccessToken;
     }
 
     /**
      * Set realname
      *
      * @param string $realname
+     *
      * @return Users
      */
     public function setRealname($realname)
     {
         $this->realname = $realname;
-    
+
         return $this;
     }
 
     /**
      * Get realname
      *
-     * @return string 
+     * @return string
      */
     public function getRealname()
     {
@@ -585,68 +580,23 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     }
 
     /**
-     * Set street
-     *
-     * @param string $street
-     * @return Users
-     */
-    public function setStreet($street)
-    {
-        $this->street = $street;
-    
-        return $this;
-    }
-
-    /**
-     * Get street
-     *
-     * @return string 
-     */
-    public function getStreet()
-    {
-        return $this->street;
-    }
-
-    /**
-     * Set home_index
-     *
-     * @param integer $homeIndex
-     * @return Users
-     */
-    public function setHomeIndex($homeIndex)
-    {
-        $this->home_index = $homeIndex;
-    
-        return $this;
-    }
-
-    /**
-     * Get home_index
-     *
-     * @return integer 
-     */
-    public function getHomeIndex()
-    {
-        return $this->home_index;
-    }
-
-    /**
      * Set phone
      *
      * @param integer $phone
+     *
      * @return Users
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
-    
+
         return $this;
     }
 
     /**
      * Get phone
      *
-     * @return integer 
+     * @return integer
      */
     public function getPhone()
     {
@@ -657,19 +607,20 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
      * Set skype
      *
      * @param string $skype
+     *
      * @return Users
      */
     public function setSkype($skype)
     {
         $this->skype = $skype;
-    
+
         return $this;
     }
 
     /**
      * Get skype
      *
-     * @return string 
+     * @return string
      */
     public function getSkype()
     {
@@ -680,313 +631,24 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
      * Set path
      *
      * @param string $path
+     *
      * @return Users
      */
     public function setPath($path)
     {
         $this->path = $path;
-    
+
         return $this;
     }
 
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
         return $this->path;
-    }
-
-    /**
-     * Set workHourStart
-     *
-     * @param \DateTime $workHourStart
-     * @return Users
-     */
-    public function setWorkHourStart($workHourStart)
-    {
-        $this->workHourStart = $workHourStart;
-    
-        return $this;
-    }
-
-    /**
-     * Get workHourStart
-     *
-     * @return \DateTime 
-     */
-    public function getWorkHourStart()
-    {
-        return $this->workHourStart;
-    }
-
-    /**
-     * Set workHourEnd
-     *
-     * @param \DateTime $workHourEnd
-     * @return Users
-     */
-    public function setWorkHourEnd($workHourEnd)
-    {
-        $this->workHourEnd = $workHourEnd;
-    
-        return $this;
-    }
-
-    /**
-     * Get workHourEnd
-     *
-     * @return \DateTime 
-     */
-    public function getWorkHourEnd()
-    {
-        return $this->workHourEnd;
-    }
-
-    /**
-     * Set city
-     *
-     * @param \User\UserBundle\Entity\City $city
-     * @return Users
-     */
-    public function setCity(\User\UserBundle\Entity\City $city = null)
-    {
-        $this->city = $city;
-    
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return \User\UserBundle\Entity\City
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Add roles
-     *
-     * @param \User\UserBundle\Entity\Roles $roles
-     * @return Users
-     */
-    public function addRole(\User\UserBundle\Entity\Roles $roles)
-    {
-        $this->roles[] = $roles;
-    
-        return $this;
-    }
-
-    /**
-     * Remove roles
-     *
-     * @param \User\UserBundle\Entity\Roles $roles
-     */
-    public function removeRole(\User\UserBundle\Entity\Roles $roles)
-    {
-        $this->roles->removeElement($roles);
-    }
-
-    /**
-     * Add shop
-     *
-     * @param \Shop\CreateBundle\Entity\Shops $shop
-     * @return Users
-     */
-    public function addShop(\Shop\CreateBundle\Entity\Shops $shop)
-    {
-        $this->shop[] = $shop;
-    
-        return $this;
-    }
-
-    /**
-     * Remove shop
-     *
-     * @param \Shop\CreateBundle\Entity\Shops $shop
-     */
-    public function removeShop(\Shop\CreateBundle\Entity\Shops $shop)
-    {
-        $this->shop->removeElement($shop);
-    }
-
-    /**
-     * Get shop
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getShop()
-    {
-        return $this->shop;
-    }
-
-    /**
-     * Add shopManager
-     *
-     * @param \Shop\CreateBundle\Entity\Shops $shopManager
-     * @return Users
-     */
-    public function addShopManager(\Shop\CreateBundle\Entity\Shops $shopManager)
-    {
-        $this->shopManager[] = $shopManager;
-    
-        return $this;
-    }
-
-    /**
-     * Remove shopManager
-     *
-     * @param \Shop\CreateBundle\Entity\Shops $shopManager
-     */
-    public function removeShopManager(\Shop\CreateBundle\Entity\Shops $shopManager)
-    {
-        $this->shopManager->removeElement($shopManager);
-    }
-
-    /**
-     * Get shopManager
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getShopManager()
-    {
-        return $this->shopManager;
-    }
-
-    /**
-     * Add shopUsers
-     *
-     * @param \Shop\CreateBundle\Entity\Shops $shopUsers
-     * @return Users
-     */
-    public function addShopUser(\Shop\CreateBundle\Entity\Shops $shopUsers)
-    {
-        $this->shopUsers[] = $shopUsers;
-    
-        return $this;
-    }
-
-    /**
-     * Remove shopUsers
-     *
-     * @param \Shop\CreateBundle\Entity\Shops $shopUsers
-     */
-    public function removeShopUser(\Shop\CreateBundle\Entity\Shops $shopUsers)
-    {
-        $this->shopUsers->removeElement($shopUsers);
-    }
-
-    /**
-     * Get shopUsers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getShopUsers()
-    {
-        return $this->shopUsers;
-    }
-
-    /**
-     * Add friends
-     *
-     * @param \User\FriendsBundle\Entity\Friends $friends
-     * @return Users
-     */
-    public function addFriend(\User\FriendsBundle\Entity\Friends $friends)
-    {
-        $this->friends[] = $friends;
-    
-        return $this;
-    }
-
-    /**
-     * Remove friends
-     *
-     * @param \User\FriendsBundle\Entity\Friends $friends
-     */
-    public function removeFriend(\User\FriendsBundle\Entity\Friends $friends)
-    {
-        $this->friends->removeElement($friends);
-    }
-
-    /**
-     * Get friends
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFriends()
-    {
-        return $this->friends;
-    }
-
-    /**
-     * Add product
-     *
-     * @param \Shop\ProductBundle\Entity\Product $product
-     * @return Users
-     */
-    public function addProduct(\Shop\ProductBundle\Entity\Product $product)
-    {
-        $this->product[] = $product;
-    
-        return $this;
-    }
-
-    /**
-     * Remove product
-     *
-     * @param \Shop\ProductBundle\Entity\Product $product
-     */
-    public function removeProduct(\Shop\ProductBundle\Entity\Product $product)
-    {
-        $this->product->removeElement($product);
-    }
-
-    /**
-     * Get product
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * Add order
-     *
-     * @param \Shop\OrderBundle\Entity\Order $order
-     * @return Users
-     */
-    public function addOrder(\Shop\OrderBundle\Entity\Order $order)
-    {
-        $this->order[] = $order;
-    
-        return $this;
-    }
-
-    /**
-     * Remove order
-     *
-     * @param \Shop\OrderBundle\Entity\Order $order
-     */
-    public function removeOrder(\Shop\OrderBundle\Entity\Order $order)
-    {
-        $this->order->removeElement($order);
-    }
-
-    /**
-     * Get order
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getOrder()
-    {
-        return $this->order;
     }
 
     /**
@@ -1011,5 +673,305 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set workHourStart
+     *
+     * @param \DateTime $workHourStart
+     *
+     * @return Users
+     */
+    public function setWorkHourStart($workHourStart)
+    {
+        $this->workHourStart = $workHourStart;
+
+        return $this;
+    }
+
+    /**
+     * Get workHourStart
+     *
+     * @return \DateTime
+     */
+    public function getWorkHourStart()
+    {
+        return $this->workHourStart;
+    }
+
+    /**
+     * Set workHourEnd
+     *
+     * @param \DateTime $workHourEnd
+     *
+     * @return Users
+     */
+    public function setWorkHourEnd($workHourEnd)
+    {
+        $this->workHourEnd = $workHourEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get workHourEnd
+     *
+     * @return \DateTime
+     */
+    public function getWorkHourEnd()
+    {
+        return $this->workHourEnd;
+    }
+
+    /**
+     * Set city
+     *
+     * @param \User\UserBundle\Entity\City $city
+     *
+     * @return Users
+     */
+    public function setCity(\User\UserBundle\Entity\City $city = null)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return \User\UserBundle\Entity\City
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Add role
+     *
+     * @param \User\UserBundle\Entity\Roles $role
+     *
+     * @return Users
+     */
+    public function addRole(\User\UserBundle\Entity\Roles $role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Remove role
+     *
+     * @param \User\UserBundle\Entity\Roles $role
+     */
+    public function removeRole(\User\UserBundle\Entity\Roles $role)
+    {
+        $this->roles->removeElement($role);
+    }
+
+    /**
+     * Add shop
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shop
+     *
+     * @return Users
+     */
+    public function addShop(\Shop\CreateBundle\Entity\Shops $shop)
+    {
+        $this->shop[] = $shop;
+
+        return $this;
+    }
+
+    /**
+     * Remove shop
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shop
+     */
+    public function removeShop(\Shop\CreateBundle\Entity\Shops $shop)
+    {
+        $this->shop->removeElement($shop);
+    }
+
+    /**
+     * Get shop
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShop()
+    {
+        return $this->shop;
+    }
+
+    /**
+     * Add product
+     *
+     * @param \Shop\ProductBundle\Entity\Product $product
+     *
+     * @return Users
+     */
+    public function addProduct(\Shop\ProductBundle\Entity\Product $product)
+    {
+        $this->product[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \Shop\ProductBundle\Entity\Product $product
+     */
+    public function removeProduct(\Shop\ProductBundle\Entity\Product $product)
+    {
+        $this->product->removeElement($product);
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     *
+     * @return Users
+     */
+    public function addOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     */
+    public function removeOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order->removeElement($order);
+    }
+
+    /**
+     * Get order
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Add shopUser
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shopUser
+     *
+     * @return Users
+     */
+    public function addShopUser(\Shop\CreateBundle\Entity\Shops $shopUser)
+    {
+        $this->shopUsers[] = $shopUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove shopUser
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shopUser
+     */
+    public function removeShopUser(\Shop\CreateBundle\Entity\Shops $shopUser)
+    {
+        $this->shopUsers->removeElement($shopUser);
+    }
+
+    /**
+     * Get shopUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShopUsers()
+    {
+        return $this->shopUsers;
+    }
+
+    /**
+     * Add shopManager
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shopManager
+     *
+     * @return Users
+     */
+    public function addShopManager(\Shop\CreateBundle\Entity\Shops $shopManager)
+    {
+        $this->shopManager[] = $shopManager;
+
+        return $this;
+    }
+
+    /**
+     * Remove shopManager
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shopManager
+     */
+    public function removeShopManager(\Shop\CreateBundle\Entity\Shops $shopManager)
+    {
+        $this->shopManager->removeElement($shopManager);
+    }
+
+    /**
+     * Get shopManager
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShopManager()
+    {
+        return $this->shopManager;
+    }
+
+    /**
+     * Add friend
+     *
+     * @param \User\FriendsBundle\Entity\Friends $friend
+     *
+     * @return Users
+     */
+    public function addFriend(\User\FriendsBundle\Entity\Friends $friend)
+    {
+        $this->friends[] = $friend;
+
+        return $this;
+    }
+
+    /**
+     * Remove friend
+     *
+     * @param \User\FriendsBundle\Entity\Friends $friend
+     */
+    public function removeFriend(\User\FriendsBundle\Entity\Friends $friend)
+    {
+        $this->friends->removeElement($friend);
+    }
+
+    /**
+     * Get friends
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFriends()
+    {
+        return $this->friends;
     }
 }

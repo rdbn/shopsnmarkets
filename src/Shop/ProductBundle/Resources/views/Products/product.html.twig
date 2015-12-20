@@ -13,13 +13,13 @@
             </a>
         </div>
     {% endif %}
-    <div class="media">
-        <div class="media-left">
+    <div class="row top20">
+        <div class="col-md-4">
             {% for image in images %}
-                <img class="media-object" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
+                <img class="img-thumbnail" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
             {% endfor %}
         </div>
-        <div class="media-body">
+        <div class="col-md-8">
             <h3 class="alert alert-success top0">{% for tag in tags %}{{ tag.name }} {% endfor %}</h3>
             <form id="orderItem" action="#" method="post" {{ form_enctype(form) }}>
                 {{ form_errors(form) }}

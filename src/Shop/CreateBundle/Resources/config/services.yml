@@ -1,8 +1,14 @@
 parameters:
 
 services:
-    delivery.id.type.issue_selector:
+    app.type.delivery_selector:
         class: Shop\CreateBundle\Form\Type\DeliveryIdType
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
-            - { name: form.type, alias: deliveryId }
+            - { name: form.type, alias: delivery }
+
+    app.type.shopname_selector:
+        class: Shop\CreateBundle\Form\Type\ShopnameType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: shopname }

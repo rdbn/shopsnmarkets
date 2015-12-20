@@ -20,7 +20,7 @@ class Bookmarks {
     public function getShops($id) {
         $repository = $this->em->getRepository('ShopCreateBundle:Shops');
         $query = $repository->createQueryBuilder('s')
-                ->select('s.unique_name, s.shopname, s.rating, s.path, count(DISTINCT u) as users, count(shop) as like_shop')
+                ->select('s.uniqueName, s.shopname, s.rating, s.path, count(DISTINCT u) as users, count(shop) as like_shop')
                 ->leftJoin('s.users', 'u')
                 ->leftJoin('s.like_shop', 'shop')
                 ->innerJoin('s.users', 'user')

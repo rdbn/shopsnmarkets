@@ -23,7 +23,7 @@ class PutController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $shop = $em->getRepository("ShopCreateBundle:Shops")
-                ->findOneBy(["unique_name" => $shopname]);
+                ->findOneBy(["uniqueName" => $shopname]);
 
             $product->setShops($shop);
             $product->upload();
@@ -43,6 +43,7 @@ class PutController extends Controller
     public function updateAction(Request $request, $shopname, $id)
     {
         $em = $this->getDoctrine()->getManager();
+        /* @var Product $product */
         $product = $em->getRepository("ShopProductBundle:Product")
             ->findOneById($id);
 
@@ -52,13 +53,13 @@ class PutController extends Controller
         if ($form->isValid()) {
             $em->flush();
 
-            //return $this->redirectToRoute('_mainShop', ['shopname' => $shopname]);
+            return $this->redirectToRoute('_mainShop', ['shopname' => $shopname]);
         }
 
         return $this->render('ShopProductBundle:Form:form.html.twig', array(
+            'images' => $product->getImage()->toArray(),
             'form' => $form->createView(),
             'shopname' => $shopname,
         ));
     }
 }
-?>

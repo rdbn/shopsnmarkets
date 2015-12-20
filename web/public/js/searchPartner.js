@@ -19,9 +19,9 @@ var SearchParnters = {
                 var html = '';
                 
                 for (var value in data) {
-                    html += '<div class="resultShop"><a href="/'+data[value]['unique_name']+'">';
+                    html += '<div class="resultShop"><a href="/'+data[value]['uniqueName']+'">';
                     html += '<img src="/media/cache/logo_shop/'+data[value]['path']+'" /></a>';
-                    html += '<ul class="infShop"><li><a href="/'+data[value]['unique_name']+'">'+data[value]['shopname']+'</a></li>';
+                    html += '<ul class="infShop"><li><a href="/'+data[value]['uniqueName']+'">'+data[value]['shopname']+'</a></li>';
                     html += '<li><p>Подписчиков: '+data[value]['users']+'</p></li><li><p>Рейтинг: '+data[value]['rating']+'</p></li>';
                     html += '<li><p>Понравилось: '+data[value]['likes']+'</p></li></ul><div class="listPartners">';
                     html += '<a class="addPartners" href="'+data[value]['id']+'">Предложить партнерство';

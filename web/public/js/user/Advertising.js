@@ -63,14 +63,14 @@ var ShopAdvertising = {
                 for (var value in data[values]['slider']) {
                     html += '<ul class="preview"><li><a class="previewImg" href="#">Показать картинку</a></li>';
                     html += '<li><a class="deleteImg" href="#">Удалить картинку</a></li>';
-                    html += '<li><img width=807 src="/public/xml/Shops/'+data[values]['unique_name']+'/advertising/slider/';
+                    html += '<li><img width=807 src="/public/xml/Shops/'+data[values]['uniqueName']+'/advertising/slider/';
                     html += data[values]['slider'][value]+'" /></li></ul>';
                 }
                 html += '<h3 class="chapter">Рекламма с боку</h3>';
                 for (var value in data[values]['side_of']) {
                     html += '<ul class="preview"><li><a class="previewImg" href="#">Показать картинку</a></li>';
                     html += '<li><a class="deleteImg" href="#">Удалить картинку</a></li>';
-                    html += '<li><img width=100 src="/public/xml/Shops/'+data[values]['unique_name']+'/advertising/side_of/';
+                    html += '<li><img width=100 src="/public/xml/Shops/'+data[values]['uniqueName']+'/advertising/side_of/';
                     html += data[values]['side_of'][value]+'" /></li></ul>';
                 }
                 html += '</div>';

@@ -10,11 +10,11 @@
 {% block body %}
     {% for shop in shops %}
         <div class="shop">
-            <a href='{{ path('_mainShop', { 'shopname' : shop.unique_name }) }}'>
+            <a href='{{ path('_mainShop', { 'shopname' : shop.uniqueName }) }}'>
                 <img src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" /></a>
             </a>
             <ul>
-                <li><a href='{{ path('_mainShop', { 'shopname' : shop.unique_name }) }}'>{{ shop.shopname }}</a></li>
+                <li><a href='{{ path('_mainShop', { 'shopname' : shop.uniqueName }) }}'>{{ shop.shopname }}</a></li>
                 <li><p>Подписчиков: {{ shop.users }}</p></li>
                 <li><p>Райтинг: {{ shop.rating }}</p></li>
                 <li><p>Понравилось: {{ shop.like_shop }}</p></li>

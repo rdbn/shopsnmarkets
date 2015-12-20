@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -12,36 +12,31 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DeliveryType extends AbstractType
 {
-    protected $shops, $id;
-
-    public function __construct($shopname, $id) {
-        $this->shops = $shopname;
-        $this->id = $id;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('shops', 'shopname', array(
-            'data' => $this->shops,
-        ));
-        $builder->add('delivery', 'deliveryId', array(
-            'data' => $this->id,
-        ));
-        $builder->add('price_duration', 'number', array(
-            'label' => 'Стоимость:',
-            'data' => isset($options['data']) ? $options['data']->getPriceDuration() : NULL,
-        ));
-        $builder->add('duration', 'text', array(
-            'label' => 'Сроки:',
+        $builder->add('shops', 'shopname');
+        $builder->add('delivery', 'delivery');
+        $builder->add('price', 'number', [
+            'label' => false,
+            'attr' => [
+                'placeholder' => 'Стоимость'
+            ],
+            'data' => isset($options['data']) ? $options['data']->getPrice() : NULL,
+        ]);
+        $builder->add('duration', 'text', [
+            'label' => false,
+            'attr' => [
+                'placeholder' => 'Сроки'
+            ],
             'data' => isset($options['data']) ? $options['data']->getDuration() : NULL,
-        ));
+        ]);
     }
     
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Shop\CreateBundle\Entity\ShopsDelivery'
-        ));
+        ]);
     }
     
     public function getName() 
@@ -49,4 +44,3 @@ class DeliveryType extends AbstractType
         return 'ShopsDelivery';
     }
 }
-?>

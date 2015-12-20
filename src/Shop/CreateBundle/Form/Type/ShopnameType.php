@@ -1,19 +1,19 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace Shop\CreateBundle\Form\Type;
 
-use Shop\CreateBundle\Form\DataTransformer\DeliveryToIdTransformer;
+use Shop\CreateBundle\Form\DataTransformer\ShopsToShopnameTransformer;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DeliveryIdType extends AbstractType {
+class ShopnameType extends AbstractType {
     
     /**
      * @var ObjectManager
@@ -30,8 +30,8 @@ class DeliveryIdType extends AbstractType {
     
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $transformer = new DeliveryToIdTransformer($this->om);
-        $builder->addModelTransformer($transformer);
+        $transformer = new ShopsToShopnameTransformer($this->om);
+        $builder->addViewTransformer($transformer);
     }
     
     public function configureOptions(OptionsResolver $resolver)
@@ -48,6 +48,6 @@ class DeliveryIdType extends AbstractType {
     
     public function getName() 
     {
-        return 'delivery';
+        return 'shopname';
     }
 }

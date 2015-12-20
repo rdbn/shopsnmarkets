@@ -20,7 +20,7 @@ class ManagerOrders
     {
         $order = array();
         foreach ($this->getShops($id) as $index => $name) {
-            $dir = __DIR__.'/../../../../../Symfony/web/public/xml/Shops/'.$name['unique_name'].'/checkout';
+            $dir = __DIR__.'/../../../../../Symfony/web/public/xml/Shops/'.$name['uniqueName'].'/checkout';
             $order = $this->getOrders($dir, $index);
         }
         
@@ -31,7 +31,7 @@ class ManagerOrders
     {
         $repository = $this->em->getRepository('ShopCreateBundle:Shops');
         $query = $repository->createQueryBuilder('s')
-                ->select('s.unique_name')
+                ->select('s.uniqueName')
                 ->innerJoin('s.manager', 'u')
                 ->where('u.id = :id')
                 ->setParameter('id', $id);
