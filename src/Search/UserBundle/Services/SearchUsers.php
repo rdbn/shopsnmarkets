@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -9,8 +9,8 @@ namespace Search\UserBundle\Services;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class SearchUsers {
-    
+class SearchUsers
+{
     protected $em;
     protected $formFactory;
     protected $form;
@@ -92,4 +92,3 @@ class SearchUsers {
         }
     }
 }
-?>

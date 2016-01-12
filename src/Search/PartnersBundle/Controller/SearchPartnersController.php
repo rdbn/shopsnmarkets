@@ -38,4 +38,3 @@ class SearchPartnersController extends Controller {
         return new JsonResponse('');
     }
 }
-?>

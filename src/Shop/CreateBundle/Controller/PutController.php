@@ -6,13 +6,17 @@
  */
 namespace Shop\CreateBundle\Controller;
 
+use Shop\CreateBundle\Entity\Delivery;
 use Shop\CreateBundle\Entity\Shops;
+use Shop\CreateBundle\Entity\ShopsDelivery;
+
 use Shop\CreateBundle\Form\Type\ShopsType;
 use Shop\CreateBundle\Form\Type\DescriptionType;
 use Shop\CreateBundle\Form\Type\UploadLogoType;
+use Shop\CreateBundle\Form\Type\DeliveryShopType;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PutController extends Controller
 {
@@ -92,5 +96,21 @@ class PutController extends Controller
             'shopname' => $shopname,
         ));
     }
+
+    public function deliveryAction($shopname)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $shop = $em->getRepository("ShopCreateBundle:Shops")
+            ->findOneBy(["uniqueName" => $shopname]);
+
+        $form = $this->createForm(new DeliveryShopType(), $shop);
+        $delivery = $em->getRepository('ShopCreateBundle:Delivery')
+            ->findAll();
+
+        return $this->render('ShopCreateBundle:Delivery:all.html.twig', [
+            'form' => $form->createView(),
+            'delivery' => $delivery,
+            'shopname' => $shopname,
+        ]);
+    }
 }
-?>

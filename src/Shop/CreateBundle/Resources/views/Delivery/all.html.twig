@@ -1,9 +1,12 @@
-{% extends 'ManagerMainBundle:Base:layout.html.twig' %}
+{% extends 'UserUserBundle::layout.html.twig' %}
 
 {% block title %}Доставка{% endblock %}
 
 {% block content %}
     {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    {{ form_end(form) }}
     {% for value in delivery %}
         <div class="media">
             <div class="media-left media-middle">
@@ -12,7 +15,12 @@
                 </a>
             </div>
             <div class="media-body">
-                <h4 class="media-heading">{{ value.name }}</h4>
+                <p class="media-heading">
+                    {{ value.name }}
+                    <button class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus small"></span>
+                    </button>
+                </p>
             </div>
         </div>
     {% endfor %}

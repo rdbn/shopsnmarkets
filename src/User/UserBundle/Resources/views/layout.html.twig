@@ -1,0 +1,20 @@
+{% extends '::main_platform.html.twig' %}
+
+{% block body %}
+    <div class="row top20">
+        <div class="col-lg-2 small">
+            <p><a class="text-success" href="{{ path('_manager') }}">Моя Страница</a></p>
+            <p><a class="text-success" href="{{ path('_allShopsManager') }}">Мои Магазины</a></p>
+            <p><a class="text-success" href="{{ path('_allMessage') }}">Мои Сообщения</a></p>
+            <p><a class="text-success" href="{{ path('_friends') }}">Мои Друзья</a></p>
+            <p><a class="text-success" href="{{ path('_partners') }}">Мои Партнеры</a></p>
+            <p><a class="text-success" href="{{ path('_userOrder') }}">Мои Заказы</a></p>
+            <br>
+            <p><a class="text-success" href="{{ path('_advertising') }}">Реклама</a></p>
+            <p><a class="text-success" href="{{ path('_property') }}">Настройки</a></p>
+        </div>
+        <div class="col-lg-10">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

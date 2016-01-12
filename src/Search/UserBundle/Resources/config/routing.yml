@@ -5,4 +5,4 @@ _searchUsers:
     
 _resualtSearchUser:
     pattern:  /friends/resualtSearch
-    defaults: { _controller: SearchUserBundle:SearchUsers:resualtSearch }
+    defaults: { _controller: SearchUserBundle:SearchUsers:resultSearch }

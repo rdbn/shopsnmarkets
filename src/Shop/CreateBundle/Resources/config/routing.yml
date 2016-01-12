@@ -10,19 +10,10 @@ _updateShop:
 _previewShop:
     pattern:  /manager/shop/preview/{shopname}
     defaults: { _controller: ShopCreateBundle:Put:preview }
-    
-# for class Delivery
-_delivery: 
+
+_delivery:
     pattern:  /manager/shop/delivery/{shopname}
-    defaults: { _controller: ShopCreateBundle:Delivery:all }
-  
-_formDelivery:
-    pattern:  /manager/shop/deliveryForm
-    defaults: { _controller: ShopCreateBundle:Delivery:form }
-    
-_saveDelivery:
-    pattern:  /manager/shop/deliverySave
-    defaults: { _controller: ShopCreateBundle:Delivery:save }
+    defaults: { _controller: ShopCreateBundle:Put:delivery }
     
 # for class AjaxCreateShop
 _uniqueName:

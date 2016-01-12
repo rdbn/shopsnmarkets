@@ -19,14 +19,16 @@ class DeliveryType extends AbstractType
         $builder->add('price', 'number', [
             'label' => false,
             'attr' => [
-                'placeholder' => 'Стоимость'
+                'placeholder' => 'Стоимость',
+                'class' => 'form-control',
             ],
             'data' => isset($options['data']) ? $options['data']->getPrice() : NULL,
         ]);
         $builder->add('duration', 'text', [
             'label' => false,
             'attr' => [
-                'placeholder' => 'Сроки'
+                'placeholder' => 'Сроки',
+                'class' => 'form-control',
             ],
             'data' => isset($options['data']) ? $options['data']->getDuration() : NULL,
         ]);
@@ -41,6 +43,6 @@ class DeliveryType extends AbstractType
     
     public function getName() 
     {
-        return 'ShopsDelivery';
+        return 'Delivery';
     }
 }

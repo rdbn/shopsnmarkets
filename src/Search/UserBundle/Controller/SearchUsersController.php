@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -23,7 +23,7 @@ class SearchUsersController extends Controller {
         ));
     }
     
-    public function resualtSearchAction() 
+    public function resultSearchAction()
     {
         $userID = $this->getUser()->getId();
         $data = $this->get('request')->request->get('searchUsers');
@@ -32,12 +32,11 @@ class SearchUsersController extends Controller {
         $search->createForm(new SearchUsersType(), new Users());
         
         if ($search->validSearch($data, $userID)) {
-            $resualt = $search->resualtSearch();
+            $result = $search->resualtSearch();
             
-            return new JsonResponse($resualt);
+            return new JsonResponse($result);
         }
         
         return new JsonResponse('');
     }
 }
-?>

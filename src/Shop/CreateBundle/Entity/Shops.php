@@ -112,7 +112,7 @@ Class Shops
     protected $users;
     
     /**
-     * @ORM\OneToMany(targetEntity="Manager\PartnersBundle\Entity\Partners", mappedBy="shops")
+     * @ORM\OneToMany(targetEntity="User\PartnersBundle\Entity\Partners", mappedBy="shops")
      */
     protected $partners;
     
@@ -583,11 +583,11 @@ Class Shops
     /**
      * Add partner
      *
-     * @param \Manager\PartnersBundle\Entity\Partners $partner
+     * @param \User\PartnersBundle\Entity\Partners $partner
      *
      * @return Shops
      */
-    public function addPartner(\Manager\PartnersBundle\Entity\Partners $partner)
+    public function addPartner(\User\PartnersBundle\Entity\Partners $partner)
     {
         $this->partners[] = $partner;
 
@@ -597,9 +597,9 @@ Class Shops
     /**
      * Remove partner
      *
-     * @param \Manager\PartnersBundle\Entity\Partners $partner
+     * @param \User\PartnersBundle\Entity\Partners $partner
      */
-    public function removePartner(\Manager\PartnersBundle\Entity\Partners $partner)
+    public function removePartner(\User\PartnersBundle\Entity\Partners $partner)
     {
         $this->partners->removeElement($partner);
     }

@@ -1,17 +1,39 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 namespace User\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MainController extends Controller
-{    
-    public function mainAction() 
+{
+    public function managerAction()
+    {
+        $user = $this->getUser();
+        $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
+            ->findByShopsManager($user->getId());
+
+        return $this->render('UserUserBundle:User:manager.html.twig', array(
+            'shops' => $shops,
+            'user' => $user,
+        ));
+    }
+
+    public function shopsAction()
+    {
+        $user = $this->getUser();
+        $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
+            ->findByShopsManager($user);
+
+        return $this->render('UserUserBundle:User:shops.html.twig', array(
+            'shops' => $shops
+        ));
+    }
+
+    public function userAction()
     {
         $user = $this->getUser();
 
@@ -20,7 +42,7 @@ class MainController extends Controller
         ));
     }
     
-    public function userAction($id) 
+    public function userFriendsAction($id)
     {
         $userID = $this->getUser()->getId();
         $user = $this->getDoctrine()->getRepository('UserUserBundle:Users')

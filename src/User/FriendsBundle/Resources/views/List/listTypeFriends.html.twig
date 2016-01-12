@@ -1,8 +1,0 @@
-{% block javascripts %}
-    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/checkFriends.js') }}" type="text/javascript"></script>
-{% endblock %}
-
-{% for type in types %}
-    <li><a href="{{ path('_checkFriends', { 'type' : type.id, 'id' : id }) }}">{{ type.name }}</a></li>
-{% endfor %}

@@ -1,0 +1,29 @@
+{% extends 'UserUserBundle::layout.html.twig' %}
+
+{% block title %}Предложения дружбы{% endblock %}
+
+{% block content %}
+    {{ include('UserFriendsBundle:Friends:menu.html.twig') }}
+    {% for user in resualt %}
+        <div class="friends">
+            <a href='{{ path('_userID', { 'id' : user.id }) }}'>
+                <img src="{% if (user.path != '') %}{{ asset(user.path) }}{% endif %}" />
+            </a>
+            <h3>{{ user.realname }}</h3>
+            <ul>
+                <li><a class="sendMessage" href="{{ path('_sendMessage', { 'id' : user.id }) }}">Отправить сообщение</a></li>
+                <li><a href="{{ path('_userFriends', { 'id' : user.id }) }}">Посмотреть друзей</a></li>
+                <li class="typeFriends">
+                    <a class="check" href="{{ user.id }}">
+                        Потвердить<span class="load"><img src="/public/images/load/ajax-loader-button-three.gif" /></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/listTypeFriends.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/checkFriends.js') }}" type="text/javascript"></script>
+{% endblock %}

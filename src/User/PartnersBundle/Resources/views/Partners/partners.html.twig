@@ -1,0 +1,33 @@
+{% extends 'UserUserBundle::layout.html.twig' %}
+
+{% block title %}Партнеры{% endblock %}
+
+{% block content %}
+    {{ include('UserPartnersBundle:Partners:partnersMenu.html.twig') }}
+    {% for shop in shops %}
+        <div class="shop application">
+            <a href='{{ path('_mainShop', { 'shopname' : shop.uniqueName }) }}'>
+                <img src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" /></a>
+            </a>
+            <ul class="infShop">
+                <li><a href="{{ path('_mainShop', { 'shopname' : shop.uniqueName }) }}">{{ shop.shopname }}</a></li>
+                <li><p>Подписчиков: {{ shop.users }}</p></li>
+                <li><p>Рейтинг: {{ shop.rating }}</p></li>
+                <li><p>Понравилось: {{ shop.likes }}</p></li>
+            </ul>
+            <ul class="menuPartners">
+                <li><a href="{{ path('_shopPartners', { 'shopname' : shop.uniqueName}) }}">Посмотреть партнеров</a></li>
+                <li>
+                    <a class="delete" href="{{ shop.id }}/{{ shop.shops }}">
+                        Удалить из заявок
+                        <span class="load"><img src="/public/images/load/ajax-loader-button-three.gif" /></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/shop/deletePartners.js') }}" type="text/javascript"></script>
+{% endblock %}

@@ -1,25 +1,9 @@
-{% extends '::userEditor.html.twig' %}
+{% extends 'UserUserBundle::layout.html.twig' %}
 
 {% block title %}Поиск друзей{% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('public/js/jquery.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/ECMAScript.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/location.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/listTypeFriends.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/addFriends.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/searchFriends.js') }}" type="text/javascript"></script>
-    <!-- Fancy  -->
-    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.mousewheel-3.0.6.pack.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox.js?v=2.1.5') }}"></script>
-    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-buttons.js?v=1.0.5') }}"></script>
-    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-thumbs.js?v=1.0.7') }}"></script>
-    <script type="text/javascript" src="{{ asset('/public/js/fancybox/jquery.fancybox-media.js?v=1.0.6') }}"></script>
-    <script type="text/javascript" src="{{ asset('/public/js/fancybox/fancybox.js') }}"></script>
-{% endblock %}
-
-{% block body %}
-    {{ include('UserFriendsBundle:Friends:friendsMenu.html.twig') }}
+{% block content %}
+    {{ include('UserFriendsBundle:Friends:menu.html.twig') }}
     <form id='formSearchUsers' action="{{ path('_resualtSearchUser') }}" method="post" {{ form_enctype(form) }}>
         {{ form_errors(form) }}
             <div class='search'>
@@ -28,18 +12,19 @@
                 {{ form_widget(form.keywords) }}
                 <input id='submit' class='button'  type="submit" value='' />
             </div>
-            <ul class='seconderyMenuSearch'>
-                <li>
-                    {{ form_errors(form.country) }}
-                    {{ form_widget(form.country) }}
-                </li>
-                <li>
-                    {{ form_errors(form.city) }}
-                    {{ form_widget(form.city) }}
-                </li>
-            </ul>
+            {{ form_errors(form.country) }}
+            {{ form_widget(form.country) }}
+            {{ form_errors(form.city) }}
+            {{ form_widget(form.city) }}
         {{form_rest(form)}}
     </form>
     <div id="load"><div class="processImage"><img src="/public/images/load/ajax-loader.gif"></div></div>
     <div id="resualtSearch"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('public/js/location.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/listTypeFriends.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/addFriends.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('public/js/searchFriends.js') }}" type="text/javascript"></script>
 {% endblock %}

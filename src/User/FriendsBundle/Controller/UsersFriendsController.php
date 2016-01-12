@@ -42,7 +42,7 @@ class UsersFriendsController extends Controller {
         $users = $em->getRepository('UserFriendsBundle:Friends')
                 ->findAllMyApplication($userID);
         
-        return $this->render('UserFriendsBundle:Friends:myApplicationFriends.html.twig', array(
+        return $this->render('UserFriendsBundle:Friends:myApplication.html.twig', array(
             'resualt' => $users,
         ));
     }
@@ -55,9 +55,8 @@ class UsersFriendsController extends Controller {
         $users = $em->getRepository('UserFriendsBundle:Friends')
                 ->findAllApplication($userID);
         
-        return $this->render('UserFriendsBundle:Friends:applicationFriends.html.twig', array(
+        return $this->render('UserFriendsBundle:Friends:application.html.twig', array(
             'resualt' => $users,
         ));
     }
 }
-?>

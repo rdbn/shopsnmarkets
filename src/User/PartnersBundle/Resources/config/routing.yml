@@ -1,0 +1,33 @@
+# route for UserPartners
+_partners:
+    pattern:  /manager/partners
+    defaults: { _controller: UserPartnersBundle:UserPartners:partners }
+    
+_shopPartners:
+    pattern:  /manager/partners/shop/{shopname}
+    defaults: { _controller: UserPartnersBundle:UserPartners:shopPartners }
+    
+_myApplication:
+    pattern:  /manager/partners/myApplication
+    defaults: { _controller: UserPartnersBundle:UserPartners:myApplication }
+    
+_application:
+    pattern:  /manager/partners/application
+    defaults: { _controller: UserPartnersBundle:UserPartners:application }
+    
+# Ajax route for AddPartners    
+_addPartner:
+    pattern:  /manager/addPartners
+    defaults: { _controller: UserPartnersBundle:AddPartners:addPartners }
+    
+_checkPartner:
+    pattern:  /manager/addPartners/checkPartners
+    defaults: { _controller: UserPartnersBundle:AddPartners:checkPartners }
+    
+_addListMyShops:
+    pattern:  /manager/addPartners/listMyShops
+    defaults: { _controller: UserPartnersBundle:AddPartners:listMyShops }
+    
+_deletePartners:
+    pattern:  /manager/addPartners/deletePartners
+    defaults: { _controller: UserPartnersBundle:AddPartners:delete }

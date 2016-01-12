@@ -36,6 +36,8 @@ class ShopsToShopnameTransformer implements DataTransformerInterface
      */
     public function transform($shop)
     {
+        if (!$shop) return null;
+
         return $shop->getShopname();
     }
 

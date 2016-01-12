@@ -1,7 +1,7 @@
-{% extends '::userEditor.html.twig' %}
+{% extends 'UserUserBundle::layout.html.twig' %}
 
-{% block body %}
-    {{ include('UserFriendsBundle:Friends:friendsMenu.html.twig') }}
+{% block content %}
+    {{ include('UserFriendsBundle:Friends:menu.html.twig') }}
     {% for user in resualt %}
         <div class="friends">
             <a href='{{ path('_userID', { 'id' : user.id }) }}'>

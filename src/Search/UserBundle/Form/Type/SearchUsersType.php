@@ -15,24 +15,27 @@ Class SearchUsersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('keywords', 'text', array(
-            'label' => FALSE,
+            'label' => false,
             'required' => false,
-            'mapped' => FALSE,
+            'mapped' => false,
+            'attr' => ['class' => 'form-control'],
         ));
         $builder->add('country', 'entity', array(
             'class' => 'UserUserBundle:Country',
             'property' => 'name',
-            'empty_value'   => '--- Выберите страну ---',
+            'empty_value'   => 'Выберите страну',
             'required' => false,
-            'mapped' => FALSE,
-            'label' => 'Страна:',
+            'mapped' => false,
+            'label' => false,
+            'attr' => ['class' => 'form-control'],
         ));
         $builder->add('city', 'entity', array(
             'class' => 'UserUserBundle:City',
             'property' => 'name',
-            'empty_value'   => '--- Выберите город ---',
+            'empty_value'   => 'Выберите город',
             'required' => false,
-            'label' => 'Город:',
+            'label' => false,
+            'attr' => ['class' => 'form-control'],
         ));        
     }
     

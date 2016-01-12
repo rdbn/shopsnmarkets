@@ -1,4 +1,0 @@
-# for class ManagetOrder
-_managerOrder:
-    pattern:  /manager/order
-    defaults: { _controller: ManagerOrdersBundle:ManagerOrder:managerOrder }
