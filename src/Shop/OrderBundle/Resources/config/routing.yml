@@ -20,16 +20,3 @@ _deliveryOrder:
 _saveDeliveryOrder:
     pattern:  /saveDeivery/{orderNumber}
     defaults: { _controller: ShopOrderBundle:Delivery:add }
-    
-# for class Payment
-_payment_details:
-    pattern:  /payment/{orderNumber}/details
-    defaults: { _controller: ShopOrderBundle:Payment:details }
-    
-_payment_complete:
-    pattern:  /payment/{orderNumber}/complete
-    defaults: { _controller: ShopOrderBundle:Payment:complete }
-    
-_payment_cancel:
-    pattern:  /payment/{orderNumber}/cancel
-    defaults: { _controller: ShopOrderBundle:Payment:cancel }

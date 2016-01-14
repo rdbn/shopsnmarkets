@@ -35,9 +35,6 @@ class AppKernel extends Kernel
             new Shop\InformationBundle\ShopInformationBundle(),
             new Shop\OrderBundle\ShopOrderBundle(),
             new Shop\ProductBundle\ShopProductBundle(),
-            new Search\PlatformBundle\SearchPlatformBundle(),
-            new Search\PartnersBundle\SearchPartnersBundle(),
-            new Search\UserBundle\SearchUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

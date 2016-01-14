@@ -22,18 +22,6 @@ user_partners:
     resource: "@UserPartnersBundle/Resources/config/routing.yml"
     prefix:   /
 
-search_user:
-    resource: "@SearchUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
-search_partners:
-    resource: "@SearchPartnersBundle/Resources/config/routing.yml"
-    prefix:   /
-
-search_platform:
-    resource: "@SearchPlatformBundle/Resources/config/routing.yml"
-    prefix:   /
-
 platform_main:
     resource: "@PlatformMainBundle/Resources/config/routing.yml"
     prefix:   /

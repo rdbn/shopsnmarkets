@@ -1,7 +1,0 @@
-parameters:
-    searchPartners.class: Search\PartnersBundle\Services\SearchPartners
-
-services:
-    searchPartners:
-        class: %searchPartners.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory ]

@@ -19,3 +19,17 @@ _productsPlatform:
 _productPlatform:
     pattern:  /product/{id}
     defaults: { _controller: PlatformMainBundle:Products:product }
+
+# for class Search
+_search:
+    pattern:  /search
+    defaults: { _controller: PlatformMainBundle:Search:search }
+
+_resultProduct:
+    pattern:  /resultProduct
+    defaults: { _controller: PlatformMainBundle:Search:result }
+
+# for class SearchMain
+_resultProductPlatform:
+    pattern:  /resultProductPlatform
+    defaults: { _controller: PlatformMainBundle:SearchMain:result }

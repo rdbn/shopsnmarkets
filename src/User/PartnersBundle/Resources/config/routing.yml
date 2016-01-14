@@ -31,3 +31,12 @@ _addListMyShops:
 _deletePartners:
     pattern:  /manager/addPartners/deletePartners
     defaults: { _controller: UserPartnersBundle:AddPartners:delete }
+
+# route for SearchPartners
+_searchPartner:
+    pattern:  /manager/searchPartner
+    defaults: { _controller: UserPartnersBundle:SearchPartners:searchPartners }
+
+_resualtSearch:
+    pattern:  /manager/resualtSearch
+    defaults: { _controller: UserPartnersBundle:SearchPartners:resualtSearch }

@@ -1,8 +1,0 @@
-# route for SearchPartners
-_searchUsers:
-    pattern:  /friends/searchUsers
-    defaults: { _controller: SearchUserBundle:SearchUsers:searchUsers }
-    
-_resualtSearchUser:
-    pattern:  /friends/resualtSearch
-    defaults: { _controller: SearchUserBundle:SearchUsers:resultSearch }

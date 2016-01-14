@@ -2,6 +2,7 @@ parameters:
     addFriends.class: User\FriendsBundle\Services\AddFriends
     checkFriends.class: User\FriendsBundle\Services\CheckFriends
     deleteFriends.class: User\FriendsBundle\Services\DeleteFriends
+    searchUsers.class: Search\UserBundle\Services\SearchUsers
 
 services:        
     addFriends:
@@ -15,3 +16,7 @@ services:
     deleteFriends:
         class: %deleteFriends.class%
         arguments: [ @doctrine.orm.entity_manager ]
+
+    searchUsers:
+        class: %searchUsers.class%
+        arguments: [ @doctrine.orm.entity_manager, @form.factory ]

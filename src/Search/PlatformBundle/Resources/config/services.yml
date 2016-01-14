@@ -1,7 +1,0 @@
-parameters:
-    searchProduct.class: Search\PlatformBundle\Services\SearchProduct
-
-services:
-    searchProduct:
-        class: %searchProduct.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory ]

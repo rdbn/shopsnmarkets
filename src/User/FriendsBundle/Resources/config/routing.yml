@@ -31,3 +31,12 @@ _addListMyFriends:
 _deleteFriends:
     pattern:  /friends/deleteFriends
     defaults: { _controller: UserFriendsBundle:AddFriends:deleteFriends }
+
+# route for SearchUser
+_searchUsers:
+    pattern:  /friends/searchUsers
+    defaults: { _controller: UserFriendsBundle:SearchUsers:searchUsers }
+
+_resualtSearchUser:
+    pattern:  /friends/resualtSearch
+    defaults: { _controller: UserFriendsBundle:SearchUsers:resultSearch }
