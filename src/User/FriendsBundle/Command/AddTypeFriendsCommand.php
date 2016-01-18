@@ -21,7 +21,7 @@ class AddTypeFriendsCommand extends ContainerAwareCommand
     */
     private $type = [
         "Лучший друг",
-        "Товарищь",
+        "Товарищ",
         "Приятель",
         "Коллега",
         "Партнер",
