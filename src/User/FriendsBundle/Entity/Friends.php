@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -18,9 +18,10 @@ class Friends
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users", inversedBy="usersFriends")
+     * @ORM\JoinColumn(name="friends_id", referencedColumnName="id")
      */
-    protected $id;
+    protected $friends;
     
     /**
      * @ORM\Id
@@ -31,79 +32,83 @@ class Friends
     
     /**
      * @ORM\ManyToOne(targetEntity="User\FriendsBundle\Entity\TypeFriends")
-     * @ORM\JoinColumn(name="type_friends_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="type_friends_id", referencedColumnName="id", nullable=true)
      */
-    protected $type_friends;
+    protected $typeFriends;
     
     /**
      * @ORM\Column(name="check_fiends", type="boolean")
      */
-    protected $check_friends;
+    protected $checkFriends;
     
     /**
-     * Consrtuct for class Partners
+     * Construct for class Friends
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->users = new ArrayCollection();
-        $this->check_partners = true;
+        $this->checkFriends = false;
     }
 
     /**
-     * Set id
-     *
-     * @param integer $id
-     * @return Friends
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    
-        return $this;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set check_friends
+     * Set checkFriends
      *
      * @param boolean $checkFriends
+     *
      * @return Friends
      */
     public function setCheckFriends($checkFriends)
     {
-        $this->check_friends = $checkFriends;
-    
+        $this->checkFriends = $checkFriends;
+
         return $this;
     }
 
     /**
-     * Get check_friends
+     * Get checkFriends
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCheckFriends()
     {
-        return $this->check_friends;
+        return $this->checkFriends;
+    }
+
+    /**
+     * Set friends
+     *
+     * @param \User\UserBundle\Entity\Users $friends
+     *
+     * @return Friends
+     */
+    public function setFriends(\User\UserBundle\Entity\Users $friends)
+    {
+        $this->friends = $friends;
+
+        return $this;
+    }
+
+    /**
+     * Get friends
+     *
+     * @return \User\UserBundle\Entity\Users
+     */
+    public function getFriends()
+    {
+        return $this->friends;
     }
 
     /**
      * Set users
      *
      * @param \User\UserBundle\Entity\Users $users
+     *
      * @return Friends
      */
     public function setUsers(\User\UserBundle\Entity\Users $users)
     {
         $this->users = $users;
-    
+
         return $this;
     }
 
@@ -118,25 +123,26 @@ class Friends
     }
 
     /**
-     * Set type_friends
+     * Set typeFriends
      *
      * @param \User\FriendsBundle\Entity\TypeFriends $typeFriends
+     *
      * @return Friends
      */
     public function setTypeFriends(\User\FriendsBundle\Entity\TypeFriends $typeFriends = null)
     {
-        $this->type_friends = $typeFriends;
-    
+        $this->typeFriends = $typeFriends;
+
         return $this;
     }
 
     /**
-     * Get type_friends
+     * Get typeFriends
      *
-     * @return \User\FriendsBundle\Entity\TypeFriends 
+     * @return \User\FriendsBundle\Entity\TypeFriends
      */
     public function getTypeFriends()
     {
-        return $this->type_friends;
+        return $this->typeFriends;
     }
 }

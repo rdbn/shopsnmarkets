@@ -71,3 +71,11 @@ body {
 .font-center {
     font-size: 102px;
 }
+
+#result-search {
+    opacity: 0;
+}
+
+.width-body {
+    width: 10000px;
+}

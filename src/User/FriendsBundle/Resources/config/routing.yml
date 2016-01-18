@@ -1,42 +1,46 @@
 # route for UserFriends
 _friends:
     pattern:  /firends
-    defaults: { _controller: UserFriendsBundle:UsersFriends:friends }
-    
+    defaults: { _controller: UserFriendsBundle:Friends:friends }
+
+_searchUsers:
+    pattern:  /friends/search
+    defaults: { _controller: UserFriendsBundle:Friends:search }
+
 _userFriends:
     pattern:  /firends/user/{id}
-    defaults: { _controller: UserFriendsBundle:UsersFriends:userFriends }
+    defaults: { _controller: UserFriendsBundle:Friends:userFriends }
     
 _myApplicationFriends:
     pattern:  /firends/myApplication
-    defaults: { _controller: UserFriendsBundle:UsersFriends:myApplicationFriends }
+    defaults: { _controller: UserFriendsBundle:Friends:myApplication }
     
 _applicationFriends:
     pattern:  /firends/application
-    defaults: { _controller: UserFriendsBundle:UsersFriends:applicationFriends }
+    defaults: { _controller: UserFriendsBundle:Friends:application }
     
 # Ajax route for AddFriends
 _addFriends:
-    pattern:  /friends/addFriends
-    defaults: { _controller: UserFriendsBundle:AddFriends:addFriends } 
+    pattern:  /friends/add/{id}
+    defaults: { _controller: UserFriendsBundle:Ajax:add, _format: json }
+    methods: [GET]
     
 _checkFriends:
-    pattern:  /friends/addFriends/checkFriends
-    defaults: { _controller: UserFriendsBundle:AddFriends:checkFriends }
+    pattern:  /friends/add/check/{type}/{user}
+    defaults: { _controller: UserFriendsBundle:Ajax:check, _format: json }
+    methods: [GET]
     
 _addListMyFriends:
-    pattern:  /friends/addFriends/listTypeFriends
-    defaults: { _controller: UserFriendsBundle:AddFriends:listTypeFriends }
+    pattern:  /friends/add/list/{id}
+    defaults: { _controller: UserFriendsBundle:Ajax:list, _format: json }
+    methods: [GET]
     
 _deleteFriends:
-    pattern:  /friends/deleteFriends
-    defaults: { _controller: UserFriendsBundle:AddFriends:deleteFriends }
+    pattern:  /friends/remove/{id}
+    defaults: { _controller: UserFriendsBundle:Ajax:remove, _format: json }
+    methods: [GET]
 
-# route for SearchUser
-_searchUsers:
-    pattern:  /friends/searchUsers
-    defaults: { _controller: UserFriendsBundle:SearchUsers:searchUsers }
-
-_resualtSearchUser:
-    pattern:  /friends/resualtSearch
-    defaults: { _controller: UserFriendsBundle:SearchUsers:resultSearch }
+_resultSearch:
+    pattern:  /friends/result/search
+    defaults: { _controller: UserFriendsBundle:Ajax:search, _format: json }
+    methods: [GET|POST]

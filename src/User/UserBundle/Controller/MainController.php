@@ -49,7 +49,7 @@ class MainController extends Controller
                 ->findOneById($id);
         
         $check = $this->getDoctrine()->getRepository('UserFriendsBundle:Friends')
-                ->checkFriends(['id' => $id, 'user' => $userID]);
+                ->findOneBy(['friends' => $id, 'users' => $userID]);
         
         return $this->render('UserUserBundle:User:user.html.twig', array(
             'user' => $user,

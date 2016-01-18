@@ -4,26 +4,40 @@
 
 {% block content %}
     {{ include('UserFriendsBundle:Friends:menu.html.twig') }}
-    {% for user in resualt %}
-        <div class="friends">
-            <a href='{{ path('_userID', { 'id' : user.id }) }}'>
-                <img src="{% if (user.path != '') %}{{ asset(user.path) }}{% endif %}" />
-            </a>
-            <h3>{{ user.realname }}</h3>
-            <ul>
-                <li><a class="sendMessage" href="{{ path('_sendMessage', { 'id' : user.id }) }}">Отправить сообщение</a></li>
-                <li><a href="{{ path('_userFriends', { 'id' : user.id }) }}">Посмотреть друзей</a></li>
-                <li class="typeFriends">
-                    <a class="check" href="{{ user.id }}">
-                        Потвердить<span class="load"><img src="/public/images/load/ajax-loader-button-three.gif" /></span>
-                    </a>
-                </li>
-            </ul>
+    {% for user in result %}
+        <div class="media result-user top20">
+            <div class="media-left">
+                <a href="{{ path('_userID', { 'id' : user.id }) }}">
+                    <img class="media-object img-thumbnail" src="{% if(user.path) %}{{ user.path | apply_filter('avatar') }}{% endif %}" />
+                </a>
+            </div>
+            <div class="media-body width-body">
+                <div class="col-md-9"><h4 class="media-heading">{{ user.realname }}</h4></div>
+                <div class="col-md-3">
+                    <div class="btn-group-vertical btn-group-sm">
+                        <button class="btn btn-success" data-user="{{ user.id }}">Отправить сообщение</button>
+                        <a class="btn btn-success" href="{{ path('_userFriends', { 'id' : user.id }) }}">
+                            Посмотреть друзей
+                        </a>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Добавить <span class="caret"></span>
+                            </button>
+                            <ul class="type dropdown-menu">
+                                <li><a data-type="{{ type.0.id }}" data-user="{{ user.id }}" href="#">{{ type.0.name }}</a></li>
+                                <li><a data-type="{{ type.1.id }}" data-user="{{ user.id }}" href="#">{{ type.1.name }}</a></li>
+                                <li><a data-type="{{ type.2.id }}" data-user="{{ user.id }}" href="#">{{ type.2.name }}</a></li>
+                                <li><a data-type="{{ type.3.id }}" data-user="{{ user.id }}" href="#">{{ type.3.name }}</a></li>
+                                <li><a data-type="{{ type.4.id }}" data-user="{{ user.id }}" href="#">{{ type.4.name }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('public/js/listTypeFriends.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/checkFriends.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/check-friends.js') }}" type="text/javascript"></script>
 {% endblock %}

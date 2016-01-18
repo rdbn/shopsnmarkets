@@ -170,6 +170,11 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     protected $friends;
 
     /**
+     * @ORM\OneToMany(targetEntity="User\FriendsBundle\Entity\Friends", mappedBy="friends")
+     */
+    protected $usersFriends;
+
+    /**
      * Construct with Class users
      */
     public function __construct()
@@ -183,7 +188,6 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
         $this->product = new ArrayCollection();
         $this->friends = new ArrayCollection();
         $this->shop = new ArrayCollection();
-        $this->orders = new ArrayCollection();
     }
     
     /**
@@ -973,5 +977,39 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     public function getFriends()
     {
         return $this->friends;
+    }
+
+    /**
+     * Add usersFriend
+     *
+     * @param \User\FriendsBundle\Entity\Friends $usersFriend
+     *
+     * @return Users
+     */
+    public function addUsersFriend(\User\FriendsBundle\Entity\Friends $usersFriend)
+    {
+        $this->usersFriends[] = $usersFriend;
+
+        return $this;
+    }
+
+    /**
+     * Remove usersFriend
+     *
+     * @param \User\FriendsBundle\Entity\Friends $usersFriend
+     */
+    public function removeUsersFriend(\User\FriendsBundle\Entity\Friends $usersFriend)
+    {
+        $this->usersFriends->removeElement($usersFriend);
+    }
+
+    /**
+     * Get usersFriends
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsersFriends()
+    {
+        return $this->usersFriends;
     }
 }

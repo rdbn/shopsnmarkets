@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -10,53 +10,116 @@ use Doctrine\ORM\EntityRepository;
 
 class FriendsRepository extends EntityRepository
 {
-    public function findAllMyApplication($id) {
-        return $this->getEntityManager()
-                ->createQuery(
-                    'SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
-                    LEFT JOIN UserUserBundle:Users u WITH u.id = f.id
-                    WHERE f.users = :id AND f.check_friends = 0
-                    GROUP BY u'
-                )->setParameter('id', $id)
-                ->getResult();
-    }
-    
-    public function findAllApplication($id) {
-        return $this->getEntityManager()
-                ->createQuery(
-                    'SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
-                    LEFT JOIN UserUserBundle:Users u WITH u.id = f.users
-                    WHERE f.id = :id AND f.check_friends = 0
-                    GROUP BY u'
-                )->setParameter('id', $id)
-                ->getResult();
-    }
-    
-    public function findAllFriends($id) {
-        return $this->getEntityManager()
-                ->createQuery(
-                    'SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
-                    LEFT JOIN UserUserBundle:Users u WITH u.id = f.id
-                    WHERE f.users = :id AND f.check_friends = 1
-                    GROUP BY u'
-                )->setParameter('id', $id)
-                ->getResult();
-    }
-    
-    public function checkFriends($value) {
+    /**
+     * Список друзей пользователей
+     *
+     * @param int $id
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findByFriends($id, $count)
+    {
         $query = $this->getEntityManager()
-                ->createQuery(
-                    'SELECT f.id FROM UserFriendsBundle:Friends f
-                    WHERE f.id = :id AND f.users = :user'
-                )->setParameters($value)
-                ->getResult();
-        
-        if (null == $query) {
-            return true;
-        } else {
-            return false;
+            ->createQuery('
+                SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
+                LEFT JOIN f.friends u
+                WHERE f.users = :id AND f.checkFriends = 1
+                GROUP BY u
+            ')
+            ->setParameter('id', $id)
+            ->setFirstResult($count)
+            ->setMaxResults(20);
+
+        try {
+            return $query->getResult();
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
         }
-        
+    }
+
+    /**
+     * Список заявок пользователя в друзья(от него)
+     *
+     * @param int $id
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findByMyApplication($id, $count)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
+                LEFT JOIN f.friends u
+                WHERE f.users = :id AND f.checkFriends = 0
+                GROUP BY u
+            ')
+            ->setParameter('id', $id)
+            ->setFirstResult($count)
+            ->setMaxResults(20);
+
+        try {
+            return $query->getResult();
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Список заявок пользователя в друзья(к нему)
+     *
+     * @param int $id
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findByApplication($id, $count)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
+                LEFT JOIN f.users u
+                WHERE f.friends = :id AND f.checkFriends = 0
+                GROUP BY u
+            ')
+            ->setParameter('id', $id)
+            ->setFirstResult($count)
+            ->setMaxResults(20);
+
+        try {
+            return $query->getResult();
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Список заявок пользователя в друзья(от него)
+     *
+     * @param int $id
+     * @param int $count
+     *
+     * @return array
+     */
+    public function findByUserFriends($id, $count)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT fu.id, fu.realname, fu.path FROM UserUserBundle:Users u
+                LEFT JOIN u.friends f
+                LEFT JOIN f.friends fu
+                WHERE u.id = :id AND f.checkFriends = 1
+                GROUP BY f
+            ')
+            ->setParameter('id', $id)
+            ->setFirstResult($count)
+            ->setMaxResults(20);
+
+        try {
+            return $query->getResult();
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
     }
 }
-?>

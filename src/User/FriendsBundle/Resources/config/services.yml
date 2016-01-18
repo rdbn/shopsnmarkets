@@ -1,22 +1,7 @@
 parameters:
-    addFriends.class: User\FriendsBundle\Services\AddFriends
-    checkFriends.class: User\FriendsBundle\Services\CheckFriends
-    deleteFriends.class: User\FriendsBundle\Services\DeleteFriends
-    searchUsers.class: Search\UserBundle\Services\SearchUsers
+    search.users.class: User\FriendsBundle\Services\Search
 
-services:        
-    addFriends:
-        class: %addFriends.class%
-        arguments: [ @doctrine.orm.entity_manager ]
-        
-    checkFriends:
-        class: %checkFriends.class%
-        arguments: [ @doctrine.orm.entity_manager ]
-        
-    deleteFriends:
-        class: %deleteFriends.class%
-        arguments: [ @doctrine.orm.entity_manager ]
-
-    searchUsers:
-        class: %searchUsers.class%
+services:
+    search.users:
+        class: %search.users.class%
         arguments: [ @doctrine.orm.entity_manager, @form.factory ]

@@ -18,7 +18,7 @@ $(document).ready(function () {
     locations('shops_country', 'shops_city');
     locations('RegistrationUser_country', 'RegistrationUser_city');
     locations('SearchPartners_country', 'SearchPartners_city');
-    locations('SearchUsers_country', 'SearchUsers_city');
+    locations('Search_country', 'Search_city');
     locations('UserInformation_country', 'UserInformation_city');
     locations('Order_address_country', 'Order_address_city');
 });

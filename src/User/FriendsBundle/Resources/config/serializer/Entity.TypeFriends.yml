@@ -1,0 +1,9 @@
+User\FriendsBundle\Entity\TypeFriends:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [typeFriends]
+        name:
+            expose: true
+            groups: [typeFriends]

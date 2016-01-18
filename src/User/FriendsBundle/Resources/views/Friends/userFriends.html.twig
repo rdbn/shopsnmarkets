@@ -2,16 +2,24 @@
 
 {% block content %}
     {{ include('UserFriendsBundle:Friends:menu.html.twig') }}
-    {% for user in resualt %}
-        <div class="friends">
-            <a href='{{ path('_userID', { 'id' : user.id }) }}'>
-                <img src="{% if (user.path != '') %}{{ asset(user.path) }}{% endif %}" />
-            </a>
-            <h3>{{ user.realname }}</h3>
-            <ul>
-                <li><a class="sendMessage" href="{{ path('_sendMessage', { 'id' : user.id }) }}">Отправить сообщение</a></li>
-                <li><a href="{{ path('_userFriends', { 'id' : user.id }) }}">Посмотреть друзей</a></li>
-            </ul>
+    {% for user in result %}
+        <div class="media result-user top20">
+            <div class="media-left">
+                <a href="{{ path('_userID', { 'id' : user.id }) }}">
+                    <img class="media-object img-thumbnail" src="{% if(user.path) %}{{ user.path | apply_filter('avatar') }}{% endif %}" />
+                </a>
+            </div>
+            <div class="media-body width-body">
+                <div class="col-md-9"><h4 class="media-heading">{{ user.realname }}</h4></div>
+                <div class="col-md-3">
+                    <div class="btn-group-vertical">
+                        <button class="btn btn-success btn-sm" data-user="{{ user.id }}">Отправить сообщение</button>
+                        <a class="btn btn-success btn-sm" href="{{ path('_userFriends', { 'id' : user.id }) }}">
+                            Посмотреть друзей
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}
