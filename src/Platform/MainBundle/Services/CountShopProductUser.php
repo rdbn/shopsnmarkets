@@ -13,15 +13,16 @@ class CountShopProductUser {
     
     public $em;
     
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
     
-    public function count() {
+    public function count()
+    {
         $em = $this->em->getRepository('PlatformMainBundle:Count')
                 ->find('1');
         
         return $em;
     }
 }
-?>

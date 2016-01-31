@@ -1,0 +1,9 @@
+Shop\CreateBundle\Entity\Shops:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [list]
+        shopname:
+            expose: true
+            groups: [list]

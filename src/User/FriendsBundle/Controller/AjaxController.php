@@ -21,24 +21,6 @@ class AjaxController extends FOSRestController
 {
     /**
      * @ApiDoc(
-     *     description="Список типов друзей",
-     *     statusCodes={
-     *         200="Нормальный ответ"
-     *     }
-     * )
-     *
-     * @Rest\View(serializerGroups={"typeFriends"})
-     */
-    public function listAction()
-    {
-        $types = $this->getDoctrine()->getRepository('UserFriendsBundle:TypeFriends')
-            ->findAll();
-
-        return $types;
-    }
-
-    /**
-     * @ApiDoc(
      *     description="Добавить в друзья",
      *     statusCodes={
      *         200="Нормальный ответ"
@@ -164,6 +146,7 @@ class AjaxController extends FOSRestController
             $search = $this->get("search.users");
             $result = $search
                 ->setKeywords($users->getRealname())
+                ->setCityId($users->getCity())
                 ->setUserId($id)
                 ->getResult();
 

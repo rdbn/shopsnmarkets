@@ -30,10 +30,10 @@ class PutController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $isName = $em->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(array('uniqueName' => $shops->getUniqueName()));
+                ->findOneBy(['uniqueName' => $shops->getUniqueName()]);
 
-            if ($isName) {
-                $shops->addManager($user);
+            if (!$isName) {
+                $shops->setManager($user);
 
                 $em->persist($shops);
                 $em->flush();
@@ -55,14 +55,14 @@ class PutController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $shops = $em->getRepository('ShopCreateBundle:Shops')
-            ->findOneBy(array('uniqueName' => $shopname));
+            ->findOneBy(['uniqueName' => $shopname]);
 
         $form = $this->createForm(new ShopsType(), $shops);
         $form->handleRequest($request);
 
         if ($form->isValid() && $shopname == $shops->getUniqueName()) {
             $isName = $em->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(array('uniqueName' => $shops->getUniqueName()));
+                ->findOneBy(['uniqueName' => $shops->getUniqueName()]);
 
             if ($isName) {
                 $em->flush();

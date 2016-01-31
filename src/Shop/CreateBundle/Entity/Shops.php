@@ -55,7 +55,7 @@ Class Shops
     protected $rating;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
     
@@ -100,10 +100,10 @@ Class Shops
     protected $likeShop;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Keywords", inversedBy="shop")
-     * @ORM\JoinTable(name="keywords_shop")
+     * @ORM\ManyToMany(targetEntity="Shop\ProductBundle\Entity\HashTags", inversedBy="shop")
+     * @ORM\JoinTable(name="shops_tags")
      */
-    protected $keywords;
+    protected $shopTags;
     
     /**
      * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="shopUsers")
@@ -112,9 +112,14 @@ Class Shops
     protected $users;
     
     /**
-     * @ORM\OneToMany(targetEntity="User\PartnersBundle\Entity\Partners", mappedBy="shops")
+     * @ORM\OneToMany(targetEntity="Shop\PartnersBundle\Entity\Partners", mappedBy="shops")
      */
     protected $partners;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\PartnersBundle\Entity\Partners", mappedBy="partners")
+     */
+    protected $shopPartners;
     
     /**
      * @ORM\OneToMany(targetEntity="Shop\CreateBundle\Entity\ShopsDelivery", mappedBy="shops")
@@ -145,7 +150,8 @@ Class Shops
     /**
      * toString for class Country
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->shopname;
     }
     
@@ -513,40 +519,6 @@ Class Shops
     }
 
     /**
-     * Add keyword
-     *
-     * @param \Shop\CreateBundle\Entity\Keywords $keyword
-     *
-     * @return Shops
-     */
-    public function addKeyword(\Shop\CreateBundle\Entity\Keywords $keyword)
-    {
-        $this->keywords[] = $keyword;
-
-        return $this;
-    }
-
-    /**
-     * Remove keyword
-     *
-     * @param \Shop\CreateBundle\Entity\Keywords $keyword
-     */
-    public function removeKeyword(\Shop\CreateBundle\Entity\Keywords $keyword)
-    {
-        $this->keywords->removeElement($keyword);
-    }
-
-    /**
-     * Get keywords
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getKeywords()
-    {
-        return $this->keywords;
-    }
-
-    /**
      * Add user
      *
      * @param \User\UserBundle\Entity\Users $user
@@ -583,11 +555,11 @@ Class Shops
     /**
      * Add partner
      *
-     * @param \User\PartnersBundle\Entity\Partners $partner
+     * @param \Shop\PartnersBundle\Entity\Partners $partner
      *
      * @return Shops
      */
-    public function addPartner(\User\PartnersBundle\Entity\Partners $partner)
+    public function addPartner(\Shop\PartnersBundle\Entity\Partners $partner)
     {
         $this->partners[] = $partner;
 
@@ -597,9 +569,9 @@ Class Shops
     /**
      * Remove partner
      *
-     * @param \User\PartnersBundle\Entity\Partners $partner
+     * @param \Shop\PartnersBundle\Entity\Partners $partner
      */
-    public function removePartner(\User\PartnersBundle\Entity\Partners $partner)
+    public function removePartner(\Shop\PartnersBundle\Entity\Partners $partner)
     {
         $this->partners->removeElement($partner);
     }
@@ -680,5 +652,73 @@ Class Shops
     public function getAdvertisingShop()
     {
         return $this->advertisingShop;
+    }
+
+    /**
+     * Add shopTag
+     *
+     * @param \Shop\ProductBundle\Entity\HashTags $shopTag
+     *
+     * @return Shops
+     */
+    public function addShopTag(\Shop\ProductBundle\Entity\HashTags $shopTag)
+    {
+        $this->shopTags[] = $shopTag;
+
+        return $this;
+    }
+
+    /**
+     * Remove shopTag
+     *
+     * @param \Shop\ProductBundle\Entity\HashTags $shopTag
+     */
+    public function removeShopTag(\Shop\ProductBundle\Entity\HashTags $shopTag)
+    {
+        $this->shopTags->removeElement($shopTag);
+    }
+
+    /**
+     * Get shopTags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShopTags()
+    {
+        return $this->shopTags;
+    }
+
+    /**
+     * Add shopPartner
+     *
+     * @param \Shop\PartnersBundle\Entity\Partners $shopPartner
+     *
+     * @return Shops
+     */
+    public function addShopPartner(\Shop\PartnersBundle\Entity\Partners $shopPartner)
+    {
+        $this->shopPartners[] = $shopPartner;
+
+        return $this;
+    }
+
+    /**
+     * Remove shopPartner
+     *
+     * @param \Shop\PartnersBundle\Entity\Partners $shopPartner
+     */
+    public function removeShopPartner(\Shop\PartnersBundle\Entity\Partners $shopPartner)
+    {
+        $this->shopPartners->removeElement($shopPartner);
+    }
+
+    /**
+     * Get shopPartners
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShopPartners()
+    {
+        return $this->shopPartners;
     }
 }

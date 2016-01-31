@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,6 +10,7 @@ namespace Shop\CreateBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
+
 use Shop\CreateBundle\Entity\Delivery;
 
 class DeliveryToIdTransformer implements DataTransformerInterface
@@ -30,7 +31,7 @@ class DeliveryToIdTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  Issue|null $delivery
+     * @param  Delivery|null $delivery
      * @return string
      */
     public function transform($delivery)
@@ -47,7 +48,7 @@ class DeliveryToIdTransformer implements DataTransformerInterface
      *
      * @param  string $id
      *
-     * @return Issue|null
+     * @return Delivery|null
      *
      * @throws TransformationFailedException if object (issue) is not found.
      */
@@ -70,4 +71,3 @@ class DeliveryToIdTransformer implements DataTransformerInterface
         return $delivery;
     }
 }
-?>

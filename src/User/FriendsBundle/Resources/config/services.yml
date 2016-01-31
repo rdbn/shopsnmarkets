@@ -4,4 +4,4 @@ parameters:
 services:
     search.users:
         class: %search.users.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
+        arguments: [ @doctrine.orm.entity_manager ]

@@ -1,12 +1,7 @@
 parameters:
-    countShopProductUser.class: Platform\MainBundle\Services\CountShopProductUser
-    searchProduct.class: Platform\MainBundle\Services\SearchProduct
+    search.product.class: Platform\MainBundle\Services\SearchProduct
 
 services:
-    countShopProductUser:
-        class: %countShopProductUser.class%
-        arguments: [ @doctrine.orm.entity_manager ]
-
-    searchProduct:
-        class: %searchProduct.class%
+    search.product:
+        class: %search.product.class%
         arguments: [ @doctrine.orm.entity_manager, @form.factory ]

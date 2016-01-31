@@ -6,63 +6,10 @@
  */
 namespace User\FriendsBundle\Services;
 
-use Doctrine\ORM\EntityManager as Manager;
+use Shop\PartnersBundle\Services\Tools\AbstractSearch;
 
-class Search
+class Search extends AbstractSearch
 {
-    /**
-     * @var Manager
-    */
-    private $em;
-
-    /**
-     * @var integer
-    */
-    private $id;
-
-    /**
-     * @var string
-     */
-    private $keywords;
-
-    /**
-     * Инициализируем переменные
-     *
-     * @param Manager $em
-    */
-    public function __construct(Manager $em)
-    {
-        $this->em = $em;
-    }
-
-    /**
-     * Получаем id юзера
-     *
-     * @param int $id
-     *
-     * @return self
-    */
-    public function setUserId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Получаем слова для поиска
-     *
-     * @param string $keywords
-     *
-     * @return self
-     */
-    public function setKeywords($keywords)
-    {
-        $this->keywords = $keywords;
-
-        return $this;
-    }
-
     /**
      * Отдаем резльтаты поиска
      *
@@ -111,10 +58,10 @@ class Search
                 ->setParameter('name', '%'.$string.'%');
         }
 
-        /*if ($this->keywords['city']) {
+        if ($this->cityId) {
             $query = $query->andWhere('u.city = :idCity')
-                ->setParameter('idCity', $this->keywords['city']);
-        }*/
+                ->setParameter('idCity', $this->cityId);
+        }
 
         $users = $query->andWhere($qb->expr()->notIn('u.id', $qbDQL->getDQL()))
             ->setFirstResult('0')

@@ -1,6 +1,6 @@
 {% extends 'ShopProductBundle::layout.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ shopname }}{% endblock %}
 
 {% block content %}
     {% if is_granted('ROLE_MANAGER') %}
@@ -14,13 +14,17 @@
         </div>
     {% endif %}
     <div class="row top20">
-        <div class="col-md-4">
+        <div class="col-md-6">
+            <div class="row">
             {% for image in images %}
-                <img class="img-thumbnail" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
+                <div class="col-md-6 bottom20">
+                    <img class="img-thumbnail img-responsive" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
+                </div>
             {% endfor %}
+            </div>
         </div>
-        <div class="col-md-8">
-            <h3 class="alert alert-success top0">{% for tag in tags %}{{ tag.name }} {% endfor %}</h3>
+        <div class="col-md-6">
+            <h3 class="alert alert-success top0">{% for tag in tags %}#{{ tag.name }} {% endfor %}</h3>
             <form id="orderItem" action="#" method="post" {{ form_enctype(form) }}>
                 {{ form_errors(form) }}
                     <p class="price">
@@ -29,10 +33,10 @@
                     {{ form_widget(form.save) }}
                 {{ form_rest(form) }}
             </form>
-            <p class='text'>{{ product.text }}</p>
+            <p class='text text-muted top20'>{{ product.text }}</p>
         </div>
     </div>
-    <h3 class="alert alert-success">Похожие товары:</h3>
+    <h3 class="alert alert-success top0">Похожие товары:</h3>
     <div class="row top20">
         {#{% for product in products %}
             <div class="col-sm-4 col-md-3">

@@ -1,10 +1,9 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 namespace Platform\MainBundle\Controller;
 
 use Shop\ProductBundle\Entity\Product;

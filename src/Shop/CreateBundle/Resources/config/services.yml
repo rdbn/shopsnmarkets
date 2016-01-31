@@ -12,3 +12,9 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: shopname }
+
+    app.type.shops_tags_selector:
+        class: Shop\CreateBundle\Form\Type\ShopsTagsType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: shopsTags }

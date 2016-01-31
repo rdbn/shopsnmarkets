@@ -33,7 +33,7 @@ class AddCountryFieldSubscriber implements EventSubscriberInterface
         $form->add($this->factory->createNamed('country','entity', $country, array(
             'class'         => 'UserUserBundle:Country',
             'label'         => false,
-            'empty_value'   => 'Выберите страну*',
+            'empty_value'   => 'Выберите страну *',
             'auto_initialize' => false,
             'mapped'        => false,
             'attr' => ['class' => "form-control"],

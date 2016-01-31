@@ -2,6 +2,18 @@
 
 {% block title %}Создать магазин{% endblock %}
 
+{% block stylesheet %}
+    <link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet">
+    <!-- Bootstrap styling for Typeahead -->
+    <link href="{{ asset("bootstrap/css/tokenfield-typeahead.min.css") }}" type="text/css" rel="stylesheet">
+    <!-- Tokenfield CSS -->
+    <link href="{{ asset("bootstrap/css/bootstrap-tokenfield.min.css") }}" type="text/css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.min.js"></script>
+    <![endif]-->
+{% endblock %}
+
 {% block content %}
     {% if isCreate != true %}
         {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
@@ -15,37 +27,30 @@
                 {{ form_errors(form) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.uniqueName) }}
                 {{ form_errors(form.uniqueName) }}
                 {{ form_widget(form.uniqueName) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.shopname) }}
                 {{ form_errors(form.shopname) }}
                 {{ form_widget(form.shopname) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.keywords) }}
-                {{ form_errors(form.keywords) }}
-                {{ form_widget(form.keywords) }}
+                {{ form_errors(form.shopTags) }}
+                {{ form_widget(form.shopTags) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.country) }}
                 {{ form_errors(form.country) }}
                 {{ form_widget(form.country) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.city) }}
                 {{ form_errors(form.city) }}
                 {{ form_widget(form.city) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.phone) }}
                 {{ form_errors(form.phone) }}
                 {{ form_widget(form.phone) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.email) }}
                 {{ form_errors(form.email) }}
                 {{ form_widget(form.email) }}
             </div>
@@ -56,6 +61,8 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('bootstrap/js/bootstrap-tokenfield.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/typeahead.bundle.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/js/location.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/shop/formRegistrationShop.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/add-shop.js') }}" type="text/javascript"></script>
 {% endblock %}

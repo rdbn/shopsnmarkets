@@ -1,10 +1,9 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 namespace User\UserBundle\Controller;
 
 use User\UserBundle\Entity\Users;

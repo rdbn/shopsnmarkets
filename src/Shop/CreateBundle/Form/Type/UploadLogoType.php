@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -10,8 +10,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UploadLogoType extends AbstractType {
-
+class UploadLogoType extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
         $builder->add('file', 'file', array(
@@ -34,4 +34,3 @@ class UploadLogoType extends AbstractType {
         return 'UploadLogoShop';
     }
 }
-?>

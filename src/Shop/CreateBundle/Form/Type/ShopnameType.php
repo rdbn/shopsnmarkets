@@ -13,8 +13,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ShopnameType extends AbstractType {
-    
+class ShopnameType extends AbstractType
+{
     /**
      * @var ObjectManager
      */

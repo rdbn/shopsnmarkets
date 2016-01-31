@@ -16,7 +16,7 @@ class ProductsController extends Controller
     public function allAction() 
     {
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
-                ->findByProductPlatform();
+                ->findByProductPlatform(0);
 
         return $this->render('PlatformMainBundle:Page:products.html.twig', array(
             'products' => $products,

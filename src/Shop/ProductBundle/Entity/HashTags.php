@@ -34,6 +34,11 @@ Class HashTags
     protected $product;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Shop\CreateBundle\Entity\Shops", mappedBy="shopTags")
+     */
+    protected $shop;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -107,5 +112,39 @@ Class HashTags
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Add shop
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shop
+     *
+     * @return HashTags
+     */
+    public function addShop(\Shop\CreateBundle\Entity\Shops $shop)
+    {
+        $this->shop[] = $shop;
+
+        return $this;
+    }
+
+    /**
+     * Remove shop
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shop
+     */
+    public function removeShop(\Shop\CreateBundle\Entity\Shops $shop)
+    {
+        $this->shop->removeElement($shop);
+    }
+
+    /**
+     * Get shop
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShop()
+    {
+        return $this->shop;
     }
 }

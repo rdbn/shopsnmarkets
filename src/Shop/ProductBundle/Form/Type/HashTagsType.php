@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Shop\ProductBundle\Form\DataTransformer\NameToTagsTransformer;
+use Shop\ProductBundle\Form\DataTransformer\ProductsToTagsTransformer;
 
 class HashTagsType extends AbstractType
 {
@@ -29,7 +29,7 @@ class HashTagsType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new NameToTagsTransformer($this->om);
+        $transformer = new ProductsToTagsTransformer($this->om);
         $builder->addViewTransformer($transformer);
     }
 

@@ -30,7 +30,7 @@ class AppKernel extends Kernel
             new User\MessagesBundle\UserMessagesBundle(),
             new User\OrderBundle\UserOrderBundle(),
             new User\AdvertisingBundle\UserAdvertisingBundle(),
-            new User\PartnersBundle\UserPartnersBundle(),
+            new Shop\PartnersBundle\ShopPartnersBundle(),
             new Shop\CreateBundle\ShopCreateBundle(),
             new Shop\InformationBundle\ShopInformationBundle(),
             new Shop\OrderBundle\ShopOrderBundle(),

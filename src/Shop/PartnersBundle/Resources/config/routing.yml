@@ -1,0 +1,41 @@
+# route for Partners
+_partners:
+    pattern:  /partners
+    defaults: { _controller: ShopPartnersBundle:Partners:partners }
+    
+_shopPartners:
+    pattern:  /partners/shop/{shopname}
+    defaults: { _controller: ShopPartnersBundle:Partners:shopPartners }
+    
+_myApplication:
+    pattern:  /partners/myApplication
+    defaults: { _controller: ShopPartnersBundle:Partners:myApplication }
+    
+_application:
+    pattern:  /partners/application
+    defaults: { _controller: ShopPartnersBundle:Partners:application }
+
+_searchPartner:
+    pattern:  /partners/search
+    defaults: { _controller: ShopPartnersBundle:Partners:search }
+    
+# Ajax route for Ajax
+_addListMyShops:
+    pattern:  /partners/list
+    defaults: { _controller: ShopPartnersBundle:Ajax:list, _format: json }
+
+_addPartner:
+    pattern:  /partners/add/{shop}/{partner}
+    defaults: { _controller: ShopPartnersBundle:Ajax:add, _format: json }
+    
+_checkPartner:
+    pattern:  /partners/check/{shop}/{partner}
+    defaults: { _controller: ShopPartnersBundle:Ajax:check, _format: json }
+    
+_deletePartners:
+    pattern:  /partners/remove/{shop}/{partner}
+    defaults: { _controller: ShopPartnersBundle:Ajax:remove, _format: json }
+
+_resualtSearch:
+    pattern:  /partners/result
+    defaults: { _controller: ShopPartnersBundle:Ajax:result, _format: json }

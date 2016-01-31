@@ -1,0 +1,7 @@
+parameters:
+    search.partners.class: Shop\PartnersBundle\Services\Search
+
+services:
+    search.partners:
+        class: %search.partners.class%
+        arguments: [ @doctrine.orm.entity_manager ]

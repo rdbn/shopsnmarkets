@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -15,7 +15,7 @@ class ProductsController extends Controller
     public function tagsProductAction($shopname)
     {
         $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
-                ->findByProductShop($shopname);
+                ->findByProductShop($shopname, 0);
         
         return $this->render('ShopProductBundle:Products:allProducts.html.twig', array(
             'manager' => isset($manager) ? $manager : false,
@@ -50,4 +50,3 @@ class ProductsController extends Controller
         ]);
     }
 }
-?>

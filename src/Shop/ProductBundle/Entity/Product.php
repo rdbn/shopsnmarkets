@@ -78,7 +78,7 @@ Class Product
         $this->like_product = new ArrayCollection();
         $this->cacheTags = new ArrayCollection();
 
-        $this->created_at = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**

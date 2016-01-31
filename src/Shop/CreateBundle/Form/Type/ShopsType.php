@@ -25,14 +25,6 @@ Class ShopsType extends AbstractType
             ],
             'data' => isset($options['data']) ? $options['data']->getUniqueName() : NULL,
         ));
-        $builder->add('keywords', 'text', array(
-            'label' => false,
-            'attr' => [
-                'class' => "form-control",
-                "placeholder" => "Теги магазина *",
-            ],
-            'data' => isset($options['data']) ? $options['data']->getKeywords() : NULL,
-        ));
         $builder->add('shopname', 'text', array(
             'label' => false,
             'attr' => [
@@ -40,6 +32,13 @@ Class ShopsType extends AbstractType
                 "placeholder" => "Название магазина *",
             ],
             'data' => isset($options['data']) ? $options['data']->getShopname() : NULL,
+        ));
+        $builder->add('shopTags', 'shopsTags', array(
+            'label' => false,
+            'attr' => [
+                'class' => "form-control",
+                "placeholder" => "Теги магазина *",
+            ],
         ));
         $builder->add('phone', 'number', array(
             'label' => false,
@@ -73,13 +72,15 @@ Class ShopsType extends AbstractType
         $builder->addEventSubscriber($countrySubscriber);
     }
     
-    public function configureOptions(OptionsResolver $resolver) {
+    public function configureOptions(OptionsResolver $resolver)
+    {
         $resolver->setDefaults(array(
             'data_class' => 'Shop\CreateBundle\Entity\Shops'
         ));
     }
     
-    public function getName() {
-        return 'shops';
+    public function getName()
+    {
+        return 'Shops';
     }
 }

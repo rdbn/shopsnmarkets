@@ -19,7 +19,7 @@ class MainController extends Controller
             ->findOneBy(["uniqueName" => $shopname]);
 
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
-            ->findByProductShop($shopname);
+            ->findByProductShop($shopname, 0);
 
         $advertising = $this->getDoctrine()->getRepository('UserAdvertisingBundle:AdvertisingShop')
             ->findByShops($shop->getId());
@@ -33,4 +33,3 @@ class MainController extends Controller
         ]);
     }
 }
-?>

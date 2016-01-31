@@ -18,8 +18,8 @@ user_advertising:
     resource: "@UserAdvertisingBundle/Resources/config/routing.yml"
     prefix:   /
 
-user_partners:
-    resource: "@UserPartnersBundle/Resources/config/routing.yml"
+shop_partners:
+    resource: "@ShopPartnersBundle/Resources/config/routing.yml"
     prefix:   /
 
 platform_main:
