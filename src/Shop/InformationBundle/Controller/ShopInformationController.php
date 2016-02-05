@@ -13,17 +13,14 @@ class ShopInformationController extends Controller
     public function shopAction($shopname)
     {
         $shop = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
-                ->findOneByShopInformation($shopname);
+                ->findOneBy(["uniqueName" => $shopname]);
         
         $delivery = $this->getDoctrine()->getRepository('ShopCreateBundle:ShopsDelivery')
                 ->findAllShopsDelivery($shopname);
         
-        $preview = $this->get('shopInformation')->information($shopname);
-        
         return $this->render('ShopInformationBundle:Shop:shopInformation.html.twig', array(
             'shop' => $shop,
             'delivery' => $delivery,
-            'preview' => $preview,
             'shopname' => $shopname,
         ));
     }
@@ -31,13 +28,10 @@ class ShopInformationController extends Controller
     public function ajaxShopAction($shopname)
     {
         $shop = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
-                ->findOneByShopInformation($shopname);
-        
-        $preview = $this->get('shopInformation')->information($shopname);
+            ->findOneBy(["uniqueName" => $shopname]);
         
         return $this->render('ShopInformationBundle:Fancybox:shopInformation.html.twig', array(
             'shop' => $shop,
-            'preview' => $preview,
         ));
     }
     
@@ -71,4 +65,3 @@ class ShopInformationController extends Controller
         ));
     }
 }
-?>

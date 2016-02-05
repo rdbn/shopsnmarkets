@@ -7,29 +7,31 @@ _shops:
     pattern:  /shops
     defaults: { _controller: PlatformMainBundle:Page:shops }
 
+_productsPlatform:
+    pattern:  /products
+    defaults: { _controller: PlatformMainBundle:Page:products }
+
+_productPlatform:
+    pattern:  /products/{id}
+    defaults: { _controller: PlatformMainBundle:Page:product }
+
+_search:
+    pattern:  /search
+    defaults: { _controller: PlatformMainBundle:Page:search }
+
 _news:
     pattern: /news
     defaults: { _controller: PlatformMainBundle:Page:news }
 
-#route for class ProductsPlatform
-_productsPlatform:
-    pattern:  /products
-    defaults: { _controller: PlatformMainBundle:Products:all }
-
-_productPlatform:
-    pattern:  /product/{id}
-    defaults: { _controller: PlatformMainBundle:Products:product }
-
 # for class Search
-_search:
-    pattern:  /search
-    defaults: { _controller: PlatformMainBundle:Search:search }
+_paginationsShops:
+    pattern:  /paginationsShops/{count}
+    defaults: { _controller: PlatformMainBundle:Ajax:shops, _format: json }
 
-_resultProduct:
-    pattern:  /resultProduct
-    defaults: { _controller: PlatformMainBundle:Search:result }
+_paginationsProducts:
+    pattern:  /paginationsProducts/{count}
+    defaults: { _controller: PlatformMainBundle:Ajax:products, _format: json }
 
-# for class SearchMain
-_resultProductPlatform:
-    pattern:  /resultProductPlatform
-    defaults: { _controller: PlatformMainBundle:SearchMain:result }
+_resultProducts:
+    pattern:  /result
+    defaults: { _controller: PlatformMainBundle:Ajax:result, _format: json }

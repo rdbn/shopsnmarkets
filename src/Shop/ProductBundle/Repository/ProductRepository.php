@@ -31,7 +31,6 @@ class ProductRepository extends EntityRepository
             ->setMaxResults(16);
 
         try {
-
             return $query->getResult();
         } catch(\Doctrine\ORM\NoResultException $e) {
             return null;

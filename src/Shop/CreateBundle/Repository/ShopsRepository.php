@@ -10,80 +10,86 @@ use Doctrine\ORM\EntityRepository;
 
 class ShopsRepository extends EntityRepository
 {
-    public function findAllShops() {
-        return $this->getEntityManager()
-                ->createQuery('
-                    SELECT s.id, s.shopname, s.uniqueName, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
-                    FROM ShopCreateBundle:Shops s
-                    LEFT JOIN s.users sub
-                    LEFT JOIN s.likeShop like_shop
-                    GROUP BY s
-                    ORDER BY s.createdAt desc
-                ')->getResult();
-    }
-    
-    public function findByShopsManager($id) {
-        return $this->getEntityManager()
-                ->createQuery('
-                    SELECT s.id, s.shopname, s.uniqueName, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
-                    FROM ShopCreateBundle:Shops s
-                    LEFT JOIN s.manager u
-                    LEFT JOIN s.users sub
-                    LEFT JOIN s.likeShop like_shop
-                    WHERE u.id = :id
-                    GROUP BY s
-                ')->setParameter('id', $id)
-                ->getResult();
-    }
-    
-    public function findOneByShopInformation($name) {
+    /**
+     * Список всех магазинов
+     *
+     * @param int $count
+     *
+     * @return array
+    */
+    public function findByShops($count)
+    {
         $query = $this->getEntityManager()
-                ->createQuery('
-                    SELECT s.shopname, c.name as country, ci.name as city, s.street, s.home_index, s.phone, s.fax, s.email, s.path
-                    FROM ShopCreateBundle:Shops s
-                    LEFT JOIN s.city ci
-                    LEFT JOIN ci.country c
-                    WHERE s.uniqueName = :name
-                    GROUP BY s
-                ')->setParameter('name', $name)
-                ->setFirstResult('0')
-                ->setMaxResults('1')
-                ->getResult();
-        
-        if (isset($query['0'])) {
-            return $query['0'];
-        } else {
+            ->createQuery('
+                SELECT s.id, s.shopname, s.uniqueName, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
+                FROM ShopCreateBundle:Shops s
+                LEFT JOIN s.users sub
+                LEFT JOIN s.likeShop like_shop
+                GROUP BY s
+                ORDER BY s.createdAt desc
+            ')
+            ->setFirstResult($count)
+            ->setMaxResults(20);
+
+        try {
+            return $query->getResult();
+        } catch(\Doctrine\ORM\NoResultException $e) {
             return null;
         }
     }
-    
-    public function findAllShopnameManager($id)
+
+    /**
+     * Список всех магазинов у менеджера
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function findByShopsManager($id)
     {
-        return $this->getEntityManager()
-                ->createQuery('
-                    SELECT s.id, s.shopname FROM ShopCreateBundle:Shops s
-                    LEFT JOIN s.manager u
-                    WHERE u.id = :id
-                    GROUP BY s
-                ')->setParameter('id', $id)
-                ->getResult();
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT s.id, s.shopname, s.uniqueName, s.rating, s.path, count(DISTINCT sub) as users, count(DISTINCT like_shop) as likes
+                FROM ShopCreateBundle:Shops s
+                LEFT JOIN s.manager u
+                LEFT JOIN s.users sub
+                LEFT JOIN s.likeShop like_shop
+                WHERE u.id = :id
+                GROUP BY s
+            ')
+            ->setParameter('id', $id);
+
+        try {
+            return $query->getResult();
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
     }
 
+    /**
+     * Информация по магазину с количеством подписчиков
+     *
+     * @param string $name
+     *
+     * @return array
+    */
     public function findOneByShop($name) 
     {
         $query = $this->getEntityManager()
-                ->createQuery('
-                    SELECT s.id, s.shopname, s.path, count(DISTINCT u) as users
-                    FROM ShopCreateBundle:Shops s
-                    LEFT JOIN s.users u
-                    WHERE s.uniqueName = :name
-                    GROUP BY s
-                ')->setParameter('name', $name)
-                ->getResult();
-        
-        if (isset($query['0'])) {
-            return $query['0'];
-        } else {
+            ->createQuery('
+                SELECT s.id, s.shopname, s.path, count(DISTINCT u) as users
+                FROM ShopCreateBundle:Shops s
+                LEFT JOIN s.users u
+                WHERE s.uniqueName = :name
+                GROUP BY s
+            ')
+            ->setParameter('name', $name);
+
+        try {
+            $result = $query->getResult();
+
+            return $result["0"];
+        } catch(\Doctrine\ORM\NoResultException $e) {
             return null;
         }
     }

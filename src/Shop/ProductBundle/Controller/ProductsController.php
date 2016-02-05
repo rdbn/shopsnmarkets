@@ -8,6 +8,7 @@ namespace Shop\ProductBundle\Controller;
 
 use Shop\OrderBundle\Entity\OrderItem;
 use Shop\OrderBundle\Form\Type\OrderItemType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProductsController extends Controller

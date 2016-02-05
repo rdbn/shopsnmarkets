@@ -45,4 +45,3 @@ class ShopInformation {
         return $payment;
     }
 }
-?>
