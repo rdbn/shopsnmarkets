@@ -14,13 +14,6 @@ Class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('realname', 'text', [
-            'label' => false,
-            'attr' => ["class" => "form-control", "placeholder" => "Фамилия, Имя"],
-            'data' => isset($options['data']) ? $options['data']->getRealname() : NULL,
-            'invalid_message' => 'Заполните поле: "Фамилия, Имя".',
-            'error_bubbling' => true,
-        ]);
         $builder->add('username', 'email', [
             'label' => false,
             'attr' => ["class" => "form-control", "placeholder" => "email"],
