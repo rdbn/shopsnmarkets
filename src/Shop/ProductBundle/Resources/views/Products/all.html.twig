@@ -20,7 +20,7 @@
                 <li>
                     <a href='{{ path('_productShop', {'shopname' : shopname, 'idFloor' : floor, 'idCategory' : idCategory, 'idSubcategory' : product.subcategory, 'idProduct' : product.id }) }}'>
                         <span class="imgHover"></span>
-                        <img src="{{ asset(product.path | apply_filter('product_image')) }}" alt="Product" />
+                        <img src="{{ asset(product.path | imagine_filter('product_image')) }}" alt="Product" />
                     </a>
                 </li>
                 <li>
@@ -37,6 +37,6 @@
 
 {% block javascripts %}
     <script src="{{ asset('public/js/shop/searchShop.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/js/shop/Like.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/add-like.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/js/user/AddSubscribe.js') }}" type="text/javascript"></script>
 {% endblock %}

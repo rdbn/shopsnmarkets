@@ -1,33 +1,3 @@
 parameters:
-    basket.class: Shop\OrderBundle\Services\Basket
-    formBasket.class: Shop\OrderBundle\Services\FormBasket
-    formDelivery.class: Shop\OrderBundle\Services\FormDelivery
 
 services:
-    basket:
-        class: %basket.class%
-        arguments: [ @doctrine.orm.entity_manager ]
-        
-    formBasket:
-        class: %formBasket.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
-        
-    formDelivery:
-        class: %formDelivery.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory ]
-        
-    product.id.type.issue_selector:
-        class: Shop\OrderBundle\Form\Type\ProductIdType
-        arguments: ["@doctrine.orm.entity_manager"]
-        tags:
-            - { name: form.type, alias: product }
-
-    payment.plugin.paypal:
-        class: Shop\OrderBundle\Plugin\PaypalPlugin
-        tags: [{name: payment.plugin}]
-        
-    credit_card_type:
-        class: Shop\OrderBundle\Form\Type\CreditCardType
-        tags:
-            - { name: form.type, alias: credit_card }
-            - { name: payment.method_type }

@@ -13,36 +13,41 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserInformationType extends AbstractType {
-    
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+class UserInformationType extends AbstractType 
+{
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('realname', 'text', array(
+        $builder->add('realname', TextType::class, [
             'label' => false,
             "attr" => ["class" => "form-control", "placeholder" => "Фамилия/Имя*"],
             'data' => isset($options['data']) ? $options['data']->getRealname() : NULL,
-        ));
-        $builder->add('username', 'email', array(
+        ]);
+        $builder->add('username', EmailType::class, [
             'label' => false,
             "attr" => ["class" => "form-control", "placeholder" => "Email*"],
             'data' => isset($options['data']) ? $options['data']->getUsername() : NULL,
-        ));
-        $builder->add('phone', 'number', array(
+        ]);
+        $builder->add('phone', NumberType::class, [
             'label' => false,
             "attr" => ["class" => "form-control", "placeholder" => "Телефон"],
             'required' => false,
             'data' => isset($options['data']) ? $options['data']->getPhone() : NULL,
-        ));
-        $builder->add('skype', 'text', array(
+        ]);
+        $builder->add('skype', TextType::class, [
             'label' => false,
             "attr" => ["class" => "form-control", "placeholder" => "Skype"],
             'required' => false,
             'data' => isset($options['data']) ? $options['data']->getSkype() : NULL,
-        ));
-        $builder->add('save', 'submit', array(
-            'attr' => array('class' => 'btn btn-success btn-sm center-block'),
-            'label' => 'Сохранить'
-        ));
+        ]);
+        $builder->add('save', SubmitType::class, [
+            'attr' => ['class' => 'btn btn-success btn-sm center-block'],
+            'label' => 'Сохранить',
+        ]);
         
         $factory = $builder->getFormFactory();
         $countrySubscriber = new AddCountryFieldSubscriber($factory);
@@ -53,14 +58,8 @@ class UserInformationType extends AbstractType {
     
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'User\UserBundle\Entity\Users'
-        ));
-    }
-    
-    public function getName()
-    {
-        return 'UserInformation';
+        ]);
     }
 }
-?>

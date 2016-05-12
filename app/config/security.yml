@@ -54,7 +54,7 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/user, roles: [ROLE_USER, ROLE_MANAGER] }
         - { path: ^/manager, roles: ROLE_MANAGER }
         - { path: ^/id, roles: [ROLE_MANAGER, ROLE_USER] }
         - { path: ^/property, roles: [ROLE_MANAGER, ROLE_USER] }

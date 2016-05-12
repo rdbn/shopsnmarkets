@@ -79,3 +79,9 @@ body {
 .width-body {
     width: 10000px;
 }
+
+#comments-list {
+    overflow-y: auto;
+    max-height: 250px;
+    opacity: 0;
+}

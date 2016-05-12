@@ -6,17 +6,22 @@
  */
 namespace Platform\MainBundle\Controller;
 
-use Shop\OrderBundle\Entity\OrderItem;
-use Shop\OrderBundle\Form\Type\OrderItemType;
-
 use Shop\ProductBundle\Entity\Product;
 use Platform\MainBundle\Form\Type\SearchType;
 use Platform\MainBundle\Form\Type\SearchMainType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PageController extends Controller
 {
+    /**
+     * Main page
+     *
+     * @Route("/", name="main")
+     * @Method({"GET"})
+     */
     public function indexAction()
     {
         $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
@@ -28,12 +33,18 @@ class PageController extends Controller
         if (null == $advertising)
             $advertising['0']['path'] = '/public/images/slider.png';
         
-        return $this->render('PlatformMainBundle:Page:index.html.twig', array(
+        return $this->render('PlatformMainBundle:Page:index.html.twig', [
             'shops' => $shops,
             'advertising' => $advertising,
-        ));
+        ]);
     }
 
+    /**
+     * Page shops
+     *
+     * @Route("/shops", name="shops")
+     * @Method({"GET"})
+     */
     public function shopsAction()
     {
         $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
@@ -44,6 +55,12 @@ class PageController extends Controller
         ));
     }
 
+    /**
+     * Page products
+     *
+     * @Route("/products", name="products")
+     * @Method({"GET"})
+     */
     public function productsAction()
     {
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
@@ -54,6 +71,18 @@ class PageController extends Controller
         ));
     }
 
+    /**
+     * Page product
+     *
+     * @param int $id
+     *
+     * @Route("/products/{id}", name="product_platform", requirements={
+     *     "id": "\d+"
+     * })
+     * @Method({"GET"})
+     *
+     * @return object
+     */
     public function productAction($id)
     {
         $product = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
@@ -65,28 +94,46 @@ class PageController extends Controller
         $tags = $this->getDoctrine()->getRepository('ShopProductBundle:HashTags')
             ->findByTags($id);
 
-        $form = $this->createForm(new OrderItemType(), new OrderItem());
-
         return $this->render('PlatformMainBundle:Product:card.html.twig', [
-            'form' => $form->createView(),
             'product' => $product,
             'images' => $images,
             'tags' => $tags,
         ]);
     }
 
+    /**
+     * Page search
+     *
+     * @Route("/search", name="search")
+     * @Method({"GET"})
+     */
     public function searchAction()
     {
-        $form = $this->createForm(new SearchType(), new Product());
+        $form = $this->createForm(SearchType::class, new Product());
 
         return $this->render('PlatformMainBundle:Search:product.html.twig', array(
             'form' => $form->createView(),
         ));
     }
 
+    /**
+     * Page news
+     *
+     * @Route("/news", name="news")
+     * @Method({"GET"})
+     */
+    public function newsAction()
+    {
+        $name = 'Страница новостей';
+
+        return $this->render('PlatformMainBundle:Page:news.html.twig', array(
+            'name' => $name,
+        ));
+    }
+
     public function searchFormAction()
     {
-        $form = $this->createForm(new SearchType(), new Product());
+        $form = $this->createForm(SearchType::class, new Product());
 
         return $this->render('PlatformMainBundle:Form:searchForm.html.twig', array(
             'form' => $form->createView(),
@@ -95,19 +142,10 @@ class PageController extends Controller
 
     public function searchTopAction()
     {
-        $form = $this->createForm(new SearchMainType(), new Product());
+        $form = $this->createForm(SearchMainType::class, new Product());
 
         return $this->render('PlatformMainBundle:Form:searchFormTop.html.twig', array(
             'form' => $form->createView(),
-        ));
-    }
-
-    public function newsAction()
-    {
-        $name = 'Страница новостей';
-
-        return $this->render('PlatformMainBundle:Page:news.html.twig', array(
-            'name' => $name,
         ));
     }
 }

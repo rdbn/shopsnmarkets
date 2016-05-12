@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -36,7 +36,8 @@ Class City
     /**
      * toString for class City
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->name;
     }
 

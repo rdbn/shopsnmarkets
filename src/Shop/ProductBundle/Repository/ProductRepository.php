@@ -7,6 +7,7 @@
 namespace Shop\ProductBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 class ProductRepository extends EntityRepository
 {
@@ -19,19 +20,34 @@ class ProductRepository extends EntityRepository
      */
     public function findByProductPlatform($count)
     {
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addEntityResult("ShopProductBundle:Product", "p");
+        $rsm->addFieldResult("p", "id", "id");
+        $rsm->addFieldResult("p", "price", "price");
+
+        $rsm->addJoinedEntityResult("UserUserBundle:Users", "u", "p", "likeProduct");
+        $rsm->addFieldResult("u", "likes", "id");
+
+        $rsm->addJoinedEntityResult("ShopProductBundle:ProductImage", "pi", "p", "image");
+        $rsm->addFieldResult("pi", "image_id", "id");
+        $rsm->addFieldResult("pi", "path", "path");
+
         $query = $this->getEntityManager()
-            ->createQuery('
-                SELECT count(p.id) as id, p.id, p.price, count(likeProduct) as likes, img.path
-                FROM ShopProductBundle:Product p
-                LEFT JOIN p.likeProduct likeProduct
-                LEFT JOIN p.image img
-                GROUP BY p
-            ')
-            ->setFirstResult($count)
-            ->setMaxResults(16);
+            ->createNativeQuery('
+                SELECT DISTINCT ON (p.id) p.id, p.price, count(u.id) as likes, pi.id as image_id, pi.path
+                FROM product p
+                  LEFT JOIN product_image pi ON pi.product_id = p.id
+                  LEFT JOIN product_like pl ON pl.product_id = p.id
+                  LEFT JOIN users u ON pl.users_id = u.id
+                  LEFT JOIN shops s ON s.id = p.shops_id
+                GROUP BY p.id, p.price, pi.id, pi.path
+                LIMIT 16 OFFSET ?
+            ', $rsm)
+            ->setParameter(1, $count);
 
         try {
-            return $query->getResult();
+            return $query->getArrayResult();
         } catch(\Doctrine\ORM\NoResultException $e) {
             return null;
         }
@@ -55,7 +71,7 @@ class ProductRepository extends EntityRepository
                 LEFT JOIN s.users u
                 LEFT JOIN s.likeShop likeShop
                 WHERE p.id = :id
-                GROUP BY p
+                GROUP BY p, s
             ')
             ->setParameter('id', $id);
 
@@ -78,21 +94,35 @@ class ProductRepository extends EntityRepository
      */
     public function findByProductShop($name, $count)
     {
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+
+        $rsm->addEntityResult("ShopProductBundle:Product", "p");
+        $rsm->addFieldResult("p", "id", "id");
+        $rsm->addFieldResult("p", "price", "price");
+
+        $rsm->addJoinedEntityResult("UserUserBundle:Users", "u", "p", "likeProduct");
+        $rsm->addFieldResult("u", "likes", "id");
+
+        $rsm->addJoinedEntityResult("ShopProductBundle:ProductImage", "pi", "p", "image");
+        $rsm->addFieldResult("pi", "image_id", "id");
+        $rsm->addFieldResult("pi", "path", "path");
+
         $query = $this->getEntityManager()
-            ->createQuery('
-                SELECT p.id, p.price, count(likeProduct) as likes, im.path FROM ShopProductBundle:Product p
-                LEFT JOIN p.likeProduct likeProduct
-                LEFT JOIN p.shops s
-                LEFT JOIN p.image im
-                WHERE s.uniqueName = :name
-                GROUP BY p
-            ')
-            ->setParameter('name', $name)
-            ->setFirstResult($count)
-            ->setMaxResults(16);
+            ->createNativeQuery('
+                SELECT DISTINCT ON (p.id) p.id, p.price, count(u.id) as likes, pi.id as image_id, pi.path
+                FROM product p
+                  LEFT JOIN product_image pi ON pi.product_id = p.id
+                  LEFT JOIN product_like pl ON pl.product_id = p.id
+                  LEFT JOIN users u ON pl.users_id = u.id
+                  LEFT JOIN shops s ON s.id = p.shops_id
+                WHERE s.unique_name = ?
+                GROUP BY p.id, p.price, pi.id, pi.path
+                LIMIT 16 OFFSET ?
+            ', $rsm)
+            ->setParameters([1 => $name, 2 => $count]);
 
         try {
-            return $query->getResult();
+            return $query->getArrayResult();
         } catch(\Doctrine\ORM\NoResultException $e) {
             return null;
         }
@@ -113,6 +143,7 @@ class ProductRepository extends EntityRepository
                 FROM ShopProductBundle:Product p
                 LEFT JOIN p.likeProduct likeProduct
                 WHERE p.id = :id
+                GROUP BY p.id, p.price, p.text
             ')
             ->setParameter('id', $id);
 
@@ -120,6 +151,57 @@ class ProductRepository extends EntityRepository
             $result = $query->getResult();
 
             return $result["0"];
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Проверяем наличие лайка от пользователя
+     *
+     * @param int $product
+     * @param int $user
+     *
+     * @return array
+     */
+    public function findOneByIsLike($product, $user)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT p FROM ShopProductBundle:Product p
+                  LEFT JOIN p.likeProduct u
+                WHERE p.id = :product AND u.id = :users
+            ')
+            ->setParameters(['product' => $product, 'users' => $user]);
+
+        try {
+            return $query->getSingleResult();
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Кол-во лайков у продукта
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function findOneByCountLike($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT count(u.id) as likes FROM ShopProductBundle:Product p
+                  LEFT JOIN p.likeProduct u
+                WHERE p.id = :product
+            ')
+            ->setParameter('product', $id);
+
+        try {
+            $result = $query->getResult();
+
+            return $result[0]["likes"];
         } catch(\Doctrine\ORM\NoResultException $e) {
             return null;
         }

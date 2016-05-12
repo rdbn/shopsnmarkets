@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -30,16 +30,16 @@ class UsersToIdTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  Issue|null $users
+     * @param  Users|null $users
+     *
      * @return string
      */
     public function transform($users)
     {
-        if (null === $users) {
+        if (null === $users)
             return "";
-        }
 
-        return $users;
+        return $users->getId();
     }
 
     /**
@@ -47,20 +47,16 @@ class UsersToIdTransformer implements DataTransformerInterface
      *
      * @param  string $id
      *
-     * @return Issue|null
+     * @return Users|null
      *
      * @throws TransformationFailedException if object (issue) is not found.
      */
     public function reverseTransform($id)
     {
-        if (!$id) {
-            return null;
-        }
+        if (!$id) return null;
 
-        $users = $this->om
-            ->getRepository('UserUserBundle:Users')
-            ->findOneById($id)
-        ;
+        $users = $this->om->getRepository('UserUserBundle:Users')
+            ->findOneById($id);
 
         if (null === $users) {
             throw new TransformationFailedException(sprintf(
@@ -72,4 +68,3 @@ class UsersToIdTransformer implements DataTransformerInterface
         return $users;
     }
 }
-?>

@@ -10,39 +10,24 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Shop\CreateBundle\Form\Type\ShopDeliveryType as EntityShopsDeliveryType;
+
 class DeliveryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('shops', 'shopname');
-        $builder->add('delivery', 'delivery');
-        $builder->add('price', 'number', [
+        $builder->add('shopsDelivery', CollectionType::class, [
+            'entry_type' => EntityShopsDeliveryType::class,
+            'allow_add' => true,
             'label' => false,
-            'attr' => [
-                'placeholder' => 'Стоимость',
-                'class' => 'form-control',
-            ],
-            'data' => isset($options['data']) ? $options['data']->getPrice() : NULL,
-        ]);
-        $builder->add('duration', 'text', [
-            'label' => false,
-            'attr' => [
-                'placeholder' => 'Сроки',
-                'class' => 'form-control',
-            ],
-            'data' => isset($options['data']) ? $options['data']->getDuration() : NULL,
         ]);
     }
     
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Shop\CreateBundle\Entity\ShopsDelivery'
+            'data_class' => 'Shop\CreateBundle\Entity\Shops'
         ]);
-    }
-    
-    public function getName() 
-    {
-        return 'Delivery';
     }
 }

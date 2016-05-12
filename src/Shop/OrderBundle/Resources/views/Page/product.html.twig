@@ -1,0 +1,32 @@
+{% extends '::main_platform.html.twig' %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block body %}
+    <h3 class="text-success">Корзина:</h3>
+    {% if orderItems is defined %}
+        {% for orderItem in orderItems %}
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="{{ path('product_platform', {'id' : orderItem.product.id }) }}">
+                        <img class="media-object img-thumbnail" src="{{ asset(orderItem.product.image[0].path | imagine_filter('advertisingSideOf')) }}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <p class="media-heading text-muted">Цена: <span class="text-success">{{ orderItem.product.price }}</span> руб.</p>
+                    <p class='text-muted'>Кол-во: <span>{{ orderItem.number }}</span></p>
+                    <button class="btn btn-danger delete-order" data-toggle='{{ orderItem.product.id }}'>Удалить из корзины</button>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="alert alert-success top20">
+            <a class="btn btn-success" href='{{ path('basket_order') }}'>Оформить заказ</a>
+            <p class="top20">Общие количество: {{ count }}</p>
+            <p>Итого: {{ sum }} руб.</p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

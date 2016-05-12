@@ -11,11 +11,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 Class SearchMainType extends AbstractType 
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('hashTags', 'text', array(
+        $builder->add('hashTags', TextType::class, array(
             'label' => false,
             'attr' => ["class" => "form-control"],
             'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
@@ -28,10 +30,4 @@ Class SearchMainType extends AbstractType
             'data_class' => 'Shop\ProductBundle\Entity\Product'
         ));
     }
-
-    public function getName()
-    {
-        return 'SearchMain';
-    }
 }
-

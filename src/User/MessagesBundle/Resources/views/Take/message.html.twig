@@ -27,7 +27,7 @@
     {% for message in messages %}
         <div class="message {% if message.flags == '0' %}unread{% endif %}">
             <span class="tick"></span>
-            <img src="{% if (message.path != '') %}{{ message.path | apply_filter('mini_avatar') }}{% endif %}">
+            <img src="{% if (message.path != '') %}{{ message.path | imagine_filter('mini_avatar') }}{% endif %}">
             <ul>
                 <li><span id="{{ message.message }}" class="messageId"></span></li>
                 <li><h3>{{ message.realname }}<span>{{ message.createdAt.date }}</span></h3></li>
@@ -37,16 +37,16 @@
     {% endfor %}
     </div>
     <div class="formMessage">
-        <img src="{% if (user.path != '') %}{{ user.path | apply_filter('mini_avatar') }}{% endif %}" />
+        <img src="{% if (user.path != '') %}{{ user.path | imagine_filter('mini_avatar') }}{% endif %}" />
         <div class="formFields">
             <input id="dialog" type="hidden" value="{{ id }}" />
             <input id="user" type="hidden" value="{{ user.id }}" />
-            <input id="path" type="hidden" value="{% if (user.path != '') %}{{ user.path | apply_filter('mini_avatar') }}{% endif %}" />
+            <input id="path" type="hidden" value="{% if (user.path != '') %}{{ user.path | imagine_filter('mini_avatar') }}{% endif %}" />
             <input id="realname" type="hidden" value="{{ user.realname }}" />
             <label for="text">Сообщение *:</label>
             <textarea id="text" placeholder="Текст сообщение..."></textarea>
             <button class='button'>Отправить</button>
         </div>
-        <img class="imageRight" src="{% if (path != '') %}{{ path | apply_filter('mini_avatar') }}{% endif %}" />
+        <img class="imageRight" src="{% if (path != '') %}{{ path | imagine_filter('mini_avatar') }}{% endif %}" />
     </div>
 {% endblock %}

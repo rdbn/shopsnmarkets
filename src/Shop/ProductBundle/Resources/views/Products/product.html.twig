@@ -18,7 +18,7 @@
             <div class="row">
             {% for image in images %}
                 <div class="col-md-6 bottom20">
-                    <img class="img-thumbnail img-responsive" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
+                    <img class="img-thumbnail img-responsive" src="{{ asset(image.path | imagine_filter('main_product_image')) }}" alt="Product" />
                 </div>
             {% endfor %}
             </div>
@@ -42,7 +42,7 @@
             <div class="col-sm-4 col-md-3">
                 <div class="thumbnail">
                     <a href='{{ path('_productShop', {'shopname' : shopname, 'id' : product.id }) }}'>
-                        <img src="{{ asset(product.path | apply_filter('product_image')) }}" alt="Product" />
+                        <img src="{{ asset(product.path | imagine_filter('product_image')) }}" alt="Product" />
                     </a>
                     <div class="caption">
                         <h4>
@@ -59,7 +59,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('public/js/shop/Like.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/add-like.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/js/shop/addOrder.js') }}" type="text/javascript"></script>
     <script src="{{ asset('public/js/user/AddSubscribe.js') }}" type="text/javascript"></script>
 {% endblock %}

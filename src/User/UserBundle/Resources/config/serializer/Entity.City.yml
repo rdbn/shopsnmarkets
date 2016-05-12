@@ -6,4 +6,7 @@ User\UserBundle\Entity\City:
             groups: [city]
         name:
             expose: true
-            groups: [city]
+            groups: [city, shopInformation]
+        country:
+            expose: true
+            groups: [city, shopInformation]

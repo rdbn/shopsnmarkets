@@ -39,9 +39,9 @@
                 {{ form_errors(form.shops) }}
                 {{ form_widget(form.shops) }}
                 {% for shop in shops %}
-                    <label class="col-md-3" for="AdvertisingPlatform_shops_{{ shop.id }}">
+                    <label class="col-md-3" for="advertising_platform_shops_{{ shop.id }}">
                         <span class="thumbnail">
-                            <img src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" />
+                            <img src="{% if (shop.path != '') %}{{ shop.path | imagine_filter('logo_shop') }}{% endif %}" />
                             <span class="caption small">
                                 <span class="text-success">
                                     {{ shop.shopname }}

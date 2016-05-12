@@ -1,11 +1,12 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace Shop\OrderBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,13 +22,6 @@ class Address
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
-    /**
-     * @ORM\OneToOne(targetEntity="Shop\OrderBundle\Entity\Order", inversedBy="address", cascade={"persist"})
-     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
-     */
-    protected $order;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\City")
@@ -64,15 +58,31 @@ class Address
      * @ORM\Column(name="skype", type="string", length=45, nullable=true)
      */
     protected $skype;
-    
-    public function __toString() {
-        return $this->realname;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="address", cascade={"persist"})
+     */
+    protected $order;
+
+    /**
+     * constructor
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+
+        $this->order = new ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,19 +93,20 @@ class Address
      * Set realname
      *
      * @param string $realname
+     *
      * @return Address
      */
     public function setRealname($realname)
     {
         $this->realname = $realname;
-    
+
         return $this;
     }
 
     /**
      * Get realname
      *
-     * @return string 
+     * @return string
      */
     public function getRealname()
     {
@@ -106,19 +117,20 @@ class Address
      * Set email
      *
      * @param string $email
+     *
      * @return Address
      */
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -129,19 +141,20 @@ class Address
      * Set street
      *
      * @param string $street
+     *
      * @return Address
      */
     public function setStreet($street)
     {
         $this->street = $street;
-    
+
         return $this;
     }
 
     /**
      * Get street
      *
-     * @return string 
+     * @return string
      */
     public function getStreet()
     {
@@ -149,22 +162,23 @@ class Address
     }
 
     /**
-     * Set home_index
+     * Set homeIndex
      *
      * @param integer $homeIndex
+     *
      * @return Address
      */
     public function setHomeIndex($homeIndex)
     {
         $this->home_index = $homeIndex;
-    
+
         return $this;
     }
 
     /**
-     * Get home_index
+     * Get homeIndex
      *
-     * @return integer 
+     * @return integer
      */
     public function getHomeIndex()
     {
@@ -175,19 +189,20 @@ class Address
      * Set phone
      *
      * @param integer $phone
+     *
      * @return Address
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
-    
+
         return $this;
     }
 
     /**
      * Get phone
      *
-     * @return integer 
+     * @return integer
      */
     public function getPhone()
     {
@@ -198,19 +213,20 @@ class Address
      * Set skype
      *
      * @param string $skype
+     *
      * @return Address
      */
     public function setSkype($skype)
     {
         $this->skype = $skype;
-    
+
         return $this;
     }
 
     /**
      * Get skype
      *
-     * @return string 
+     * @return string
      */
     public function getSkype()
     {
@@ -218,38 +234,40 @@ class Address
     }
 
     /**
-     * Set order
+     * Set createdAt
      *
-     * @param \Shop\OrderBundle\Entity\Order $order
+     * @param \DateTime $createdAt
+     *
      * @return Address
      */
-    public function setOrder(\Shop\OrderBundle\Entity\Order $order = null)
+    public function setCreatedAt($createdAt)
     {
-        $this->order = $order;
-    
+        $this->createdAt = $createdAt;
+
         return $this;
     }
 
     /**
-     * Get order
+     * Get createdAt
      *
-     * @return \Shop\OrderBundle\Entity\Order 
+     * @return \DateTime
      */
-    public function getOrder()
+    public function getCreatedAt()
     {
-        return $this->order;
+        return $this->createdAt;
     }
 
     /**
      * Set city
      *
      * @param \User\UserBundle\Entity\City $city
+     *
      * @return Address
      */
     public function setCity(\User\UserBundle\Entity\City $city = null)
     {
         $this->city = $city;
-    
+
         return $this;
     }
 
@@ -261,5 +279,39 @@ class Address
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     *
+     * @return Address
+     */
+    public function addOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     */
+    public function removeOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order->removeElement($order);
+    }
+
+    /**
+     * Get order
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

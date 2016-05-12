@@ -15,7 +15,7 @@
     <div class="allMessage">
         {% for user in messages %}
             <a class="user" href="{{ path('_userDialog', { 'id' : user.dialog, 'users' : user.id }) }}">
-                <img src="{% if (user.path != '') %}{{ user.path | apply_filter('mini_avatar') }}{% endif %}" />
+                <img src="{% if (user.path != '') %}{{ user.path | imagine_filter('mini_avatar') }}{% endif %}" />
                 <span class="name">{{ user.realname }}</span> <span class="text">{{ user.text }}</span>
             </a>
         {% endfor %}

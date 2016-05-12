@@ -18,7 +18,8 @@ class AdvertisingPlatformRepository extends EntityRepository
      *
      * @return array
     */
-    public function findByAdvertising(array $data) {
+    public function findByAdvertising(array $data) 
+    {
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT ap.path FROM UserAdvertisingBundle:AdvertisingPlatform ap
@@ -40,7 +41,8 @@ class AdvertisingPlatformRepository extends EntityRepository
      *
      * @return array
      */
-    public function findByAdvertisingShop(array $data) {
+    public function findByAdvertisingShop(array $data) 
+    {
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT ap.path FROM UserAdvertisingBundle:AdvertisingPlatform ap
@@ -64,7 +66,8 @@ class AdvertisingPlatformRepository extends EntityRepository
      *
      * @return array
      */
-    public function findByAdvertisingUser($id) {
+    public function findByAdvertisingUser($id) 
+    {
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT ap.id, ap.date_start, ap.date_end, f.id as format, f.name, s.shopname, ap.path

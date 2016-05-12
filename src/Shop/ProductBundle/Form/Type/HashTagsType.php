@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Shop\ProductBundle\Form\DataTransformer\ProductsToTagsTransformer;
 
 class HashTagsType extends AbstractType
@@ -42,11 +43,6 @@ class HashTagsType extends AbstractType
 
     public function getParent()
     {
-        return "text";
-    }
-
-    public function getName()
-    {
-        return 'tags';
+        return TextType::class;
     }
 }

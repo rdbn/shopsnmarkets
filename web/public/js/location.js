@@ -1,6 +1,6 @@
 function locations(send, take) {
     $('#'+send).change(function() {
-        $.get("/app_dev.php/city/"+$(this).val(), function(data){
+        $.get("/city/"+$(this).val(), function(data){
             if (data !== '') {
                 var html = '<option value>Выберите город *</option>';
                 
@@ -15,10 +15,10 @@ function locations(send, take) {
 }
 
 $(document).ready(function () {
-    locations('Shops_country', 'Shops_city');
+    locations('shops_country', 'shops_city');
     locations('RegistrationUser_country', 'RegistrationUser_city');
     locations('SearchPartners_country', 'SearchPartners_city');
     locations('Search_country', 'Search_city');
     locations('UserInformation_country', 'UserInformation_city');
-    locations('Order_address_country', 'Order_address_city');
+    locations('address_country', 'address_city');
 });

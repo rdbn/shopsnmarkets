@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -10,16 +10,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DescriptionType extends AbstractType {
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+class DescriptionType extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('description', 'textarea', [
+        $builder->add('description', TextareaType::class, [
             'label' => false,
             'attr' => ["class" => "form-control", "placeholder" => "Кратко о себе", "rows" => "5"],
             'data' => isset($options['data']) ? $options['data']->getDescription() : '',
         ]);
-        $builder->add('save', 'submit', [
+        $builder->add('save', SubmitType::class, [
             'attr' => ['class' => 'btn btn-success btn-sm top20'],
             'label' => 'Сохранить'
         ]);
@@ -27,14 +30,8 @@ class DescriptionType extends AbstractType {
     
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'User\UserBundle\Entity\Users'
-        ));
-    }
-    
-    public function getName() 
-    {
-        return 'Description';
+        ]);
     }
 }
-?>

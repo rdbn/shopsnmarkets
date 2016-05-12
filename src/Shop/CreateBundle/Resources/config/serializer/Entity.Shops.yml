@@ -3,7 +3,25 @@ Shop\CreateBundle\Entity\Shops:
     properties:
         id:
             expose: true
-            groups: [list]
+            groups: [list, shopInformation]
         shopname:
             expose: true
-            groups: [list]
+            groups: [list, shopInformation]
+        city:
+            expose: true
+            groups: [shopInformation]
+        description:
+            expose: true
+            groups: [shopInformation]
+        email:
+            expose: true
+            groups: [shopInformation]
+        phone:
+            expose: true
+            groups: [shopInformation]
+        path:
+            expose: true
+            groups: [shopInformation]
+        shopsDelivery:
+            expose: true
+            groups: [shopInformation]

@@ -1,28 +1,8 @@
 parameters:
-    shopInformation.class: Shop\InformationBundle\Services\ShopInformation
-    shopComments.class: Shop\InformationBundle\Services\ShopComments
-    shopCommentsXML.class: Shop\InformationBundle\Services\ShopCommentsXML
-    shopLike.class: Shop\InformationBundle\Services\ShopLike
 
 services:
-    shopCommentsXML:
-        class: %shopCommentsXML.class%
-        
-    shopInformation:
-        class: %shopInformation.class%
-        arguments: [ @doctrine.orm.entity_manager ]
-        
-    shopComments:
-        class: %shopComments.class%
-        arguments: [ @form.factory, @shopCommentsXML ]
-        
-    shopLike:
-        class: %shopLike.class%
-        arguments: [ @doctrine.orm.entity_manager ]
-        
-    Shop.type.UserID:
+    shop.type.user_id:
         class: Shop\InformationBundle\Form\Type\UserIDType
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: userID }
-

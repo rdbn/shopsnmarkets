@@ -9,7 +9,7 @@ _productShop:
 
 # route for controller Ajax
 _addLikeProduct:
-    pattern:  /addLikeProduct
+    pattern:  /addLikeProduct/{id}
     defaults: { _controller: ShopProductBundle:Ajax:like, _format: json }
     requirements:
         _method: GET

@@ -9,7 +9,7 @@
     <div class="allMessage">
         {% for user in take %}
             <a class="user {% if (user.flags == false) %}unread{% endif %}" href="{{ path('_userDialog', { 'id' : user.dialog, 'users' : user.id }) }}">
-                <img src="{% if (user.path != '') %}{{ user.path | apply_filter('mini_avatar') }}{% endif %}" />
+                <img src="{% if (user.path != '') %}{{ user.path | imagine_filter('mini_avatar') }}{% endif %}" />
                 <span class="name">{{ user.realname }}</span>
                 <span id="{{ user.id }}" class="delete">&times;</span>
                 <span class="text">{{ user.text }}</span>
@@ -17,7 +17,7 @@
         {% endfor %}
         {% for user in send %}
             <a class="user {% if (user.flags == false) %}unread{% endif %}" href="{{ path('_userDialog', { 'id' : user.dialog, 'users' : user.id }) }}">
-                <img src="{% if (user.path != '') %}{{ user.path | apply_filter('mini_avatar') }}{% endif %}" />
+                <img src="{% if (user.path != '') %}{{ user.path | imagine_filter('mini_avatar') }}{% endif %}" />
                 <span class="name">{{ user.realname }}</span>
                 <span id="{{ user.dialog }}" class="delete">&times;</span>
                 <span class="text">{{ user.text }}</span>

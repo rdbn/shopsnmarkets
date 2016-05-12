@@ -1,0 +1,12 @@
+Shop\InformationBundle\Entity\Comments:
+    exclusion_policy: ALL
+    properties:
+        users:
+            expose: true
+            groups: [comments]
+        text:
+            expose: true
+            groups: [comments]
+        createdAt:
+            expose: true
+            groups: [comments]

@@ -13,6 +13,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
 class ShopnameType extends AbstractType
 {
     /**
@@ -43,11 +45,6 @@ class ShopnameType extends AbstractType
     
     public function getParent()
     {
-        return 'hidden';
-    }
-    
-    public function getName() 
-    {
-        return 'shopname';
+        return HiddenType::class;
     }
 }

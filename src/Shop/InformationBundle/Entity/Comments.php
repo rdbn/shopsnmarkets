@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -8,81 +8,96 @@ namespace Shop\InformationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="Shop\InformationBundle\Repository\CommentsRepository")
+ * @ORM\Table(name="shops_comments")
+ */
 class Comments
-{    
+{
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users")
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users", inversedBy="comments", cascade={"persist"})
      * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
      */
     protected $users;
     
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="comments", cascade={"persist"})
+     * @ORM\JoinColumn(name="shops_id", referencedColumnName="id")
      */
-    protected $shopname;
+    protected $shops;
     
     /**
      * @ORM\Column(type="text")
      */
     protected $text;
-    
+
     /**
-     * Set shopname
+     * @ORM\Column(type="datetime", name="created_at")
      *
-     * @param string $shopname
-     * @return Comments
+     * @var \DateTime $createdAt
      */
-    public function setShopname($shopname)
+    protected $createdAt;
+
+    /**
+     * Construct for class Comments
+     */
+    public function __construct()
     {
-        $this->shopname = $shopname;
-    
-        return $this;
+        $this->createdAt = new \DateTime();
     }
 
     /**
-     * Get shopname
+     * Get id
      *
-     * @return string 
+     * @return integer
      */
-    public function getShopname()
+    public function getId()
     {
-        return $this->shopname;
+        return $this->id;
     }
-    
+
     /**
      * Set text
      *
      * @param string $text
+     *
      * @return Comments
      */
     public function setText($text)
     {
         $this->text = $text;
-    
+
         return $this;
     }
 
     /**
-     * Get $text
+     * Get text
      *
-     * @return text 
+     * @return string
      */
     public function getText()
     {
         return $this->text;
     }
-    
+
     /**
      * Set users
      *
      * @param \User\UserBundle\Entity\Users $users
+     *
      * @return Comments
      */
     public function setUsers(\User\UserBundle\Entity\Users $users = null)
     {
         $this->users = $users;
-    
+
         return $this;
     }
 
@@ -95,5 +110,52 @@ class Comments
     {
         return $this->users;
     }
+
+    /**
+     * Set shops
+     *
+     * @param \Shop\CreateBundle\Entity\Shops $shops
+     *
+     * @return Comments
+     */
+    public function setShops(\Shop\CreateBundle\Entity\Shops $shops = null)
+    {
+        $this->shops = $shops;
+
+        return $this;
+    }
+
+    /**
+     * Get shops
+     *
+     * @return \Shop\CreateBundle\Entity\Shops
+     */
+    public function getShops()
+    {
+        return $this->shops;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Comments
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 }
-?>

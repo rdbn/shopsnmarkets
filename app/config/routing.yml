@@ -11,11 +11,11 @@ user_friends:
     prefix:   /
     
 user_user:
-    resource: "@UserUserBundle/Resources/config/routing.yml"
+    resource: "@UserUserBundle/Controller/"
     prefix:   /
 
 user_advertising:
-    resource: "@UserAdvertisingBundle/Resources/config/routing.yml"
+    resource: "@UserAdvertisingBundle/Controller/"
     prefix:   /
 
 shop_partners:
@@ -23,49 +23,11 @@ shop_partners:
     prefix:   /
 
 platform_main:
-    resource: "@PlatformMainBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@PlatformMainBundle/Controller/"
+    type:   annotation
     
-# AvalancheImagineBundle
-_imagine:
-    resource: .
-    type:     imagine
-    
-_imagine_logo_shop:
-    resource: .
-    type:     imagine
-    
-_imagine_logo_shop_information:
-    resource: .
-    type:     imagine
-    
-_imagine_avatar:
-    resource: .
-    type:     imagine
-    
-_imagine_mini_avatar:
-    resource: .
-    type:     imagine
-
-_imagine_advertisingSliderPlatform:
-    resource: .
-    type:     imagine
-    
-_imagine_advertisingSliderShop:
-    resource: .
-    type:     imagine
-
-_imagine_advertisingSideOf:
-    resource: .
-    type:     imagine
-
-_imagine_product_image:
-    resource: .
-    type:     imagine
-    
-_imagine_main_product_image:
-    resource: .
-    type:     imagine
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
     
 # my login form
 login:
@@ -92,13 +54,13 @@ hwi_oauth_connect:
     prefix:   /connect
     
 vkontakte_login:
-    pattern: /login/check-vkontakte
+    path: /login/check-vkontakte
     
 facebook_login:
-    pattern: /login/check-facebook
+    path: /login/check-facebook
     
 google_login:
-    pattern: /login/check-google
+    path: /login/check-google
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
@@ -106,7 +68,7 @@ NelmioApiDocBundle:
     
 # shop route
 shop_order:
-    resource: "@ShopOrderBundle/Resources/config/routing.yml"
+    resource: "@ShopOrderBundle/Controller/"
     prefix:   /
     
 shop_product:
@@ -114,9 +76,9 @@ shop_product:
     prefix:   /
 
 shop_information:
-    resource: "@ShopInformationBundle/Resources/config/routing.yml"
+    resource: "@ShopInformationBundle/Controller/"
     prefix:   /
 
 shop_create:
-    resource: "@ShopCreateBundle/Resources/config/routing.yml"
+    resource: "@ShopCreateBundle/Controller/"
     prefix:   /

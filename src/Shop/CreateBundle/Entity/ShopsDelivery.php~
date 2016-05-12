@@ -1,30 +1,34 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace Shop\CreateBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Shop\CreateBundle\Repository\ShopsDeliveryRepository")
  * @ORM\Table(name="shops_delivery")
  */
-
 class ShopsDelivery
-{     
+{
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="shops_delivery")
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="shopsDelivery", cascade={"persist"})
      * @ORM\JoinColumn(name="shops_id", referencedColumnName="id")
      */
     protected $shops;
     
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Delivery")
      * @ORM\JoinColumn(name="delivery_id", referencedColumnName="id")
      */
@@ -41,11 +45,15 @@ class ShopsDelivery
     protected $duration;
 
     /**
-     * Construct for class ShopsDelivery
+     * @ORM\ManyToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="delivery")
+     */
+    protected $order;
+
+    /**
+     * constructor
      */
     public function __construct()
     {
-        $this->shops = new ArrayCollection();
-        $this->delivery = new ArrayCollection();
+        $this->order = new ArrayCollection();
     }
 }

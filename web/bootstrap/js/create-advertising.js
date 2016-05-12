@@ -8,7 +8,7 @@ $(document).ready(function(){
     /**
      * Add Advertising Platform
      * */
-    var watch = $('#AdvertisingPlatform_watch'), duration = $('#AdvertisingPlatform_duration');
+    var watch = $('#advertising_platform_date_start'), duration = $('#advertising_platform_date_end');
     watch.change(function() {
         var val = duration.val();
         if (val.length > 0) $('#price').html((val * 5)+' руб.');
@@ -18,7 +18,7 @@ $(document).ready(function(){
         if (watch.val().length > 0) $('#price').html((duration.val() * 5)+' руб.');
     });
 
-    $("#AdvertisingPlatform_file").change(function () {
+    $("#advertising_platform_file").change(function () {
         var file = this.files[0], previewElement = $("#preview-img");
         if (file.length == 0) return false;
 
@@ -47,14 +47,14 @@ $(document).ready(function(){
         };
     });
 
-    $("#AdvertisingPlatform_save").click(function () {
+    $("#advertising_platform_save").click(function () {
         var formData = new FormData();
-        formData.append("AdvertisingPlatform[format]", $('#format input:checked').val());
-        formData.append("AdvertisingPlatform[date_start]", $('#AdvertisingPlatform_date_start').val());
-        formData.append("AdvertisingPlatform[date_end]", $('#AdvertisingPlatform_date_end').val());
-        formData.append("AdvertisingPlatform[shops]", $('#AdvertisingPlatform_shops input:checked').val());
-        formData.append("AdvertisingPlatform[file]", $("#AdvertisingPlatform_file").prop("files")[0]);
-        formData.append("AdvertisingPlatform[_token]", $("#AdvertisingPlatform__token").val());
+        formData.append("advertising_platform[format]", $('#format input:checked').val());
+        formData.append("advertising_platform[date_start]", $('#advertising_platform_date_start').val());
+        formData.append("advertising_platform[date_end]", $('#advertising_platform_date_end').val());
+        formData.append("advertising_platform[shops]", $('#advertising_platform_shops input:checked').val());
+        formData.append("advertising_platform[file]", $("#advertising_platform_file").prop("files")[0]);
+        formData.append("advertising_platform[_token]", $("#advertising_platform__token").val());
 
         //$(this).prop("disabled", true);
 
@@ -85,7 +85,7 @@ $(document).ready(function(){
     /**
      * Add Image Advertising Shop
      * */
-    $("#AdvertisingShop_files").change(function () {
+    $("#advertising_shop_files").change(function () {
         var files = this.files, previewElement = $("#preview-img");
         if (files.length == 0) return false;
 
@@ -120,22 +120,22 @@ $(document).ready(function(){
         }
     });
 
-    $("#AdvertisingShop_save").click(function () {
+    $("#advertising_shop_save").click(function () {
         var formData = new FormData(),
             format = $('#format input:checked').val(),
-            shops = $('#AdvertisingShop_shops input:checked').val(),
-            files = $("#AdvertisingShop_files").prop("files"),
-            token = $("#AdvertisingShop__token").val();
+            shops = $('#advertising_shop_shops input:checked').val(),
+            files = $("#advertising_shop_files").prop("files"),
+            token = $("#advertising_shop__token").val();
 
-        formData.append("AdvertisingShop[format]", format);
-        formData.append("AdvertisingShop[shops]", shops);
+        formData.append("advertising_shop[format]", format);
+        formData.append("advertising_shop[shops]", shops);
 
         for (var i in files) {
             if (typeof files[i] == "object") {
-                formData.append("AdvertisingShop[files][]", files[i]);
+                formData.append("advertising_shop[files][]", files[i]);
             }
         }
-        formData.append("AdvertisingShop[_token]", token);
+        formData.append("advertising_shop[_token]", token);
 
         $(this).prop("disabled", true);
 

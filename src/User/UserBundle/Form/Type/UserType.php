@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -10,42 +10,50 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 Class UserType extends AbstractType 
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username', 'email', [
+        $builder->add('username', EmailType::class, [
             'label' => false,
-            'attr' => ["class" => "form-control", "placeholder" => "email"],
+            'attr' => ['class' => 'form-control', 'placeholder' => 'email'],
             'data' => isset($options['data']) ? $options['data']->getUsername() : NULL,
             'invalid_message' => 'Заполните поле: "Email".',
             'error_bubbling'=>true,
         ]);
-        $builder->add('password', 'repeated', [
-            'type' => 'password',
+        $builder->add('password', RepeatedType::class, [
+            'type' => PasswordType::class,
             'invalid_message' => 'Значение паролей не совпадает.',
-            'options' => array('attr' => array('class' => 'form-control', "placeholder" => "Пароль")),
+            'options' => [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Пароль'
+                ]
+            ],
             'required' => true,
-            'first_options'  => array('label' => false),
-            'second_options' => array('label' => false),
+            'first_options'  => [
+                'label' => false
+            ],
+            'second_options' => [
+                'label' => false
+            ],
             'error_bubbling'=>true,
         ]);
-        $builder->add("save", "submit", [
-            "label" => "Зарегистрироваться",
-            'attr' => ["class" => "btn btn-success"],
+        $builder->add('save', SubmitType::class, [
+            'label' => 'Зарегистрироваться',
+            'attr' => ['class' => 'btn btn-success'],
         ]);
     }
     
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'User\UserBundle\Entity\Users'
-        ));
-    }
-
-    public function getName()
-    {
-        return 'Registration';
+        ]);
     }
 }
-?>

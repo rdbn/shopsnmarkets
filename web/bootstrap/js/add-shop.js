@@ -3,7 +3,7 @@ CheckUniqueName = {
         return $('#shops_uniqueName').val();
     },
     sendName : function() {
-        var check = $.post('/manager/createShop/uniqueName', { 'name' : this.name() });
+        var check = $.get('/user/shop/uniqueName/'+this.name());
         check.done(function(data) {
             var element = $('#checkName');
             if (data === '0') {
@@ -39,7 +39,7 @@ $(document).ready(function() {
             tags[i] = {value: data[i].name};
         }
 
-        $('#Shops_shopTags').tokenfield({
+        $('#shops_shopTags').tokenfield({
             autocomplete: {
                 source: tags,
                 delay: 100

@@ -17,6 +17,8 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AjaxController extends FOSRestController
 {
@@ -27,6 +29,9 @@ class AjaxController extends FOSRestController
      *         200="Нормальный ответ"
      *     }
      * )
+     *
+     * @Route("/advertising/platform", name="api_advertising_platform", defaults={"_format": "json"})
+     * @Method({"GET"})
      *
      * @Rest\View()
      */
@@ -47,6 +52,9 @@ class AjaxController extends FOSRestController
      *     }
      * )
      *
+     * @Route("/advertising/shops", name="api_advertising_shops", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
      * @Rest\View()
      */
     public function shopsAction() 
@@ -66,6 +74,9 @@ class AjaxController extends FOSRestController
      *     }
      * )
      *
+     * @Route("/advertising/remove", name="api_advertising_remove", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
      * @Rest\View()
      */
     public function removeAction() {
@@ -84,12 +95,15 @@ class AjaxController extends FOSRestController
      *
      * @param Request $request
      *
+     * @Route("/advertising/createShop", name="api_create_advertising_platform", defaults={"_format": "json"})
+     * @Method({"POST"})
+     *
      * @Rest\View()
+     * @return array
      */
     public function addShopAction(Request $request)
     {
-        $id = $this->getUser()->getId();
-        $form = $this->createForm(new AdvertisingShopType($id), null);
+        $form = $this->createForm(AdvertisingShopType::class, null);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -120,7 +134,7 @@ class AjaxController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     description="Создание рекламы на платформе",
+     *     description="Создание рекламы в магазине",
      *     statusCodes={
      *         200="Нормальный ответ"
      *     }
@@ -128,13 +142,16 @@ class AjaxController extends FOSRestController
      *
      * @param Request $request
      *
+     * @Route("/advertising/createPlatform", name="api_create_advertising_shop", defaults={"_format": "json"})
+     * @Method({"POST"})
+     *
      * @Rest\View()
+     * @return array
      */
     public function addPlatformAction(Request $request)
     {
-        $id = $this->getUser()->getId();
         $advertising = new AdvertisingPlatform();
-        $form = $this->createForm(new AdvertisingPlatformType($id), $advertising);
+        $form = $this->createForm(AdvertisingPlatformType::class, $advertising);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

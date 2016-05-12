@@ -5,7 +5,7 @@
 {% block content %}
     <div class="media">
         <div class="media-left">
-            <img class="img-thumbnail" src="{% if(user.getPath) %}{{ user.getPath | apply_filter('avatar') }}{% endif %}" />
+            <img class="img-thumbnail" src="{% if(user.getPath) %}{{ user.getPath | imagine_filter('avatar') }}{% endif %}" />
         </div>
         <div class="media-body text-success small">
             <h4 class="media-heading">{{ user.realname }}</h4>

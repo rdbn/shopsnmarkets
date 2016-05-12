@@ -13,10 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Email;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AjaxController extends FOSRestController
 {
@@ -29,6 +30,9 @@ class AjaxController extends FOSRestController
      * )
      *
      * @param int $id
+     *
+     * @Route("/city/{id}", name="api_city", defaults={"_format": "json"})
+     * @Method({"GET"})
      *
      * @Rest\View(serializerGroups={"city"})
      */
@@ -50,7 +54,12 @@ class AjaxController extends FOSRestController
      *
      * @param int $mail
      *
+     * @Route("/emailProperty/{mail}", name="api_email", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
      * @Rest\View()
+     *
+     * @return boolean
      */
     public function emailAction($mail)
     {
@@ -79,9 +88,9 @@ class AjaxController extends FOSRestController
      *     }
      * )
      *
-     * @param int $mail
-     *
      * @Rest\View()
+     *
+     * @return boolean
      */
     public function checkEmailAction()
     {
@@ -106,7 +115,7 @@ class AjaxController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     description="Загружаем аватар пользользователя",
+     *     description="Добавляем к пользователю описание",
      *     statusCodes={
      *         200="Нормальный ответ"
      *     }
@@ -114,7 +123,12 @@ class AjaxController extends FOSRestController
      *
      * @param Request $request
      *
+     * @Route("/add/description", name="api_user_description", defaults={"_format": "json"})
+     * @Method({"POST"})
+     *
      * @Rest\View()
+     *
+     * @return mixed
      */
     public function descriptionAction(Request $request)
     {
@@ -142,7 +156,12 @@ class AjaxController extends FOSRestController
      *
      * @param Request $request
      *
+     * @Route("/add/upload", name="api_user_avatar", defaults={"_format": "json"})
+     * @Method({"POST"})
+     *
      * @Rest\View()
+     *
+     * @return mixed
      */
     public function uploadAction(Request $request)
     {
@@ -157,7 +176,7 @@ class AjaxController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            $avalancheService = $this->get('imagine.cache.path.resolver');
+            $avalancheService = $this->get('liip_imagine.cache.manager');
             $cachedImage = $avalancheService->getBrowserPath($user->getPath(), 'avatar');
 
             return [

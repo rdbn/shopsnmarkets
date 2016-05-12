@@ -1,8 +1,6 @@
 parameters:
     shop.subscribe.class: User\UserBundle\Services\ShopSubscribe
     bookmarks.class: User\UserBundle\Services\Bookmarks
-    change.password.class: User\UserBundle\Services\ChangePassword
-    hash.password.class: User\UserBundle\Services\HashPassword
     
 services:        
     shop.subscribe:
@@ -14,15 +12,15 @@ services:
         arguments: [ @doctrine.orm.entity_manager ]
 
     change.password:
-        class: %change.password.class%
-        arguments: [ @doctrine.orm.entity_manager, @form.factory, @hash.password ]
+        class: User\UserBundle\Services\ChangePassword
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@hash.password"]
 
     hash.password:
-        class: %hash.password.class%
+        class: User\UserBundle\Services\HashPassword
 
     hwi_oauth.user.provider.entity:
         class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
 
     ib_user.oauth_user_provider:
         class: User\UserBundle\Auth\OAuthProvider
-        arguments: [@doctrine, {vkontakte: vkontakte_id, facebook: facebook_id, google: google_id}]
+        arguments: ["@doctrine", {vkontakte: vkontakte_id, facebook: facebook_id, google: google_id}]

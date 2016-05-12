@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -39,24 +39,35 @@ class AjaxController extends FOSRestController
      *     }
      * )
      *
+     * @param int $id
+     *
      * @Rest\View()
+     * @return mixed
      */
-    public function likeAction()
+    public function likeAction($id)
     {
         $user = $this->getUser();
-        if ($user == null) return false;
+        if ($user == null) {
+            $view = $this->view("Unique name is used.", 403);
+            return $this->handleView($view);
+        }
 
-        $id = $this->get("request")->query->get('id');
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('ShopProductBundle:Product')
-                ->findOneBy(['user' => $user->getId(), 'product' => $id]);
+            ->findOneByIsLike($id, $user->getId());
         
-        if ($product) return false;
+        if ($product) {
+            $view = $this->view("This user is like.", 402);
+            return $this->handleView($view);
+        }
+
+        $product = $em->getRepository('ShopProductBundle:Product')
+            ->findOneBy(['id' => $id]);
 
         $em->persist($product->addLikeProduct($user));
         $em->flush();
 
-        return true;
+        return $em->getRepository("ShopProductBundle:Product")
+            ->findOneByCountLike($id);
     }
 }
-?>

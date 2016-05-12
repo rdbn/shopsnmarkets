@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 
 use User\UserBundle\Entity\Country;
@@ -27,30 +28,31 @@ class AddCityFieldSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_BIND     => 'preBind',
+            FormEvents::PRE_SUBMIT     => 'preBind',
         );
     }
     
     public function addCityForm($form, $country)
     {
-        $form->add($this->factory->createNamed('city','entity', null, array(
+        $form->add($this->factory->createNamed('city', EntityType::class, null, array(
             'class'         => 'UserUserBundle:City',
             'label'         => false,
             'attr' => ['class' => "form-control"],
-            'empty_value'   => 'Выберите город *',
+            "placeholder" => "Выберите город *",
             'auto_initialize' => false,
             'query_builder' => function (EntityRepository $repository) use ($country) {
                 $qb = $repository->createQueryBuilder('city')
                     ->innerJoin('city.country', 'country');
+                
                 if ($country instanceof Country) {
                     $qb->where('city.country = :country')
-                    ->setParameter('country', $country);
+                        ->setParameter('country', $country);
                 } elseif (is_numeric($country)) {
                     $qb->where('country.id = :country')
-                    ->setParameter('country', $country);
+                        ->setParameter('country', $country);
                 } else {
                     $qb->where('country.name = :country')
-                    ->setParameter('country', null);
+                        ->setParameter('country', null);
                 }
 
                 return $qb;

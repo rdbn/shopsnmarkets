@@ -5,7 +5,7 @@ $(document).ready(function() {
             tags[i] = {value: data[i].name};
         }
 
-        $('#Product_hashTags').tokenfield({
+        $('#product_hashTags').tokenfield({
             autocomplete: {
                 source: tags,
                 delay: 100
@@ -14,7 +14,7 @@ $(document).ready(function() {
         });
     });
 
-    $("#Product_file").change(function () {
+    $("#product_file").change(function () {
         var files = this.files, previewElement = $("#preview-img");
         if (files.length == 0) return false;
 

@@ -5,16 +5,16 @@ $(document).ready(function(){
     /**
      *  Ajax for upload logo
      */
-    $('#UploadLogoShop_file').change(function() {
+    $('#upload_logo_file').change(function() {
         var formData = new FormData(),
             file = $(this).prop("files")[0],
-            token = $("#UploadLogoShop__token").val();
+            token = $("#upload_logo__token").val();
 
-        formData.append("UploadLogoShop[file]", file);
-        formData.append("UploadLogoShop[_token]", token);
+        formData.append("upload_logo[file]", file);
+        formData.append("upload_logo[_token]", token);
 
         $.ajax({
-            url: "/manager/createShop/addLogo/"+shopname,
+            url: "/user/shop/addLogo/"+shopname,
             type: "post",
             dataType: "text",
             cache: false,
@@ -32,17 +32,17 @@ $(document).ready(function(){
     /**
      * Добавляем описание для магазина
      */
-    $("#Description_save").click(function () {
+    $("#description_save").click(function () {
         var value = {
-            "Description": {
-                "description": $("#Description_description").val(),
-                "_token": $("#Description__token").val()
+            "description": {
+                "description": $("#description_description").val(),
+                "_token": $("#description__token").val()
             }
         };
 
         $(this).addClass("disabled");
-        $.post("/manager/createShop/description/"+shopname, value, function () {
-            $("#Description_save").removeClass("disabled");
+        $.post("/user/shop/addDescription/"+shopname, value, function () {
+            $("#description_save").removeClass("disabled");
         });
     });
 });

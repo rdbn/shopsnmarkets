@@ -110,37 +110,49 @@ jms_serializer:
         auto_detection: true
     
 # avalanche_imagine
-avalanche_imagine:
-    source_root:  %kernel.root_dir%/../web
-    web_root:     %kernel.root_dir%/../web
-    driver:       gd
-    cache_prefix: media/cache
-    filters:
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
         logo_shop:
-            type:    thumbnail
-            options: { size: [200, 250], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            quality: 100
+            filters:
+                thumbnail: { size: [200, 250], mode: outbound, format: png, cache_expires: 1 weeks }
         logo_shop_information:
-            type:    thumbnail
-            options: { size: [150, 150], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
-            
+            quality: 100
+            filters:
+                thumbnail: { size: [150, 150], mode: outbound, format: png, cache_expires: 1 weeks }
         avatar:
-            type:    thumbnail
-            options: { size: [200, 250], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            quality: 100
+            filters:
+                thumbnail: { size: [200, 250], mode: outbound, format: png, cache_expires: 1 weeks }
+        mini_avatar:
+            quality: 100
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound, format: png, cache_expires: 1 weeks }
         advertisingSliderPlatform:
-            type:    thumbnail
-            options: { size: [1140, 250], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            quality: 100
+            filters:
+                thumbnail: { size: [1140, 250], mode: outbound, format: png, cache_expires: 1 weeks }
         advertisingSliderShop:
-            type:    thumbnail
-            options: { size: [770, 250], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            quality: 100
+            filters:
+                thumbnail: { size: [770, 250], mode: outbound, format: png, cache_expires: 1 weeks }
         advertisingSideOf:
-            type:    thumbnail
-            options: { size: [100, 100], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            quality: 100
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound, format: png, cache_expires: 1 weeks }
         product_image:
-            type:    thumbnail
-            options: { size: [250, 385], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            quality: 100
+            filters:
+                thumbnail: { size: [250, 385], mode: outbound, format: png, cache_expires: 1 weeks }
         main_product_image:
-            type:    thumbnail
-            options: { size: [300, 350], mode: outbound, quality: 100, format: png, cache_expires: 1 weeks }
+            quality: 100
+            filters:
+                thumbnail: { size: [300, 350], mode: outbound, format: png, cache_expires: 1 weeks }
 
 # FOS
 fos_user:
@@ -152,7 +164,6 @@ fos_user:
 hwi_oauth:
     #connect:
         #account_connector: ib_user.oauth_user_provider
-        
     firewall_name: main
     
     resource_owners:

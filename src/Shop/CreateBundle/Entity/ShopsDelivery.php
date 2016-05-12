@@ -1,30 +1,34 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace Shop\CreateBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Shop\CreateBundle\Repository\ShopsDeliveryRepository")
+ * @ORM\Entity
  * @ORM\Table(name="shops_delivery")
  */
-
 class ShopsDelivery
-{     
+{
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="shopsDelivery")
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="shopsDelivery", cascade={"persist"})
      * @ORM\JoinColumn(name="shops_id", referencedColumnName="id")
      */
     protected $shops;
     
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Delivery")
      * @ORM\JoinColumn(name="delivery_id", referencedColumnName="id")
      */
@@ -41,12 +45,26 @@ class ShopsDelivery
     protected $duration;
 
     /**
-     * Construct for class ShopsDelivery
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="delivery")
+     */
+    protected $order;
+
+    /**
+     * constructor
      */
     public function __construct()
     {
-        $this->shops = new ArrayCollection();
-        $this->delivery = new ArrayCollection();
+        $this->order = new ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -104,7 +122,7 @@ class ShopsDelivery
      *
      * @return ShopsDelivery
      */
-    public function setShops(\Shop\CreateBundle\Entity\Shops $shops)
+    public function setShops(\Shop\CreateBundle\Entity\Shops $shops = null)
     {
         $this->shops = $shops;
 
@@ -128,7 +146,7 @@ class ShopsDelivery
      *
      * @return ShopsDelivery
      */
-    public function setDelivery(\Shop\CreateBundle\Entity\Delivery $delivery)
+    public function setDelivery(\Shop\CreateBundle\Entity\Delivery $delivery = null)
     {
         $this->delivery = $delivery;
 
@@ -143,5 +161,39 @@ class ShopsDelivery
     public function getDelivery()
     {
         return $this->delivery;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     *
+     * @return ShopsDelivery
+     */
+    public function addOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     */
+    public function removeOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order->removeElement($order);
+    }
+
+    /**
+     * Get order
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

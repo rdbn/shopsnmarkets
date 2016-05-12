@@ -3,7 +3,7 @@
 {% block body %}
     <div class="row top20">
         <div class="col-lg-2">
-            <img class="img-thumbnail" src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" />
+            <img class="img-thumbnail" src="{% if (shop.path != '') %}{{ shop.path | imagine_filter('logo_shop') }}{% endif %}" />
             {% if is_granted('ROLE_USER') %}
                 {% if user %}
                     <a class="btn btn-success" href="{{ shop.id }}">Подписаться на новости</a>

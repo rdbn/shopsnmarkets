@@ -24,7 +24,7 @@ class FriendsRepository extends EntityRepository
             ->createQuery('
                 SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
                 LEFT JOIN f.friends u
-                WHERE f.users = :id AND f.checkFriends = 1
+                WHERE f.users = :id AND f.checkFriends = \'t\'
                 GROUP BY u
             ')
             ->setParameter('id', $id)
@@ -52,7 +52,7 @@ class FriendsRepository extends EntityRepository
             ->createQuery('
                 SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
                 LEFT JOIN f.friends u
-                WHERE f.users = :id AND f.checkFriends = 0
+                WHERE f.users = :id AND f.checkFriends = \'f\'
                 GROUP BY u
             ')
             ->setParameter('id', $id)
@@ -80,7 +80,7 @@ class FriendsRepository extends EntityRepository
             ->createQuery('
                 SELECT u.id, u.realname, u.path FROM UserFriendsBundle:Friends f
                 LEFT JOIN f.users u
-                WHERE f.friends = :id AND f.checkFriends = 0
+                WHERE f.friends = :id AND f.checkFriends = \'f\'
                 GROUP BY u
             ')
             ->setParameter('id', $id)
@@ -109,7 +109,7 @@ class FriendsRepository extends EntityRepository
                 SELECT fu.id, fu.realname, fu.path FROM UserUserBundle:Users u
                 LEFT JOIN u.friends f
                 LEFT JOIN f.friends fu
-                WHERE u.id = :id AND f.checkFriends = 1
+                WHERE u.id = :id AND f.checkFriends = \'t\'
                 GROUP BY f
             ')
             ->setParameter('id', $id)

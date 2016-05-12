@@ -1,15 +1,16 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace Shop\CreateBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Shop\CreateBundle\Repository\DeliveryRepository")
  * @ORM\Table(name="delivery")
  */
 
@@ -31,6 +32,19 @@ class Delivery
      * @ORM\Column(name="image", type="string", length=255)
      */
     protected $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="delivery")
+     */
+    protected $order;
+
+    /**
+     * Construct with Class Delivery
+     */
+    public function __construct()
+    {
+        $this->order = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -86,5 +100,39 @@ class Delivery
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     *
+     * @return Delivery
+     */
+    public function addOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     */
+    public function removeOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order->removeElement($order);
+    }
+
+    /**
+     * Get order
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

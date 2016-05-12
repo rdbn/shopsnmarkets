@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -75,7 +75,7 @@ Class Product
      */
     public function __construct() {
         $this->image = new ArrayCollection();
-        $this->like_product = new ArrayCollection();
+        $this->likeProduct = new ArrayCollection();
         $this->cacheTags = new ArrayCollection();
 
         $this->createdAt = new \DateTime();
@@ -188,7 +188,7 @@ Class Product
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -200,7 +200,7 @@ Class Product
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -270,7 +270,7 @@ Class Product
      */
     public function addLikeProduct(\User\UserBundle\Entity\Users $likeProduct)
     {
-        $this->like_product[] = $likeProduct;
+        $this->likeProduct[] = $likeProduct;
 
         return $this;
     }
@@ -282,7 +282,7 @@ Class Product
      */
     public function removeLikeProduct(\User\UserBundle\Entity\Users $likeProduct)
     {
-        $this->like_product->removeElement($likeProduct);
+        $this->likeProduct->removeElement($likeProduct);
     }
 
     /**
@@ -292,7 +292,7 @@ Class Product
      */
     public function getLikeProduct()
     {
-        return $this->like_product;
+        return $this->likeProduct;
     }
 
     /**

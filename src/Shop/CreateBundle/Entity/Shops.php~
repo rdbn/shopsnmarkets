@@ -55,7 +55,7 @@ Class Shops
     protected $rating;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
     
@@ -101,7 +101,7 @@ Class Shops
 
     /**
      * @ORM\ManyToMany(targetEntity="Shop\ProductBundle\Entity\HashTags", inversedBy="shop")
-     * @ORM\JoinTable(name="shop_tags")
+     * @ORM\JoinTable(name="shops_tags")
      */
     protected $shopTags;
     
@@ -122,7 +122,7 @@ Class Shops
     protected $shopPartners;
     
     /**
-     * @ORM\OneToMany(targetEntity="Shop\CreateBundle\Entity\ShopsDelivery", mappedBy="shops")
+     * @ORM\OneToMany(targetEntity="Shop\CreateBundle\Entity\ShopsDelivery", mappedBy="shops", cascade={"persist"})
      */
     protected $shopsDelivery;
 
@@ -130,6 +130,16 @@ Class Shops
      * @ORM\OneToMany(targetEntity="User\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
      */
     protected $advertisingShop;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\InformationBundle\Entity\Comments", mappedBy="shops")
+     */
+    protected $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="shops")
+     */
+    protected $order;
 
     /**
      * Construct for class Shops
@@ -141,8 +151,9 @@ Class Shops
         $this->manager = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->partners = new ArrayCollection();
-        $this->shops_delivery = new ArrayCollection();
-        $this->advertising_shop = new ArrayCollection();
+        $this->shopsDelivery = new ArrayCollection();
+        $this->advertisingShop = new ArrayCollection();
+        $this->comments = new ArrayCollection();
 
         $this->createdAt = new \DateTime();
     }
@@ -150,7 +161,8 @@ Class Shops
     /**
      * toString for class Country
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->shopname;
     }
     
@@ -651,5 +663,107 @@ Class Shops
     public function getAdvertisingShop()
     {
         return $this->advertisingShop;
+    }
+
+    /**
+     * Add shopTag
+     *
+     * @param \Shop\ProductBundle\Entity\HashTags $shopTag
+     *
+     * @return Shops
+     */
+    public function addShopTag(\Shop\ProductBundle\Entity\HashTags $shopTag)
+    {
+        $this->shopTags[] = $shopTag;
+
+        return $this;
+    }
+
+    /**
+     * Remove shopTag
+     *
+     * @param \Shop\ProductBundle\Entity\HashTags $shopTag
+     */
+    public function removeShopTag(\Shop\ProductBundle\Entity\HashTags $shopTag)
+    {
+        $this->shopTags->removeElement($shopTag);
+    }
+
+    /**
+     * Get shopTags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShopTags()
+    {
+        return $this->shopTags;
+    }
+
+    /**
+     * Add shopPartner
+     *
+     * @param \Shop\PartnersBundle\Entity\Partners $shopPartner
+     *
+     * @return Shops
+     */
+    public function addShopPartner(\Shop\PartnersBundle\Entity\Partners $shopPartner)
+    {
+        $this->shopPartners[] = $shopPartner;
+
+        return $this;
+    }
+
+    /**
+     * Remove shopPartner
+     *
+     * @param \Shop\PartnersBundle\Entity\Partners $shopPartner
+     */
+    public function removeShopPartner(\Shop\PartnersBundle\Entity\Partners $shopPartner)
+    {
+        $this->shopPartners->removeElement($shopPartner);
+    }
+
+    /**
+     * Get shopPartners
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShopPartners()
+    {
+        return $this->shopPartners;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Shop\InformationBundle\Entity\Comments $comment
+     *
+     * @return Shops
+     */
+    public function addComment(\Shop\InformationBundle\Entity\Comments $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Shop\InformationBundle\Entity\Comments $comment
+     */
+    public function removeComment(\Shop\InformationBundle\Entity\Comments $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -12,6 +12,8 @@ use Symfony\Component\Form\AbstractType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class UserIDType extends AbstractType {
     
@@ -30,8 +32,8 @@ class UserIDType extends AbstractType {
     
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $transfomer = new UsersToIdTransformer($this->om);
-        $builder->addModelTransformer($transfomer);
+        $transformer = new UsersToIdTransformer($this->om);
+        $builder->addViewTransformer($transformer);
     }
     
     public function configureOptions(OptionsResolver $resolver)
@@ -43,12 +45,6 @@ class UserIDType extends AbstractType {
     
     public function getParent()
     {
-        return 'hidden';
-    }
-    
-    public function getName() 
-    {
-        return 'userID';
+        return HiddenType::class;
     }
 }
-?>

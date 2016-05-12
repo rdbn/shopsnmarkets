@@ -10,6 +10,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Doctrine\ORM\EntityRepository;
 
 class AddCountryFieldSubscriber implements EventSubscriberInterface 
@@ -30,19 +32,19 @@ class AddCountryFieldSubscriber implements EventSubscriberInterface
     
     public function addCityForm($form, $country)
     {
-        $form->add($this->factory->createNamed('country','entity', $country, array(
-            'class'         => 'UserUserBundle:Country',
-            'label'         => false,
-            'empty_value'   => 'Выберите страну *',
+        $form->add($this->factory->createNamed('country', EntityType::class, $country, [
+            'class' => 'UserUserBundle:Country',
+            'label' => false,
             'auto_initialize' => false,
-            'mapped'        => false,
+            'mapped' => false,
             'attr' => ['class' => "form-control"],
+            "placeholder" => "Выберите страну *",
             'query_builder' => function (EntityRepository $repository) {
                 $qb = $repository->createQueryBuilder('country');
 
                 return $qb;
             }
-        )));
+        ]));
     }
     
     public function preSetData(FormEvent $event)

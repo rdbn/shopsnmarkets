@@ -31,16 +31,14 @@ class DeliveryToIdTransformer implements DataTransformerInterface
     /**
      * Transforms an object (issue) to a string (number).
      *
-     * @param  Delivery|null $delivery
+     * @param  Delivery $delivery
      * @return string
      */
     public function transform($delivery)
     {
-        if (null === $delivery) {
-            return "";
-        }
+        if (!$delivery) return null;
 
-        return $delivery;
+        return $delivery->getId();
     }
 
     /**
@@ -54,9 +52,7 @@ class DeliveryToIdTransformer implements DataTransformerInterface
      */
     public function reverseTransform($id)
     {
-        if (!$id) {
-            return null;
-        }
+        if (!$id) return null;
 
         $delivery = $this->om->getRepository('ShopCreateBundle:Delivery')
                 ->findOneById($id);
@@ -67,7 +63,7 @@ class DeliveryToIdTransformer implements DataTransformerInterface
                 $id
             ));
         }
-
+        
         return $delivery;
     }
 }

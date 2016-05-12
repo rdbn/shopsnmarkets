@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -10,17 +10,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType as Password;
+
 class PasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('old_password', 'password', array(
+        $builder->add('old_password', Password::class, array(
             'label' => false,
             "attr" => ["class" => "form-control", "placeholder" => "Старый пароль*"],
             'mapped' => false,
         ));
-        $builder->add('password', 'repeated', array(
-            'type' => 'password',
+        $builder->add('password', RepeatedType::class, array(
+            'type' => Password::class,
             'invalid_message' => 'Ошибка введите парольеще раз!',
             'required' => true,
             'first_options'  => [
@@ -32,7 +36,7 @@ class PasswordType extends AbstractType
                 "attr" => ["class" => "form-control", "placeholder" => "Повторить*"],
             ],
         ));
-        $builder->add('save', 'submit', array(
+        $builder->add('save', SubmitType::class, array(
             'attr' => ['class' => 'btn btn-success btn-sm center-block'],
             'label' => 'Сохранить'
         ));
@@ -44,10 +48,4 @@ class PasswordType extends AbstractType
             'data_class' => 'User\UserBundle\Entity\Users'
         ));
     }
-    
-    public function getName() 
-    {
-        return 'Password';
-    }
 }
-?>

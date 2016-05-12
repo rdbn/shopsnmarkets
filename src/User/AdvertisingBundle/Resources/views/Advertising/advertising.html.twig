@@ -20,9 +20,9 @@
                     <p>Время окончания показа: <span class="text-success">в {{ value.date_end.format("Y-m-d H:i:s") }}.</span></p>
                     <a class="btn btn-success btn-sm bottom20" href="#">Показать картинку</a>
                     {% if value.format == '1' %}
-                        <img class="img-thumbnail" src="{{ value.path | apply_filter('advertisingSliderPlatform') }}" />
+                        <img class="img-thumbnail" src="{{ value.path | imagine_filter('advertisingSliderPlatform') }}" />
                     {% else %}
-                        <img src="{{ value.path | apply_filter('advertisingSideOf') }}" />
+                        <img src="{{ value.path | imagine_filter('advertisingSideOf') }}" />
                     {% endif %}
                 </div>
             {% endfor %}

@@ -6,11 +6,11 @@
     {{ include('ShopPartnersBundle:Partners:partnersMenu.html.twig') }}
     {% for shop in shops %}
         <div class="shop application">
-            <a href='{{ path('_mainShop', { 'shopname' : shop.uniqueName }) }}'>
-                <img src="{% if (shop.path != '') %}{{ shop.path | apply_filter('logo_shop') }}{% endif %}" />
+            <a href='{{ path('main_shop', { 'shopname' : shop.uniqueName }) }}'>
+                <img src="{% if (shop.path != '') %}{{ shop.path | imagine_filter('logo_shop') }}{% endif %}" />
             </a>
             <ul class="infShop">
-                <li><a href="{{ path('_mainShop', { 'shopname' : shop.uniqueName }) }}">{{ shop.shopname }}</a></li>
+                <li><a href="{{ path('main_shop', { 'shopname' : shop.uniqueName }) }}">{{ shop.shopname }}</a></li>
                 <li><p>Подписчиков: {{ shop.users }}</p></li>
                 <li><p>Рейтинг: {{ shop.rating }}</p></li>
                 <li><p>Понравилось: {{ shop.likes }}</p></li>

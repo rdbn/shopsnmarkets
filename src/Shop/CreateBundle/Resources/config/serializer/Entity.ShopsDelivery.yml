@@ -1,0 +1,12 @@
+Shop\CreateBundle\Entity\ShopsDelivery:
+    exclusion_policy: ALL
+    properties:
+        delivery:
+            expose: true
+            groups: [shopInformation]
+        price:
+            expose: true
+            groups: [shopInformation]
+        duration:
+            expose: true
+            groups: [shopInformation]

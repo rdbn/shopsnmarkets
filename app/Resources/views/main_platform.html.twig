@@ -34,14 +34,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ path("_main") }}">Ornest</a>
+                    <a class="navbar-brand" href="{{ path("main") }}">Shops & Markets</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ path('_shops') }}">Магазины</a></li>
-                        <li><a href="{{ path('_productsPlatform') }}">Товары</a></li>
-                        <li><a href="{{ path('_search') }}">Поиск</a></li>
-                        <li><a href="{{ path('_news') }}">Новости</a></li>
+                        <li><a href="{{ path('shops') }}">Магазины</a></li>
+                        <li><a href="{{ path('products') }}">Товары</a></li>
+                        <li><a href="{{ path('search') }}">Поиск</a></li>
+                        <li><a href="{{ path('news') }}">Новости</a></li>
                     </ul>
                     {{ render(controller('PlatformMainBundle:Page:searchTop')) }}
                 </div>
@@ -68,11 +68,11 @@
                         </p>
                     </div>
                     <div class="col-lg-8 top20">
-                        <a href="{{ path('_shops') }}">о сайте</a>
-                        <a href="{{ path('_news') }}">помощь</a>
-                        <a href="{{ path('_news') }}">правила</a>
-                        <a href="{{ path('_news') }}">реклама</a>
-                        <a href="{{ path('_news') }}">вакансии</a>
+                        <a href="{{ path('shops') }}">о сайте</a>
+                        <a href="{{ path('news') }}">помощь</a>
+                        <a href="{{ path('news') }}">правила</a>
+                        <a href="{{ path('news') }}">реклама</a>
+                        <a href="{{ path('news') }}">вакансии</a>
                     </div>
                 </div>
             </div>

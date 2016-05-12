@@ -10,7 +10,7 @@
         
 <ul class="formFields">
     <li>
-        <img src="{% if (user.path != '') %}{{ user.path | apply_filter('mini_avatar') }}{% endif %}" />
+        <img src="{% if (user.path != '') %}{{ user.path | imagine_filter('mini_avatar') }}{% endif %}" />
         <h3>{{ user.realname }}</h3>
     </li>
     <form id="sendMessage" action="#" method="post" {{ form_enctype(form) }}>

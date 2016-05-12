@@ -8,7 +8,7 @@
                 <div class="date"></div>
                 {% for shop in shops %}
                     {% if shop.uniqueName == order.products.product.shopname %}
-                        <img src="{{ asset(shop.path | apply_filter('logo_shop')) }}">
+                        <img src="{{ asset(shop.path | imagine_filter('logo_shop')) }}">
                         <ul class="address">
                             <li><h3>{{ shop.shopname }}</h3></li>
                             <li><p><span>Имя:</span> {{ shop.realname }}</p></li>
@@ -21,7 +21,7 @@
                 <div class="products">
                 {% for value in order.products %}
                     <div class="product">
-                        <img src="{{ asset(value.path | apply_filter('advertisingSideOf')) }}" />
+                        <img src="{{ asset(value.path | imagine_filter('advertisingSideOf')) }}" />
                         <ul>
                             <li><p><span>Название:</span> {{ value.name }}</p></li>
                             <li><p><span>Цена:</span> {{ value.price }}</p></li>

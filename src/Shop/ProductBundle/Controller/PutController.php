@@ -17,7 +17,7 @@ class PutController extends Controller
     public function addAction(Request $request, $shopname)
     {
         $product = new Product();
-        $form = $this->createForm(new ProductType($shopname), $product);
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -31,7 +31,7 @@ class PutController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirectToRoute('_mainShop', ['shopname' => $shopname]);
+            return $this->redirectToRoute('main_shop', ['shopname' => $shopname]);
         }
 
         return $this->render('ShopProductBundle:Form:form.html.twig', array(
@@ -53,7 +53,7 @@ class PutController extends Controller
         if ($form->isValid()) {
             $em->flush();
 
-            return $this->redirectToRoute('_mainShop', ['shopname' => $shopname]);
+            return $this->redirectToRoute('main_shop', ['shopname' => $shopname]);
         }
 
         return $this->render('ShopProductBundle:Form:form.html.twig', array(

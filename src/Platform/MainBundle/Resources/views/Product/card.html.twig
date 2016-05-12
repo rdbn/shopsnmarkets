@@ -8,37 +8,33 @@
             <div class="row">
             {% for image in images %}
                 <div class="col-md-6 bottom20">
-                    <img class="img-thumbnail img-responsive" src="{{ asset(image.path | apply_filter('main_product_image')) }}" alt="Product" />
+                    <img class="img-thumbnail img-responsive" src="{{ asset(image.path | imagine_filter('main_product_image')) }}" alt="Product" />
                 </div>
             {% endfor %}
             </div>
         </div>
         <div class="col-md-6">
             <h3 class="alert alert-success top0">{% for tag in tags %}#{{ tag.name }} {% endfor %}</h3>
-            <form id="orderItem" action="#" method="post" {{ form_enctype(form) }}>
-                {{ form_errors(form) }}
-                    <p class="price">
-                        {{ product.price }} руб.
-                    </p>
-                    {{ form_widget(form.save) }}
-                {{ form_rest(form) }}
-            </form>
-            <p class='text'>{{ product.text }}</p>
+            <p class="font24 text-success">
+                <strong class="text-muted">{{ product.price }}</strong> руб.
+            </p>
+            <button id="add-order" class="btn btn-success" data-toggle="{{ product.id }}">Купить товар</button>
+            <p class='top20 text-muted'>{{ product.text }}</p>
             <div class="row top20">
                 <div class="col-lg-5">
                     <div class="media">
                         <div class="media-left">
-                            <a href="{{ path('_mainShop', { 'shopname' : product.uniqueName }) }}">
-                                <img class="media-object img-responsive" src="{% if (product.logo != '') %}{{ product.logo | apply_filter('logo_shop') }}{% endif %}" />
+                            <a href="{{ path('main_shop', { 'shopname' : product.uniqueName }) }}">
+                                <img class="media-object img-responsive" src="{% if (product.logo != '') %}{{ product.logo | imagine_filter('logo_shop') }}{% endif %}" />
                             </a>
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">
-                                <a class="text-success" href="{{ path('_mainShop', { 'shopname' : product.uniqueName }) }}">{{ product.shopname }}</a>
+                                <a class="text-success" href="{{ path('main_shop', { 'shopname' : product.uniqueName }) }}">{{ product.shopname }}</a>
                             </h4>
                             <p class="text-muted small">Подписчиков: {{ product.users }}</p>
                             <p class="text-muted small">Рейтинг: {{ product.rating }}</p>
-                            <button class="btn btn-success btn-xs" type="button">
+                            <button class="btn btn-success btn-xs add-like-shop" type="button" data-toggle="{{ product.shop }}">
                                 Понравилось <span class="badge">{{ product.likes }}</span>
                             </button>
                         </div>
@@ -56,7 +52,7 @@
                             { 'idFloor' : product.floor, 'idCategory' : product.category, 'idSubcategory' : product.subcategory, 'id' : product.id }) 
                         }}'>
                         <span class="imgHover"></span>
-                        <img src="{{ asset(product.path | apply_filter('product_image')) }}" alt="Product" />
+                        <img src="{{ asset(product.path | imagine_filter('product_image')) }}" alt="Product" />
                     </a>
                 </li>
                 <li>
@@ -71,5 +67,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('public/js/shop/addOrder.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/add-like.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/add-order.js') }}" type="text/javascript"></script>
 {% endblock %}

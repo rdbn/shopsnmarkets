@@ -14,6 +14,8 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AjaxController extends FOSRestController
 {
@@ -27,7 +29,14 @@ class AjaxController extends FOSRestController
      *
      * @param int $count
      *
+     * @Route("/showShops/{count}", name="show_shops", defaults={"_format": "json"}, requirements={
+     *     "count": "\d+"
+     * })
+     * @Method({"GET"})
+     *
      * @Rest\View()
+     *
+     * @return array
      */
     public function shopsAction($count)
     {
@@ -47,14 +56,21 @@ class AjaxController extends FOSRestController
      *
      * @param int $count
      *
+     * @Route("/showProducts/{count}", name="show_products", defaults={"_format": "json"}, requirements={
+     *     "count": "\d+"
+     * })
+     * @Method({"GET"})
+     *
      * @Rest\View()
+     *
+     * @return array
      */
     public function productsAction($count)
     {
         $result = $this->getDoctrine()->getRepository("ShopProductBundle:Product")
             ->findByProductPlatform($count);
 
-        $avalancheService = $this->get('imagine.cache.path.resolver');
+        $avalancheService = $this->get('liip_imagine.cache.manager');
         $result = array_map(function ($data) use ($avalancheService) {
             $data['path'] = $avalancheService->getBrowserPath($data['path'], 'product_image');
 
@@ -74,12 +90,17 @@ class AjaxController extends FOSRestController
      *
      * @param Request $request
      *
+     * @Route("/resultSearch", name="search_platform", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
      * @Rest\View()
+     *
+     * @return array
      */
     public function resultAction(Request $request)
     {
         $product = new Product();
-        $form = $this->createForm(new SearchType(), $product);
+        $form = $this->createForm(SearchType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

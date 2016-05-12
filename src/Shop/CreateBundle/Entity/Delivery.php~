@@ -1,15 +1,16 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace Shop\CreateBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Shop\CreateBundle\Repository\DeliveryRepository")
  * @ORM\Table(name="delivery")
  */
 
@@ -31,14 +32,14 @@ class Delivery
      * @ORM\Column(name="image", type="string", length=255)
      */
     protected $image;
-    
+
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\OrderBundle\Entity\OrderDelivery", mappedBy="delivery")
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="delivery")
      */
     protected $order;
-    
-    /*
-     * constructor
+
+    /**
+     * Construct with Class Delivery
      */
     public function __construct()
     {

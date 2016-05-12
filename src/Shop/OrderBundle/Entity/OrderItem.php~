@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,51 +8,48 @@
 namespace Shop\OrderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Shop\OrderBundle\Repository\OrderItemRepository")
  * @ORM\Table(name="order_item")
  */
 
 class OrderItem 
-{  
+{
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
-     * @ORM\ManyToOne(targetEntity="Shop\OrderBundle\Entity\Order", inversedBy="item")
+     * @ORM\ManyToOne(targetEntity="Shop\OrderBundle\Entity\Order", inversedBy="orderItem", cascade={"persist"})
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
      */
     protected $order;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops")
-     * @ORM\JoinColumn(name="shops_id", referencedColumnName="id")
-     */
-    protected $shops;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Shop\AddProductsBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="Shop\ProductBundle\Entity\Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     protected $product;
-    
+
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\AddProductsBundle\Entity\Size", inversedBy="order")
-     * @ORM\JoinColumn(name="order_size")
+     * @ORM\Column(name="number", type="integer", options={"default" = 0})
      */
-    protected $size;
-    
-    /*
+    protected $number;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $createdAt;
+
+    /**
      * constructor
      */
     public function __construct()
     {
-        $this->size = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 }

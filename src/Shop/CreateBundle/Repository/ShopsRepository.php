@@ -93,4 +93,55 @@ class ShopsRepository extends EntityRepository
             return null;
         }
     }
+
+    /**
+     * Проверяем наличие лайка от пользователя
+     *
+     * @param int $shop
+     * @param int $user
+     *
+     * @return array
+     */
+    public function findOneByIsLike($shop, $user)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT s FROM ShopCreateBundle:Shops s
+                  LEFT JOIN s.likeShop u
+                WHERE s.id = :shop AND u.id = :users
+            ')
+            ->setParameters(['shop' => $shop, 'users' => $user]);
+
+        try {
+            return $query->getSingleResult();
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Кол-во лайков у магазина
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function findOneByCountLike($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT count(u.id) as likes FROM ShopCreateBundle:Shops s
+                  LEFT JOIN s.likeShop u
+                WHERE s.id = :shop
+            ')
+            ->setParameter('shop', $id);
+
+        try {
+            $result = $query->getResult();
+
+            return $result[0]["likes"];
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }

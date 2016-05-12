@@ -24,11 +24,11 @@
         "symfony/assetic-bundle": "~2.3",
 
         "jms/serializer-bundle": "dev-master",
-        "friendsofsymfony/rest-bundle": "1.1.*",
+        "friendsofsymfony/rest-bundle": "1.7.*",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "avalanche123/imagine-bundle": "v2.1",
         "nelmio/api-doc-bundle": "^2.9",
-        "hwi/oauth-bundle": "0.3.*@dev"
+        "hwi/oauth-bundle": "^0.4.1",
+        "liip/imagine-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

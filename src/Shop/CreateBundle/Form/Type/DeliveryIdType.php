@@ -13,8 +13,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DeliveryIdType extends AbstractType {
-    
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
+class DeliveryIdType extends AbstractType
+{
     /**
      * @var ObjectManager
      */
@@ -28,10 +30,10 @@ class DeliveryIdType extends AbstractType {
         $this->om = $om;
     }
     
-    public function buildForm(FormBuilderInterface $builder, array $options) 
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $transformer = new DeliveryToIdTransformer($this->om);
-        $builder->addModelTransformer($transformer);
+        $builder->addViewTransformer($transformer);
     }
     
     public function configureOptions(OptionsResolver $resolver)
@@ -43,11 +45,6 @@ class DeliveryIdType extends AbstractType {
     
     public function getParent()
     {
-        return 'hidden';
-    }
-    
-    public function getName() 
-    {
-        return 'delivery';
+        return HiddenType::class;
     }
 }

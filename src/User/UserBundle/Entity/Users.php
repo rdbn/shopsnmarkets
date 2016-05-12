@@ -148,8 +148,7 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     protected $product;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="users")
-     *
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="users")
      */
     protected $order;
     
@@ -175,6 +174,11 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     protected $usersFriends;
 
     /**
+     * @ORM\OneToMany(targetEntity="Shop\InformationBundle\Entity\Comments", mappedBy="users")
+     */
+    protected $comments;
+
+    /**
      * Construct with Class users
      */
     public function __construct()
@@ -188,6 +192,8 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
         $this->product = new ArrayCollection();
         $this->friends = new ArrayCollection();
         $this->shop = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->order = new ArrayCollection();
     }
     
     /**
@@ -1011,5 +1017,39 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     public function getUsersFriends()
     {
         return $this->usersFriends;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Shop\InformationBundle\Entity\Comments $comment
+     *
+     * @return Users
+     */
+    public function addComment(\Shop\InformationBundle\Entity\Comments $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Shop\InformationBundle\Entity\Comments $comment
+     */
+    public function removeComment(\Shop\InformationBundle\Entity\Comments $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

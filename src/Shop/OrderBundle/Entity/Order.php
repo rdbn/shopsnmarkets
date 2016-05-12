@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -8,10 +8,9 @@ namespace Shop\OrderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use JMS\Payment\CoreBundle\Entity\PaymentInstruction;
 
 /**
- * @ORM\Entity(repositoryClass="Shop\OrderBundle\Repository\OrderRepository")
+ * @ORM\Entity
  * @ORM\Table(name="`order`")
  */
 
@@ -23,11 +22,30 @@ class Order
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
-    /** 
-     * @ORM\Column(name="order_number", type="string", length=45)
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop\OrderBundle\Entity\Address", inversedBy="order")
+     * @ORM\JoinColumn(name="address_id", nullable=true)
      */
-    protected $order_number;
+    protected $address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users", inversedBy="order")
+     * @ORM\JoinColumn(name="users_id", nullable=true)
+     */
+    protected $users;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="order")
+     * @ORM\JoinColumn(name="shops_id", nullable=true)
+     */
+    protected $shops;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\ShopsDelivery", inversedBy="order")
+     * @ORM\JoinColumn(name="delivery_id", nullable=true)
+     */
+    protected $delivery;
 
     /**
      * @ORM\Column(name="amount", type="decimal", precision=6, scale=2, nullable=true)
@@ -35,48 +53,36 @@ class Order
     protected $amount;
     
     /** 
-     * @ORM\Column(name="check_pay", type="boolean") 
+     * @ORM\Column(name="check_pay", type="boolean")
      */
-    protected $check_pay;
+    protected $checkPay;
     
     /**
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\OrderItem", mappedBy="order", cascade={"persist"})
+     */
+    protected $orderItem;
     
     /**
-     * @ORM\OneToOne(targetEntity="Shop\OrderBundle\Entity\Address", mappedBy="order", cascade={"persist"})
-     */
-    protected $address;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\OrderDelivery", mappedBy="order", cascade={"persist"})
-     */
-    protected $delivery;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="User\UserBundle\Entity\Users", inversedBy="order")
-     * @ORM\JoinColumn(name="order_user")
-     */
-    protected $users;
-    
-    /*
      * constructor
      */
-    public function __construct($amount, $orderNumber)
+    public function __construct()
     {
-        $this->amount = $amount;
-        $this->order_number = $orderNumber;
-        $this->check_pay = false;
+        $this->amount = 100;
+        $this->checkPay = false;
+
         $this->createdAt = new \DateTime();
-        $this->users = new ArrayCollection();
-        $this->delivery = new ArrayCollection();
+        $this->orderItem = new ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -84,45 +90,23 @@ class Order
     }
 
     /**
-     * Set order_number
-     *
-     * @param string $orderNumber
-     * @return Order
-     */
-    public function setOrderNumber($orderNumber)
-    {
-        $this->order_number = $orderNumber;
-    
-        return $this;
-    }
-
-    /**
-     * Get order_number
-     *
-     * @return string 
-     */
-    public function getOrderNumber()
-    {
-        return $this->order_number;
-    }
-
-    /**
      * Set amount
      *
      * @param string $amount
+     *
      * @return Order
      */
     public function setAmount($amount)
     {
         $this->amount = $amount;
-    
+
         return $this;
     }
 
     /**
      * Get amount
      *
-     * @return string 
+     * @return string
      */
     public function getAmount()
     {
@@ -130,45 +114,47 @@ class Order
     }
 
     /**
-     * Set check_pay
+     * Set checkPay
      *
      * @param boolean $checkPay
+     *
      * @return Order
      */
     public function setCheckPay($checkPay)
     {
-        $this->check_pay = $checkPay;
-    
+        $this->checkPay = $checkPay;
+
         return $this;
     }
 
     /**
-     * Get check_pay
+     * Get checkPay
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getCheckPay()
     {
-        return $this->check_pay;
+        return $this->checkPay;
     }
 
     /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
+     *
      * @return Order
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -179,19 +165,20 @@ class Order
      * Set address
      *
      * @param \Shop\OrderBundle\Entity\Address $address
+     *
      * @return Order
      */
     public function setAddress(\Shop\OrderBundle\Entity\Address $address = null)
     {
         $this->address = $address;
-    
+
         return $this;
     }
 
     /**
      * Get address
      *
-     * @return \Shop\OrderBundle\Entity\Address 
+     * @return \Shop\OrderBundle\Entity\Address
      */
     public function getAddress()
     {
@@ -199,32 +186,23 @@ class Order
     }
 
     /**
-     * Add users
+     * Set users
      *
      * @param \User\UserBundle\Entity\Users $users
+     *
      * @return Order
      */
-    public function addUser(\User\UserBundle\Entity\Users $users)
+    public function setUsers(\User\UserBundle\Entity\Users $users = null)
     {
-        $this->users[] = $users;
-    
-        return $this;
-    }
+        $this->users = $users;
 
-    /**
-     * Remove users
-     *
-     * @param \User\UserBundle\Entity\Users $users
-     */
-    public function removeUser(\User\UserBundle\Entity\Users $users)
-    {
-        $this->users->removeElement($users);
+        return $this;
     }
 
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \User\UserBundle\Entity\Users
      */
     public function getUsers()
     {
@@ -232,35 +210,84 @@ class Order
     }
 
     /**
-     * Add delivery
+     * Set shops
      *
-     * @param \Shop\OrderBundle\Entity\OrderDelivery $delivery
+     * @param \Shop\CreateBundle\Entity\Shops $shops
+     *
      * @return Order
      */
-    public function addDelivery(\Shop\OrderBundle\Entity\OrderDelivery $delivery)
+    public function setShops(\Shop\CreateBundle\Entity\Shops $shops = null)
     {
-        $this->delivery[] = $delivery;
-    
+        $this->shops = $shops;
+
         return $this;
     }
 
     /**
-     * Remove delivery
+     * Get shops
      *
-     * @param \Shop\OrderBundle\Entity\OrderDelivery $delivery
+     * @return \Shop\CreateBundle\Entity\Shops
      */
-    public function removeDelivery(\Shop\OrderBundle\Entity\OrderDelivery $delivery)
+    public function getShops()
     {
-        $this->delivery->removeElement($delivery);
+        return $this->shops;
+    }
+
+    /**
+     * Set delivery
+     *
+     * @param \Shop\CreateBundle\Entity\ShopsDelivery $delivery
+     *
+     * @return Order
+     */
+    public function setDelivery(\Shop\CreateBundle\Entity\ShopsDelivery $delivery = null)
+    {
+        $this->delivery = $delivery;
+
+        return $this;
     }
 
     /**
      * Get delivery
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Shop\CreateBundle\Entity\ShopsDelivery
      */
     public function getDelivery()
     {
         return $this->delivery;
+    }
+
+    /**
+     * Add orderItem
+     *
+     * @param \Shop\OrderBundle\Entity\OrderItem $orderItem
+     *
+     * @return Order
+     */
+    public function addOrderItem(\Shop\OrderBundle\Entity\OrderItem $orderItem)
+    {
+        $this->orderItem[] = $orderItem;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderItem
+     *
+     * @param \Shop\OrderBundle\Entity\OrderItem $orderItem
+     */
+    public function removeOrderItem(\Shop\OrderBundle\Entity\OrderItem $orderItem)
+    {
+        $this->orderItem->removeElement($orderItem);
+    }
+
+    /**
+     * Get orderItem
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrderItem()
+    {
+        return $this->orderItem;
     }
 }

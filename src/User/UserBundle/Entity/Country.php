@@ -34,7 +34,7 @@ Class Country
     protected $city;
     
     /**
-     * Construct for class Contry
+     * Construct for class Country
      */
     public function __construct()
     {
@@ -42,10 +42,11 @@ Class Country
     }
     
     /**
-     * toString for class Contry
+     * toString for class Country
      */
-    public function __toString() {
-        return $this->name;
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**

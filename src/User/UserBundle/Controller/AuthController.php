@@ -11,6 +11,8 @@ use User\UserBundle\Form\Type\UserType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AuthController extends Controller
 {
@@ -36,11 +38,21 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Register user
+     *
+     * @param Request $request
+     *
+     * @Route("/register", name="register")
+     * @Method({"GET"})
+     *
+     * @return object
+    */
     public function registrationAction(Request $request)
     {
         $user = new Users();
         $form = $this->createForm(new UserType(), $user, [
-            'action' => $this->generateUrl('_register'),
+            'action' => $this->generateUrl('register'),
             'method' => 'POST',
         ]);
 
@@ -59,7 +71,7 @@ class AuthController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('_main');
+            return $this->redirectToRoute('main');
         }
         
         return $this->render('UserUserBundle:Form:registration.html.twig', [

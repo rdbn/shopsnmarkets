@@ -20,7 +20,7 @@
         <div class="row">
     {% endif %}
     <div class="{% if isCreate %}col-lg-offset-3{% endif %} col-lg-6 top20">
-        <form action="{% if isCreate %}{{ path('_createShop') }}{% else %}{{ path('_updateShop', {"shopname": shopname}) }}{% endif %}" method="post" {{ form_enctype(form) }}>
+        {{ form_start(form) }}
             {{ form_errors(form) }}
             <div class="errors">
                 {% if errors == false %}<h3>Адресс магазина : уже занят</h3>{% endif %}
@@ -55,7 +55,7 @@
                 {{ form_widget(form.email) }}
             </div>
             {{ form_rest(form) }}
-        </form>
+        {{ form_end(form) }}
     </div>
     {% if isCreate != true %}</div>{% endif %}
 {% endblock %}

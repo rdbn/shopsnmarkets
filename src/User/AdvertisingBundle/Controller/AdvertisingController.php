@@ -12,9 +12,17 @@ use User\AdvertisingBundle\Form\Type\AdvertisingShopType;
 use User\AdvertisingBundle\Form\Type\AdvertisingPlatformType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AdvertisingController extends Controller
 {
+    /**
+     * advertising page
+     *
+     * @Route("/advertising", name="advertising")
+     * @Method({"GET"})
+     */
     public function advertisingAction() 
     {
         $id = $this->getUser()->getId();
@@ -26,13 +34,19 @@ class AdvertisingController extends Controller
         ));
     }
 
+    /**
+     * advertising shop page
+     *
+     * @Route("/advertising/shop", name="advertising_shop")
+     * @Method({"GET"})
+     */
     public function shopAction()
     {
         $id = $this->getUser()->getId();
         $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
             ->findByShopsManager($id);
 
-        $form = $this->createForm(new AdvertisingShopType($id), null);
+        $form = $this->createForm(AdvertisingShopType::class, null);
 
         return $this->render('UserAdvertisingBundle:Form:shop.html.twig', array(
             'form' => $form->createView(),
@@ -40,13 +54,19 @@ class AdvertisingController extends Controller
         ));
     }
 
+    /**
+     * advertising platform page
+     *
+     * @Route("/advertising/platform", name="advertising_platform")
+     * @Method({"GET"})
+     */
     public function platformAction()
     {
         $id = $this->getUser()->getId();
         $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
             ->findByShopsManager($id);
 
-        $form = $this->createForm(new AdvertisingPlatformType($id), new AdvertisingPlatform());
+        $form = $this->createForm(AdvertisingPlatformType::class, new AdvertisingPlatform());
 
         return $this->render('UserAdvertisingBundle:Form:platform.html.twig', array(
             'form' => $form->createView(),

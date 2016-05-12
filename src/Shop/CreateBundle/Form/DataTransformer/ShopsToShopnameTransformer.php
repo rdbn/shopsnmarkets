@@ -55,7 +55,7 @@ class ShopsToShopnameTransformer implements DataTransformerInterface
         if (!$shopname) return null;
 
         $shop = $this->om->getRepository('ShopCreateBundle:Shops')
-                ->findOneBy(["uniqueName" => $shopname]);
+            ->findOneBy(["shopname" => $shopname]);
         
         if (null === $shop) {
             throw new TransformationFailedException(sprintf(
@@ -63,7 +63,7 @@ class ShopsToShopnameTransformer implements DataTransformerInterface
                 $shopname
             ));
         }
-
+        
         return $shop;
     }
 }

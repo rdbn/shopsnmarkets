@@ -122,7 +122,7 @@ Class Shops
     protected $shopPartners;
     
     /**
-     * @ORM\OneToMany(targetEntity="Shop\CreateBundle\Entity\ShopsDelivery", mappedBy="shops")
+     * @ORM\OneToMany(targetEntity="Shop\CreateBundle\Entity\ShopsDelivery", mappedBy="shops", cascade={"persist"})
      */
     protected $shopsDelivery;
 
@@ -130,6 +130,16 @@ Class Shops
      * @ORM\OneToMany(targetEntity="User\AdvertisingBundle\Entity\AdvertisingShop", mappedBy="shops")
      */
     protected $advertisingShop;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\InformationBundle\Entity\Comments", mappedBy="shops")
+     */
+    protected $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\Order", mappedBy="shops")
+     */
+    protected $order;
 
     /**
      * Construct for class Shops
@@ -141,8 +151,9 @@ Class Shops
         $this->manager = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->partners = new ArrayCollection();
-        $this->shops_delivery = new ArrayCollection();
-        $this->advertising_shop = new ArrayCollection();
+        $this->shopsDelivery = new ArrayCollection();
+        $this->advertisingShop = new ArrayCollection();
+        $this->comments = new ArrayCollection();
 
         $this->createdAt = new \DateTime();
     }
@@ -720,5 +731,73 @@ Class Shops
     public function getShopPartners()
     {
         return $this->shopPartners;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Shop\InformationBundle\Entity\Comments $comment
+     *
+     * @return Shops
+     */
+    public function addComment(\Shop\InformationBundle\Entity\Comments $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Shop\InformationBundle\Entity\Comments $comment
+     */
+    public function removeComment(\Shop\InformationBundle\Entity\Comments $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     *
+     * @return Shops
+     */
+    public function addOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \Shop\OrderBundle\Entity\Order $order
+     */
+    public function removeOrder(\Shop\OrderBundle\Entity\Order $order)
+    {
+        $this->order->removeElement($order);
+    }
+
+    /**
+     * Get order
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

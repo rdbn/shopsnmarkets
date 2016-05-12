@@ -1,0 +1,9 @@
+Shop\CreateBundle\Entity\Delivery:
+    exclusion_policy: ALL
+    properties:
+        name:
+            expose: true
+            groups: [shopInformation]
+        image:
+            expose: true
+            groups: [shopInformation]

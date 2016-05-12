@@ -20,16 +20,16 @@ class DialogRepository extends EntityRepository
                 ->setParameter('id', $value);
         
         if ($flags == '0') {
-            $query = $query->andWhere('d.flags = 0');
+            $query = $query->andWhere('d.flags = \'f\'');
         } 
         if ($flags == '2') {
-            $query = $query->andWhere('d.flags = 2');
+            $query = $query->andWhere('d.flags = \'t\'');
         }
         if ($flags == null) {
-            $query = $query->andWhere('d.flags <> 2');
+            $query = $query->andWhere('d.flags <> \'t\'');
         }
         
-        $query = $query->groupBy('send')
+        $query = $query->groupBy('send.id, send.realname, send.path, d.id, m.text, m.flags, m.createdAt')
                 ->orderBy('m.createdAt', 'DESC');
         
         $user = $query->getQuery()->getResult();
@@ -47,16 +47,16 @@ class DialogRepository extends EntityRepository
                 ->setParameter('id', $value);
         
         if ($flags == '0') {
-            $query = $query->andWhere('d.flags = 0');
+            $query = $query->andWhere('d.flags = \'f\'');
         } 
         if ($flags == '2') {
-            $query = $query->andWhere('d.flags = 2');
+            $query = $query->andWhere('d.flags = \'t\'');
         }
         if ($flags == null) {
-            $query = $query->andWhere('d.flags <> 2');
+            $query = $query->andWhere('d.flags <> \'t\'');
         }
         
-        $query = $query->groupBy('take')
+        $query = $query->groupBy('take.id, take.realname, take.path, d.id, m.text, m.flags, m.createdAt')
                 ->orderBy('m.createdAt', 'ASC');
         
         $user = $query->getQuery()->getResult();
@@ -64,4 +64,3 @@ class DialogRepository extends EntityRepository
         return $user;
     }
 }
-?>

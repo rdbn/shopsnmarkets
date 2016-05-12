@@ -13,6 +13,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 class ShopsTagsType extends AbstractType {
     
     /**
@@ -43,11 +45,6 @@ class ShopsTagsType extends AbstractType {
     
     public function getParent()
     {
-        return 'text';
-    }
-    
-    public function getName() 
-    {
-        return 'shopsTags';
+        return TextType::class;
     }
 }

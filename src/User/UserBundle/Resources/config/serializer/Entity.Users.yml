@@ -1,0 +1,9 @@
+User\UserBundle\Entity\Users:
+    exclusion_policy: ALL
+    properties:
+        realname:
+            expose: true
+            groups: [shopInformation, comments]
+        path:
+            expose: true
+            groups: [comments]
