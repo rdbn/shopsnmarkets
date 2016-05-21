@@ -95,6 +95,9 @@ $(document).ready(function(){
     registrationEmail.keydown(function() {
         CheckMail.checkMail($(this));
     });
+    registrationEmail.blur(function() {
+        CheckMail.checkMail($(this));
+    });
 
     /** check password */
     var registrationPassword = $("#registration_password_second");
@@ -102,6 +105,9 @@ $(document).ready(function(){
         Check.password();
     });
     registrationPassword.keyup(function() {
+        Check.password();
+    });
+    registrationPassword.blur(function() {
         Check.password();
     });
 
