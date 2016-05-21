@@ -12,7 +12,7 @@ var CheckMail = {
     sendMail : function(element) {
         $.ajax({
             method: "GET",
-            url: '/app_dev.php/checkEmail/'+$('#registration_username').val(),
+            url: '/checkEmail/'+$('#registration_username').val(),
             statusCode: {
                 200: function() {
                     if (element.hasClass("has-error")) {
