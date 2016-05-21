@@ -86,9 +86,7 @@ class AjaxController extends FOSRestController
             ->findOneBy(["uniqueName" => $shopname]);
 
         $avalancheService = $this->get('liip_imagine.cache.manager');
-        $cachedImage = $avalancheService->getBrowserPath($shop->getPath(), 'logo_shop');
-
-        $shop->setPath($cachedImage);
+        $shop->setPath($avalancheService->getBrowserPath($shop->getPath(), 'logo_shop'));
 
         return $shop;
     }
