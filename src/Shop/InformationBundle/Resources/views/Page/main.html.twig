@@ -59,9 +59,9 @@
                 <button id="show-comments" class="btn btn-success" datatype="{{ shop.id }}" data-toggle="modal" data-target="#comments">
                     Отзывы
                 </button>
-                {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : shopname }) }}">Партнеры</button>#}
+                {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : uniqueName }) }}">Партнеры</button>#}
                 {% if is_granted('ROLE_MANAGER') %}
-                    <a class="btn btn-success" href='{{ path('_addProduct', { 'shopname' : shopname }) }}'>
+                    <a class="btn btn-success" href='{{ path('_addProduct', { 'shopname' : uniqueName }) }}'>
                         <span class="glyphicon glyphicon-plus"></span> Добавить товар
                     </a>
                 {% endif %}
