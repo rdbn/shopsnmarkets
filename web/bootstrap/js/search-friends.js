@@ -8,7 +8,7 @@ var Search = {
         };
     },    
     result : function() {
-        $.post('/app_dev.php/friends/result/search', this.getElement(), function(data) {
+        $.post('/friends/result/search', this.getElement(), function(data) {
             var html = '',
                 result = $('#result-search');
 

@@ -47,7 +47,7 @@ var AddDelivery = {
             }
         });
 
-        $.post('/app_dev.php/user/shop/addDelivery/'+shop[1], getElement, function() {
+        $.post('/user/shop/addDelivery/'+shop[1], getElement, function() {
             element.removeClass("disabled");
         });
     },

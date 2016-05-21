@@ -19,7 +19,7 @@ var CheckUniqueName = {
 
         $.ajax({
             method: "GET",
-            url: '/app_dev.php/user/shop/uniqueName/'+$('#shops_uniqueName').val()+id,
+            url: '/user/shop/uniqueName/'+$('#shops_uniqueName').val()+id,
             statusCode: {
                 200: function() {
                     if (parent.hasClass("has-error")) {

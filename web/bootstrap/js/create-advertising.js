@@ -59,7 +59,7 @@ $(document).ready(function(){
         //$(this).prop("disabled", true);
 
         $.ajax({
-            url: "/app_dev.php/advertising/createPlatform",
+            url: "/advertising/createPlatform",
             type: "post",
             dataType: "text",
             cache: false,
@@ -140,7 +140,7 @@ $(document).ready(function(){
         $(this).prop("disabled", true);
 
         $.ajax({
-            url: "/app_dev.php/advertising/createShop",
+            url: "/advertising/createShop",
             type: "post",
             dataType: "text",
             cache: false,

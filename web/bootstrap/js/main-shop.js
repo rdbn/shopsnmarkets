@@ -5,7 +5,7 @@ var ShopProducts = {
         element.addClass("disabled");
         var result = $("#result");
 
-        $.get('/app_dev.php/'+shopname+'/showProducts/0', function(data) {
+        $.get('/'+shopname+'/showProducts/0', function(data) {
             var html = '';
             for (var name in data) {
                 var product = data[name];
@@ -33,7 +33,7 @@ var ShopInformation = {
         var shopname = element.attr("data-toggle");
 
         element.addClass("disabled");
-        $.get("/app_dev.php/"+shopname+"/information", function (data) {
+        $.get("/"+shopname+"/information", function (data) {
             var html = "<div class='col-md-8'><h3 class=\"text-success\">Информация о магазине</h3>";
             html += "<div class=\"media\"><div class=\"media-left media-middle\">";
             html += "<img class='media-object img-thumbnail' src=\""+data.path+"\" alt=\""+data.shopname+"\" /></div>";
@@ -73,7 +73,7 @@ var ShowComments = {
         var id = element.attr("datatype");
 
         element.addClass("disabled");
-        $.get('/app_dev.php/shopComments/'+id+'/0', function(data) {
+        $.get('/shopComments/'+id+'/0', function(data) {
             var html = '';
             for (var i in data) {
                 var comments = data[i];
@@ -120,7 +120,7 @@ var AddComments = {
 
         text.val("");
         element.addClass("disabled");
-        $.post('/app_dev.php/'+shopname+'/addCommentsShop', comments, function(data) {
+        $.post('/'+shopname+'/addCommentsShop', comments, function(data) {
             $("#comments_text").val("");
 
             var html = "<div class=\"media\"><div class=\"media-left\">";

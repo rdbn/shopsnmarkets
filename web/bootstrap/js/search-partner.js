@@ -12,7 +12,7 @@ var SearchPartners = {
         element.css('opacity', '1');
         element.animate({'opacity' : '0'}, 200);
         
-        $.post("/app_dev.php/partners/result", SearchPartners.getElement(), function(data) {
+        $.post("/partners/result", SearchPartners.getElement(), function(data) {
             var html = '';
             if (data !== '') {
                 for (var value in data) {

@@ -3,7 +3,7 @@ var AddOrder = {
         var product = element.attr("data-toggle");
 
         element.addClass("disabled");
-        $.get("/app_dev.php/addOrder/"+product, function() {
+        $.get("/addOrder/"+product, function() {
             element.removeClass("disabled");
         });
     },
@@ -21,7 +21,7 @@ var RemoveOrder = {
         var product = element.attr("data-toggle");
 
         element.addClass("disabled");
-        $.get('/app_dev.php/removeOrder/'+product, function() {
+        $.get('/removeOrder/'+product, function() {
             element.parents('.media').remove();
         });
     },
@@ -39,7 +39,7 @@ var UpdateNumber = {
         var order = element.attr("data-toggle");
 
         element.addClass("disabled");
-        $.get("/app_dev.php/updateNumberOrder/"+order+'/'+sign, function(data) {
+        $.get("/updateNumberOrder/"+order+'/'+sign, function(data) {
             var parents = element.parents('p');
             if (data.number == 1) {
                 parents.find(".minus-number-order").remove();

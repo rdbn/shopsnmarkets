@@ -38,7 +38,7 @@ $(document).ready(function() {
         };
 
         $(this).addClass("disabled");
-        $.post("/app_dev.php/add/description", value, function () {
+        $.post("/add/description", value, function () {
             $("#description_save").removeClass("disabled");
         });
 
