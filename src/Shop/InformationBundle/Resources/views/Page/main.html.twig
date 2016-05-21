@@ -61,7 +61,7 @@
                 </button>
                 {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : uniqueName }) }}">Партнеры</button>#}
                 {% if is_granted('ROLE_MANAGER') %}
-                    <a class="btn btn-success" href='{{ path('_addProduct', { 'shopname' : uniqueName }) }}'>
+                    <a class="btn btn-success" href='{{ path('_addProduct', { 'shopname' : shop.uniqueName }) }}'>
                         <span class="glyphicon glyphicon-plus"></span> Добавить товар
                     </a>
                 {% endif %}

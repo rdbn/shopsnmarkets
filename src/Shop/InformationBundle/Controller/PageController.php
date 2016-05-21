@@ -43,7 +43,6 @@ class PageController extends Controller
         $comments = new Comments();
         $comments->setShops($shop);
         $comments->setUsers($this->getUser());
-
         $comments = $this->createForm(CommentsType::class, $comments, [
             'method' => 'POST',
         ]);
