@@ -7,7 +7,7 @@
 namespace User\UserBundle\Controller;
 
 use User\UserBundle\Entity\Users;
-use User\UserBundle\Form\Type\UserType;
+use User\UserBundle\Form\Type\RegistrationType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,10 +32,17 @@ class AuthController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $user = new Users();
+        $form = $this->createForm(RegistrationType::class, $user, [
+            'action' => $this->generateUrl('register'),
+            'method' => 'POST',
+        ]);
+
         return $this->render('UserUserBundle:Login:loginForm.html.twig', [
-            'login' => true,
+            'form' => $form->createView(),
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error' => $error,
+            'login' => true,
         ]);
     }
 
@@ -52,7 +59,7 @@ class AuthController extends Controller
     public function registrationAction(Request $request)
     {
         $user = new Users();
-        $form = $this->createForm(UserType::class, $user, [
+        $form = $this->createForm(RegistrationType::class, $user, [
             'action' => $this->generateUrl('register'),
             'method' => 'POST',
         ]);

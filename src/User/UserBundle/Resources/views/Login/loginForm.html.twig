@@ -9,7 +9,7 @@
                 <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            <h4>Вход для продавцов:</h4>
+            <h4 class="text-success">Авторизация</h4>
             <div id="errors" class="login_error"></div>
             <form action="{{ path('login') }}" method="post">
                 <div class="form-group">
@@ -27,6 +27,30 @@
             </form>
         </div>
         <div class="col-lg-6">
+            <h4 class="text-success">Регистрация</h4>
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <div id="emails-valid" class="form-group"></div>
+                <div class="form-group">
+                    {{ form_widget(form.username) }}
+                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback hide" aria-hidden="true"></span>
+                </div>
+                <div id="password-valid" class="form-group"></div>
+                <div class="form-group">
+                    {{ form_widget(form.password.first) }}
+                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback hide" aria-hidden="true"></span>
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.password.second) }}
+                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback hide" aria-hidden="true"></span>
+                </div>
+            {{ form_end(form) }}
+        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="col-lg-6">
             <h4>Вход для покупателей:</h4>
             <div class="btn-group-vertical" role="group">
                 <a class="btn btn-primary" href="{{ hwi_oauth_login_url('vkontakte') }}">Регистрация через ВК</a>
@@ -34,5 +58,10 @@
                 <a class="btn btn-danger" href="{{ hwi_oauth_login_url('google') }}">Регистрация через G+</a>
             </div>
         </div>
+        {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bootstrap/js/add-users.js') }}" type="text/javascript"></script>
 {% endblock %}

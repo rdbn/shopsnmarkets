@@ -26,16 +26,9 @@ class PageController extends Controller
     {
         $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
                 ->findByShops(0);
-
-        $advertising = $this->getDoctrine()->getRepository('UserAdvertisingBundle:AdvertisingPlatform')
-            ->findByAdvertising(['date' => date("Y-m-d H:i:s"), 'id' => '1']);
-
-        if (null == $advertising)
-            $advertising['0']['path'] = '/public/images/slider.png';
         
         return $this->render('PlatformMainBundle:Page:index.html.twig', [
             'shops' => $shops,
-            'advertising' => $advertising,
         ]);
     }
 

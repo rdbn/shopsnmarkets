@@ -1,5 +1,5 @@
 var CheckUniqueName = {
-    howBad: function (element) {
+    showBad: function (element) {
         if (element.hasClass("has-success")) {
             element.removeClass("has-success");
             element.removeClass("has-feedback");
@@ -32,7 +32,7 @@ var CheckUniqueName = {
                     parent.find(".glyphicon-ok").removeClass("hide");
                 },
                 403: function() {
-                    CheckUniqueName.howBad(parent);
+                    CheckUniqueName.showBad(parent);
                 }
             }
         });
@@ -46,7 +46,7 @@ var CheckUniqueName = {
             return true;
         } else {
             var parent = element.parents(".form-group");
-            CheckUniqueName.howBad(parent);
+            CheckUniqueName.showBad(parent);
 
             return false;
         }

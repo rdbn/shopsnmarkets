@@ -54,7 +54,7 @@ class AjaxController extends FOSRestController
      *
      * @param int $mail
      *
-     * @Route("/emailProperty/{mail}", name="api_email", defaults={"_format": "json"})
+     * @Route("/checkEmail/{mail}", name="api_email", defaults={"_format": "json"})
      * @Method({"GET"})
      *
      * @Rest\View()
@@ -67,49 +67,24 @@ class AjaxController extends FOSRestController
         $errors = $this->get('validator')->validateValue($mail, $email);
         
         if (count($errors) == 0) {
-            $check = $this->getDoctrine()->getRepository('UserUserBundle:Users')
-                ->findOneByEmail($mail);
-            
-            if ($check == NULL || $check->getId() == $this->getUser()->getId()) {
-                return true;
+            $user = $this->getUser();
+            if ($user) {
+                if ($user->getUsername() == $mail)
+                    return "successful";
+            }
+
+            $users = $this->getDoctrine()->getRepository('UserUserBundle:Users')
+                ->findOneBy(["username" => $mail]);
+
+            if (!$users) {
+                return "successful";
             } else {
-                return false;
+                $view = $this->view("Emails is used", 403);
+                return $this->handleView($view);
             }
         } else {
-            return false;
-        }
-    }
-
-    /**
-     * @ApiDoc(
-     *     description="Проверяем своден email или нет",
-     *     statusCodes={
-     *         200="Нормальный ответ"
-     *     }
-     * )
-     *
-     * @Rest\View()
-     *
-     * @return boolean
-     */
-    public function checkEmailAction()
-    {
-        $mail = $this->get("request")->request->get('email');
-
-        $email = new Email();
-        $errors = $this->get('validator')->validateValue($mail, $email);
-
-        if (count($errors) == 0) {
-            $check = $this->getDoctrine()->getRepository('UserUserBundle:Users')
-                ->findOneByEmail($mail);
-
-            if ($check == NULL) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
+            $view = $this->view("Not valid email", 402);
+            return $this->handleView($view);
         }
     }
 
