@@ -114,10 +114,14 @@ $(document).ready(function(){
     /** Ajax for next Step Form Registration */
     $('#registration_save').click(function() {
         if ($("#emails-valid").find(".alert-danger").length > 0) {
+            registrationEmail.focus();
+
             return false;
         }
 
         if ($("#password-valid").find(".alert-danger").length > 0) {
+            registrationPassword.focus();
+
             return false;
         }
     });
