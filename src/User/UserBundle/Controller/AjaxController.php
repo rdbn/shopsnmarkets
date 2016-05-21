@@ -156,7 +156,7 @@ class AjaxController extends FOSRestController
      *
      * @param Request $request
      *
-     * @Route("/add/upload", name="api_user_avatar", defaults={"_format": "json"})
+     * @Route("/add/user/avatar", name="api_user_avatar", defaults={"_format": "json"})
      * @Method({"POST"})
      *
      * @Rest\View()

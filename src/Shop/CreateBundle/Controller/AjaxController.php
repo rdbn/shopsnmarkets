@@ -6,8 +6,8 @@
  */
 namespace Shop\CreateBundle\Controller;
 
+use Shop\CreateBundle\Entity\Shops;
 use Shop\CreateBundle\Form\Type\DeliveryType;
-use Shop\CreateBundle\Form\Type\DescriptionType;
 use Shop\CreateBundle\Form\Type\UploadLogoType;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -31,16 +31,25 @@ class AjaxController extends FOSRestController
      * )
      *
      * @param string $shopname
+     * @param int $id
      *
-     * @Route("/user/shop/uniqueName/{shopname}", name="unique_name", defaults={"_format": "json"})
+     * @Route("/user/shop/uniqueName/{shopname}/{id}", name="unique_name", defaults={"id" = null, "_format": "json"})
      * @Method({"GET"})
      *
      * @Rest\View()
      *
      * @return mixed
      */
-    public function uniqueNameAction($shopname)
+    public function uniqueNameAction($shopname, $id = null)
     {
+        $id = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
+            ->findOneBy(['id' => $id]);
+
+        if ($id) {
+            if ($id->getUniqueName() == $shopname)
+                return "successful";
+        }
+
         $uniqueName = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
             ->findOneBy(['uniqueName' => $shopname]);
 
@@ -54,42 +63,6 @@ class AjaxController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     description="Описание для магазина",
-     *     statusCodes={
-     *         200="Нормальный ответ"
-     *     }
-     * )
-     *
-     * @param Request $request
-     * @param string $shopname
-     *
-     * @Route("/user/shop/addDescription/{shopname}", name="add_description", defaults={"_format": "json"})
-     * @Method({"POST"})
-     *
-     * @Rest\View()
-     *
-     * @return mixed
-     */
-    public function addDescriptionAction(Request $request, $shopname)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $shop = $em->getRepository("ShopCreateBundle:Shops")
-            ->findOneBy(["uniqueName" => $shopname]);
-
-        $form = $this->createForm(DescriptionType::class, $shop);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em->flush();
-
-            return "successful";
-        }
-
-        return $form->getErrors();
-    }
-
-    /**
-     * @ApiDoc(
      *     description="Загрузка файла лотипа для магазина",
      *     statusCodes={
      *         200="Нормальный ответ"
@@ -97,21 +70,17 @@ class AjaxController extends FOSRestController
      * )
      *
      * @param Request $request
-     * @param string $shopname
      *
-     * @Route("/user/shop/addLogo/{shopname}", name="add_logo", defaults={"_format": "json"})
+     * @Route("/user/shop/addLogo", name="add_logo", defaults={"_format": "json"})
      * @Method({"POST"})
      *
      * @Rest\View()
      *
      * @return mixed
      */
-    public function addLogoAction(Request $request, $shopname)
+    public function addLogoAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $shop = $em->getRepository("ShopCreateBundle:Shops")
-            ->findOneBy(["uniqueName" => $shopname]);
-
+        $shop = new Shops();
         $form = $this->createForm(UploadLogoType::class, $shop);
         $form->handleRequest($request);
 
@@ -119,7 +88,8 @@ class AjaxController extends FOSRestController
             $shop->preUpload();
             $shop->upload();
 
-            $em->flush();
+            $redis = $this->get("snc_redis.default");
+            $redis->set("shop_avatar_".$this->getUser()->getId(), $shop->getPath());
 
             $avalancheService = $this->get('liip_imagine.cache.manager');
             $cachedImage = $avalancheService->getBrowserPath($shop->getPath(), 'logo_shop');

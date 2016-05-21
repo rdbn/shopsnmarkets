@@ -39,7 +39,10 @@ class PageController extends Controller
                 ->findByProductsBasket($user->getId());
 
             $sum = 0;
-            foreach ($orderItem as $value) $sum += $value['product']['price'];
+            foreach ($orderItem as $value) $sum += $value['product']['price'] * $value['number'];
+
+            $count = 0;
+            foreach ($orderItem as $value) $count += $value['number'];
         } else {
             $orderItem = $this->getDoctrine()->getRepository("ShopOrderBundle:OrderItem")
                 ->findByProductsUsersBasket($user->getId());
@@ -48,12 +51,15 @@ class PageController extends Controller
                 return $this->render('ShopOrderBundle:Page:product.html.twig');
 
             $sum = 0;
-            foreach ($orderItem as $value) $sum += $value['product']['price'];
+            foreach ($orderItem as $value) $sum += $value['product']['price'] * $value['number'];
+
+            $count = 0;
+            foreach ($orderItem as $value) $count += $value['number'];
         }
 
         return $this->render('ShopOrderBundle:Page:product.html.twig', [
             'orderItems' => $orderItem,
-            'count' => count($orderItem),
+            'count' => $count,
             'sum' => $sum,
         ]);
     }
@@ -71,35 +77,51 @@ class PageController extends Controller
     public function orderAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $user = $this->getUser();
         if ($user) {
-            $sum = $em->getRepository("ShopOrderBundle:OrderItem")
-                ->getValueUsersBasket($user->getId());
-
             $form = $this->createForm(UsersType::class, $user, [
                 'action' => $this->generateUrl('basket_order'),
                 'method' => 'post',
             ]);
-        } else {
-            $address = new Address();
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                foreach ($user->getOrder() as $order) {
+                    /** @var Order $order */
+                    $order->setIsCreateOrder(true);
+                }
+
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirectToRoute("basket");
+            }
 
             $sum = $em->getRepository("ShopOrderBundle:OrderItem")
-                ->getValueSumBasket($user->getId());
+                ->getValueUsersBasket($user->getId());
+        } else {
+            $address = new Address();
 
             $form = $this->createForm(AddressType::class, $address, [
                 'action' => $this->generateUrl('basket_order'),
                 'method' => 'post',
             ]);
-        }
+            $form->handleRequest($request);
 
-        $form->handleRequest($request);
+            if ($form->isValid()) {
+                foreach ($address->getOrder() as $order) {
+                    /** @var Order $order */
+                    $order->setIsCreateOrder(true);
+                }
 
-        if ($form->isValid()) {
-            $em->persist($user);
-            $em->flush();
+                $em->persist($address);
+                $em->flush();
 
-            return $this->redirectToRoute("basket_order");
+                return $this->redirectToRoute("basket");
+            }
+
+            $sum = $em->getRepository("ShopOrderBundle:OrderItem")
+                ->getValueSumBasket($user->getId());
         }
 
         return $this->render('ShopOrderBundle:Page:delivery.html.twig', [

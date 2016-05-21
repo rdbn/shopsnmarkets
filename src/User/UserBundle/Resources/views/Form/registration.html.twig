@@ -5,7 +5,7 @@
 {% block body %}
     <div class="row">
         <div class="col-lg-6">
-            <h3>Регистрация для продавцов:</h3>
+            <h3 class="text-success">Регистрация</h3>
             {{ form_start(form) }}
             {{ form_errors(form) }}
                 {% if (email) %}
@@ -31,14 +31,14 @@
             {{ form_rest(form) }}
             {{ form_end(form) }}
         </div>
-        <div class="col-lg-6">
+        {#<div class="col-lg-6">
             <h3>Регистрация для покупателей:</h3>
             <div class="btn-group-vertical" role="group">
                 <a class="btn btn-primary" href="{{ hwi_oauth_login_url('vkontakte') }}">Регистрация через ВК</a>
                 <a class="btn btn-info" href="{{ hwi_oauth_login_url('facebook') }}">Регистрация через FB</a>
                 <a class="btn btn-danger" href="{{ hwi_oauth_login_url('google') }}">Регистрация через G+</a>
             </div>
-        </div>
+        </div>#}
     </div>
 {% endblock %}
 

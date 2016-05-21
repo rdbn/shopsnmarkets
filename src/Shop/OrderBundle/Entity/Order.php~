@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="Shop\OrderBundle\Repository\OrderRepository")
+ * @ORM\Entity
  * @ORM\Table(name="`order`")
  */
 
@@ -37,7 +37,7 @@ class Order
 
     /**
      * @ORM\ManyToOne(targetEntity="Shop\CreateBundle\Entity\Shops", inversedBy="order")
-     * @ORM\JoinColumn(name="delivery_id", nullable=true)
+     * @ORM\JoinColumn(name="shops_id", nullable=true)
      */
     protected $shops;
 
@@ -51,11 +51,16 @@ class Order
      * @ORM\Column(name="amount", type="decimal", precision=6, scale=2, nullable=true)
      */
     protected $amount;
+
+    /**
+     * @ORM\Column(name="is_create_order", type="boolean", options={"default" = FALSE})
+     */
+    protected $isCreateOrder;
     
     /** 
-     * @ORM\Column(name="check_pay", type="boolean")
+     * @ORM\Column(name="is_pay", type="boolean", options={"default" = FALSE})
      */
-    protected $checkPay;
+    protected $isPay;
     
     /**
      * @ORM\Column(name="created_at", type="datetime")
@@ -63,7 +68,7 @@ class Order
     protected $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\OrderItem", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="Shop\OrderBundle\Entity\OrderItem", mappedBy="order", cascade={"persist"})
      */
     protected $orderItem;
     

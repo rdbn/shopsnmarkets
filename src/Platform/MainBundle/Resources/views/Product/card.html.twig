@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <h3 class="alert alert-success top0">{% for tag in tags %}#{{ tag.name }} {% endfor %}</h3>
             <p class="font24 text-success">
-                <strong class="text-muted">{{ product.price }}</strong> руб.
+                <strong class="text-muted">{{ product.price|number_format(2, '.', ' ') }}</strong> руб.
             </p>
             <button id="add-order" class="btn btn-success" data-toggle="{{ product.id }}">Купить товар</button>
             <p class='top20 text-muted'>{{ product.text }}</p>

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Shop\OrderBundle\Repository\OrderRepository")
  * @ORM\Table(name="`order`")
  */
 
@@ -51,11 +51,16 @@ class Order
      * @ORM\Column(name="amount", type="decimal", precision=6, scale=2, nullable=true)
      */
     protected $amount;
+
+    /**
+     * @ORM\Column(name="is_create_order", type="boolean", options={"default" = FALSE})
+     */
+    protected $isCreateOrder;
     
     /** 
-     * @ORM\Column(name="check_pay", type="boolean")
+     * @ORM\Column(name="is_pay", type="boolean", options={"default" = FALSE})
      */
-    protected $checkPay;
+    protected $isPay;
     
     /**
      * @ORM\Column(name="created_at", type="datetime")
@@ -114,27 +119,51 @@ class Order
     }
 
     /**
-     * Set checkPay
+     * Set isCreateOrder
      *
-     * @param boolean $checkPay
+     * @param boolean $isCreateOrder
      *
      * @return Order
      */
-    public function setCheckPay($checkPay)
+    public function setIsCreateOrder($isCreateOrder)
     {
-        $this->checkPay = $checkPay;
+        $this->isCreateOrder = $isCreateOrder;
 
         return $this;
     }
 
     /**
-     * Get checkPay
+     * Get isCreateOrder
      *
      * @return boolean
      */
-    public function getCheckPay()
+    public function getIsCreateOrder()
     {
-        return $this->checkPay;
+        return $this->isCreateOrder;
+    }
+
+    /**
+     * Set isPay
+     *
+     * @param boolean $isPay
+     *
+     * @return Order
+     */
+    public function setIsPay($isPay)
+    {
+        $this->isPay = $isPay;
+
+        return $this;
+    }
+
+    /**
+     * Get isPay
+     *
+     * @return boolean
+     */
+    public function getIsPay()
+    {
+        return $this->isPay;
     }
 
     /**

@@ -150,6 +150,12 @@ class AjaxController extends FOSRestController
                 ->setUserId($id)
                 ->getResult();
 
+            $count = count($result);
+            $avalancheService = $this->get('liip_imagine.cache.manager');
+            for ($i = 0; $i < $count; $i++) {
+                $result[$i]["path"] = $avalancheService->getBrowserPath($result[$i]["path"], 'avatar');
+            }
+
             return $result;
         }
 

@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Shop\OrderBundle\Repository\AddressRepository")
+ * @ORM\Entity
  * @ORM\Table(name="address")
  */
 

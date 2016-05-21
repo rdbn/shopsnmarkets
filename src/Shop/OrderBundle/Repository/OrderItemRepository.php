@@ -50,7 +50,7 @@ class OrderItemRepository extends EntityRepository
                   LEFT JOIN product_image pi ON p.id = pi.product_id
                 WHERE 
                   oi.id IN (?)
-                  AND oi.order_id IS NULL 
+                  AND oi.is_create_order = \'f\'
             ', $rsm)
             ->setParameter(1, $id);
 
@@ -73,14 +73,14 @@ class OrderItemRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT 
-                  count(oi.id) as count_product,
-                  sum(p.price) as sum_price
+                  sum(oi.number) as count_product,
+                  sum(p.price * oi.number) as sum_price
                 FROM ShopOrderBundle:OrderItem oi
                   LEFT JOIN oi.product p
                   LEFT JOIN oi.order o
                 WHERE 
                   o.id IN (?)
-                  AND o.checkPay = \'f\' 
+                  AND o.isCreateOrder = \'f\' 
             ')
             ->setParameter("id", $id);
 
@@ -131,7 +131,7 @@ class OrderItemRepository extends EntityRepository
                   LEFT JOIN product_image pi ON p.id = pi.product_id
                 WHERE 
                   o.users_id = ? 
-                  AND o.check_pay = \'f\'
+                  AND o.is_create_order = \'f\'
             ', $rsm)
             ->setParameter(1, $id);
 
@@ -154,14 +154,14 @@ class OrderItemRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT 
-                  count(oi.id) as count_product,
-                  sum(p.price) as sum_price
+                  sum(oi.number) as count_product,
+                  sum(p.price * oi.number) as sum_price
                 FROM ShopOrderBundle:OrderItem oi
                   LEFT JOIN oi.product p
                   LEFT JOIN oi.order o
                 WHERE 
                   o.users = :id
-                  AND o.checkPay = \'f\' 
+                  AND o.isCreateOrder = \'f\' 
             ')
             ->setParameter("id", $id);
 

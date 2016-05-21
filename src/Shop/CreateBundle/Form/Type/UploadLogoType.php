@@ -20,6 +20,7 @@ class UploadLogoType extends AbstractType
             'label' => 'Загрузить лого',
             'label_attr' => ['class' => 'btn btn-success'],
             'attr' => ["class" => "hide"],
+            'required' => false,
             'data' => isset($options['data']) ? $options['data']->getFile() : NULL,
         ));
     }

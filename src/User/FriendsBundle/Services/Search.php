@@ -65,7 +65,7 @@ class Search extends AbstractSearch
 
         $users = $query->andWhere($qb->expr()->notIn('u.id', $qbDQL->getDQL()))
             ->setFirstResult('0')
-            ->setMaxResults('20')
+            ->setMaxResults('10')
             ->getQuery();
 
         return $users->getResult();

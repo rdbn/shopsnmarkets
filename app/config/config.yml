@@ -108,8 +108,22 @@ nelmio_api_doc:
 jms_serializer:
     metadata:
         auto_detection: true
-    
-# avalanche_imagine
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://localhost
+        cache:
+            type: predis
+            alias: cache
+            dsn: redis://secret@localhost/1
+            options:
+                profile: 2.2
+                connection_timeout: 10
+                read_write_timeout: 30
+
 liip_imagine:
     resolvers:
        default:

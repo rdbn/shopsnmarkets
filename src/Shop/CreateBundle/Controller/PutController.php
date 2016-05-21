@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class PutController extends Controller
 {
@@ -33,13 +34,15 @@ class PutController extends Controller
      */
     public function addAction(Request $request)
     {
+        $redis = $this->get("snc_redis.default");
         $user = $this->getUser();
         $shops = new Shops();
         $form = $this->createForm(ShopsType::class, $shops, [
             'action' => $this->generateUrl('create_shop'),
             'method' => 'POST',
         ]);
-        
+
+        $upload = $this->createForm(UploadLogoType::class, $shops);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -49,18 +52,40 @@ class PutController extends Controller
 
             if (!$isName) {
                 $shops->setManager($user);
+                if (!$this->get('security.authorization_checker')->isGranted("ROLE_MANAGER")) {
+                    $role = $em->getRepository("UserUserBundle:Roles")
+                        ->findOneBy(["role" => "ROLE_MANAGER"]);
+
+                    $user->addRole($role);
+
+                    $tokenStorage = $this->get("security.token_storage");
+                    $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
+                    $tokenStorage->setToken($token);
+                }
+
+                if ($redis->get("shop_avatar_" . $this->getUser()->getId())) {
+                    $shops->setPath($redis->get("shop_avatar_" . $this->getUser()->getId()));
+                    $redis->del("shop_avatar_" . $this->getUser()->getId());
+                }
 
                 $em->persist($shops);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('preview_shop', [
+                return $this->redirect($this->generateUrl('delivery', [
                     'shopname' => $shops->getUniqueName(),
                 ]));
             }
         }
+
+        if (!$shops->getPath()) {
+            $redis = $this->get("snc_redis.default");
+            $shops->setPath($redis->get("shop_avatar_" . $this->getUser()->getId()));
+        }
         
         return $this->render('ShopCreateBundle:Shop:form.html.twig', array(
+            'upload' => $upload->createView(),
             'form' => $form->createView(),
+            'image' => $shops->getPath(),
             'isCreate' => true,
             'errors' => true,
         ));
@@ -79,11 +104,13 @@ class PutController extends Controller
      */
     public function updateAction(Request $request, $shopname)
     {
+        $redis = $this->get("snc_redis.default");
         $em = $this->getDoctrine()->getManager();
         $shops = $em->getRepository('ShopCreateBundle:Shops')
             ->findOneBy(['uniqueName' => $shopname]);
 
         $form = $this->createForm(ShopsType::class, $shops);
+        $upload = $this->createForm(UploadLogoType::class, $shops);
         $form->handleRequest($request);
 
         if ($form->isValid() && $shopname == $shops->getUniqueName()) {
@@ -91,45 +118,30 @@ class PutController extends Controller
                 ->findOneBy(['uniqueName' => $shops->getUniqueName()]);
 
             if ($isName) {
+                if ($redis->get("shop_avatar_" . $this->getUser()->getId())) {
+                    $shops->setPath($redis->get("shop_avatar_" . $this->getUser()->getId()));
+                    $redis->del("shop_avatar_" . $this->getUser()->getId());
+                }
+
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('preview_shop', [
+                return $this->redirect($this->generateUrl('delivery', [
                     'shopname' => $shops->getUniqueName(),
                 ]));
             }
         }
 
+        if (!$shops->getPath()) {
+            $shops->setPath($redis->get("shop_avatar_" . $this->getUser()->getId()));
+        }
+
         return $this->render('ShopCreateBundle:Shop:form.html.twig', array(
+            'upload' => $upload->createView(),
             'form' => $form->createView(),
+            'image' => $shops->getPath(),
             'shopname' => $shopname,
             'isCreate' => false,
             'errors' => true,
-        ));
-    }
-
-    /**
-     * Page create shop
-     *
-     * @param string $shopname
-     *
-     * @Route("/user/shop/preview/{shopname}", name="preview_shop")
-     * @Method({"GET"})
-     *
-     * @return object
-     */
-    public function previewAction($shopname)
-    {
-        $shop = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
-            ->findOneBy(['uniqueName' => $shopname]);
-
-        $upload = $this->createForm(UploadLogoType::class, $shop);
-        $description = $this->createForm(DescriptionType::class, $shop);
-
-        return $this->render('ShopCreateBundle:Preview:additional.html.twig', array(
-            'upload' => $upload->createView(),
-            'description' => $description->createView(),
-            'image' => $shop->getPath(),
-            'shopname' => $shopname,
         ));
     }
 

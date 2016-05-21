@@ -6,7 +6,7 @@
  */
 namespace Shop\CreateBundle\Form\Type;
 
-use Shop\CreateBundle\Form\Type\ShopsTagsType;
+use Shop\CreateBundle\Form\Type\ShopsTagsType as TagsType;
 use User\UserBundle\Form\EventListener\AddCityFieldSubscriber;
 use User\UserBundle\Form\EventListener\AddCountryFieldSubscriber;
 
@@ -14,22 +14,24 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 Class ShopsType extends AbstractType 
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('id', HiddenType::class);
         $builder->add('uniqueName', TextType::class, [
             'label' => false,
             'attr' => [
                 'class' => "form-control",
                 "placeholder" => "Адресс магазина *",
             ],
-            'data' => isset($options['data']) ? $options['data']->getUniqueName() : NULL,
         ]);
         $builder->add('shopname', TextType::class, [
             'label' => false,
@@ -37,9 +39,8 @@ Class ShopsType extends AbstractType
                 'class' => "form-control",
                 "placeholder" => "Название магазина *",
             ],
-            'data' => isset($options['data']) ? $options['data']->getShopname() : NULL,
         ]);
-        $builder->add('shopTags', ShopsTagsType::class, [
+        $builder->add('shopTags', TagsType::class, [
             'label' => false,
             'attr' => [
                 'class' => "form-control",
@@ -53,7 +54,6 @@ Class ShopsType extends AbstractType
                 'class' => "form-control",
                 "placeholder" => "Телефон",
             ],
-            'data' => isset($options['data']) ? $options['data']->getPhone() : NULL,
         ]);
         $builder->add('email', EmailType::class, [
             'label' => false,
@@ -62,7 +62,11 @@ Class ShopsType extends AbstractType
                 'class' => "form-control",
                 "placeholder" => "email",
             ],
-            'data' => isset($options['data']) ? $options['data']->getEmail() : NULL,
+        ]);
+        $builder->add('description', TextareaType::class, [
+            'label' => false,
+            'required' => false,
+            'attr' => ['class' => 'form-control', 'rows' => '8', 'placeholder' => 'кратко о магазине'],
         ]);
         $builder->add("save", SubmitType::class, [
             "label" => "Создать",

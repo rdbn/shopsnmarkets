@@ -28,7 +28,9 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "nelmio/api-doc-bundle": "^2.9",
         "hwi/oauth-bundle": "^0.4.1",
-        "liip/imagine-bundle": "^1.5"
+        "liip/imagine-bundle": "^1.5",
+        "predis/predis": "^1.0",
+        "snc/redis-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

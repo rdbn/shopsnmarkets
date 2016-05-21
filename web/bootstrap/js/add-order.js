@@ -1,62 +1,80 @@
 var AddOrder = {
-    getQuery : function(element) {
+    add: function(element) {
         var product = element.attr("data-toggle");
 
-        $.get("/app_dev.php/addOrder/"+product, function(data) {
-            console.log(data);
+        element.addClass("disabled");
+        $.get("/app_dev.php/addOrder/"+product, function() {
+            element.removeClass("disabled");
         });
     },
-    add : function() {
+    click: function() {
         $('#add-order').click(function() {
-            AddOrder.getQuery($(this));
+            AddOrder.add($(this));
 
             return false;
         });
     }
 };
 
-var DeleteOrder = {
-    getPreLoad : function(element) {
-        element.find('.load').css({'opacity' : '0', 'display' : 'block'});
-        element.find('.load').animate({'opacity' : '1'}, 200);
+var RemoveOrder = {
+    add: function(element) {
+        var product = element.attr("data-toggle");
+
+        element.addClass("disabled");
+        $.get('/app_dev.php/removeOrder/'+product, function() {
+            element.parents('.media').remove();
+        });
     },
-    getEndLoad : function(element) {
-        if ($('.basket .order').length === 1) {
-            element.parents('.basket').css('opacity', '1');
-            element.parents('.basket').animate({'opacity' : '0'}, 200, function() {
-                $(this).slideToggle(300, function() {
-                    $(this).remove();
-                });
-            });
-        } else {
-            element.parents('.order').css('opacity', '1');
-            element.parents('.order').animate({'opacity' : '0'}, 200, function() {
-                $(this).slideToggle(300, function() {
-                    $(this).remove();
-                });
-            });
-        }
-    },
-    getQuery : function(element) {
-        this.getPreLoad(element);
-        
-        $.get('/deleteOrderUser', { 'id' : element.attr('href') }, function(data) {
-            if (data === '0') {
-                DeleteOrder.getEndLoad(element);
+    click: function() {
+        $('.delete-order').click(function() {
+            RemoveOrder.add($(this));
+
+            return false;
+        });
+    }
+};
+
+var UpdateNumber = {
+    add: function(element, sign) {
+        var order = element.attr("data-toggle");
+
+        element.addClass("disabled");
+        $.get("/app_dev.php/updateNumberOrder/"+order+'/'+sign, function(data) {
+            var parents = element.parents('p');
+            if (data.number == 1) {
+                parents.find(".minus-number-order").remove();
+            } else {
+                if (parents.find(".minus-number-order").length == 0) {
+                    var html = '<button class="btn btn-success btn-xs minus-number-order" data-toggle="'+order+'">';
+                    html += '<span class="glyphicon glyphicon-minus"></span></button>';
+
+                    parents.append(html);
+                }
             }
+
+            parents.find('.number-order').html(data.number);
+            element.removeClass("disabled");
         });
     },
-    del : function() {
-        $('.order .delete').click(function() {
-            DeleteOrder.getQuery($(this));
-            
+    plus: function() {
+        $('.plus-number-order').click(function() {
+            UpdateNumber.add($(this), 1);
+
+            return false;
+        });
+    },
+    minus: function() {
+        $('.media').on("click", ".minus-number-order", function() {
+            UpdateNumber.add($(this), 0);
+
             return false;
         });
     }
 };
-
 
 $(document).ready(function(){
-    AddOrder.add();
-    DeleteOrder.del();
+    AddOrder.click();
+    RemoveOrder.click();
+    UpdateNumber.plus();
+    UpdateNumber.minus();
 });

@@ -56,8 +56,8 @@
             </div>
             <div class="alert alert-success top20">
                 {{ form_widget(form.save) }}
-                <p>Общие количество: {{ count }}</p>
-                <p>Итого: {{ sum }} руб.</p>
+                <p>Общие количество: <strong>{{ count }}</strong></p>
+                <p>Итого: <strong>{{ sum|number_format(2, '.', ' ') }}</strong> руб.</p>
             </div>
         {{ form_end(form) }}
         </div>

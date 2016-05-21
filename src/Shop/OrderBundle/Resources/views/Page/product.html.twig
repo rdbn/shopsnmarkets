@@ -13,20 +13,33 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <p class="media-heading text-muted">Цена: <span class="text-success">{{ orderItem.product.price }}</span> руб.</p>
-                    <p class='text-muted'>Кол-во: <span>{{ orderItem.number }}</span></p>
-                    <button class="btn btn-danger delete-order" data-toggle='{{ orderItem.product.id }}'>Удалить из корзины</button>
+                    <p class="media-heading text-muted">
+                        Цена: <span class="text-success"><strong>{{ orderItem.product.price|number_format(2, '.', ' ') }}</strong></span> руб.
+                    </p>
+                    <p class='text-muted'>
+                        Кол-во:
+                        <button class="btn btn-success btn-xs plus-number-order" data-toggle='{{ orderItem.id }}'>
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                        <span class="text-success number-order">{{ orderItem.number }}</span>
+                        {% if orderItem.number > 1 %}
+                            <button class="btn btn-success btn-xs minus-number-order" data-toggle='{{ orderItem.id }}'>
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </button>
+                        {% endif %}
+                    </p>
+                    <button class="btn btn-danger delete-order" data-toggle='{{ orderItem.id }}'>Удалить из корзины</button>
                 </div>
             </div>
         {% endfor %}
         <div class="alert alert-success top20">
             <a class="btn btn-success" href='{{ path('basket_order') }}'>Оформить заказ</a>
-            <p class="top20">Общие количество: {{ count }}</p>
-            <p>Итого: {{ sum }} руб.</p>
+            <p class="top20">Общие количество: <strong>{{ count }}</strong></p>
+            <p>Итого: <strong>{{ sum|number_format(2, '.', ' ') }}</strong> руб.</p>
         </div>
     {% endif %}
 {% endblock %}
 
 {% block javascripts %}
-
+    <script src="{{ asset('bootstrap/js/add-order.js') }}" type="text/javascript"></script>
 {% endblock %}

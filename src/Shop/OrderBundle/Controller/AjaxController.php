@@ -35,7 +35,6 @@ class AjaxController extends FOSRestController
      * @Method({"GET"})
      *
      * @Rest\View()
-     *
      * @return mixed
      */
     public function addOrderAction($id)
@@ -103,7 +102,44 @@ class AjaxController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     description="Удаляем заказ из базу",
+     *     description="Удаляем заказ из базы",
+     *     statusCodes={
+     *         200="Нормальный ответ"
+     *     }
+     * )
+     *
+     * @param int $id
+     * @param int $isUp
+     *
+     * @Route("/updateNumberOrder/{id}/{isUp}", name="update_number_order", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
+     * @Rest\View()
+     * @return mixed
+     */
+    public function updateNumberAction($id, $isUp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $orderItem = $em->getRepository("ShopOrderBundle:OrderItem")
+            ->findOneBy(['id' => $id]);
+
+        $number = $orderItem->getNumber();
+        if ($isUp) {
+            $orderItem->setNumber($number + 1);
+        } else if ($orderItem->getNumber() != 1) {
+            $orderItem->setNumber($number - 1);
+        }
+
+        $em->flush();
+
+        return [
+            'number' => $orderItem->getNumber(),
+        ];
+    }
+
+    /**
+     * @ApiDoc(
+     *     description="Удаляем заказ из базы",
      *     statusCodes={
      *         200="Нормальный ответ"
      *     }
@@ -112,10 +148,9 @@ class AjaxController extends FOSRestController
      * @param int $id
      *
      * @Route("/removeOrder/{id}", name="remove_order", defaults={"_format": "json"})
-     * @Method({"POST"})
+     * @Method({"GET"})
      *
      * @Rest\View()
-     *
      * @return mixed
      */
     public function removeOrderAction($id)
@@ -124,7 +159,16 @@ class AjaxController extends FOSRestController
         $orderItem = $em->getRepository("ShopOrderBundle:OrderItem")
             ->findOneBy(['id' => $id]);
 
-        $em->persist($orderItem);
+        $orderItems = $em->getRepository("ShopOrderBundle:OrderItem")
+            ->findBy(['order' => $orderItem->getOrder()->getId()]);
+
+        if (count($orderItems) == 1) {
+            $em->remove($orderItems[0]->getOrder());
+            $em->remove($orderItems[0]);
+        } else {
+            $em->remove($orderItem);
+        }
+
         $em->flush();
 
         return "successful";

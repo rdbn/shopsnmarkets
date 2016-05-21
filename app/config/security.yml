@@ -1,19 +1,19 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: sha512
         User\UserBundle\Entity\Users: sha512
 
     role_hierarchy:
         ROLE_ANONIM_USER: IS_AUTHENTICATED_FULLY
-        ROLE_ADMIN:       [ROLE_USER, ROLE_MANAGER]
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_MANAGER:     [ROLE_USER]
+        ROLE_ADMIN:       [ROLE_MANAGER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         hwi_provider:
             id: ib_user.oauth_user_provider
         main:
             entity:
-                class: UserUserBundle:Users
+                class: User\UserBundle\Entity\Users
                 property: username
 
     firewalls:            
@@ -21,17 +21,13 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         
-        login:
-            pattern:  ^/login$
-            anonymous: true
-        
         main:
             pattern: ^/
             security: true
             form_login:
                 provider: main
                 login_path: login
-                check_path: login_check
+                check_path: login
             logout:
                 path:   /logout
                 target: /
@@ -55,11 +51,11 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user, roles: [ROLE_USER, ROLE_MANAGER] }
-        - { path: ^/manager, roles: ROLE_MANAGER }
         - { path: ^/id, roles: [ROLE_MANAGER, ROLE_USER] }
         - { path: ^/property, roles: [ROLE_MANAGER, ROLE_USER] }
         - { path: ^/firends, roles: [ROLE_MANAGER, ROLE_USER] }
         - { path: ^/partners, roles: [ROLE_MANAGER, ROLE_USER] }
         - { path: ^/message, roles: [ROLE_MANAGER, ROLE_USER] }
+        - { path: ^/order, roles: [ROLE_MANAGER, ROLE_USER] }
         - { path: ^/advertising, roles: [ROLE_MANAGER] }
         - { path: ^/addProducts, roles: [ROLE_MANAGER] }

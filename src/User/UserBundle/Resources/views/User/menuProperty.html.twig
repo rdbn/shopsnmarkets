@@ -1,8 +1,6 @@
 <div class="btn-group">
     <a class="btn btn-success btn-sm" href='{{ path('property') }}'>Настройки</a>
-    {% if is_granted('ROLE_MANAGER') %}
-        <a class="btn btn-success btn-sm" href='{{ path('property_password') }}'>Изменить пароль</a>
-    {% endif %}
+    <a class="btn btn-success btn-sm" href='{{ path('property_password') }}'>Изменить пароль</a>
     <a class="btn btn-success btn-sm" href='{{ path('property_information') }}'>О себе</a>
     <a class="btn btn-success btn-sm" href='{{ path('property_preview_information') }}'>Дополнительные настройки</a>
 </div>

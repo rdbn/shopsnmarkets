@@ -6,6 +6,8 @@
  */
 namespace User\UserBundle\Controller;
 
+use User\UserBundle\Form\Type\UploadLogoType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -21,20 +23,19 @@ class UserController extends Controller
     public function userAction()
     {
         $user = $this->getUser();
+        $form = $this->createForm(UploadLogoType::class, $user);
 
+        $shops = null;
         if ($this->get('security.authorization_checker')->isGranted("ROLE_MANAGER")) {
             $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
                 ->findByShopsManager($user->getId());
-
-            return $this->render('UserUserBundle:User:manager.html.twig', array(
-                'shops' => $shops,
-                'user' => $user,
-            ));
         }
 
-        return $this->render('UserUserBundle:User:main.html.twig', array(
+        return $this->render('UserUserBundle:User:profile.html.twig', [
+            'form' => $form->createView(),
+            'shops' => $shops,
             'user' => $user,
-        ));
+        ]);
     }
 
     /**

@@ -1,32 +1,53 @@
-CheckUniqueName = {
-    name : function() {
-        return $('#shops_uniqueName').val();
+var CheckUniqueName = {
+    howBad: function (element) {
+        if (element.hasClass("has-success")) {
+            element.removeClass("has-success");
+            element.removeClass("has-feedback");
+            element.find(".glyphicon-ok").addClass("hide");
+        }
+
+        element.addClass("has-error has-feedback");
+        element.find(".glyphicon-remove").removeClass("hide");
     },
-    sendName : function() {
-        var check = $.get('/user/shop/uniqueName/'+this.name());
-        check.done(function(data) {
-            var element = $('#checkName');
-            if (data === '0') {
-                element.text('+').show();
-                element.addClass('plus');
-                element.removeClass('minus');
+    send: function(element) {
+        var id = $('#shops_id').val(),
+            parent = element.parents(".form-group");
 
-                return true;
-            } else {
-                element.text('-').show();
-                element.addClass('minus');
-                element.removeClass('plus');
+        if (id.length > 0) {
+            id = "/"+id;
+        }
 
-                return false;
+        $.ajax({
+            method: "GET",
+            url: '/app_dev.php/user/shop/uniqueName/'+$('#shops_uniqueName').val()+id,
+            statusCode: {
+                200: function() {
+                    if (parent.hasClass("has-error")) {
+                        parent.removeClass("has-error");
+                        parent.removeClass("has-feedback");
+                        parent.find(".glyphicon-remove").addClass("hide");
+                    }
+
+                    parent.addClass("has-success has-feedback");
+                    parent.find(".glyphicon-ok").removeClass("hide");
+                },
+                403: function() {
+                    CheckUniqueName.howBad(parent);
+                }
             }
         });
     },
-    checkName : function() {
-        if (this.name().length > 4) {
-            this.sendName();
+    check: function(element) {
+        element.val(element.val().replace(/[^\da-z0-9]/gi, ''));
+
+        if (element.val().length > 4) {
+            this.send(element);
             
             return true;
         } else {
+            var parent = element.parents(".form-group");
+            CheckUniqueName.howBad(parent);
+
             return false;
         }
     }
@@ -49,13 +70,48 @@ $(document).ready(function() {
     });
 
     var element = $('#shops_uniqueName');
-    element.focus(function(){
-        CheckUniqueName.checkName();
+    element.keyup(function() {
+        CheckUniqueName.check(element);
     });
-    element.keyup(function(){
-        CheckUniqueName.checkName();
+    element.keydown(function() {
+        CheckUniqueName.check(element);
     });
-    element.blur(function(){
-        CheckUniqueName.checkName();
+
+    $("#shops_save").click(function () {
+        var parent = element.parents(".form-group");
+        if (parent.hasClass("has-error")) {
+            element.focus();
+
+            return false;
+        }
+
+        return true;
+    });
+
+    /**
+     *  Ajax for upload logo
+     */
+    $('#upload_logo_file').change(function() {
+        var formData = new FormData(),
+            file = $(this).prop("files")[0],
+            token = $("#upload_logo__token").val();
+
+        formData.append("upload_logo[file]", file);
+        formData.append("upload_logo[_token]", token);
+
+        $.ajax({
+            url: "/user/shop/addLogo",
+            type: "post",
+            dataType: "text",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            enctype: 'multipart/form-data',
+            success: function (data) {
+                var path = JSON.parse(data).path;
+                $("#preview-img").attr("src", path);
+            }
+        });
     });
 });

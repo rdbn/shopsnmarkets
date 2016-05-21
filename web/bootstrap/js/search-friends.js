@@ -17,10 +17,10 @@ var Search = {
                     var item = data[value],
                         path = (item.path !== null) ? item.path : '';
 
-                    html += '<div class="row result-user"><div class="media"><div class="media-left col-md-3"><a href="/id/'+item.id+'">';
-                    html += '<img class="media-object img-responsive img-thumbnail col-md-12" src="'+path+'" /></a></div>';
-                    html += '<div class="media-body width-body"><div class="col-md-8"><h4 class="media-heading">';
-                    html += item.realname+'</h4></div><div class="col-md-4"><div class="btn-group-vertical">';
+                    html += '<div class="col-md-12 result-user top20"><div class="media"><div class="media-left"><a href="/user/'+item.id+'">';
+                    html += '<img class="media-object img-responsive img-thumbnail" src="'+path+'" /></a></div>';
+                    html += '<div class="media-body width-body"><h4 class="media-heading text-success">';
+                    html += item.realname+'</h4><div class="btn-group-vertical top20">';
                     html += '<button class="btn btn-success btn-sm add-friends" data-user="'+item.id+'">Добавить в друзья</button>';
                     html += '<a class="btn btn-success btn-sm" href="/message/sendMessage/'+item.id+'">Отправить сообщение</a>';
                     html += '</div></div></div></div>';

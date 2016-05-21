@@ -23,12 +23,12 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
 
             new Platform\MainBundle\PlatformMainBundle(),
             new User\UserBundle\UserUserBundle(),
             new User\FriendsBundle\UserFriendsBundle(),
             new User\MessagesBundle\UserMessagesBundle(),
-            new User\OrderBundle\UserOrderBundle(),
             new User\AdvertisingBundle\UserAdvertisingBundle(),
             new Shop\PartnersBundle\ShopPartnersBundle(),
             new Shop\CreateBundle\ShopCreateBundle(),

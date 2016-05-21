@@ -11,7 +11,7 @@ $(document).ready(function() {
         formData.append("upload_logo[_token]", token);
 
         $.ajax({
-            url: "/avatar/upload",
+            url: "/add/user/avatar",
             type: "post",
             dataType: "text",
             cache: false,

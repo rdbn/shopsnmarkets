@@ -1,0 +1,6 @@
+<div class="btn-group">
+    <a class="btn btn-success btn-sm" href='{{ path('user_order') }}'>Мои заказы в магазинах</a>
+    {% if is_granted('ROLE_MANAGER') %}
+        <a class="btn btn-success btn-sm" href='{{ path('manager_order') }}'>Заказы в моих магазинах</a>
+    {% endif %}
+</div>

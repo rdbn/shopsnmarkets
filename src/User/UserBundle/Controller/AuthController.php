@@ -16,16 +16,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AuthController extends Controller
 {
-    public function authFormAction()
-    {
-        $user = $this->getUser();
-
-        return $this->render('UserUserBundle:Login:profile_menu.html.twig', array(
-            'user' => $user,
-        ));
-    }
-
-    public function loginAction()
+    /**
+     * Login user
+     *
+     * @param Request $request
+     *
+     * @Route("/login", name="login")
+     * @Method({"GET", "POST"})
+     *
+     * @return object
+     */
+    public function loginAction(Request $request)
     {
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -44,14 +45,14 @@ class AuthController extends Controller
      * @param Request $request
      *
      * @Route("/register", name="register")
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      *
      * @return object
     */
     public function registrationAction(Request $request)
     {
         $user = new Users();
-        $form = $this->createForm(new UserType(), $user, [
+        $form = $this->createForm(UserType::class, $user, [
             'action' => $this->generateUrl('register'),
             'method' => 'POST',
         ]);
@@ -64,7 +65,7 @@ class AuthController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $role = $em->getRepository("UserUserBundle:Roles")
-                ->findOneByRole("ROLE_MANAGER");
+                ->findOneBy(["role" => "ROLE_USER"]);
 
             $user->addRole($role);
 
@@ -75,8 +76,8 @@ class AuthController extends Controller
         }
         
         return $this->render('UserUserBundle:Form:registration.html.twig', [
-            'email' => false,
             'form' => $form->createView(),
+            'email' => false,
         ]);
     }
 }
