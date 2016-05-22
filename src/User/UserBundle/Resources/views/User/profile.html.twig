@@ -5,14 +5,12 @@
 {% block content %}
     {{ form_start(form) }}
         {{ form_errors(form) }}
-
-        {{ form_errors(form.file) }}
         {{ form_label(form.file) }}
         {{ form_widget(form.file) }}
     {{ form_end(form) }}
     <div class="media">
         <div class="media-left">
-            <img id="preview-img" class="img-thumbnail" src="{% if(user.getPath) %}{{ user.getPath | imagine_filter('avatar') }}{% endif %}" />
+            <img id="preview-img" class="img-thumbnail profile-img" {% if(user.getPath) %}src="{{ user.getPath | imagine_filter('avatar') }}"{% endif %} />
         </div>
         <div class="media-body text-success small">
             <h4 class="media-heading">{{ user.realname }}</h4>

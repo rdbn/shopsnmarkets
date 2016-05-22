@@ -68,6 +68,11 @@ body {
     height: 150px;
 }
 
+.profile-img {
+    width: 200px;
+    height: 250px;
+}
+
 .font-center {
     font-size: 102px;
 }
