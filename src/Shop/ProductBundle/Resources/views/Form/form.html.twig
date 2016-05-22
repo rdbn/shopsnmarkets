@@ -48,8 +48,13 @@
                     {% if images|length > 0 %}
                         {% for image in images %}
                             <div class="col-md-3 image">
-                                <button class="btn btn-danger remove-image" data-toggle="{{ image }}" type="button">Удалить</button>
-                                <img class="img-thumbnail top10" src="{{ image | imagine_filter('upload_product_image')  }}" width="150" height="150" />
+                                {% if image.id is defined %}
+                                    <button class="btn btn-danger remove-image" data-toggle="{{ image.id }}" type="button">Удалить</button>
+                                    <img class="img-thumbnail top10" src="{{ image.path | imagine_filter('upload_product_image')  }}" width="150" height="150" />
+                                {% else %}
+                                    <button class="btn btn-danger remove-image" data-toggle="{{ image }}" type="button">Удалить</button>
+                                    <img class="img-thumbnail top10" src="{{ image | imagine_filter('upload_product_image')  }}" width="150" height="150" />
+                                {% endif %}
                             </div>
                         {% endfor %}
                     {% else %}

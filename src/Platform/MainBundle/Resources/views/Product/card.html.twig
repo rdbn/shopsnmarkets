@@ -14,6 +14,11 @@
             </div>
         </div>
         <div class="col-md-6">
+            {% if is_granted('ROLE_MANAGER') %}
+                <a class="btn btn-success bottom20" href="{{ path("update_product", {'shopname': product.uniqueName, 'id': product.id}) }}">
+                    Обновить информацию о товаре
+                </a>
+            {% endif %}
             <h3 class="alert alert-success top0">{% for tag in tags %}#{{ tag.name }} {% endfor %}</h3>
             <p class="font24 text-success">
                 <strong class="text-muted">{{ product.price|number_format(2, '.', ' ') }}</strong> руб.
@@ -43,8 +48,8 @@
             </div>
         </div>
     </div>
-    <h3 class="alert alert-success top0">Похожие товары:</h3>
-    <div class='subcategoryProducts'>
+    <h3 class="alert alert-success top0">Похожие товары</h3>
+    <div>
         {#{% for product in products %}
             <ul class="products">
                 <li>
