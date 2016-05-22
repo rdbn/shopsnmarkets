@@ -93,7 +93,7 @@ class AjaxController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     description="Список последних 20 коментариев магазина",
+     *     description="Подгружаем еще продукты магазина",
      *     statusCodes={
      *         200="Нормальный ответ"
      *     }
@@ -195,10 +195,11 @@ class AjaxController extends FOSRestController
             $em->persist($comments);
             $em->flush();
 
-            $users = $comments->getUsers();
-            $avalancheService = $this->get('liip_imagine.cache.manager');
-            $cachedImage = $avalancheService->getBrowserPath($users->getPath(), 'mini_avatar');
-            $users->setPath($cachedImage);
+            if ($user->getPath()) {
+                $avalancheService = $this->get('liip_imagine.cache.manager');
+                $cachedImage = $avalancheService->getBrowserPath($user->getPath(), 'mini_avatar');
+                $user->setPath($cachedImage);
+            }
             
             return $comments;
         }
