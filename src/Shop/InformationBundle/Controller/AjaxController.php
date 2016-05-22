@@ -149,9 +149,11 @@ class AjaxController extends FOSRestController
         foreach ($comments as $comment) {
             $users = $comment->getUsers();
             $path = $users->getPath();
-            $cachedImage = $avalancheService->getBrowserPath($path, 'mini_avatar');
+            if ($path) {
+                $cachedImage = $avalancheService->getBrowserPath($path, 'mini_avatar');
 
-            if (!preg_match("/(media\/cache)/i", $path)) $users->setPath($cachedImage);
+                if (!preg_match("/(media\/cache)/i", $path)) $users->setPath($cachedImage);
+            }
         }
 
         return $comments;
