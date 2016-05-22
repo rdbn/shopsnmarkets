@@ -19,7 +19,7 @@ $(document).ready(function() {
             value = element.attr("data-toggle");
 
         element.addClass("disabled");
-        $.post("/app_dev.php/removeProductImage", {image: value}, function () {
+        $.post("/removeProductImage", {image: value}, function () {
             element.parent(".image").remove();
 
             if ($("#preview-img .image").length == 0) {
@@ -47,7 +47,7 @@ $(document).ready(function() {
         formData.append("product_image[_token]", $("#product_image__token").val());
 
         $.ajax({
-            url: "/app_dev.php/addImageProduct",
+            url: "/addImageProduct",
             type: "post",
             dataType: "text",
             cache: false,
