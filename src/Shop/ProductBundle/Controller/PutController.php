@@ -111,11 +111,13 @@ class PutController extends Controller
 
                     $product->addImage($productImage);
                 }
+
+                $redis->del("product_image_".$this->getUser()->getId());
             }
 
             $em->flush();
 
-            return $this->redirectToRoute('main_shop', ['shopname' => $shopname]);
+            return $this->redirectToRoute('product_platform', ['id' => $id]);
         }
 
         if (count($images) == 0) {
