@@ -13,7 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Shop\ProductBundle\Form\Type\HashTagsType as TagsType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProductType extends AbstractType
@@ -44,17 +43,6 @@ class ProductType extends AbstractType
                 "rows" => 10,
             ],
             'data' => isset($options['data']) ? $options['data']->getText() : NULL,
-        ]);
-        $builder->add('file', FileType::class, [
-            'label' => "Добавить картинки",
-            "label_attr" => [
-                "class" => "btn btn-success",
-            ],
-            "multiple" => true,
-            'attr' => [
-                "class" => "hide",
-            ],
-            'data_class' => null,
         ]);
         $builder->add('save', SubmitType::class, [
             'label' => 'Добавить',

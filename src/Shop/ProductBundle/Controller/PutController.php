@@ -7,18 +7,41 @@
 namespace Shop\ProductBundle\Controller;
 
 use Shop\ProductBundle\Entity\Product;
+use Shop\ProductBundle\Entity\ProductImage;
 use Shop\ProductBundle\Form\Type\ProductType;
+use Shop\ProductBundle\Form\Type\ProductImageType;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class PutController extends Controller
 {
+    /**
+     * Page add product
+     *
+     * @param Request $request
+     * @param string $shopname
+     *
+     * @Route("/{shopname}/addProducts", name="add_product")
+     * @Method({"GET", "POST"})
+     *
+     * @return mixed
+     */
     public function addAction(Request $request, $shopname)
     {
+        $redis = $this->get("snc_redis.default");
+
         $product = new Product();
-        $form = $this->createForm(ProductType::class, $product);
+        $upload = $this->createForm(ProductImageType::class, $product);
+        $form = $this->createForm(ProductType::class, $product, [
+            'action' => $this->generateUrl('add_product', ['shopname' => $shopname]),
+            'method' => 'post',
+        ]);
         $form->handleRequest($request);
+
+        $images = json_decode($redis->get("product_image_".$this->getUser()->getId()), 1);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -26,40 +49,84 @@ class PutController extends Controller
                 ->findOneBy(["uniqueName" => $shopname]);
 
             $product->setShops($shop);
-            $product->upload();
+
+            foreach ($images as $image) {
+                $productImage = new ProductImage();
+                $productImage->setProduct($product);
+                $productImage->setPath($image);
+
+                $product->addImage($productImage);
+            }
 
             $em->persist($product);
             $em->flush();
 
+            $redis->del("product_image_".$this->getUser()->getId());
+
             return $this->redirectToRoute('main_shop', ['shopname' => $shopname]);
         }
 
-        return $this->render('ShopProductBundle:Form:form.html.twig', array(
+        return $this->render('ShopProductBundle:Form:form.html.twig', [
+            'upload' => $upload->createView(),
             'form' => $form->createView(),
             'shopname' => $shopname,
-        ));
+            'images' => $images,
+        ]);
     }
 
+    /**
+     * Page update product
+     *
+     * @param Request $request
+     * @param string $shopname
+     * @param int $id
+     *
+     * @Route("/{shopname}/addProducts/{id}", name="update_product")
+     * @Method({"GET", "POST"})
+     *
+     * @return mixed
+     */
     public function updateAction(Request $request, $shopname, $id)
     {
+        $redis = $this->get("snc_redis.default");
         $em = $this->getDoctrine()->getManager();
         /* @var Product $product */
         $product = $em->getRepository("ShopProductBundle:Product")
-            ->findOneById($id);
+            ->findOneBy(["id" => $id]);
 
-        $form = $this->createForm(new ProductType(), $product);
+        $upload = $this->createForm(ProductImageType::class, $product);
+        $form = $this->createForm(ProductType::class, $product, [
+            'action' => $this->generateUrl('update_product', ['shopname' => $shopname, 'id' => $id]),
+            'method' => 'post',
+        ]);
         $form->handleRequest($request);
 
+        $images = json_decode($redis->get("product_image_".$this->getUser()->getId()), 1);
         if ($form->isValid()) {
+            if (count($images) > 0) {
+                foreach ($images as $image) {
+                    $productImage = new ProductImage();
+                    $productImage->setProduct($product);
+                    $productImage->setPath($image);
+
+                    $product->addImage($productImage);
+                }
+            }
+
             $em->flush();
 
             return $this->redirectToRoute('main_shop', ['shopname' => $shopname]);
         }
 
-        return $this->render('ShopProductBundle:Form:form.html.twig', array(
-            'images' => $product->getImage()->toArray(),
+        if (count($images) == 0) {
+            $images = $product->getImage()->toArray();
+        }
+
+        return $this->render('ShopProductBundle:Form:form.html.twig', [
+            'upload' => $upload->createView(),
             'form' => $form->createView(),
             'shopname' => $shopname,
-        ));
+            'images' => $images,
+        ]);
     }
 }

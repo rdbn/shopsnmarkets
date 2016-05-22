@@ -67,7 +67,7 @@
                 {{ form_widget(upload._token) }}
             </div>
             <div class="form-group">
-                <img id="preview-img" class="img-thumbnail" src="{% if image %}{{ image | imagine_filter('logo_shop') }}{% endif %}" />
+                <img id="preview-img" class="img-thumbnail preview-img" src="{% if image %}{{ image | imagine_filter('logo_shop') }}{% endif %}" />
             </div>
         {{ form_end(form) }}
     </div>

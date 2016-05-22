@@ -61,7 +61,7 @@
                 </button>
                 {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : uniqueName }) }}">Партнеры</button>#}
                 {% if is_granted('ROLE_MANAGER') %}
-                    <a class="btn btn-success" href='{{ path('_addProduct', { 'shopname' : shop.uniqueName }) }}'>
+                    <a class="btn btn-success" href='{{ path('add_product', { 'shopname' : shop.uniqueName }) }}'>
                         <span class="glyphicon glyphicon-plus"></span> Добавить товар
                     </a>
                 {% endif %}
@@ -88,7 +88,7 @@
         {% for product in products %}
             <div class="col-sm-4 col-md-3">
                 <div class="thumbnail">
-                    <a href='{{ path('_productShop', {'shopname' : shopname, 'id' : product.id }) }}'>
+                    <a href='{{ path('product_platform', {'id' : product.id }) }}'>
                         <img src="{{ asset(product.image[0].path | imagine_filter('product_image')) }}" alt="Product" />
                     </a>
                     <div class="caption">

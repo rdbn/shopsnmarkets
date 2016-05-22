@@ -7,7 +7,9 @@
             {% if is_granted('ROLE_MANAGER') %}
                 <p><a class="text-success" href="{{ path('user_shops') }}">Мои Магазины</a></p>
             {% endif %}
-            <p><a class="text-success" href="{{ path('_allMessage') }}">Мои Сообщения</a></p>
+            {% if is_granted('ROLE_ADMIN') %}
+                <p><a class="text-success" href="{{ path('_allMessage') }}">Мои Сообщения</a></p>
+            {% endif %}
             <p><a class="text-success" href="{{ path('_friends') }}">Мои Друзья</a></p>
             {% if is_granted('ROLE_MANAGER') %}
                 <p><a class="text-success" href="{{ path('_partners') }}">Мои Партнеры</a></p>

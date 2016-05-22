@@ -61,7 +61,7 @@ shop_order:
     prefix:   /
     
 shop_product:
-    resource: "@ShopProductBundle/Resources/config/routing.yml"
+    resource: "@ShopProductBundle/Controller/"
     prefix:   /
 
 shop_information:

@@ -58,15 +58,14 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="small" href="{{ path('user') }}">Мой Профиль</a></li>
-                                {% if is_granted('ROLE_USER') %}
+                                <li><a class="small" href="{{ path('user_shops') }}">Мои Магазины</a></li>
+                                {% if is_granted('ROLE_MANAGER') %}
                                     <li><a class="small" href="{{ path('user_order') }}">Мои заказы</a></li>
-                                    <li><a class="small" href="{{ path('_allMessage') }}">Мои сообщения</a></li>
-                                    <li><a class="small" href="{{ path('_friends') }}">Мои друзья</a></li>
-                                {% else %}
-                                    <li><a class="small" href="{{ path('user_shops') }}">Мои Магазины</a></li>
-                                    <li><a class="small" href="{{ path('user_order') }}">Заказы</a></li>
-                                    <li><a class="small" href="{{ path('_allMessage') }}">Сообщения</a></li>
                                 {% endif %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a class="small" href="{{ path('_allMessage') }}">Мои сообщения</a></li>
+                                {% endif %}
+                                <li><a class="small" href="{{ path('_friends') }}">Мои друзья</a></li>
                                 <li><a class="small" href="{{ path('logout') }}">Выйти</a></li>
                             </ul>
                         </div>
@@ -125,7 +124,7 @@
             {% block body %}{% endblock %}
         </div>
 
-        <footer class="footer">
+        <footer class="footer top20">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 top10">

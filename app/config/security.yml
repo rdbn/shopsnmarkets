@@ -50,12 +50,12 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user, roles: [ROLE_USER, ROLE_MANAGER] }
-        - { path: ^/id, roles: [ROLE_MANAGER, ROLE_USER] }
-        - { path: ^/property, roles: [ROLE_MANAGER, ROLE_USER] }
-        - { path: ^/firends, roles: [ROLE_MANAGER, ROLE_USER] }
-        - { path: ^/partners, roles: [ROLE_MANAGER, ROLE_USER] }
+        - { path: ^/user, roles: [ROLE_USER] }
+        - { path: ^/id, roles: [ROLE_USER] }
+        - { path: ^/property, roles: [ROLE_USER] }
+        - { path: ^/firends, roles: [ROLE_USER] }
+        - { path: ^/partners, roles: [ROLE_MANAGER] }
         - { path: ^/message, roles: [ROLE_MANAGER, ROLE_USER] }
         - { path: ^/order, roles: [ROLE_MANAGER, ROLE_USER] }
         - { path: ^/advertising, roles: [ROLE_MANAGER] }
-        - { path: ^/addProducts, roles: [ROLE_MANAGER] }
+        - { path: ^/addImageProduct, roles: [ROLE_MANAGER] }
