@@ -79,10 +79,10 @@ var ShowComments = {
                 var comments = data[i];
 
                 html += "<div class=\"media\"><div class=\"media-left\">";
-                if (comments.users.path != undefined) {
-                    html += "<img class=\"media-object\" src=\"" + comments.users.path + "\" />";
-                } else {
+                if (comments.users.path == undefined) {
                     html += "<img class=\"media-object preview-comments\" />";
+                } else {
+                    html += "<img class=\"media-object\" src=\"" + comments.users.path + "\" />";
                 }
 
                 html += "</div><div class=\"media-body\"><h4 class=\"media-heading text-success\">";
@@ -129,7 +129,12 @@ var AddComments = {
             $("#comments_text").val("");
 
             var html = "<div class=\"media\"><div class=\"media-left\">";
-            html += "<img class=\"media-object\" src=\""+data.users.path+"\" />";
+            if (data.users.path == undefined) {
+                html += "<img class=\"media-object preview-comments\" />";
+            } else {
+                html += "<img class=\"media-object\" src=\"" + data.users.path + "\" />";
+            }
+
             html += "</div><div class=\"media-body\"><h4 class=\"media-heading text-success\">";
             html += data.users.realname+"</h4><p class='text-muted'>"+data.text+"</p>";
             html += "</div></div>";
