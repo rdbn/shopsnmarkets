@@ -87,7 +87,13 @@ class PageController extends Controller
         $tags = $this->getDoctrine()->getRepository('ShopProductBundle:HashTags')
             ->findByTags($id);
 
+        $isProductManager = false;
+        if ($product['shopManager'] == $this->getUser()->getId()) {
+            $isProductManager = true;
+        }
+
         return $this->render('PlatformMainBundle:Product:card.html.twig', [
+            'isProductManager' => $isProductManager,
             'product' => $product,
             'images' => $images,
             'tags' => $tags,

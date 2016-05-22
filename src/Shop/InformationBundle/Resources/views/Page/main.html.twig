@@ -60,7 +60,7 @@
                     Отзывы
                 </button>
                 {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : uniqueName }) }}">Партнеры</button>#}
-                {% if is_granted('ROLE_MANAGER') %}
+                {% if isShopManager %}
                     <a class="btn btn-success" href='{{ path('add_product', { 'shopname' : shop.uniqueName }) }}'>
                         <span class="glyphicon glyphicon-plus"></span> Добавить товар
                     </a>

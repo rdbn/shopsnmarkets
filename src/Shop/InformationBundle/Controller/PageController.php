@@ -30,9 +30,13 @@ class PageController extends Controller
      */
     public function indexAction($shopname)
     {
-        $search = $this->createForm(SearchShopType::class, new Product);
         $shop = $this->getDoctrine()->getRepository("ShopCreateBundle:Shops")
             ->findOneBy(["uniqueName" => $shopname]);
+
+        $isShopManager = false;
+        if ($shop->getManager()->getId() == $this->getUser()->getId()) {
+            $isShopManager = true;
+        }
 
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
             ->findByProductShop($shopname, 0);
@@ -47,9 +51,12 @@ class PageController extends Controller
             'method' => 'POST',
         ]);
 
+        $search = $this->createForm(SearchShopType::class, new Product);
+
         return $this->render('ShopInformationBundle:Page:main.html.twig', [
             'comments' => $comments->createView(),
             'search' => $search->createView(),
+            'isShopManager' => $isShopManager,
             'advertising' => $advertising,
             'shopname' => $shopname,
             'products' => $products,

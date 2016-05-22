@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            {% if is_granted('ROLE_MANAGER') %}
+            {% if isProductManager %}
                 <a class="btn btn-success bottom20" href="{{ path("update_product", {'shopname': product.uniqueName, 'id': product.id}) }}">
                     Обновить информацию о товаре
                 </a>
