@@ -79,7 +79,12 @@ var ShowComments = {
                 var comments = data[i];
 
                 html += "<div class=\"media\"><div class=\"media-left\">";
-                html += "<img class=\"media-object\" src=\""+comments.users.path+"\" />";
+                if (comments.users.path == '') {
+                    html += "<img class=\"media-object\" src=\"" + comments.users.path + "\" />";
+                } else {
+                    html += "<img class=\"media-object preview-comments\" />";
+                }
+
                 html += "</div><div class=\"media-body\"><h4 class=\"media-heading text-success\">";
                 html += comments.users.realname+"</h4><p class='text-muted'>"+comments.text+"</p>";
                 html += "</div></div>";
