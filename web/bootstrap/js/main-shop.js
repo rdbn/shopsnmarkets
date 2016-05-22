@@ -79,7 +79,7 @@ var ShowComments = {
                 var comments = data[i];
 
                 html += "<div class=\"media\"><div class=\"media-left\">";
-                if (comments.users.path == undefined) {
+                if (comments.users.path != undefined) {
                     html += "<img class=\"media-object\" src=\"" + comments.users.path + "\" />";
                 } else {
                     html += "<img class=\"media-object preview-comments\" />";
