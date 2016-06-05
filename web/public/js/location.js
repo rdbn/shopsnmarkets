@@ -19,5 +19,5 @@ $(document).ready(function () {
     locations('SearchPartners_country', 'SearchPartners_city');
     locations('search_country', 'search_city');
     locations('user_information_country', 'user_information_city');
-    locations('address_country', 'address_city');
+    locations('users_country', 'users_city');
 });
