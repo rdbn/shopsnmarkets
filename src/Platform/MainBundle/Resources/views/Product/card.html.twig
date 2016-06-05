@@ -23,7 +23,7 @@
             <p class="font24 text-success">
                 <strong class="text-muted">{{ product.price|number_format(2, '.', ' ') }}</strong> руб.
             </p>
-            {% if isProductManager == false %}
+            {% if isProductManager == false and is_granted('ROLE_USER') %}
             <div class="btn-group">
                 <button id="add-order" class="btn btn-success" data-toggle="{{ product.id }}">Купить товар</button>
                 <button id="add-message" class="btn btn-success" data-user="{{ product.shopManager }}" data-toggle="modal" data-target="#send-message">
