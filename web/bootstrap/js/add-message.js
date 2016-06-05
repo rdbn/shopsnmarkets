@@ -8,7 +8,7 @@ var AddMessages = {
             };
 
         text.val("");
-        $.post('/app_dev.php/message/dialog/add/'+id, message);
+        $.post('/message/dialog/add/'+id, message);
     },
     add : function() {
         $('#messages_save').click(function() {
