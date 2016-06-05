@@ -62,15 +62,15 @@
             <div class="btn-group top20">
                 <button id="shop-products" class="btn btn-success" data-toggle="{{ shop.uniqueName }}">Товары</button>
                 <button id="shop-information" class="btn btn-success" data-toggle="{{ shop.uniqueName }}">Инфо о магазине</button>
-                <button id="show-comments" class="btn btn-success" datatype="{{ shop.id }}" data-toggle="modal" data-target="#comments">
-                    Отзывы
-                </button>
-                {% if isShopManager == false %}
+                {% if isShopManager == false and is_granted('ROLE_USER') %}
+                    <button id="show-comments" class="btn btn-success" datatype="{{ shop.id }}" data-toggle="modal" data-target="#comments">
+                        Отзывы
+                    </button>
                     <button id="add-message" class="btn btn-success" data-user="{{ shop.manager }}" data-toggle="modal" data-target="#send-message">
                         <span class="glyphicon glyphicon-edit"></span> Написать продавцу
                     </button>
+                    {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : uniqueName }) }}">Партнеры</button>#}
                 {% endif %}
-                {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : uniqueName }) }}">Партнеры</button>#}
                 {% if isShopManager %}
                     <a class="btn btn-success" href='{{ path('add_product', { 'shopname' : shop.uniqueName }) }}'>
                         <span class="glyphicon glyphicon-plus"></span> Добавить товар
