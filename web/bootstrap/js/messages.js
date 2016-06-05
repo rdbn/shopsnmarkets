@@ -24,7 +24,7 @@ var SendMessage = {
         return html;
     },
     connect: function () {
-        SendMessage.chat = io.connect('http://localhost:8080/chat');
+        SendMessage.chat = io.connect('http://shopsnmarkets:8080/chat');
 
         var element = $("#all-messages");
         SendMessage.username = "username_"+element.attr('data-user');
