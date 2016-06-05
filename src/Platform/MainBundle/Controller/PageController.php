@@ -94,8 +94,8 @@ class PageController extends Controller
             ->findByTags($id);
 
         $isProductManager = false;
-        if ($product['shopManager'] == $this->getUser()->getId()) {
-            $isProductManager = true;
+        if ($this->getUser()) {
+            if ($product['shopManager'] == $this->getUser()->getId()) $isProductManager = true;
         }
 
         $form = $this->createForm(MessagesType::class, new Messages());
