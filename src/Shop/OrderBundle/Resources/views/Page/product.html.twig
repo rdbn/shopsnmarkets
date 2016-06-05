@@ -3,7 +3,6 @@
 {% block title %}Корзина{% endblock %}
 
 {% block body %}
-    <h3 class="text-success">Корзина:</h3>
     {% if orderItems is defined %}
         {% for orderItem in orderItems %}
             <div class="media">

@@ -46,7 +46,7 @@ class AjaxController extends FOSRestController
             ->findOneById($id);
 
         $order = $em->getRepository("ShopOrderBundle:Order")
-            ->findOneBy(['users' => $user->getId(), 'shops' => $product->getShops()->getId(), 'checkPay' => false]);
+            ->findOneBy(['users' => $user->getId(), 'shops' => $product->getShops()->getId(), 'isPay' => false]);
 
         if ($order) {
             /** @var OrderItem $orderItem */

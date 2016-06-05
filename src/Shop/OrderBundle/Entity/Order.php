@@ -78,7 +78,8 @@ class Order
     public function __construct()
     {
         $this->amount = 100;
-        $this->checkPay = false;
+        $this->isPay = false;
+        $this->isCreateOrder = false;
 
         $this->createdAt = new \DateTime();
         $this->orderItem = new ArrayCollection();
