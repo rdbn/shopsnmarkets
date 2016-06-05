@@ -49,9 +49,9 @@ class MessageUserConsumer implements ConsumerInterface
         preg_match('/username_(.*\d)/', $parameters['to'], $to);
 
         /** Message from */
-        $this->addDialog($parameters['message'], $date, ['from' => $from[1], 'to' => $to[1]]);
+        $this->addDialog($parameters['message'], $date, ['from' => $from[1], 'to' => $to[1]], true);
         /** Message to */
-        $this->addDialog($parameters['message'], $date, ['from' => $to[1], 'to' => $from[1]]);
+        $this->addDialog($parameters['message'], $date, ['from' => $to[1], 'to' => $from[1]], false);
 
         /** Save message */
         $this->em->flush();
@@ -70,8 +70,9 @@ class MessageUserConsumer implements ConsumerInterface
      * @param string $messageText
      * @param \DateTime $date
      * @param array $data
+     * @param boolean $isFrom
      */
-    private function addDialog($messageText, $date, array $data)
+    private function addDialog($messageText, $date, array $data, $isFrom)
     {
         $dialog = $this->em->getRepository("UserMessagesBundle:Dialog")
             ->findOneBy(['users' => $data['from'], 'usersTo' => $data['to']]);
@@ -92,7 +93,7 @@ class MessageUserConsumer implements ConsumerInterface
             $dialog->setFlags(false);
         }
 
-        $this->addMessage($dialog, $messageText, $date);
+        $this->addMessage($dialog, $messageText, $date, $isFrom);
     }
 
     /**
@@ -101,14 +102,20 @@ class MessageUserConsumer implements ConsumerInterface
      * @param Dialog $dialog
      * @param string $messageText
      * @param \DateTime $date
+     * @param boolean $isFrom
      */
-    private function addMessage(Dialog $dialog, $messageText, \DateTime $date)
+    private function addMessage(Dialog $dialog, $messageText, \DateTime $date, $isFrom)
     {
         $message = new Messages();
         $message->setDialog($dialog);
-        $message->setUsers($dialog->getUsers());
         $message->setText($messageText);
         $message->setCreatedAt($date);
+
+        if ($isFrom) {
+            $message->setUsers($dialog->getUsers());
+        } else {
+            $message->setUsers($dialog->getUsersTo());
+        }
 
         $this->em->persist($message);
     }
