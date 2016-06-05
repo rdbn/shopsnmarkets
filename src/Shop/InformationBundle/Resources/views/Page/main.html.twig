@@ -14,8 +14,8 @@
                     </button>
                     {% endif %}
                 </div>
+                <p class="text-muted text-center top10">Всего подписчеков: <span class="text-success">{{ shop.subscribers }}</span></p>
             {% endif %}
-            <p class="text-muted text-center top10">Всего подписчеков: <span class="text-success">{{ shop.subscribers }}</span></p>
         </div>
         <div class="col-lg-10">
             <h3 class="top0">{{ shop.shopname }}</h3>
@@ -65,9 +65,11 @@
                 <button id="show-comments" class="btn btn-success" datatype="{{ shop.id }}" data-toggle="modal" data-target="#comments">
                     Отзывы
                 </button>
-                <button id="add-message" class="btn btn-success" data-user="{{ shop.manager }}" data-toggle="modal" data-target="#send-message">
-                    <span class="glyphicon glyphicon-edit"></span> Написать продавцу
-                </button>
+                {% if isShopManager == false %}
+                    <button id="add-message" class="btn btn-success" data-user="{{ shop.manager }}" data-toggle="modal" data-target="#send-message">
+                        <span class="glyphicon glyphicon-edit"></span> Написать продавцу
+                    </button>
+                {% endif %}
                 {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : uniqueName }) }}">Партнеры</button>#}
                 {% if isShopManager %}
                     <a class="btn btn-success" href='{{ path('add_product', { 'shopname' : shop.uniqueName }) }}'>
