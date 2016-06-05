@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -25,15 +25,15 @@ class Dialog
     
     /**
      * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users")
-     * @ORM\JoinColumn(name="send_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
      */
-    protected $send;
-    
+    protected $users;
+
     /**
      * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users")
-     * @ORM\JoinColumn(name="take_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="users_to_id", referencedColumnName="id")
      */
-    protected $take;
+    protected $usersTo;
     
     /**
      * @ORM\Column(name="flags", type="boolean")
@@ -43,7 +43,7 @@ class Dialog
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
     
@@ -53,9 +53,10 @@ class Dialog
     protected $messages;
     
     /**
-     * Consrtuct for class Messages
+     * Construct for class Messages
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->messages = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->flags = false;
@@ -64,7 +65,7 @@ class Dialog
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -75,19 +76,20 @@ class Dialog
      * Set flags
      *
      * @param boolean $flags
+     *
      * @return Dialog
      */
     public function setFlags($flags)
     {
         $this->flags = $flags;
-    
+
         return $this;
     }
 
     /**
      * Get flags
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getFlags()
     {
@@ -98,19 +100,20 @@ class Dialog
      * Set createdAt
      *
      * @param \DateTime $createdAt
+     *
      * @return Dialog
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -118,78 +121,81 @@ class Dialog
     }
 
     /**
-     * Set send
+     * Set users
      *
-     * @param \User\UserBundle\Entity\Users $send
+     * @param \User\UserBundle\Entity\Users $users
+     *
      * @return Dialog
      */
-    public function setSend(\User\UserBundle\Entity\Users $send = null)
+    public function setUsers(\User\UserBundle\Entity\Users $users = null)
     {
-        $this->send = $send;
-    
+        $this->users = $users;
+
         return $this;
     }
 
     /**
-     * Get send
+     * Get users
      *
      * @return \User\UserBundle\Entity\Users
      */
-    public function getSend()
+    public function getUsers()
     {
-        return $this->send;
+        return $this->users;
     }
 
     /**
-     * Set take
+     * Set usersTo
      *
-     * @param \User\UserBundle\Entity\Users $take
+     * @param \User\UserBundle\Entity\Users $usersTo
+     *
      * @return Dialog
      */
-    public function setTake(\User\UserBundle\Entity\Users $take = null)
+    public function setUsersTo(\User\UserBundle\Entity\Users $usersTo = null)
     {
-        $this->take = $take;
-    
+        $this->usersTo = $usersTo;
+
         return $this;
     }
 
     /**
-     * Get take
+     * Get usersTo
      *
      * @return \User\UserBundle\Entity\Users
      */
-    public function getTake()
+    public function getUsersTo()
     {
-        return $this->take;
+        return $this->usersTo;
     }
 
     /**
-     * Add messages
+     * Add message
      *
-     * @param \User\MessagesBundle\Entity\Messages $messages
+     * @param \User\MessagesBundle\Entity\Messages $message
+     *
      * @return Dialog
      */
-    public function addMessage(\User\MessagesBundle\Entity\Messages $messages)
+    public function addMessage(\User\MessagesBundle\Entity\Messages $message)
     {
-        $this->messages[] = $messages;
-    
+        $this->messages[] = $message;
+
         return $this;
     }
 
     /**
-     * Remove messages
+     * Remove message
      *
-     * @param \User\MessagesBundle\Entity\Messages $messages
+     * @param \User\MessagesBundle\Entity\Messages $message
      */
-    public function removeMessage(\User\MessagesBundle\Entity\Messages $messages)
+    public function removeMessage(\User\MessagesBundle\Entity\Messages $message)
     {
-        $this->messages->removeElement($messages);
+        $this->messages->removeElement($message);
     }
 
     /**
      * Get messages
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMessages()
     {

@@ -29,6 +29,7 @@ class OrderController extends Controller
         
         return $this->render('ShopOrderBundle:Order:users.html.twig', [
             'orders' => $orders,
+            'isOrder' => true,
         ]);
     }
 
@@ -48,6 +49,7 @@ class OrderController extends Controller
 
         return $this->render('ShopOrderBundle:Order:manager.html.twig', [
             'orders' => $orders,
+            'isOrder' => true,
         ]);
     }
 }

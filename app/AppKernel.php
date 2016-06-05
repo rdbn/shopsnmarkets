@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
+            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
 
             new Platform\MainBundle\PlatformMainBundle(),
             new User\UserBundle\UserUserBundle(),

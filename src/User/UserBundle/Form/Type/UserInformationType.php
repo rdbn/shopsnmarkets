@@ -17,37 +17,45 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class UserInformationType extends AbstractType 
 {
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('realname', TextType::class, [
-            'label' => false,
-            "attr" => ["class" => "form-control", "placeholder" => "Фамилия/Имя*"],
-            'data' => isset($options['data']) ? $options['data']->getRealname() : NULL,
-        ]);
-        $builder->add('username', EmailType::class, [
-            'label' => false,
-            "attr" => ["class" => "form-control", "placeholder" => "Email*"],
-            'data' => isset($options['data']) ? $options['data']->getUsername() : NULL,
-        ]);
-        $builder->add('phone', NumberType::class, [
-            'label' => false,
-            "attr" => ["class" => "form-control", "placeholder" => "Телефон"],
-            'required' => false,
-            'data' => isset($options['data']) ? $options['data']->getPhone() : NULL,
-        ]);
-        $builder->add('skype', TextType::class, [
-            'label' => false,
-            "attr" => ["class" => "form-control", "placeholder" => "Skype"],
-            'required' => false,
-            'data' => isset($options['data']) ? $options['data']->getSkype() : NULL,
-        ]);
-        $builder->add('save', SubmitType::class, [
-            'attr' => ['class' => 'btn btn-success btn-sm center-block'],
-            'label' => 'Сохранить',
-        ]);
+        $builder
+            ->add('realname', TextType::class, [
+                'label' => false,
+                "attr" => ["class" => "form-control", "placeholder" => "Фамилия/Имя*"],
+                'data' => isset($options['data']) ? $options['data']->getRealname() : NULL,
+            ])
+            ->add('username', EmailType::class, [
+                'label' => false,
+                "attr" => ["class" => "form-control", "placeholder" => "Email*"],
+                'data' => isset($options['data']) ? $options['data']->getUsername() : NULL,
+            ])
+            ->add('phone', NumberType::class, [
+                'label' => false,
+                "attr" => ["class" => "form-control", "placeholder" => "Телефон"],
+                'required' => false,
+                'data' => isset($options['data']) ? $options['data']->getPhone() : NULL,
+            ])
+            ->add('skype', TextType::class, [
+                'label' => false,
+                "attr" => ["class" => "form-control", "placeholder" => "Skype"],
+                'required' => false,
+                'data' => isset($options['data']) ? $options['data']->getSkype() : NULL,
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => false,
+                "attr" => ["class" => "form-control", "placeholder" => "Подробное описание", "rows" => 10],
+                'required' => false,
+                'data' => isset($options['data']) ? $options['data']->getSkype() : NULL,
+            ])
+            ->add('save', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-success  center-block'],
+                'label' => 'Сохранить',
+            ]);
         
         $factory = $builder->getFormFactory();
         $countrySubscriber = new AddCountryFieldSubscriber($factory);

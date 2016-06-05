@@ -3,71 +3,73 @@
 {% block title %}Заказы пользователей в маназине{% endblock %}
 
 {% block content %}
-    {{ include('ShopOrderBundle:Order:menuOrder.html.twig') }}
+    <div class="col-md-12">
+        {{ include('ShopOrderBundle:Order:menuOrder.html.twig') }}
+    </div>
     {% for order in orders %}
-        <div class="row top20">
-            <div class="col-md-6">
-                <h4 class="text-success">Магазин</h4>
+        <div class="col-md-6">
+            <h4 class="text-success">Магазин</h4>
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="{{ path('main_shop', {'shopname': order.shops.shopname}) }}">
+                        <img class="img-thumbnail" src="{{ asset(order.shops.path | imagine_filter('logo_shop_information')) }}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading text-success"><strong>{{ order.shops.shopname }}</strong></h4>
+                    <p class="text-muted">Имя: <span class="text-success">{{ order.shops.manager.realname }}</span></p>
+                    <p class="text-muted">Email: <span class="text-success">{{ order.shops.email }}</span></p>
+                    <p class="text-muted">Телефон: <span class="text-success">{{ order.shops.phone }}</span></p>
+                    <button class="btn btn-success" data-toggle="{{ order.shops.manager.id }}">Отправить сообщение</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="text-success">Адрес доставки</h4>
+                    <p class="text-muted">Фамилия/Имя: <span class="text-success">{{ order.users.realname }}</span></p>
+                    <p class="text-muted">Страна: <span class="text-success">{{ order.users.city.country.name }}</span></p>
+                    <p class="text-muted">Город: <span class="text-success">{{ order.users.city.name }}</span></p>
+                    <p class="text-muted">Тел: <span class="text-success">{{ order.users.phone }}</span></p>
+                    <p class="text-muted">Skype: <span class="text-success">{{ order.users.skype }}</span></p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-success">Способ доставки</h4>
+                    <div class="media">
+                        <div class="media-left media-middle">
+                            <img src="{{ asset(order.delivery.delivery.image) }}" />
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading text-success"><strong>{{ order.delivery.delivery.name }}</strong></h4>
+                            <p class="text-muted">Цена: <strong class="text-success">{{ order.delivery.price|number_format(2, '.', ' ') }}</strong> руб.</p>
+                            <p class="text-muted">Срок: <strong class="text-success">{{ order.delivery.duration }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4 class="text-success">Товары</h4>
+            {% for orderItem in order.orderItem %}
                 <div class="media">
                     <div class="media-left media-middle">
-                        <a href="{{ path('main_shop', {'shopname': order.shops.shopname}) }}">
-                            <img class="img-thumbnail" src="{{ asset(order.shops.path | imagine_filter('logo_shop_information')) }}">
+                        <a href="{{ path('product_platform', {'id': orderItem.product.id}) }}">
+                            <img class="img-thumbnail" src="{{ asset(orderItem.product.image.0.path | imagine_filter('advertisingSideOf')) }}" />
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading text-success"><strong>{{ order.shops.shopname }}</strong></h4>
-                        <p class="text-muted">Имя: <span class="text-success">{{ order.shops.manager.realname }}</span></p>
-                        <p class="text-muted">Email: <span class="text-success">{{ order.shops.email }}</span></p>
-                        <p class="text-muted">Телефон: <span class="text-success">{{ order.shops.phone }}</span></p>
-                        <button class="btn btn-success" data-toggle="{{ order.shops.manager.id }}">Отправить сообщение</button>
+                        <p class="text-muted">
+                            Цена: <strong class="text-success">{{ orderItem.product.price|number_format(2, '.', ' ') }}</strong> руб.
+                        </p>
+                        <p class="text-muted">Кол-во: <strong class="text-success">{{ orderItem.number }}</strong></p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="text-success">Адрес доставки</h4>
-                        <p class="text-muted">Фамилия/Имя: <span class="text-success">{{ order.users.realname }}</span></p>
-                        <p class="text-muted">Страна: <span class="text-success">{{ order.users.city.country.name }}</span></p>
-                        <p class="text-muted">Город: <span class="text-success">{{ order.users.city.name }}</span></p>
-                        <p class="text-muted">Тел: <span class="text-success">{{ order.users.phone }}</span></p>
-                        <p class="text-muted">Skype: <span class="text-success">{{ order.users.skype }}</span></p>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 class="text-success">Способ доставки</h4>
-                        <div class="media">
-                            <div class="media-left media-middle">
-                                <img src="{{ asset(order.delivery.delivery.image) }}" />
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading text-success"><strong>{{ order.delivery.delivery.name }}</strong></h4>
-                                <p class="text-muted">Цена: <strong class="text-success">{{ order.delivery.price|number_format(2, '.', ' ') }}</strong> руб.</p>
-                                <p class="text-muted">Срок: <strong class="text-success">{{ order.delivery.duration }}</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <h4 class="text-success">Товары</h4>
-                {% for orderItem in order.orderItem %}
-                    <div class="media">
-                        <div class="media-left media-middle">
-                            <a href="{{ path('product_platform', {'id': orderItem.product.id}) }}">
-                                <img class="img-thumbnail" src="{{ asset(orderItem.product.image.0.path | imagine_filter('advertisingSideOf')) }}" />
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-muted">
-                                Цена: <strong class="text-success">{{ orderItem.product.price|number_format(2, '.', ' ') }}</strong> руб.
-                            </p>
-                            <p class="text-muted">Кол-во: <strong class="text-success">{{ orderItem.number }}</strong></p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-        <div class="alert alert-success top20">
-            <p>Итогавая стоимость: <strong>{{ 10000|number_format(2, '.', ' ') }}</strong> руб.</p>
-            <p>Количество товаров: <strong>{{ 0 }}</strong></p>
+        <div class="col-md-12">
+            <div class="alert alert-success top20">
+                <p>Итогавая стоимость: <strong>{{ 10000|number_format(2, '.', ' ') }}</strong> руб.</p>
+                <p>Количество товаров: <strong>{{ 0 }}</strong></p>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}

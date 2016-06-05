@@ -60,7 +60,7 @@ class AdvertisingShopType extends AbstractType
         $builder->add('files', FileType::class, [
             'label' => 'Добавить изображения',
             "multiple" => "multiple",
-            'label_attr' => ["class" => "btn btn-success btn-sm"],
+            'label_attr' => ["class" => "btn btn-success "],
             "attr" => ["class" => "hide"],
         ]);
         $builder->add('save', SubmitType::class, [

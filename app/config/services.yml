@@ -1,11 +1,76 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     fos_user.doctrine_registry:
-            alias: doctrine
+        alias: doctrine
+
+    message.user:
+        class: User\MessagesBundle\Consumer\MessageUserConsumer
+        arguments: ["@doctrine.orm.entity_manager", "@snc_redis.default"]
+
+    search.product:
+        class: Platform\MainBundle\Services\Search
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.type.delivery_selector:
+        class: Shop\CreateBundle\Form\Type\DeliveryIdType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: delivery }
+
+    app.type.shopname_selector:
+        class: Shop\CreateBundle\Form\Type\ShopnameType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: shopname }
+
+    app.type.shops_tags_selector:
+        class: Shop\CreateBundle\Form\Type\ShopsTagsType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: shopsTags }
+
+    shop.type.user_id:
+        class: Shop\InformationBundle\Form\Type\UserIDType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: userID }
+
+    app.type.tags_selector:
+        class: Shop\ProductBundle\Form\Type\HashTagsType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: tags }
+
+    advertising.form.type.advertising_platform:
+        class: User\AdvertisingBundle\Form\Type\AdvertisingPlatformType
+        arguments: ["@security.token_storage"]
+        tags:
+            - { name: form.type }
+
+    advertising.form.type.advertising_shop:
+        class: User\AdvertisingBundle\Form\Type\AdvertisingShopType
+        arguments: ["@security.token_storage"]
+        tags:
+            - { name: form.type }
+
+    search.users:
+        class: User\FriendsBundle\Services\Search
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    shop.subscribe:
+        class: User\UserBundle\Services\ShopSubscribe
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    bookmarks:
+        class: User\UserBundle\Services\Bookmarks
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    hwi_oauth.user.provider.entity:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+
+    ib_user.oauth_user_provider:
+        class: User\UserBundle\Auth\OAuthProvider
+        arguments: ["@doctrine", {vkontakte: vkontakte_id, facebook: facebook_id, google: google_id}]

@@ -1,14 +1,14 @@
 var Search = {
     getElement : function() {
         return {
-            'Search[realname]' : $('#Search_realname').val(),
-            'Search[country]' : $('#Search_country').val(),
-            'Search[city]' : $('#Search_city').val(),
-            'Search[_token]' : $('#Search__token').val()
+            'search[realname]' : $('#search_realname').val(),
+            'search[country]' : $('#search_country').val(),
+            'search[city]' : $('#search_city').val(),
+            'search[_token]' : $('#search__token').val()
         };
     },    
     result : function() {
-        $.post('/friends/result/search', this.getElement(), function(data) {
+        $.post('/app_dev.php/friends/result/search', this.getElement(), function(data) {
             var html = '',
                 result = $('#result-search');
 

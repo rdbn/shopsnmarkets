@@ -20,26 +20,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class PropertyController extends Controller
 {
     /**
-     * Page User Information
-     *
-     * @Route("/property", name="property")
-     * @Method({"GET"})
-    */
-    public function propertyAction() 
-    {
-        $user = $this->getUser();
-        
-        return $this->render('UserUserBundle:User:property.html.twig',array(
-            'user' => $user,
-        ));
-    }
-
-    /**
      * Page from User Information
      *
      * @param Request $request
      *
-     * @Route("/property/information", name="property_information")
+     * @Route("/property/information", name="property")
      * @Method({"GET", "POST"})
      *
      * @return object
@@ -48,7 +33,7 @@ class PropertyController extends Controller
     {        
         $user = $this->getUser();
         $form = $this->createForm(UserInformationType::class, $user, [
-            "action" => $this->generateUrl("property_information")
+            "action" => $this->generateUrl("property")
         ]);
         $form->handleRequest($request);
 
@@ -59,47 +44,43 @@ class PropertyController extends Controller
             return $this->redirectToRoute("property");
         }
         
-        return $this->render('UserUserBundle:Form:userInformation.html.twig',array(
+        return $this->render('UserUserBundle:Form:userInformation.html.twig', array(
             'form' => $form->createView(),
+            'isProperty' => true,
         ));
     }
 
     /**
      * Page From User Password
      *
+     * @param Request $request
+     *
      * @Route("/property/password", name="property_password")
      * @Method({"GET"})
      *
      * @return object
      */
-    public function formPasswordAction()
+    public function formPasswordAction(Request $request)
     {
         $user = $this->getUser();
         $form = $this->createForm(PasswordType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
+
+            $user->setPassword($encoded);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            $this->redirectToRoute("property");
+        }
 
         return $this->render('UserUserBundle:Form:password.html.twig',array(
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Page From Preview User
-     *
-     * @Route("/property/previewInformation", name="property_preview_information")
-     * @Method({"GET"})
-     *
-     * @return object
-     */
-    public function formPreviewAction()
-    {
-        $user = $this->getUser();
-        $formDescription = $this->createForm(DescriptionType::class, $user);
-        $formUpload = $this->createForm(UploadLogoType::class, $user);
-
-        return $this->render('UserUserBundle:Form:addInformation.html.twig',array(
-            'formUpload' => $formUpload->createView(),
-            'formDescription' => $formDescription->createView(),
-            'image' => $user->getPath(),
+            'isProperty' => true,
         ));
     }
 }

@@ -6,6 +6,9 @@
  */
 namespace Shop\InformationBundle\Controller;
 
+use User\MessagesBundle\Entity\Messages;
+use User\MessagesBundle\Form\Type\MessagesType;
+
 use Shop\ProductBundle\Entity\Product;
 use Shop\InformationBundle\Form\Type\SearchShopType;
 
@@ -31,10 +34,10 @@ class PageController extends Controller
     public function indexAction($shopname)
     {
         $shop = $this->getDoctrine()->getRepository("ShopCreateBundle:Shops")
-            ->findOneBy(["uniqueName" => $shopname]);
+            ->findOneByShop($shopname);
 
         $isShopManager = false;
-        if ($shop->getManager()->getId() == $this->getUser()->getId()) {
+        if ($shop['manager'] == $this->getUser()->getId()) {
             $isShopManager = true;
         }
 
@@ -42,19 +45,24 @@ class PageController extends Controller
             ->findByProductShop($shopname, 0);
 
         $advertising = $this->getDoctrine()->getRepository('UserAdvertisingBundle:AdvertisingShop')
-            ->findByShops($shop->getId());
+            ->findByShops($shop['id']);
+
+        $shopEntity = $this->getDoctrine()->getRepository("ShopCreateBundle:Shops")
+            ->findOneBy(['uniqueName' => $shopname]);
 
         $comments = new Comments();
-        $comments->setShops($shop);
+        $comments->setShops($shopEntity);
         $comments->setUsers($this->getUser());
         $comments = $this->createForm(CommentsType::class, $comments, [
             'method' => 'POST',
         ]);
 
-        $search = $this->createForm(SearchShopType::class, new Product);
+        $search = $this->createForm(SearchShopType::class, new Product());
+        $message = $this->createForm(MessagesType::class, new Messages());
 
         return $this->render('ShopInformationBundle:Page:main.html.twig', [
             'comments' => $comments->createView(),
+            'message' => $message->createView(),
             'search' => $search->createView(),
             'isShopManager' => $isShopManager,
             'advertising' => $advertising,

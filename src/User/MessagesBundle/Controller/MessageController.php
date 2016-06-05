@@ -1,68 +1,69 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace User\MessagesBundle\Controller;
 
+use User\MessagesBundle\Entity\Messages;
+use User\MessagesBundle\Form\Type\MessagesType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class MessageController extends Controller
 {
-    public function allAction()
+    /**
+     * Page user messages
+     *
+     * @Route("/message", name="messages")
+     * @Method({"GET"})
+     *
+     * @return object
+     */
+    public function dialogAction()
     {
-        $userID = $this->getUser()->getId();
-        
-        $em = $this->getDoctrine();        
-        $take = $em->getRepository('UserMessagesBundle:Dialog');
-        $send = $em->getRepository('UserMessagesBundle:Dialog');
-        
-        return $this->render('UserMessagesBundle:All:message.html.twig', array(
-            'take' => $take->findBySend($userID),
-            'send' => $send->findByTake($userID),
-            'id' => $userID,
-        ));
+        $id = $this->getUser()->getId();
+        $dialogs = $this->getDoctrine()->getRepository('UserMessagesBundle:Dialog')
+            ->findByDialog($id, 0);
+
+        return $this->render('UserMessagesBundle:Messages:dialogs.html.twig', [
+            'dialogs' => $dialogs,
+            'isMessage' => true,
+            'id' => $id,
+        ]);
     }
-    
-    public function inboxAction()
+
+    /**
+     * Page user dialog
+     *
+     * @param int $id
+     *
+     * @Route("/message/dialog/{id}", name="dialog")
+     * @Method({"GET"})
+     *
+     * @return object
+     */
+    public function messagesAction($id)
     {
-        $userID = $this->getUser()->getId();
-        
-        $messages = $this->getDoctrine()->getRepository('UserMessagesBundle:Dialog')
-                ->findBySend($userID);
-        
-        return $this->render('UserMessagesBundle:All:box.html.twig', array(
+        $user = $this->getUser();
+        $dialog = $this->getDoctrine()->getRepository('UserMessagesBundle:Dialog')
+            ->findOneBy(["id" => $id]);
+
+        $messages = $this->getDoctrine()->getRepository('UserMessagesBundle:Messages')
+            ->findByUsersMessages($id, 0);
+
+        $form = $this->createForm(MessagesType::class, new Messages());
+
+        return $this->render('UserMessagesBundle:Messages:messages.html.twig', [
+            'form' => $form->createView(),
+            'path' => $user->getPath(),
             'messages' => $messages,
-            'id' => $userID,
-        ));
-    }
-    
-    public function outboxAction()
-    {
-        $userID = $this->getUser()->getId();
-        
-        $messages = $this->getDoctrine()->getRepository('UserMessagesBundle:Dialog')
-                ->findByTake($userID);
-        
-        return $this->render('UserMessagesBundle:All:box.html.twig', array(
-            'messages' => $messages,
-            'id' => $userID,
-        ));
-    }
-    
-    public function deleteAction()
-    {
-        $userID = $this->getUser()->getId();
-        
-        $em = $this->getDoctrine();        
-        $repository = $em->getRepository('UserMessagesBundle:Dialog');
-        
-        return $this->render('UserMessagesBundle:All:basket.html.twig', array(
-            'take' => $repository->findBySend($userID, '2'),
-            'send' => $repository->findByTake($userID, '2'),
-            'id' => $userID,
-        ));
+            'isMessage' => true,
+            'dialog' => $dialog,
+            'user' => $user,
+        ]);
     }
 }
-?>

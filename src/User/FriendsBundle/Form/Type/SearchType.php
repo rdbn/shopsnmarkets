@@ -13,11 +13,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 Class SearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('realname', 'text', [
+        $builder->add('realname', TextType::class, [
             'label' => false,
             'attr' => ['class' => 'form-control', 'placeholder' => 'Фамилия, Имя'],
         ]);
@@ -34,10 +36,5 @@ Class SearchType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'User\UserBundle\Entity\Users'
         ]);
-    }
-
-    public function getName()
-    {
-        return 'Search';
     }
 }

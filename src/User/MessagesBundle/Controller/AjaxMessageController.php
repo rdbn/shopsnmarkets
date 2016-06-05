@@ -1,101 +1,113 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace User\MessagesBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use User\MessagesBundle\Entity\Messages;
 
-class AjaxMessageController extends Controller
-{  
-     public function allMessageAction() {
-        $request = $this->getRequest()->query->get('id');
-        
-        if (settype($request, 'integer')) {
-            $messages = $this->getDoctrine()->getRepository('UserMessagesBundle:Messages')
-                    ->findByMessages($request);
+use Symfony\Component\HttpFoundation\Request;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
+class AjaxMessageController extends FOSRestController
+{
+    /**
+     * @ApiDoc(
+     *     description="Сообщения пользователя",
+     *     statusCodes={
+     *         200="Нормальный ответ"
+     *     }
+     * )
+     *
+     * @param int $id
+     * @param int $count
+     *
+     * @Route("/message/messages/{id}/{count}", name="messages_all", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
+     * @Rest\View()
+     *
+     * @return array
+     */
+     public function allAction($id, $count)
+     {
+         $messages = $this->getDoctrine()->getRepository('UserMessagesBundle:Messages')
+             ->findByUsersMessages($id, $count);
             
-            return new JsonResponse($messages);
-        } else {
-            return new Response('1');
-        }
+         return $messages;
     }
-    
-    public function basketMessageAction() {
-        $request = $this->getRequest()->query->get('id');
-        
-        if (settype($request, 'integer')) {
-            $messages = $this->getDoctrine()->getRepository('UserMessagesBundle:Messages')
-                    ->findByMessagesFlags(array('id' => $request, 'flags' => '2'));
-            
-            return new JsonResponse($messages);
-        } else {
-            return new Response('1');
+
+    /**
+     * @ApiDoc(
+     *     description="Обновляем флаг сообщения пользователя",
+     *     statusCodes={
+     *         200="Нормальный ответ"
+     *     }
+     * )
+     *
+     * @param int $id
+     *
+     * @Route("/message/messages/check/{id}", name="messages_check", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
+     * @Rest\View()
+     *
+     * @return string
+     */
+    public function checksAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $messages = $em->getRepository('UserMessagesBundle:Messages')
+            ->findByCheckMessages($id);
+
+        foreach ($messages as $message) {
+            /** @var Messages $message */
+            $message->setFlags(true);
         }
+
+        $em->flush();
+
+        return "successful";
     }
-    
-    public function checkAction() {
-        $request = $this->getRequest()->query->get('id');
-        
-        if (settype($request, 'integer')) {
-            $this->get('dialog')->updateMessage($request, '1');
-            
-            return new Response('0');
-        } else {
-            return new Response('1');
+
+    /**
+     * @ApiDoc(
+     *     description="Удалить сообщения пользователя",
+     *     statusCodes={
+     *         200="Нормальный ответ"
+     *     }
+     * )
+     *
+     * @param Request $request
+     *
+     * @Route("/message/messages/remove", name="messages_remove", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
+     * @Rest\View()
+     *
+     * @return string
+     */
+    public function removeAction(Request $request)
+    {
+        $id = $request->request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $messages = $em->getRepository('UserMessagesBundle:Messages')
+            ->findByCheckMessages($id);
+
+        foreach ($messages as $message) {
+            $em->remove($message);
         }
-    }
-    
-    public function checkAllAction() {
-        $request = $this->getRequest()->query->get('id');
-        
-        if (settype($request, 'array')) {
-            foreach ($request as $value) {
-                if (settype($value, 'integer')) {
-                    $this->get('dialog')->updateMessage($value, '1');
-                }
-            }
-            
-            return new Response('0');
-        } else {
-            return new Response('1');
-        }
-    }
-    
-    public function basketAction() {
-        $request = $this->getRequest()->query->get('id');
-        
-        if (settype($request, 'array')) {
-            foreach ($request as $value) {
-                if (settype($value, 'integer')) {
-                    $this->get('dialog')->updateMessage($request, '2');
-                }
-            }
-            
-            return new Response('0');
-        } else {
-            return new Response('1');
-        }
-    }
-    
-    public function deleteAction() {
-        $request = $this->getRequest()->query->get('id');
-        
-        if (settype($request, 'array')) {
-            foreach ($request as $value) {
-                if (settype($value, 'integer')) {
-                    $this->get('dialog')->deleteMessage($value, '1');
-                }
-            }
-            
-            return new Response('0');
-        } else {
-            return new Response('1');
-        }
+
+        $em->flush();
+
+        return "successful";
     }
 }
-?>

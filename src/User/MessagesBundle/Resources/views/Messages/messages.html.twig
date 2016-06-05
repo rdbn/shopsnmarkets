@@ -1,0 +1,46 @@
+{% extends 'UserUserBundle::layout.html.twig' %}
+
+{% block title %}Сообщения{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        {{ include('UserMessagesBundle:Menu:menu.html.twig') }}
+    </div>
+    <div id="all-messages" class="col-md-12 top20" data-user="{{ dialog.users.id }}" data-to="{{ dialog.usersTo.id }}" data-path-from="{{ dialog.users.path | imagine_filter('mini_avatar') }}" data-path-to="{{ dialog.usersTo.path | imagine_filter('mini_avatar') }}">
+        {% for message in messages %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm bottom10 {% if message.users.id == dialog.users.id %}pull-right{% endif %} col-md-4" data-user="username_{{ message.users.id }}">
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="{{ path('user_friends', {'id': message.users.id}) }}">
+                                    <img class="media-object" src="{% if (message.users.path != '') %}{{ message.users.path | imagine_filter('mini_avatar') }}{% endif %}" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <p class="small text-muted">{{ message.createdAt.format('Y-m-d H:i:s') }}</p>
+                                <p>{{ message.text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-12">
+        {{ form_errors(form) }}
+        <div class="form-group">
+            {{ form_errors(form.text) }}
+            {{ form_widget(form.text) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.save) }}
+        </div>
+        {{form_rest(form)}}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bootstrap/js/date.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/messages.js') }}" type="text/javascript"></script>
+{% endblock %}

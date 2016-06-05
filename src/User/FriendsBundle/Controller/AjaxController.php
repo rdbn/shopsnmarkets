@@ -16,6 +16,8 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AjaxController extends FOSRestController
 {
@@ -29,7 +31,12 @@ class AjaxController extends FOSRestController
      *
      * @param int $id
      *
+     * @Route("/friends/add/{id}", name="add_friends", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
      * @Rest\View()
+     *
+     * @return string
      */
     public function addAction($id)
     {
@@ -60,7 +67,12 @@ class AjaxController extends FOSRestController
      * @param int $type
      * @param int $user
      *
+     * @Route("/friends/add/check/{type}/{user}", name="check_friends", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
      * @Rest\View()
+     *
+     * @return string
      */
     public function checkAction($type, $user)
     {
@@ -93,7 +105,7 @@ class AjaxController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     description="Удалить из друга",
+     *     description="Удалить из друзей",
      *     statusCodes={
      *         200="Нормальный ответ"
      *     }
@@ -101,7 +113,12 @@ class AjaxController extends FOSRestController
      *
      * @param int $id
      *
+     * @Route("/friends/remove/{id}", name="remove_friends", defaults={"_format": "json"})
+     * @Method({"GET"})
+     *
      * @Rest\View()
+     *
+     * @return string
      */
     public function removeAction($id)
     {
@@ -132,7 +149,12 @@ class AjaxController extends FOSRestController
      *
      * @param Request $request
      *
+     * @Route("/friends/result/search", name="result_search", defaults={"_format": "json"})
+     * @Method({"GET", "POST"})
+     *
      * @Rest\View()
+     *
+     * @return mixed
      */
     public function searchAction(Request $request)
     {
@@ -149,10 +171,11 @@ class AjaxController extends FOSRestController
                 ->setCityId($users->getCity())
                 ->setUserId($id)
                 ->getResult();
-            
+
             $avalancheService = $this->get('liip_imagine.cache.manager');
             $result = array_map(function ($data) use ($avalancheService) {
-                return $avalancheService->getBrowserPath($data["path"], 'avatar');
+                $data["path"] = $avalancheService->getBrowserPath($data["path"], 'avatar');
+                return $data;
             }, $result);
 
             return $result;

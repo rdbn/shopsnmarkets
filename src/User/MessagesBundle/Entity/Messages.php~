@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -23,13 +23,13 @@ class Messages
     protected $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User\MessagesBundle\Entity\Dialog")
-     * @ORM\JoinColumn(name="dialog_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User\MessagesBundle\Entity\Dialog", inversedBy="messages", cascade={"all"})
+     * @ORM\JoinColumn(name="dialog_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $dialog;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User\RegistrationBundle\Entity\Users")
+     * @ORM\ManyToOne(targetEntity="User\UserBundle\Entity\Users")
      * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
      */
     protected $users;
@@ -47,15 +47,16 @@ class Messages
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
     
     /**
      * Consrtuct for class Messages
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->createdAt = new \DateTime();
-        $this->check_message = false;
+        $this->flags = false;
     }
 }

@@ -1,50 +1,42 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 namespace User\MessagesBundle\Form\Type;
 
-use User\MessagesBundle\Form\Type\DialogType;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 Class MessagesType extends AbstractType
 {
-    protected $take, $send;
-    
-    public function __construct($take, $send) {
-        $this->take = $take;
-        $this->send = $send;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('dialog', new DialogType($this->take, $this->send), array(
-            'data_class' => 'User\MessagesBundle\Entity\Dialog',
-        ));
-        $builder->add('users', 'users', array(
-            'data' => $this->send,
-        ));
-        $builder->add('text', 'textarea', array(
-            'label' => 'Сообщение *:',
-            'data' => isset($options['data']) ? $options['data']->getText() : NULL,
-        ));
+        $builder->add('text', TextareaType::class, [
+            'label' => false,
+            'attr' => [
+                'class' => 'form-control',
+                'placeholder' => 'Сообщение *',
+                'rows' => '5',
+            ]
+        ]);
+        $builder->add('save', SubmitType::class, [
+            "label" => "Отправить сообщение",
+            'attr' => [
+                "class" => "btn btn-success ",
+            ],
+        ]);
     }
     
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'User\MessagesBundle\Entity\Messages'
-        ));
-    }
-
-    public function getName()
-    {
-        return 'Message';
+        ]);
     }
 }
-?>

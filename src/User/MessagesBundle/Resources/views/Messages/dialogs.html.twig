@@ -1,0 +1,33 @@
+{% extends 'UserUserBundle::layout.html.twig' %}
+
+{% block title %}Сообщения{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        {{ include('UserMessagesBundle:Menu:menu.html.twig') }}
+    </div>
+    <div class="col-md-12">
+        <button class="btn btn-link btn-xs" data-toggle="{{ id }}">Непрочитанные сообщения</button>
+    </div>
+    {% for dialog in dialogs %}
+        <div class="col-md-6 top20">
+            <div class="media">
+                <div class="media-left">
+                    <a href="{{ path('dialog', { 'id' : dialog.id }) }}">
+                        <img class="media-object img-thumbnail" src="{% if (dialog.usersTo.path != '') %}{{ dialog.usersTo.path | imagine_filter('message_avatar') }}{% endif %}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading text-success">{{ dialog.messages[0].users.realname }}</h4>
+                    <p class="{% if (dialog.flags == false) %}unread{% endif %}">
+                        <h5 class="media-heading text-muted">{{ dialog.messages[0].text }}</h5>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {#<script src="{{ asset('public/js/user/Dialog.js') }}" type="text/javascript"></script>#}
+{% endblock %}

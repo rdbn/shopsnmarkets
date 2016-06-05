@@ -1,13 +1,13 @@
 user_messages:
-    resource: "@UserMessagesBundle/Resources/config/routing.yml"
-    prefix:   /
-
-user_friends:
-    resource: "@UserFriendsBundle/Resources/config/routing.yml"
+    resource: "@UserMessagesBundle/Controller/"
     prefix:   /
     
 user_user:
     resource: "@UserUserBundle/Controller/"
+    prefix:   /
+
+user_friends:
+    resource: "@UserFriendsBundle/Controller/"
     prefix:   /
 
 user_advertising:

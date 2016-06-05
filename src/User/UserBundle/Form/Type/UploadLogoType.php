@@ -18,7 +18,7 @@ class UploadLogoType extends AbstractType
     {
         $builder->add('file', FileType::class, [
             'label' => 'Загрузить аватарку',
-            'label_attr' => ["class" => "btn btn-success btn-sm"],
+            'label_attr' => ["class" => "btn btn-success "],
             'attr' => ["class" => "hide"],
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -47,14 +47,15 @@ class Messages
     /**
      * @ORM\Column(type="datetime", name="created_at")
      *
-     * @var DateTime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
     
     /**
      * Consrtuct for class Messages
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->createdAt = new \DateTime();
         $this->flags = false;
     }
@@ -62,7 +63,7 @@ class Messages
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,19 +74,20 @@ class Messages
      * Set text
      *
      * @param string $text
+     *
      * @return Messages
      */
     public function setText($text)
     {
         $this->text = $text;
-    
+
         return $this;
     }
 
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -96,19 +98,20 @@ class Messages
      * Set flags
      *
      * @param boolean $flags
+     *
      * @return Messages
      */
     public function setFlags($flags)
     {
         $this->flags = $flags;
-    
+
         return $this;
     }
 
     /**
      * Get flags
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getFlags()
     {
@@ -119,19 +122,20 @@ class Messages
      * Set createdAt
      *
      * @param \DateTime $createdAt
+     *
      * @return Messages
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -142,19 +146,20 @@ class Messages
      * Set dialog
      *
      * @param \User\MessagesBundle\Entity\Dialog $dialog
+     *
      * @return Messages
      */
     public function setDialog(\User\MessagesBundle\Entity\Dialog $dialog = null)
     {
         $this->dialog = $dialog;
-    
+
         return $this;
     }
 
     /**
      * Get dialog
      *
-     * @return \User\MessagesBundle\Entity\Dialog 
+     * @return \User\MessagesBundle\Entity\Dialog
      */
     public function getDialog()
     {
@@ -165,12 +170,13 @@ class Messages
      * Set users
      *
      * @param \User\UserBundle\Entity\Users $users
+     *
      * @return Messages
      */
     public function setUsers(\User\UserBundle\Entity\Users $users = null)
     {
         $this->users = $users;
-    
+
         return $this;
     }
 

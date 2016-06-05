@@ -158,9 +158,29 @@ var AddComments = {
     }
 };
 
+var AddSubscriber = {
+    query: function () {
+        var element = $(this);
+        var id = element.attr('data-toggle');
+
+        $.get('/app_dev.php/subscribeShop/'+id, function(data) {
+            var subscribe = Number(element.parent('.menuBok').find('.count').text());
+            var count = subscribe + 1;
+            element.parent('.menuBok').find('.count').text(count);
+            element.remove();
+        });
+    },
+    click: function () {
+        $('#add-subscriber').click(function() {
+            AddSubscriber.query();
+        });
+    }
+};
+
 $(document).ready(function() {
     ShopProducts.click();
     ShopInformation.click();
     ShowComments.click();
     AddComments.click();
+    AddSubscriber.click();
 });

@@ -3,9 +3,18 @@
 {% block title %}Товары{% endblock %}
 
 {% block body %}
-    <div class="top20">
-        {{ render(controller('PlatformMainBundle:Page:searchForm')) }}
-    </div>
+    <form id="search" action="#" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+        <div class="input-group">
+            {{ form_label(form.hashTags) }}
+            {{ form_errors(form.hashTags) }}
+            {{ form_widget(form.hashTags) }}
+            <span class="input-group-btn">
+                {{ form_widget(form.save) }}
+            </span>
+        </div>
+        {{form_rest(form)}}
+    </form>
     <div id="load" class="hide"><img src="{{ asset("public/images/load/ajax-loader.gif") }}"></div>
     <div id="result" class="row top20">
         {% for product in products %}
@@ -29,7 +38,7 @@
     <div id="result-search" class="row"></div>
     <div class="row">
         <div class="col-md-12 text-center">
-            <button id="pagination" class="btn btn-warning btn-sm" data-pagination="16">Показать еще</button>
+            <button id="pagination" class="btn btn-warning " data-pagination="16">Показать еще</button>
         </div>
     </div>
 {% endblock %}

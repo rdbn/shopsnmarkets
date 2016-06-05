@@ -77,11 +77,18 @@ class ShopsRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT s.id, s.shopname, s.path, count(DISTINCT u) as users
+                SELECT 
+                  s.id, 
+                  s.uniqueName,
+                  s.shopname, 
+                  s.path, 
+                  count(DISTINCT u) as subscribers, 
+                  m.id as manager
                 FROM ShopCreateBundle:Shops s
-                LEFT JOIN s.users u
+                  LEFT JOIN s.manager m
+                  LEFT JOIN s.users u
                 WHERE s.uniqueName = :name
-                GROUP BY s
+                GROUP BY s.id, m.id
             ')
             ->setParameter('name', $name);
 

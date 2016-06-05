@@ -3,14 +3,14 @@
 {% block title %}Shops & Markets{% endblock %}
 
 {% block body %}
-    <div class="jumbotron top20">
-        <h1>Shops & Markets</h1>
-        <p>Социальная сеть интернет магазинов.</p>
-        <p><a class="btn btn-success btn-lg" href="{{ path("create_shop") }}" role="button">Создать магазин</a></p>
+    <div class="jumbotron bottom20">
+        <div class="container">
+            <h1>Shops & Markets</h1>
+            <p>Социальная сеть интернет магазинов.</p>
+            <p><a class="btn btn-success btn-lg" href="{{ path("create_shop") }}" role="button">Создать магазин</a></p>
+        </div>
     </div>
-    <a class="btn btn-warning" href="#">Топ 100 магазинов</a>
-
-    <div class="row top20 bottom20">
+    <div class="row top20">
         <div class="row">
         {% for shop in shops %}
             <div class="col-lg-3 bottom20">

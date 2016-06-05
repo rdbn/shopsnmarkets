@@ -16,8 +16,9 @@
 
 {% block content %}
     {% if isCreate != true %}
-        {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
-        <div class="row">
+        <div class="col-lg-12">
+            {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
+        </div>
     {% endif %}
     <div class="{% if isCreate %}col-lg-offset-3{% endif %} col-lg-6 top20">
         {{ form_start(form) }}
@@ -71,7 +72,6 @@
             </div>
         {{ form_end(form) }}
     </div>
-    {% if isCreate != true %}</div>{% endif %}
 {% endblock %}
 
 {% block javascripts %}

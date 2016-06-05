@@ -3,50 +3,56 @@
 {% block title %}Доставка{% endblock %}
 
 {% block content %}
-    {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
-    <div id="formValue" class="top20" data-prototype="{{ form_widget(form.shopsDelivery.vars.prototype)|e }}">
+    <div class="col-md-12">
+        {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
+    </div>
+    <div id="formValue" data-prototype="{{ form_widget(form.shopsDelivery.vars.prototype)|e }}">
     {{ form_start(form) }}
         {% for key, delivery in form.shopsDelivery %}
-            <div class="media">
-                <div class="media-left media-middle">
-                    <a href="{{ shopsDelivery[key].id }}">
-                        <img src="{{ asset(shopsDelivery[key].image) }}" alt="{{ shopsDelivery[key].name }}" />
-                    </a>
-                </div>
-                <div class="media-body">
-                    <div class="media-heading">
-                        <p class="text-success">{{ shopsDelivery[key].name }}</p>
-                        {{ form_widget(delivery.shops) }}
-                        {{ form_widget(delivery.delivery) }}
-                        <div class="form-group">
-                            {{ form_label(delivery.price) }}
-                            {{ form_errors(delivery.price) }}
-                            {{ form_widget(delivery.price) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(delivery.duration) }}
-                            {{ form_errors(delivery.duration) }}
-                            {{ form_widget(delivery.duration) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_widget(delivery.submit) }}
+            <div class="col-md-6 top10">
+                <div class="media">
+                    <div class="media-left media-middle">
+                        <a href="{{ shopsDelivery[key].id }}">
+                            <img src="{{ asset(shopsDelivery[key].image) }}" alt="{{ shopsDelivery[key].name }}" />
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="media-heading">
+                            <p class="text-success">{{ shopsDelivery[key].name }}</p>
+                            {{ form_widget(delivery.shops) }}
+                            {{ form_widget(delivery.delivery) }}
+                            <div class="form-group">
+                                {{ form_label(delivery.price) }}
+                                {{ form_errors(delivery.price) }}
+                                {{ form_widget(delivery.price) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(delivery.duration) }}
+                                {{ form_errors(delivery.duration) }}
+                                {{ form_widget(delivery.duration) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(delivery.submit) }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
         {% for key, delivery in deliveries %}
-            <div class="media">
-                <div class="media-left media-middle">
-                    <a href="{{ delivery.id }}">
-                        <img src="{{ asset(delivery.image) }}" alt="{{ delivery.name }}" />
-                    </a>
-                </div>
-                <div class="media-body">
-                    <div class="media-heading" datatype="{{ key }}">
-                        <p class="text-success">{{ delivery.name }}</p>
-                        <div class="form-group">
-                            <button class="btn btn-success addForm" type="button">Добавить</button>
+            <div class="col-md-6 top10">
+                <div class="media">
+                    <div class="media-left media-middle">
+                        <a href="{{ delivery.id }}">
+                            <img src="{{ asset(delivery.image) }}" alt="{{ delivery.name }}" />
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="media-heading" datatype="{{ key }}">
+                            <p class="text-success">{{ delivery.name }}</p>
+                            <div class="form-group">
+                                <button class="btn btn-success addForm" type="button">Добавить</button>
+                            </div>
                         </div>
                     </div>
                 </div>

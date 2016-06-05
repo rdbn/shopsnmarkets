@@ -37,7 +37,7 @@ class PasswordType extends AbstractType
             ],
         ));
         $builder->add('save', SubmitType::class, array(
-            'attr' => ['class' => 'btn btn-success btn-sm center-block'],
+            'attr' => ['class' => 'btn btn-success  center-block'],
             'label' => 'Сохранить'
         ));
     }

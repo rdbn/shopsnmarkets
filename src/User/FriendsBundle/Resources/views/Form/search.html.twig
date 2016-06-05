@@ -3,32 +3,32 @@
 {% block title %}Поиск друзей{% endblock %}
 
 {% block content %}
-    {{ include('UserFriendsBundle:Friends:menu.html.twig') }}
-    <div class="row top20">
-        {{ form_errors(form) }}
-        <div class="col-md-9">
-            <div class="input-group">
-                {{ form_errors(form.realname) }}
-                {{ form_widget(form.realname) }}
-                <span class="input-group-btn">
-                    <button id="search" class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
-            <div id="result-search" class="row"></div>
+    <div class="col-md-12 bottom20">
+        {{ include('UserFriendsBundle:Friends:menu.html.twig') }}
+    </div>
+    {{ form_errors(search) }}
+    <div class="col-md-9">
+        <div class="input-group">
+            {{ form_errors(search.realname) }}
+            {{ form_widget(search.realname) }}
+            <span class="input-group-btn">
+                <button id="search" class="btn btn-default" type="button">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                {{ form_errors(form.country) }}
-                {{ form_widget(form.country) }}
-            </div>
-            <div class="form-group">
-                {{ form_errors(form.city) }}
-                {{ form_widget(form.city) }}
-            </div>
-            {{form_rest(form)}}
+        <div id="result-search" class="row"></div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            {{ form_errors(search.country) }}
+            {{ form_widget(search.country) }}
         </div>
+        <div class="form-group">
+            {{ form_errors(search.city) }}
+            {{ form_widget(search.city) }}
+        </div>
+        {{form_rest(search)}}
     </div>
 {% endblock %}
 

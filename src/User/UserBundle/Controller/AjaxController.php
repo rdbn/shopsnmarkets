@@ -35,11 +35,13 @@ class AjaxController extends FOSRestController
      * @Method({"GET"})
      *
      * @Rest\View(serializerGroups={"city"})
+     *
+     * @return array
      */
     public function cityAction($id)
     {
         $city = $this->getDoctrine()->getRepository('UserUserBundle:City')
-            ->findByCountry($id);
+            ->findBy(["country" => $id]);
 
         return $city;
     }
@@ -64,7 +66,8 @@ class AjaxController extends FOSRestController
     public function emailAction($mail)
     {
         $email = new Email();
-        $errors = $this->get('validator')->validateValue($mail, $email);
+        $errors = $this->get('validator')
+            ->validateValue($mail, $email);
         
         if (count($errors) == 0) {
             $user = $this->getUser();
@@ -86,39 +89,6 @@ class AjaxController extends FOSRestController
             $view = $this->view("Not valid email", 402);
             return $this->handleView($view);
         }
-    }
-
-    /**
-     * @ApiDoc(
-     *     description="Добавляем к пользователю описание",
-     *     statusCodes={
-     *         200="Нормальный ответ"
-     *     }
-     * )
-     *
-     * @param Request $request
-     *
-     * @Route("/add/description", name="api_user_description", defaults={"_format": "json"})
-     * @Method({"POST"})
-     *
-     * @Rest\View()
-     *
-     * @return mixed
-     */
-    public function descriptionAction(Request $request)
-    {
-        $user = $this->getUser();
-        $form = $this->createForm(new DescriptionType(), $user);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-
-            return true;
-        }
-
-        return $form->getErrors();
     }
 
     /**

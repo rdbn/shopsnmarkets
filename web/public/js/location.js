@@ -17,7 +17,7 @@ function locations(send, take) {
 $(document).ready(function () {
     locations('shops_country', 'shops_city');
     locations('SearchPartners_country', 'SearchPartners_city');
-    locations('Search_country', 'Search_city');
+    locations('search_country', 'search_city');
     locations('user_information_country', 'user_information_city');
     locations('address_country', 'address_city');
 });

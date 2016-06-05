@@ -55,6 +55,14 @@ body {
     float: none;
 }
 
+#all-messages {
+    min-height: 250px;
+    max-height: 490px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
 .ui-autocomplete {
     max-height: 250px;
     overflow-y: auto;

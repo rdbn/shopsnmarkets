@@ -9,7 +9,7 @@
                 <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            <h4 class="text-success">Авторизация</h4>
+            <h4 class="text-success">Войти на сайт</h4>
             <div id="errors" class="login_error"></div>
             <form action="{{ path('login') }}" method="post">
                 <div class="form-group">
@@ -23,11 +23,11 @@
                         <input type="checkbox" id="remember_me" name="_remember_me" checked /> Запомнить меня
                     </label>
                 </div>
-                <button class="btn btn-success btn-sm" type="submit">Войти</button>
+                <button class="btn btn-success " type="submit">Войти</button>
             </form>
         </div>
         <div class="col-lg-6">
-            <h4 class="text-success">Регистрация</h4>
+            <h4 class="text-success">Зарегистрироваться на сайте</h4>
             {{ form_start(form) }}
                 {{ form_errors(form) }}
                 <div id="emails-valid" class="form-group"></div>

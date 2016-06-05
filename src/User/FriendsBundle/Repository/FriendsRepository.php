@@ -95,7 +95,7 @@ class FriendsRepository extends EntityRepository
     }
 
     /**
-     * Список заявок пользователя в друзья(от него)
+     * Список друзей друга
      *
      * @param int $id
      * @param int $count
@@ -106,11 +106,9 @@ class FriendsRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT fu.id, fu.realname, fu.path FROM UserUserBundle:Users u
-                LEFT JOIN u.friends f
-                LEFT JOIN f.friends fu
-                WHERE u.id = :id AND f.checkFriends = \'t\'
-                GROUP BY f
+                SELECT f, fu FROM UserFriendsBundle:Friends f
+                  LEFT JOIN f.friends fu
+                WHERE f.users = :id AND f.checkFriends = \'t\'
             ')
             ->setParameter('id', $id)
             ->setFirstResult($count)

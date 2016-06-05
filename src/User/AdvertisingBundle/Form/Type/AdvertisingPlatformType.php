@@ -72,7 +72,7 @@ class AdvertisingPlatformType extends AbstractType
         ]);
         $builder->add('file', FileType::class, [
             'label' => 'Добавить изображение',
-            'label_attr' => ['class' => 'btn btn-success btn-sm'],
+            'label_attr' => ['class' => 'btn btn-success '],
             'attr' => ['class' => 'hide'],
         ]);
         $builder->add('save', SubmitType::class, [

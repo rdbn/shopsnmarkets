@@ -1,30 +1,24 @@
 {% extends '::main_platform.html.twig' %}
 
 {% block body %}
-    <div class="row top20">
-        <div class="col-lg-2 small">
-            <p><a class="text-success" href="{{ path('user') }}">Моя Страница</a></p>
-            {% if is_granted('ROLE_MANAGER') %}
-                <p><a class="text-success" href="{{ path('user_shops') }}">Мои Магазины</a></p>
-            {% endif %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <p><a class="text-success" href="{{ path('_allMessage') }}">Мои Сообщения</a></p>
-            {% endif %}
-            <p><a class="text-success" href="{{ path('_friends') }}">Мои Друзья</a></p>
-            {% if is_granted('ROLE_MANAGER') %}
-                <p><a class="text-success" href="{{ path('_partners') }}">Мои Партнеры</a></p>
-            {% endif %}
-            <p><a class="text-success" href="{{ path('user_order') }}">Мои Заказы</a></p>
-            <br>
-            {% if is_granted('ROLE_MANAGER') %}
-                <p><a class="text-success" href="{{ path('advertising') }}">Реклама</a></p>
-            {% else %}
-                {#<p><a href="{{ path('_bookmarks') }}">Закладки</a></p>#}
-            {% endif %}
-            <p><a class="text-success" href="{{ path('property') }}">Настройки</a></p>
-        </div>
-        <div class="col-lg-10">
-            {% block content %}{% endblock %}
-        </div>
+    <ul class="nav nav-tabs bottom20">
+        <li {% if isUser is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('user') }}">Моя Страница</a></li>
+        {% if is_granted('ROLE_MANAGER') %}
+            <li {% if isShops is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('user_shops') }}">Мои Магазины</a></li>
+        {% endif %}
+        <li {% if isMessage is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('messages') }}">Мои Сообщения <span class="badge">0</span></a></li>
+        <li {% if isFriends is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('friends') }}">Мои Друзья</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li {% if isPartners is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('_partners') }}">Мои Партнеры</a></li>
+        {% endif %}
+        <li {% if isOrder is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('user_order') }}">Мои Заказы</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li {% if isAdvertising is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('advertising') }}">Реклама</a></li>
+        {% endif %}
+        {#<li><a href="{{ path('_bookmarks') }}">Закладки</a></li>#}
+        <li {% if isProperty is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('property') }}">Настройки</a></li>
+    </ul>
+    <div class="row">
+        {% block content %}{% endblock %}
     </div>
 {% endblock %}

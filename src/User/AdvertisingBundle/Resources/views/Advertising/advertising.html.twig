@@ -7,8 +7,8 @@
     <div class="row top20">
         <div class="col-md-12">
             <div class="btn-group">
-                <button id="platform" class="btn btn-success btn-sm">Реклама на платформе</button>
-                <button id="shops" class="btn btn-success btn-sm">Реклама в магазине</button>
+                <button id="platform" class="btn btn-success ">Реклама на платформе</button>
+                <button id="shops" class="btn btn-success ">Реклама в магазине</button>
             </div>
         </div>
         {% if advertising != null %}
@@ -18,7 +18,7 @@
                     <p>Место показа: <span class="text-success">{{ value.name }}</span></p>
                     <p>Время начала показа: <span class="text-success">{{ value.date_start.format("Y-m-d H:i:s") }}.</span></p>
                     <p>Время окончания показа: <span class="text-success">в {{ value.date_end.format("Y-m-d H:i:s") }}.</span></p>
-                    <a class="btn btn-success btn-sm bottom20" href="#">Показать картинку</a>
+                    <a class="btn btn-success  bottom20" href="#">Показать картинку</a>
                     {% if value.format == '1' %}
                         <img class="img-thumbnail" src="{{ value.path | imagine_filter('advertisingSliderPlatform') }}" />
                     {% else %}

@@ -71,9 +71,9 @@ class PutController extends Controller
                 $em->persist($shops);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('delivery', [
+                return $this->redirectToRoute('delivery', [
                     'shopname' => $shops->getUniqueName(),
-                ]));
+                ]);
             }
         }
 

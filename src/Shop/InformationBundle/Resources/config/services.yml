@@ -1,8 +1,0 @@
-parameters:
-
-services:
-    shop.type.user_id:
-        class: Shop\InformationBundle\Form\Type\UserIDType
-        arguments: ["@doctrine.orm.entity_manager"]
-        tags:
-            - { name: form.type, alias: userID }

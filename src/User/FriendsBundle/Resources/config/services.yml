@@ -1,6 +1,0 @@
-parameters:
-
-services:
-    search.users:
-        class: User\FriendsBundle\Services\Search
-        arguments: ["@doctrine.orm.entity_manager"]

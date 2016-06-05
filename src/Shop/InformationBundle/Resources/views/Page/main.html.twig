@@ -3,13 +3,19 @@
 {% block title %}{{ shop.shopname }}{% endblock %}
 
 {% block body %}
-    <div class="row top20">
+    <div class="row">
         <div class="col-lg-2">
             <img class="img-thumbnail" src="{% if (shop.path != '') %}{{ shop.path | imagine_filter('logo_shop') }}{% endif %}" />
             {% if is_granted('ROLE_ADMIN') %}
-                <button class="btn btn-success btn-sm top20" data-toggle="" f="{{ shop.id }}">Подписаться на новости</button>
+                <div class="btn-group-vertical text-center">
+                    {% if isShopManager == false %}
+                    <button id="add-subscriber" class="btn btn-success btn-sm top10" data-toggle="{{ shop.id }}">
+                        Подписаться на новости
+                    </button>
+                    {% endif %}
+                </div>
             {% endif %}
-            {#<p>Всего покупателей: <span class="count">{{ shop.users }}</span></p>#}
+            <p class="text-muted text-center top10">Всего подписчеков: <span class="text-success">{{ shop.subscribers }}</span></p>
         </div>
         <div class="col-lg-10">
             <h3 class="top0">{{ shop.shopname }}</h3>
@@ -58,6 +64,9 @@
                 <button id="shop-information" class="btn btn-success" data-toggle="{{ shop.uniqueName }}">Инфо о магазине</button>
                 <button id="show-comments" class="btn btn-success" datatype="{{ shop.id }}" data-toggle="modal" data-target="#comments">
                     Отзывы
+                </button>
+                <button id="add-message" class="btn btn-success" data-user="{{ shop.manager }}" data-toggle="modal" data-target="#send-message">
+                    <span class="glyphicon glyphicon-edit"></span> Написать продавцу
                 </button>
                 {#<button class="btn btn-success" href="{{ path('_partnersShop', { 'shopname' : uniqueName }) }}">Партнеры</button>#}
                 {% if isShopManager %}
@@ -139,9 +148,35 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="send-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Написат сообщение</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_errors(message) }}
+                    <div class="form-group">
+                        {{ form_errors(message.text) }}
+                        {{ form_widget(message.text) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(message.save) }}
+                    </div>
+                    {{form_rest(message)}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('bootstrap/js/add-like.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bootstrap/js/main-shop.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/add-message.js') }}" type="text/javascript"></script>
 {% endblock %}
