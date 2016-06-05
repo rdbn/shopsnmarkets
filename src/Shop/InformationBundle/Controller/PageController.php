@@ -37,8 +37,8 @@ class PageController extends Controller
             ->findOneByShop($shopname);
 
         $isShopManager = false;
-        if ($shop['manager'] == $this->getUser()->getId()) {
-            $isShopManager = true;
+        if ($this->getUser()) {
+            if ($shop['manager'] == $this->getUser()->getId()) $isShopManager = true;
         }
 
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
