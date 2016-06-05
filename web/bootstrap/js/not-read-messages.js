@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var message = io.connect('http://localhost:8080/notRead'),
+    var message = io.connect('http://shopsnmarkets.com:88/notRead'),
         username = "username_"+$("#not-read").attr('data-toggle');
 
     message.emit("addUser", {username: username});
