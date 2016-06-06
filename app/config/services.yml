@@ -6,6 +6,13 @@ services:
     fos_user.doctrine_registry:
         alias: doctrine
 
+    app.twig_extension:
+        class: User\MessagesBundle\Twig\UserMessageExtension
+        public: false
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+        tags:
+            - { name: twig.extension }
+
     message.user:
         class: User\MessagesBundle\Consumer\MessageUserConsumer
         arguments: ["@doctrine.orm.entity_manager", "@snc_redis.default"]

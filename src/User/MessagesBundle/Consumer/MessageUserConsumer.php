@@ -55,12 +55,8 @@ class MessageUserConsumer implements ConsumerInterface
 
         /** Save message */
         $this->em->flush();
-
-
-        $this->redis->publish('not-read', json_encode([
-            'username' => 'username_'.$parameters['to'],
-        ]));
-
+        $this->sendCountNotReadMessage($to[1]);
+        
         return true;
     }
 
@@ -118,5 +114,25 @@ class MessageUserConsumer implements ConsumerInterface
         }
 
         $this->em->persist($message);
+    }
+
+    /**
+     * Отправляем метку количества не прочитанных сообщений
+     *
+     * @param int $user
+     *
+     * @return integer
+    */
+    private function sendCountNotReadMessage($user)
+    {
+        $notReadMessage = $this->em->getRepository("UserMessagesBundle:Dialog")
+            ->findOneByNotReadMessage($user);
+
+        if ($notReadMessage > 0) {
+            $this->redis->publish('not-read', json_encode([
+                'username' => 'username_' . $user,
+                'count' => $notReadMessage,
+            ]));
+        }
     }
 }

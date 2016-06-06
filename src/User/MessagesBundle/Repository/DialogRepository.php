@@ -70,4 +70,29 @@ class DialogRepository extends EntityRepository
             return null;
         }
     }
+
+    /**
+     * Получаем количество ане прочитанных сообщений
+     *
+     * @param int $id
+     *
+     * @return int
+    */
+    public function findOneByNotReadMessage($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery("
+                SELECT count(d.id) as not_read FROM UserMessagesBundle:Dialog d
+                WHERE d.users = :id AND d.flags = 'f'
+            ")
+            ->setParameter("id", $id);
+
+        try {
+            $result = $query->getArrayResult();
+
+            return $result[0]["not_read"];
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }
