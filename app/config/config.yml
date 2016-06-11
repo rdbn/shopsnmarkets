@@ -267,10 +267,20 @@ old_sound_rabbit_mq:
         message_user:
             connection:       default
             exchange_options: {name: 'message', type: direct}
+        check_read:
+            connection:       default
+            exchange_options: {name: 'check-read', type: direct}
+
     consumers:
         message_user:
             connection:       default
             exchange_options: {name: 'message', type: direct}
             queue_options:    {name: 'message'}
             callback:         message.user
+            qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
+        check_read:
+            connection:       default
+            exchange_options: {name: 'check-read', type: direct}
+            queue_options:    {name: 'check-read'}
+            callback:         check.read
             qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}

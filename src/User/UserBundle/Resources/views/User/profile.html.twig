@@ -7,8 +7,9 @@
 {% block content %}
     <div class="col-md-5 bottom20">
         {{ form_start(form) }}
-            {{ form_errors(form) }}
-            {{ form_label(form.file) }}
+            <label class="btn btn-success" for="upload_logo_file">
+                <span class="glyphicon glyphicon-download"></span> Загрузить аватарку
+            </label>
             {{ form_widget(form.file) }}
         {{ form_end(form) }}
         <div class="media">
@@ -27,7 +28,9 @@
         </div>
     </div>
     <div class="col-md-7">
-        <a class='btn btn-success ' href='{{ path('create_shop') }}'>Создать магазин</a>
+        <a class='btn btn-success' href='{{ path('create_shop') }}'>
+            <span class="glyphicon glyphicon-plus"></span> Создать магазин
+        </a>
         {% if is_granted('ROLE_MANAGER') %}
             <div class="row top20">
                 {% for shop in shops %}

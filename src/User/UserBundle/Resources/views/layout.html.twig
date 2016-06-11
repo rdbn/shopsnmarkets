@@ -3,10 +3,7 @@
 {% block body %}
     <ul class="nav nav-tabs bottom20">
         <li {% if isUser is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('user') }}">Моя Страница</a></li>
-        {% if is_granted('ROLE_MANAGER') %}
-            <li {% if isShops is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('user_shops') }}">Мои Магазины</a></li>
-        {% endif %}
-        <li {% if isMessage is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('messages') }}">Мои Сообщения <span class="badge">0</span></a></li>
+        <li {% if isMessage is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('messages') }}">Мои Сообщения <span class="badge">{{ app.user.id|notReadMessage }}</span></a></li>
         <li {% if isFriends is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('friends') }}">Мои Друзья</a></li>
         {% if is_granted('ROLE_ADMIN') %}
             <li {% if isPartners is defined %}class="active"{% endif %}><a class="text-success" href="{{ path('_partners') }}">Мои Партнеры</a></li>

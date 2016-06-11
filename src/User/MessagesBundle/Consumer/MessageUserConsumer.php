@@ -10,35 +10,12 @@ namespace User\MessagesBundle\Consumer;
 use User\MessagesBundle\Entity\Dialog;
 use User\MessagesBundle\Entity\Messages;
 
-use Predis\Client;
 use PhpAmqpLib\Message\AMQPMessage;
-use Doctrine\ORM\EntityManager as Manager;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
+use User\MessagesBundle\Consumer\Handler\AbstractMessage;
 
-class MessageUserConsumer implements ConsumerInterface
+class MessageUserConsumer extends AbstractMessage implements ConsumerInterface
 {
-    /**
-     * @var Manager
-     */
-    private $em;
-
-    /**
-     * @var Client
-     */
-    private $redis;
-
-    /**
-     * init variable
-     *
-     * @param Manager $em
-     * @param Client $redis
-     */
-    public function __construct(Manager $em, Client $redis)
-    {
-        $this->em = $em;
-        $this->redis = $redis;
-    }
-
     public function execute(AMQPMessage $msg)
     {
         echo $msg->body . PHP_EOL;
@@ -114,25 +91,5 @@ class MessageUserConsumer implements ConsumerInterface
         }
 
         $this->em->persist($message);
-    }
-
-    /**
-     * Отправляем метку количества не прочитанных сообщений
-     *
-     * @param int $user
-     *
-     * @return integer
-    */
-    private function sendCountNotReadMessage($user)
-    {
-        $notReadMessage = $this->em->getRepository("UserMessagesBundle:Dialog")
-            ->findOneByNotReadMessage($user);
-
-        if ($notReadMessage > 0) {
-            $this->redis->publish('not-read', json_encode([
-                'username' => 'username_' . $user,
-                'count' => $notReadMessage,
-            ]));
-        }
     }
 }

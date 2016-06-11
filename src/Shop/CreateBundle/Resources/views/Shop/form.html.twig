@@ -20,12 +20,14 @@
             {{ include('ShopCreateBundle:Menu:menu.html.twig') }}
         </div>
     {% endif %}
-    <div class="{% if isCreate %}col-lg-offset-3{% endif %} col-lg-6 top20">
+    <div class="{% if isCreate %}col-lg-offset-3{% endif %} col-lg-6">
         {{ form_start(form) }}
             {{ form_errors(form) }}
             {{ form_widget(form.id) }}
             <div class="errors">
-                {% if errors == false %}<h3>Адресс магазина : уже занят</h3>{% endif %}
+                {% if errors == false %}
+                    <h3>Адресс магазина : уже занят</h3>
+                {% endif %}
                 {{ form_errors(form) }}
             </div>
             <div class="form-group">

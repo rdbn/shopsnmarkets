@@ -10,14 +10,13 @@
             <p><a class="btn btn-success btn-lg" href="{{ path("create_shop") }}" role="button">Создать магазин</a></p>
         </div>
     </div>
-    <div class="row top20">
-        <div class="row">
+    <div class="row">
         {% for shop in shops %}
-            <div class="col-lg-3 bottom20">
+            <div class="col-lg-4 bottom20">
                 <div class="media">
-                    <div class="media-left col-lg-5">
+                    <div class="media-left">
                         <a href="{{ path('main_shop', { 'shopname' : shop.uniqueName }) }}">
-                            <img class="media-object img-responsive" src="{% if (shop.path != '') %}{{ shop.path | imagine_filter('logo_shop') }}{% endif %}" />
+                            <img class="media-object img-thumbnail" src="{% if (shop.path != '') %}{{ shop.path | imagine_filter('logo_shop_information') }}{% endif %}" />
                         </a>
                     </div>
                     <div class="media-body">

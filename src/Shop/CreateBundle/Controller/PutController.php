@@ -87,6 +87,7 @@ class PutController extends Controller
             'form' => $form->createView(),
             'image' => $shops->getPath(),
             'isCreate' => true,
+            'isUser' => true,
             'errors' => true,
         ));
     }
@@ -141,6 +142,7 @@ class PutController extends Controller
             'image' => $shops->getPath(),
             'shopname' => $shopname,
             'isCreate' => false,
+            'isUser' => true,
             'errors' => true,
         ));
     }
@@ -182,10 +184,11 @@ class PutController extends Controller
         }
 
         return $this->render('ShopCreateBundle:Delivery:all.html.twig', [
+            'shopsDelivery' => $shopsDelivery,
             'form' => $form->createView(),
             'deliveries' => $deliveries,
-            'shopsDelivery' => $shopsDelivery,
             'shopname' => $shopname,
+            'isUser' => true,
         ]);
     }
 }

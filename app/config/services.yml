@@ -17,6 +17,10 @@ services:
         class: User\MessagesBundle\Consumer\MessageUserConsumer
         arguments: ["@doctrine.orm.entity_manager", "@snc_redis.default"]
 
+    check.read:
+        class: User\MessagesBundle\Consumer\CheckReadConsumer
+        arguments: ["@doctrine.orm.entity_manager", "@snc_redis.default"]
+
     search.product:
         class: Platform\MainBundle\Services\Search
         arguments: ["@doctrine.orm.entity_manager"]

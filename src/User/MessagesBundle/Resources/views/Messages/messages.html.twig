@@ -6,11 +6,17 @@
     <div class="col-md-12">
         {{ include('UserMessagesBundle:Menu:menu.html.twig') }}
     </div>
-    <div id="all-messages" class="col-md-12 top20" data-user="{{ dialog.users.id }}" data-to="{{ dialog.usersTo.id }}" data-path-from="{{ dialog.users.path | imagine_filter('mini_avatar') }}" data-path-to="{{ dialog.usersTo.path | imagine_filter('mini_avatar') }}">
-        {% for message in messages %}
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="well well-sm bottom10 {% if message.users.id == dialog.users.id %}pull-right{% endif %} col-md-4" data-user="username_{{ message.users.id }}">
+    <div class="col-md-12">
+        <div
+            id="all-messages"
+            class="top20"
+            data-user="{{ dialog.users.id }}"
+            data-to="{{ dialog.usersTo.id }}"
+            data-path-from="{% if dialog.users.path %}{{ dialog.users.path | imagine_filter('mini_avatar') }}{% endif %}"
+            data-path-to="{% if dialog.usersTo.path %}{{ dialog.usersTo.path | imagine_filter('mini_avatar') }}{% endif %}">
+            {% for message in messages %}
+                <div class="col-md-12 bottom10">
+                    <div class="well well-sm bottom0 {% if message.users.id == dialog.users.id %}pull-right{% endif %} col-md-4" data-user="username_{{ message.users.id }}">
                         <div class="media">
                             <div class="media-left">
                                 <a href="{{ path('user_friends', {'id': message.users.id}) }}">
@@ -18,14 +24,19 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <p class="small text-muted">{{ message.createdAt.format('Y-m-d H:i:s') }}</p>
+                                <p class="small text-muted">
+                                    {{ message.createdAt.format('Y-m-d H:i:s') }}
+                                    {% if message.users.id == dialog.users.id %}
+                                        <span class="glyphicon glyphicon-ok {% if message.flags %}text-success{% endif %}"></span>
+                                    {% endif %}
+                                </p>
                                 <p>{{ message.text }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
     <div class="col-md-12">
         {{ form_errors(form) }}

@@ -3,18 +3,12 @@
 {% block title %}Сообщения{% endblock %}
 
 {% block content %}
-    <div class="col-md-12">
-        {{ include('UserMessagesBundle:Menu:menu.html.twig') }}
-    </div>
-    <div class="col-md-12">
-        <button class="btn btn-link btn-xs" data-toggle="{{ id }}">Непрочитанные сообщения</button>
-    </div>
     {% for dialog in dialogs %}
-        <div class="col-md-6 top20">
+        <div class="col-md-6 bottom10">
             <div class="media">
                 <div class="media-left">
                     <a href="{{ path('dialog', { 'id' : dialog.id }) }}">
-                        <img class="media-object img-thumbnail" src="{% if (dialog.usersTo.path != '') %}{{ dialog.usersTo.path | imagine_filter('message_avatar') }}{% endif %}" alt="...">
+                        <img class="media-object img-thumbnail {% if (dialog.usersTo.path == '') %}img-avatar-message{% endif %}" {% if (dialog.usersTo.path != '') %}src="{{ dialog.usersTo.path | imagine_filter('message_avatar') }}"{% endif %} />
                     </a>
                 </div>
                 <div class="media-body">

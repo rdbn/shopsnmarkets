@@ -41,19 +41,30 @@ class MessagesRepository extends EntityRepository
     /**
      * Получаем все сообщения которые не прочитаны
      *
-     * @param int $id
+     * @param int $usersFrom
+     * @param int $usersTo
+     * @param int $toUsers
      *
      * @return array
      */
-    public function findByCheckMessages($id)
+    public function findByCheckMessages($usersFrom, $usersTo, $toUsers)
     {
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT m FROM UserMessagesBundle:Messages m
+                  LEFT JOIN m.dialog d
                   LEFT JOIN m.users u
-                WHERE m.dialog = :id AND m.flags = \'f\'
+                WHERE 
+                  d.users = :usersFrom
+                  AND d.usersTo = :usersTo 
+                  AND m.users = :toUsers 
+                  AND m.flags = \'f\'
             ')
-            ->setParameter('id', $id);
+            ->setParameters([
+                'usersFrom' => $usersFrom,
+                'usersTo' => $usersTo,
+                'toUsers' => $toUsers
+            ]);
 
         try {
             return $query->getResult();

@@ -6,6 +6,9 @@
  */
 namespace Shop\OrderBundle\Controller;
 
+use User\MessagesBundle\Entity\Messages;
+use User\MessagesBundle\Form\Type\MessagesType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -26,8 +29,11 @@ class OrderController extends Controller
         $em = $this->getDoctrine()->getManager();
         $orders = $em->getRepository("ShopOrderBundle:Order")
             ->findByUsersOrder($user->getId());
+
+        $form = $this->createForm(MessagesType::class, new Messages());
         
         return $this->render('ShopOrderBundle:Order:users.html.twig', [
+            'form' => $form->createView(),
             'orders' => $orders,
             'isOrder' => true,
         ]);

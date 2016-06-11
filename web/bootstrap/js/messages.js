@@ -10,16 +10,16 @@ var SendMessage = {
             path = element.attr('data-path-from');
         }
 
-        var html = '<div class="row"><div class="col-md-12">';
+        var html = '<div class="col-md-12 bottom10">';
         if (isFrom) {
-            html += '<div class="well well-sm pull-right bottom10 col-md-4" data-user="'+data.from+'">';
+            html += '<div class="well well-sm bottom0 pull-right col-md-4" data-user="'+data.from+'">';
         } else {
-            html += '<div class="well well-sm bottom10 col-md-4" data-user="'+data.from+'">';
+            html += '<div class="well well-sm bottom0 col-md-4" data-user="'+data.from+'">';
         }
 
         html += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="'+path+'">';
         html += '</a></div><div class="media-body"><p class="small text-muted">'+data.date+'</p><p>'+data.message+'</p>';
-        html += '</div></div></div></div>';
+        html += '</div></div></div>';
 
         return html;
     },
@@ -85,22 +85,33 @@ var SendMessage = {
         });
     }
 };
-var AddShowMessage = {
-    getQuery : function() {
-        
+var CheckMessage = {
+    username: null,
+    usernameTo: null,
+    chat: null,
+    connect: function () {
+        var domain = window.location.hostname ;
+        domain = domain == 'shopsnmarkets.com' ? domain+':88' : 'localhost:8080';
 
-        $.get('/message/messages/{id}/{count}', function(data) {
-
+        CheckMessage.chat = io.connect('http://'+domain+'/checkRead');
+    },
+    take: function () {
+        CheckMessage.chat.on('check-read', function (data) {
+            
         });
     },
-    click : function() {
-        $('#content .menuMessages .allMessages').click(function() {
-            AddShowMessage.getQuery();
+    send: function () {
+        var element = $("#all-messages");
+        CheckMessage.username = "username_"+element.attr('data-user');
+        CheckMessage.usernameTo = "username_"+element.attr('data-to');
 
-            return false;
+        CheckMessage.chat.emit("check", {
+            from: CheckMessage.username,
+            to: CheckMessage.usernameTo
         });
     }
 };
+
 var Delete = {
     getValue : function() {
         var arValue = [];
@@ -170,13 +181,23 @@ $(document).ready(function() {
     SendMessage.connect();
     SendMessage.take();
     SendMessage.send();
-    
-    $('#content').on('click', '.messages .message', function() {        
+
+    CheckMessage.connect();
+    CheckMessage.take();
+    CheckMessage.send();
+
+    Delete.select();
+    Delete.click();
+
+    var main = $("#all-messages");
+    main.scrollTop(main.get(0).scrollHeight);
+
+    $('#content').on('click', '.messages .message', function() {
         if (!$(this).hasClass('click')) {
             $(this).addClass('click');
             $(this).find('.tick').animate({'opacity' : '1'}, 200, function() {
                 var html = '<ul class="addMenu"><li><a class="basket" href="#">В корзину</a></li></ul>';
-                
+
                 if ($('#content .menuMessages').find('.addMenu').length === 0) {
                     $('#content .menuMessages').append(html).find('.addMenu').slideToggle(200, function() {
                         $(this).animate({'opacity' : '1'}, 200);
@@ -202,15 +223,4 @@ $(document).ready(function() {
             });
         }
     });
-
-    AddShowMessage.click();
-    Delete.select();
-    Delete.click();
-
-    var main = $("#all-messages");
-    main.scrollTop(main.get(0).scrollHeight);
-
-    /*setInterval(function() {
-        $.get('/message/messages/check/'+main.attr('data-toggle'));
-    }, 10000);*/
 });

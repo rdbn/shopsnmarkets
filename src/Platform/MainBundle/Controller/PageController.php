@@ -11,7 +11,6 @@ use User\MessagesBundle\Form\Type\MessagesType;
 
 use Shop\ProductBundle\Entity\Product;
 use Platform\MainBundle\Form\Type\SearchType;
-use Platform\MainBundle\Form\Type\SearchMainType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

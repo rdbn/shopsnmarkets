@@ -29,7 +29,10 @@ class AjaxMessageController extends FOSRestController
      * @param int $id
      * @param int $count
      *
-     * @Route("/message/messages/{id}/{count}", name="messages_all", defaults={"_format": "json"})
+     * @Route("/message/messages/{id}/{count}", name="messages_all", defaults={"_format": "json"}, requirements={
+     *     "id": "\d+",
+     *     "count": "\d+"
+     * })
      * @Method({"GET"})
      *
      * @Rest\View()
@@ -42,39 +45,6 @@ class AjaxMessageController extends FOSRestController
              ->findByUsersMessages($id, $count);
             
          return $messages;
-    }
-
-    /**
-     * @ApiDoc(
-     *     description="Обновляем флаг сообщения пользователя",
-     *     statusCodes={
-     *         200="Нормальный ответ"
-     *     }
-     * )
-     *
-     * @param int $id
-     *
-     * @Route("/message/messages/check/{id}", name="messages_check", defaults={"_format": "json"})
-     * @Method({"GET"})
-     *
-     * @Rest\View()
-     *
-     * @return string
-     */
-    public function checksAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $messages = $em->getRepository('UserMessagesBundle:Messages')
-            ->findByCheckMessages($id);
-
-        foreach ($messages as $message) {
-            /** @var Messages $message */
-            $message->setFlags(true);
-        }
-
-        $em->flush();
-
-        return "successful";
     }
 
     /**
@@ -100,7 +70,7 @@ class AjaxMessageController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
         $messages = $em->getRepository('UserMessagesBundle:Messages')
-            ->findByCheckMessages($id);
+            ->findByRemoveMessages($id);
 
         foreach ($messages as $message) {
             $em->remove($message);
