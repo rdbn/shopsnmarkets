@@ -25,9 +25,11 @@
                         </h4>
                         <p class="text-muted small">Подписчиков: {{ shop.users }}</p>
                         <p class="text-muted small">Рейтинг: {{ shop.rating }}</p>
-                        <button class="btn btn-success btn-xs" type="button">
+                        {% if is_granted('ROLE_USER') %}
+                        <button class="btn btn-success btn-xs add-like-shop" type="button" data-toggle="{{ shop.id }}">
                             Понравилось <span class="badge">{{ shop.likes }}</span>
                         </button>
+                        {% endif %}
                     </div>
                 </div>
             </div>
