@@ -53,7 +53,10 @@ class OrderController extends Controller
         $orders = $this->getDoctrine()->getRepository("ShopOrderBundle:Order")
             ->findByManagerOrder($user->getId());
 
+        $form = $this->createForm(MessagesType::class, new Messages());
+
         return $this->render('ShopOrderBundle:Order:manager.html.twig', [
+            'form' => $form->createView(),
             'orders' => $orders,
             'isOrder' => true,
         ]);
