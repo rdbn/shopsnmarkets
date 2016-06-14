@@ -15,16 +15,16 @@
             data-path-from="{% if dialog.users.path %}{{ dialog.users.path | imagine_filter('mini_avatar') }}{% endif %}"
             data-path-to="{% if dialog.usersTo.path %}{{ dialog.usersTo.path | imagine_filter('mini_avatar') }}{% endif %}">
             {% for message in messages %}
-                <div class="col-md-12 bottom10">
+                <div class="col-md-12 bottom10 message-user">
                     <div class="well well-sm bottom0 {% if message.users.id == dialog.users.id %}pull-right{% endif %} col-md-4" data-user="username_{{ message.users.id }}">
                         <div class="media">
                             <div class="media-left">
                                 <a href="{{ path('user_friends', {'id': message.users.id}) }}">
-                                    <img class="media-object" src="{% if (message.users.path != '') %}{{ message.users.path | imagine_filter('mini_avatar') }}{% endif %}" alt="...">
+                                    <img class="media-object {% if message.users.path == '' %}preview-avatar{% endif %}" {% if (message.users.path) %}src="{{ message.users.path | imagine_filter('mini_avatar') }}"{% endif %} />
                                 </a>
                             </div>
                             <div class="media-body">
-                                <p class="small text-muted">
+                                <p class="small text-muted {% if message.users.id == dialog.users.id %}{% if message.flags == false %}unread-message{% endif %}{% endif %}">
                                     {{ message.createdAt.format('Y-m-d H:i:s') }}
                                     {% if message.users.id == dialog.users.id %}
                                         <span class="glyphicon glyphicon-ok {% if message.flags %}text-success{% endif %}"></span>

@@ -97,7 +97,11 @@ var CheckMessage = {
     },
     take: function () {
         CheckMessage.chat.on('check-read', function (data) {
-            
+            $("#all-messages").find('.message-user .unread-message').each(function () {
+                var element = $(this);
+                element.removeClass('unread-message');
+                element.find("span").addClass('text-success');
+            });
         });
     },
     send: function () {
