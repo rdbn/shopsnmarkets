@@ -60,14 +60,14 @@ class OAuthProvider extends OAuthUserProvider
             throw new UsernameNotFoundException('Вы не идентифицированы т.к. не получен Email-адрес');
         }
         
-        $user=$this->getUserByUsername($username);// находим пользователя
+        $user = $this->getUserByUsername($username);// находим пользователя
         /** @var $user \User\UserBundle\Entity\Users */
 
         // если пользователя нет в базе данных - добавим его
         if(!$user || !$user->getId()){
             $service = $response->getResourceOwner()->getName();
             $setter = 'set'.ucfirst($service);
-            $setter_id = $setter.'Id';
+            $setter_id = $setter;
             $setter_token = $setter.'AccessToken';
             
             $user = new Users();
