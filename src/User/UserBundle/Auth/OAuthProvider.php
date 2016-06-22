@@ -56,8 +56,6 @@ class OAuthProvider extends OAuthUserProvider
         $token = $response->getAccessToken();// токен (уникальный идентификатор) для авторизации, например:ZxC1/2+3 (более 255 символов)
         $path = $response->getProfilePicture();// изображение профиля, может не быть, например:пусто
 
-        var_dump($response);
-        exit();
         if(empty($username)){
             throw new UsernameNotFoundException('Вы не идентифицированы т.к. не получен Email-адрес');
         }
