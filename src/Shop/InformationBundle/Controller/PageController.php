@@ -44,9 +44,6 @@ class PageController extends Controller
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
             ->findByProductShop($shopname, 0);
 
-        $advertising = $this->getDoctrine()->getRepository('UserAdvertisingBundle:AdvertisingShop')
-            ->findByShops($shop['id']);
-
         $shopEntity = $this->getDoctrine()->getRepository("ShopCreateBundle:Shops")
             ->findOneBy(['uniqueName' => $shopname]);
 
@@ -54,7 +51,7 @@ class PageController extends Controller
         $comments->setShops($shopEntity);
         $comments->setUsers($this->getUser());
         $comments = $this->createForm(CommentsType::class, $comments, [
-            'method' => 'POST',
+            'method' => 'post',
         ]);
 
         $search = $this->createForm(SearchShopType::class, new Product());
@@ -65,7 +62,6 @@ class PageController extends Controller
             'message' => $message->createView(),
             'search' => $search->createView(),
             'isShopManager' => $isShopManager,
-            'advertising' => $advertising,
             'shopname' => $shopname,
             'products' => $products,
             'shop' => $shop,

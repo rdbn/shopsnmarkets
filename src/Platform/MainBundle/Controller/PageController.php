@@ -61,9 +61,13 @@ class PageController extends Controller
         $products = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
             ->findByProductPlatform(0);
 
+        $countProducts = $this->getDoctrine()->getRepository('ShopProductBundle:Product')
+            ->findOneByCountProducts();
+
         $form = $this->createForm(SearchType::class, new Product());
 
         return $this->render('PlatformMainBundle:Page:products.html.twig', array(
+            'countProducts' => $countProducts,
             'form' => $form->createView(),
             'products' => $products,
         ));

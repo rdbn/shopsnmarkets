@@ -21,8 +21,16 @@ var RemoveOrder = {
         var product = element.attr("data-toggle");
 
         element.addClass("disabled");
-        $.get('/removeOrder/'+product, function() {
+        $.get('/removeOrder/'+product, function(data) {
             element.parents('.media').remove();
+
+            var media = $('.media');
+            if (media.length == 0) {
+                $('.final-sum').remove();
+            }
+
+            $('#all-count').text(data.count_product);
+            $('#all-sum').text(data.sum_product+".00");
         });
     },
     click: function() {
@@ -54,6 +62,9 @@ var UpdateNumber = {
 
             parents.find('.number-order').html(data.number);
             element.removeClass("disabled");
+
+            $('#all-count').text(data.count_product);
+            $('#all-sum').text(data.sum_product+".00");
         });
     },
     plus: function() {

@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 hidden-xs hidden-sm">
             <div class="row">
             {% for image in images %}
                 <div class="col-md-6 bottom20">
@@ -31,26 +31,27 @@
                 </button>
             </div>
             {% endif %}
+            <div class="row visible-xs visible-sm top20">
+                <div class="col-md-6 bottom20">
+                    <img class="img-thumbnail img-responsive" src="{{ asset(images[0].path | imagine_filter('main_product_image')) }}" alt="Product" />
+                </div>
+            </div>
             <p class='top20 text-muted'>{{ product.text }}</p>
-            <div class="row top20 bottom20">
-                <div class="col-lg-5">
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="{{ path('main_shop', { 'shopname' : product.uniqueName }) }}">
-                                <img class="media-object img-responsive" src="{% if (product.logo != '') %}{{ product.logo | imagine_filter('logo_shop') }}{% endif %}" />
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">
-                                <a class="text-success" href="{{ path('main_shop', { 'shopname' : product.uniqueName }) }}">{{ product.shopname }}</a>
-                            </h4>
-                            <p class="text-muted small">Подписчиков: {{ product.users }}</p>
-                            <p class="text-muted small">Рейтинг: {{ product.rating }}</p>
-                            <button class="btn btn-success btn-xs add-like-shop" type="button" data-toggle="{{ product.shop }}">
-                                Понравилось <span class="badge">{{ product.likes }}</span>
-                            </button>
-                        </div>
-                    </div>
+            <div class="media hidden-xs hidden-sm">
+                <div class="media-left">
+                    <a href="{{ path('main_shop', { 'shopname' : product.uniqueName }) }}">
+                        <img class="media-object img-responsive img-thumbnail" src="{% if (product.logo != '') %}{{ product.logo | imagine_filter('logo_shop_information') }}{% endif %}" />
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a class="text-success" href="{{ path('main_shop', { 'shopname' : product.uniqueName }) }}">{{ product.shopname }}</a>
+                    </h4>
+                    <p class="text-muted small">Подписчиков: {{ product.users }}</p>
+                    <p class="text-muted small">Рейтинг: {{ product.rating }}</p>
+                    <button class="btn btn-success btn-xs add-like-shop" type="button" data-toggle="{{ product.shop }}">
+                        Понравилось <span class="badge">{{ product.likes }}</span>
+                    </button>
                 </div>
             </div>
         </div>

@@ -1,16 +1,18 @@
 var Pagination = {
     getQuery : function(element) {
         element.addClass("disabled");
-        var result = $("#result-search");
+        var result = $("#result");
         
-        $.get('/paginationsProducts/'+element.attr("data-pagination"), function(data) {
+        $.get('/showProducts/'+element.attr("data-pagination"), function(data) {
             var html = '';
             for (var name in data) {
-                html += '<div class="col-sm-4 col-md-3"><div class="thumbnail"><a href="/products/' + data[name]['id'] + '">';
-                html += '<img src="' + data[name]['path'] + '" alt="Product" /></a><div class="caption"><h4>';
-                html += '<span class="text-danger">' + data[name]['price'] + '</span> <span class="label label-danger">';
-                html += 'руб.</span><button id="product-like" class="btn btn-success btn-xs pull-right">Хочу ';
-                html += '<span class="badge">' + data[name]['likes'] + '</span></button></h4></div></div></div>';
+                var item = data[name];
+
+                html += '<div class="col-md-3"><a href="/products/' + item['id'] + '">';
+                html += '<img class="img-responsive img-thumbnail" src="' + item['image'][0]['path'] + '" alt="Product" /></a><h4>';
+                html += '<span class="text-danger">' + item['price'] + '</span> <span class="label label-danger">';
+                html += 'руб.</span><button class="btn btn-success btn-xs add-like-product" data-toggle="' + item['id'] + '">Хочу ';
+                html += '<span class="badge">' + item['likeProduct'][0]['id'] + '</span></button></h4></div>';
             }
 
             if (data.length < 16) {
@@ -20,7 +22,7 @@ var Pagination = {
             result.append(html);
             result.animate({"opacity": 1}, 200);
             element.removeClass("disabled");
-        }, 'json');
+        });
     },
     button : function() {
         $('#pagination').click(function() {

@@ -24,7 +24,9 @@ class MessagesRepository extends EntityRepository
             ->createQuery('
                 SELECT m, u FROM UserMessagesBundle:Messages m
                   LEFT JOIN m.users u
-                WHERE m.dialog = :id
+                WHERE 
+                  m.dialog = :id
+                  AND m.isRemove = \'f\'
                 ORDER BY m.id ASC
             ')
             ->setParameter('id', $id)

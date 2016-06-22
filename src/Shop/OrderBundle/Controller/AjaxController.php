@@ -132,8 +132,13 @@ class AjaxController extends FOSRestController
 
         $em->flush();
 
+        $order = $em->getRepository("ShopOrderBundle:OrderItem")
+            ->getValueUsersBasket($this->getUser()->getId());
+
         return [
             'number' => $orderItem->getNumber(),
+            'count_product' => $order[0]['count_product'],
+            'sum_product' => $order[0]['sum_price'],
         ];
     }
 
@@ -171,6 +176,12 @@ class AjaxController extends FOSRestController
 
         $em->flush();
 
-        return "successful";
+        $order = $em->getRepository("ShopOrderBundle:OrderItem")
+            ->getValueUsersBasket($this->getUser()->getId());
+
+        return [
+            'count_product' => $order[0]['count_product'],
+            'sum_product' => $order[0]['sum_price'],
+        ];
     }
 }

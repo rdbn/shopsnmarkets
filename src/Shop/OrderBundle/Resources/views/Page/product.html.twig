@@ -31,10 +31,10 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="alert alert-success top20">
+        <div class="alert alert-success top20 final-sum">
             <a class="btn btn-success" href='{{ path('basket_order') }}'>Оформить заказ</a>
-            <p class="top20">Общие количество: <strong>{{ count }}</strong></p>
-            <p>Итого: <strong>{{ sum|number_format(2, '.', ' ') }}</strong> руб.</p>
+            <p class="top20">Общие количество: <strong id="all-count">{{ count }}</strong></p>
+            <p>Итого: <strong id="all-sum">{{ sum|number_format(2, '.', ' ') }}</strong> руб.</p>
         </div>
     {% endif %}
 {% endblock %}

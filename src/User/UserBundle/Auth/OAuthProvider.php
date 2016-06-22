@@ -51,11 +51,13 @@ class OAuthProvider extends OAuthUserProvider
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $name = $response->getRealName();// имя пользователя на стороне oAuth-сервера, например:Nikolay Lebedenko
+        $name = $response->getRealName();// имя пользователя на стороне oAuth-сервера
         $username = $response->getUsername();// уникальный ID пользователя на стороне oAuth-сервера, например:8d86a051742940e3
         $token = $response->getAccessToken();// токен (уникальный идентификатор) для авторизации, например:ZxC1/2+3 (более 255 символов)
         $path = $response->getProfilePicture();// изображение профиля, может не быть, например:пусто
 
+        var_dump($response);
+        exit();
         if(empty($username)){
             throw new UsernameNotFoundException('Вы не идентифицированы т.к. не получен Email-адрес');
         }

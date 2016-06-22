@@ -174,10 +174,6 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [1140, 250], mode: outbound, format: png, cache_expires: 1 weeks }
-        advertisingSliderShop:
-            quality: 100
-            filters:
-                thumbnail: { size: [770, 250], mode: outbound, format: png, cache_expires: 1 weeks }
         advertisingSideOf:
             quality: 100
             filters:
@@ -210,8 +206,8 @@ hwi_oauth:
     resource_owners:
         vkontakte:
             type:                vkontakte
-            client_id:           4105947
-            client_secret:       xe7oWIcTCpfwpmDHgx7b
+            client_id:           "%vk_client%"
+            client_secret:       "%vk_secret%"
             scope:               offline,friends,groups,stats
                
         facebook:

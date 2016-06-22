@@ -23,8 +23,8 @@ class Messages
     protected $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User\MessagesBundle\Entity\Dialog", inversedBy="messages", cascade={"all"})
-     * @ORM\JoinColumn(name="dialog_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="User\MessagesBundle\Entity\Dialog", inversedBy="messages")
+     * @ORM\JoinColumn(name="dialog_id", referencedColumnName="id")
      */
     protected $dialog;
     
@@ -40,9 +40,14 @@ class Messages
     protected $text;
     
     /**
-     * @ORM\Column(name="flags", type="boolean")
+     * @ORM\Column(name="flags", type="boolean", options={"default": FALSE })
      */
     protected $flags;
+
+    /**
+     * @ORM\Column(name="is_remove", type="boolean", options={"default": FALSE })
+     */
+    protected $isRemove;
     
     /**
      * @ORM\Column(type="datetime", name="created_at")
@@ -52,12 +57,13 @@ class Messages
     protected $createdAt;
     
     /**
-     * Consrtuct for class Messages
+     * Construct for class Messages
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->flags = false;
+        $this->isRemove = false;
     }
 
     /**
@@ -116,6 +122,30 @@ class Messages
     public function getFlags()
     {
         return $this->flags;
+    }
+
+    /**
+     * Set isRemove
+     *
+     * @param boolean $isRemove
+     *
+     * @return Messages
+     */
+    public function setIsRemove($isRemove)
+    {
+        $this->isRemove = $isRemove;
+
+        return $this;
+    }
+
+    /**
+     * Get isRemove
+     *
+     * @return boolean
+     */
+    public function getIsRemove()
+    {
+        return $this->isRemove;
     }
 
     /**

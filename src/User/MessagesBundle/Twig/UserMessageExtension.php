@@ -18,11 +18,6 @@ class UserMessageExtension extends \Twig_Extension
     private $em;
 
     /**
-     * @var integer
-     */
-    private $id;
-
-    /**
      * variable init
      *
      * @param Manager $em

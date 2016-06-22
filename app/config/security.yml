@@ -55,7 +55,7 @@ security:
         - { path: ^/property, roles: [ROLE_USER] }
         - { path: ^/firends, roles: [ROLE_USER] }
         - { path: ^/partners, roles: [ROLE_MANAGER] }
-        - { path: ^/message, roles: [ROLE_MANAGER, ROLE_USER] }
-        - { path: ^/order, roles: [ROLE_MANAGER, ROLE_USER] }
+        - { path: ^/message, roles: [ROLE_USER] }
+        - { path: ^/order, roles: [ROLE_USER] }
         - { path: ^/advertising, roles: [ROLE_MANAGER] }
         - { path: ^/addImageProduct, roles: [ROLE_MANAGER] }

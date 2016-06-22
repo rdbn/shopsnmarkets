@@ -37,8 +37,8 @@ class UserController extends Controller
         return $this->render('UserUserBundle:User:profile.html.twig', [
             'form' => $form->createView(),
             'shops' => $shops,
-            'user' => $user,
             'isUser' => true,
+            'user' => $user,
         ]);
     }
 

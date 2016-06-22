@@ -62,6 +62,10 @@ class MessageUserConsumer extends AbstractMessage implements ConsumerInterface
             $dialog->setUsersTo($usersTo);
 
             $this->em->persist($dialog);
+        }
+
+        if ($isFrom) {
+            $dialog->setFlags(true);
         } else {
             $dialog->setFlags(false);
         }

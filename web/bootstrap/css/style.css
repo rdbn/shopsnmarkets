@@ -118,3 +118,8 @@ body {
     height: 60px;
     background: #FFFFFF;
 }
+
+.add-like-product {
+    margin-left: 10px;
+    margin-top: 2px;
+}

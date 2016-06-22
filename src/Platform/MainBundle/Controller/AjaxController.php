@@ -72,7 +72,7 @@ class AjaxController extends FOSRestController
 
         $avalancheService = $this->get('liip_imagine.cache.manager');
         $result = array_map(function ($data) use ($avalancheService) {
-            $data['path'] = $avalancheService->getBrowserPath($data['path'], 'product_image');
+            $data['image'][0]['path'] = $avalancheService->getBrowserPath($data['image'][0]['path'], 'product_image');
 
             return $data;
         }, $result);

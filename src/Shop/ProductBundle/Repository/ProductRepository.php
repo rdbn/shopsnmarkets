@@ -208,4 +208,25 @@ class ProductRepository extends EntityRepository
             return null;
         }
     }
+
+    /**
+     * Кол-во лайков у продукта
+     *
+     * @return integer
+     */
+    public function findOneByCountProducts()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT count(p.id) as count_product FROM ShopProductBundle:Product p
+            ');
+
+        try {
+            $result = $query->getResult();
+
+            return $result[0]["count_product"];
+        } catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }

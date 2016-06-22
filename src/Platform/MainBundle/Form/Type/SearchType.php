@@ -12,7 +12,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 Class SearchType extends AbstractType 
 {
@@ -22,10 +21,6 @@ Class SearchType extends AbstractType
             'label' => false,
             'attr' => ["class" => "form-control"],
             'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
-        ));
-        $builder->add('save', SubmitType::class, array(
-            'label' => "Go!",
-            'attr' => ["class" => "btn btn-default"],
         ));
     }
     

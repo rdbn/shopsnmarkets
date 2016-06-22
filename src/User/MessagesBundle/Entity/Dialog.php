@@ -48,7 +48,7 @@ class Dialog
     protected $createdAt;
     
     /**
-     * @ORM\OneToMany(targetEntity="User\MessagesBundle\Entity\Messages", mappedBy="dialog", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="User\MessagesBundle\Entity\Messages", mappedBy="dialog")
      */
     protected $messages;
     

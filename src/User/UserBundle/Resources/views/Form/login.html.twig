@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6">
             {% if error %}
                 <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
@@ -26,11 +26,11 @@
                 <button class="btn btn-success " type="submit">Войти</button>
             </form>
         </div>
-        <div class="col-lg-6">
+        <div class="col-md-6">
             <h4 class="text-success">Зарегистрироваться на сайте</h4>
             {{ form_start(form) }}
                 {{ form_errors(form) }}
-                <div id="emails-valid" class="form-group"></div>
+                <div id="emails-valid" class="form-group hide"></div>
                 <div class="form-group">
                     {{ form_widget(form.username) }}
                     <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
@@ -49,16 +49,14 @@
                 </div>
             {{ form_end(form) }}
         </div>
-        {% if is_granted('ROLE_ADMIN') %}
-        <div class="col-lg-6">
-            <h4>Вход для покупателей:</h4>
+        <div class="col-md-6">
+            <h4 class="text-success">Вход через соц. сети:</h4>
             <div class="btn-group-vertical" role="group">
                 <a class="btn btn-primary" href="{{ hwi_oauth_login_url('vkontakte') }}">Регистрация через ВК</a>
                 <a class="btn btn-info" href="{{ hwi_oauth_login_url('facebook') }}">Регистрация через FB</a>
                 <a class="btn btn-danger" href="{{ hwi_oauth_login_url('google') }}">Регистрация через G+</a>
             </div>
         </div>
-        {% endif %}
     </div>
 {% endblock %}
 

@@ -4,7 +4,12 @@
 
 {% block content %}
     <div class="col-md-12">
-        {{ include('UserMessagesBundle:Menu:menu.html.twig') }}
+        <div class="btn-group">
+            <a class="btn btn-success" href="{{ path('messages') }}">Все сообщения</a>
+        </div>
+        <div class="btn-group pull-right">
+            <button id="remove-message" class="btn btn-danger hide" type="button">Удалить сообщения</button>
+        </div>
     </div>
     <div class="col-md-12">
         <div
@@ -15,7 +20,7 @@
             data-path-from="{% if dialog.users.path %}{{ dialog.users.path | imagine_filter('mini_avatar') }}{% endif %}"
             data-path-to="{% if dialog.usersTo.path %}{{ dialog.usersTo.path | imagine_filter('mini_avatar') }}{% endif %}">
             {% for message in messages %}
-                <div class="col-md-12 bottom10 message-user">
+                <div class="col-md-12 bottom10 message-user" data-toggle="{{ message.id }}">
                     <div class="well well-sm bottom0 {% if message.users.id == dialog.users.id %}pull-right{% endif %} col-md-4" data-user="username_{{ message.users.id }}">
                         <div class="media">
                             <div class="media-left">

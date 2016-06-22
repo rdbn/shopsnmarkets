@@ -10,16 +10,16 @@ var SendMessage = {
             path = element.attr('data-path-from');
         }
 
-        var html = '<div class="col-md-12 bottom10">';
+        var html = '<div class="col-md-12 bottom10 message-user">';
         if (isFrom) {
             html += '<div class="well well-sm bottom0 pull-right col-md-4" data-user="'+data.from+'">';
         } else {
             html += '<div class="well well-sm bottom0 col-md-4" data-user="'+data.from+'">';
         }
 
-        html += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="'+path+'">';
-        html += '</a></div><div class="media-body"><p class="small text-muted">'+data.date+'</p><p>'+data.message+'</p>';
-        html += '</div></div></div>';
+        html += '<div class="media"><div class="media-left"><a href="#"><img class="media-object" src="'+path+'"></a></div>';
+        html += '<div class="media-body"><p class="small text-muted">'+data.date+' <span class="glyphicon glyphicon-ok"></span>';
+        html += '</p><p>'+data.message+'</p></div></div></div>';
 
         return html;
     },
@@ -115,67 +115,41 @@ var CheckMessage = {
         });
     }
 };
-
 var Delete = {
-    getValue : function() {
-        var arValue = [];
-        $('#content').find('.messageBasket .click').each(function() {
-            arValue.push($(this).find('.messageId').attr('id'));
-            $(this).slideToggle(200, function() {
-                $(this).remove();
-            });
-            $('#content .menuMessages').find('.addMenu').animate({'opacity' : '0'}, 200, function() {
-                $(this).slideToggle(200, function() {
-                    $(this).remove();
-                });
-            });
+    main: $("#all-messages"),
+    getQuery : function(element) {
+        var ids = [];
+        Delete.main.find('.alert-success').each(function() {
+            var element = $(this);
+            ids.push(element.attr('data-toggle'));
+
+            element.remove();
         });
-        
-        return {
-            'id' : arValue
-        };
+
+        element.addClass('disabled');
+        $.post('/app_dev.php/message/messages/remove', {id: ids}, function () {
+            element.removeClass('disabled');
+        });
     },
-    getQuery : function() {
-        $.get('/message/userMessage/delete', this.getValue());
-    },
-    click : function() {
-        $('#content').on('click', '.addMenu .delete', function() {
-            Delete.getQuery();
-            
-            return false;
+    remove : function() {
+        $('#remove-message').click(function() {
+            Delete.getQuery($(this));
         });
     },
     select : function() {
-        $('#content').on('click', '.messageBasket .message', function() {
-            if (!$(this).hasClass('click')) {
-                $(this).addClass('click');
-                $(this).find('.tick').animate({'opacity' : '1'}, 200, function() {
-                    var html = '<ul class="addMenu"><li><a class="delete" href="#">Удалить</a></li>';
-                    html += '<li><a class="reestablish" href="#">Восстановить</a></li></ul>';
+        Delete.main.on('click', '.message-user', function() {
+            if ($(this).hasClass('alert-success')) {
+                $(this).removeClass('alert-success');
 
-                    if ($('#content .menuMessages').find('.addMenu').length === 0) {
-                        $('#content .menuMessages').append(html).find('.addMenu').slideToggle(200, function() {
-                            $(this).animate({'opacity' : '1'}, 200);
-                        });
-                    }
-                });
+                if (Delete.main.find('.alert-success').length == 0) {
+                    $('#remove-message').addClass('hide');
+                }
             } else {
-                $(this).removeClass('click');
-                $(this).find('.tick').animate({'opacity' : '0'}, 200, function() {
-                    var check = true;
-                    $('#content').find('.messageBasket .message').each(function() {
-                        if ($(this).find('.tick').css('opacity') === '1') {
-                            check = false;
-                        }
-                    });
-                    if (check) {
-                        $('#content .menuMessages').find('.addMenu').animate({'opacity' : '0'}, 200, function() {
-                            $(this).slideToggle(200, function() {
-                                $(this).remove();
-                            });
-                        });
-                    }
-                });
+                $(this).addClass('alert-success');
+
+                if (Delete.main.find('.alert-success').length > 0) {
+                    $('#remove-message').removeClass('hide');
+                }
             }
         });
     }
@@ -191,40 +165,8 @@ $(document).ready(function() {
     CheckMessage.send();
 
     Delete.select();
-    Delete.click();
+    Delete.remove();
 
     var main = $("#all-messages");
     main.scrollTop(main.get(0).scrollHeight);
-
-    $('#content').on('click', '.messages .message', function() {
-        if (!$(this).hasClass('click')) {
-            $(this).addClass('click');
-            $(this).find('.tick').animate({'opacity' : '1'}, 200, function() {
-                var html = '<ul class="addMenu"><li><a class="basket" href="#">В корзину</a></li></ul>';
-
-                if ($('#content .menuMessages').find('.addMenu').length === 0) {
-                    $('#content .menuMessages').append(html).find('.addMenu').slideToggle(200, function() {
-                        $(this).animate({'opacity' : '1'}, 200);
-                    });
-                }
-            });
-        } else {
-            $(this).removeClass('click');
-            $(this).find('.tick').animate({'opacity' : '0'}, 200, function() {
-                var check = true;
-                $('#content').find('.messages .message').each(function() {
-                    if ($(this).find('.tick').css('opacity') === '1') {
-                        check = false;
-                    }
-                });
-                if (check) {
-                    $('#content .menuMessages').find('.addMenu').animate({'opacity' : '0'}, 200, function() {
-                        $(this).slideToggle(200, function() {
-                            $(this).remove();
-                        });
-                    });
-                }
-            });
-        }
-    });
 });

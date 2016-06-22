@@ -38,7 +38,7 @@ class AuthController extends Controller
             'method' => 'POST',
         ]);
 
-        return $this->render('UserUserBundle:Login:loginForm.html.twig', [
+        return $this->render('UserUserBundle:Form:login.html.twig', [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
             'error' => $error,

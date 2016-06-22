@@ -58,7 +58,7 @@ class AjaxMessageController extends FOSRestController
      * @param Request $request
      *
      * @Route("/message/messages/remove", name="messages_remove", defaults={"_format": "json"})
-     * @Method({"GET"})
+     * @Method({"POST"})
      *
      * @Rest\View()
      *
@@ -73,7 +73,8 @@ class AjaxMessageController extends FOSRestController
             ->findByRemoveMessages($id);
 
         foreach ($messages as $message) {
-            $em->remove($message);
+            /* @var Messages $message */
+            $message->setIsRemove(true);
         }
 
         $em->flush();

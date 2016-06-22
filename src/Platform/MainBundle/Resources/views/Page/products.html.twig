@@ -3,44 +3,39 @@
 {% block title %}Товары{% endblock %}
 
 {% block body %}
-    <form id="search" action="#" method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
-        <div class="input-group">
-            {{ form_label(form.hashTags) }}
-            {{ form_errors(form.hashTags) }}
-            {{ form_widget(form.hashTags) }}
-            <span class="input-group-btn">
-                {{ form_widget(form.save) }}
-            </span>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group">
+                {{ form_widget(form.hashTags) }}
+                {{ form_widget(form._token) }}
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
         </div>
-        {{form_rest(form)}}
-    </form>
-    <div id="load" class="hide"><img src="{{ asset("public/images/load/ajax-loader.gif") }}"></div>
+    </div>
     <div id="result" class="row top20">
         {% for product in products %}
-            <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                    <a href='{{ path('product_platform', {'id' : product.id }) }}'>
-                        <img src="{{ asset(product.image[0].path | imagine_filter('product_image')) }}" alt="Product" />
-                    </a>
-                    <div class="caption">
-                        <h4>
-                            <span class="text-danger">{{ product.price }}</span> <span class="label label-danger">руб.</span>
-                            <button class="btn btn-success btn-xs add-like-product pull-right" data-toggle="{{ product.id }}">
-                                Хочу <span class="badge">{{ product.likeProduct[0].id }}</span>
-                            </button>
-                        </h4>
-                    </div>
-                </div>
+            <div class="col-md-3 bottom20 col-sm-4">
+                <a href='{{ path('product_platform', {'id' : product.id }) }}'>
+                    <img class="img-responsive img-thumbnail" src="{{ asset(product.image[0].path | imagine_filter('product_image')) }}" alt="Product" />
+                </a>
+                <h4>
+                    <span class="text-danger">{{ product.price }}</span> <span class="label label-danger">руб.</span>
+                    <button class="btn btn-success btn-xs add-like-product" data-toggle="{{ product.id }}">
+                        Хочу <span class="badge">{{ product.likeProduct[0].id }}</span>
+                    </button>
+                </h4>
             </div>
         {% endfor %}
     </div>
-    <div id="result-search" class="row"></div>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <button id="pagination" class="btn btn-warning " data-pagination="16">Показать еще</button>
+    {% if countProducts > 16 %}
+        <div class="row">
+            <div class="col-md-12 text-center bottom20">
+                <button id="pagination" class="btn btn-warning " data-pagination="16">Показать еще</button>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}

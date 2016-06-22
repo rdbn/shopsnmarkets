@@ -25,16 +25,19 @@ var CheckMail = {
                     element.find(".glyphicon-ok").removeClass("hide");
 
                     $('#emails-valid')
+                        .removeClass('hide')
                         .html('<div class="alert alert-success" role="alert">Нет пользователя с таким <strong>Email</strong></div>');
                 },
                 402: function() {
                     CheckMail.showBad(element);
                     $('#emails-valid')
+                        .removeClass('hide')
                         .html('<div class="alert alert-danger" role="alert">Не коректный <strong>Email</strong></div>');
                 },
                 403: function() {
                     CheckMail.showBad(element);
                     $('#emails-valid')
+                        .removeClass('hide')
                         .html('<div class="alert alert-danger" role="alert"><strong>Email</strong> уже занят!</div>');
                 }
             }

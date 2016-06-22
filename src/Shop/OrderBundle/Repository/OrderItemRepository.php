@@ -143,7 +143,7 @@ class OrderItemRepository extends EntityRepository
     }
 
     /**
-     * Финальная цена незарегистрированного пользователя
+     * Финальная цена зарегистрированного пользователя
      *
      * @param int $id
      *
