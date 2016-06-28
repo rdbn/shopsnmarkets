@@ -28,7 +28,8 @@ Class MessagesType extends AbstractType
         $builder->add('save', SubmitType::class, [
             "label" => "Отправить сообщение",
             'attr' => [
-                "class" => "btn btn-success ",
+                "class" => "btn btn-success",
+                "data-dismiss" => "modal",
             ],
         ]);
     }

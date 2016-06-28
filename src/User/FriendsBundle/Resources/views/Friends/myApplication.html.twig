@@ -12,7 +12,7 @@
             <div class="media result-user">
                 <div class="media-left">
                     <a href="{{ path('user_friends', { 'id' : user.id }) }}">
-                        <img class="media-object img-thumbnail" src="{% if(user.path) %}{{ user.path | imagine_filter('avatar') }}{% endif %}" />
+                        <img class="media-object img-thumbnail {% if user.path == '' %}img-avatar-friends{% endif %}" src="{% if(user.path) %}{{ user.path | imagine_filter('avatar') }}{% endif %}" />
                     </a>
                 </div>
                 <div class="media-body">

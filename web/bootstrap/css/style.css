@@ -113,6 +113,11 @@ body {
     height: 110px;
 }
 
+.img-avatar-friends {
+    width: 210px;
+    height: 260px;
+}
+
 .preview-avatar {
     width: 60px;
     height: 60px;

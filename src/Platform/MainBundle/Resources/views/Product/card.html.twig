@@ -32,11 +32,11 @@
             </div>
             {% endif %}
             <div class="row visible-xs visible-sm top20">
-                <div class="col-md-6 bottom20">
+                <div class="col-md-6">
                     <img class="img-thumbnail img-responsive" src="{{ asset(images[0].path | imagine_filter('main_product_image')) }}" alt="Product" />
                 </div>
             </div>
-            <p class='top20 text-muted'>{{ product.text }}</p>
+            <p class='text-muted top10'>{{ product.text }}</p>
             <div class="media hidden-xs hidden-sm">
                 <div class="media-left">
                     <a href="{{ path('main_shop', { 'shopname' : product.uniqueName }) }}">
