@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="User\UserBundle\Repository\UsersRepository")
  * @ORM\Table(name="users")
  */
 Class Users implements UserInterface, EquatableInterface, \Serializable
@@ -27,47 +27,37 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     protected $id;
     
     /**
-     * @ORM\Column(name="vkontakte_id", type="string", nullable=true, options={"default":""})
+     * @ORM\Column(name="vkontakte_id", type="bigint", nullable=true, options={"default": 0})
      */
-    protected $vkontakte;
+    protected $vkontakteId;
     
     /** 
      * @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true, options={"default":""}) 
      */
     protected $vkontakteAccessToken;
     
-    /** 
-     * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true, options={"default":""}) 
+    /**
+     * @ORM\Column(name="instagram_id", type="bigint", nullable=true, options={"default": 0})
      */
-    protected $facebook;
+    protected $instagramId;
  
     /** 
-     * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true, options={"default":""}) 
+     * @ORM\Column(name="instagram_access_token", type="string", length=255, nullable=true, options={"default":""})
      */
-    protected $facebookAccessToken;
- 
-    /** 
-     * @ORM\Column(name="google_id", type="string", length=255, nullable=true, options={"default":""}) 
-     */
-    protected $google;
- 
-    /** 
-     * @ORM\Column(name="google_access_token", type="string", length=255, nullable=true, options={"default":""}) 
-     */
-    protected $googleAccessToken;
+    protected $instagramAccessToken;
     
     /**
-     * @ORM\Column(name="username", type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $username;
     
     /**
-     * @ORM\Column(name="realname", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $realname;
 
     /**
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     protected $password;
     
@@ -422,27 +412,27 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     }
 
     /**
-     * Set vkontakte
+     * Set vkontakteId
      *
-     * @param string $vkontakte
+     * @param integer $vkontakteId
      *
      * @return Users
      */
-    public function setVkontakte($vkontakte)
+    public function setVkontakteId($vkontakteId)
     {
-        $this->vkontakte = $vkontakte;
+        $this->vkontakteId = $vkontakteId;
 
         return $this;
     }
 
     /**
-     * Get vkontakte
+     * Get vkontakteId
      *
-     * @return string
+     * @return integer
      */
-    public function getVkontakte()
+    public function getVkontakteId()
     {
-        return $this->vkontakte;
+        return $this->vkontakteId;
     }
 
     /**
@@ -470,99 +460,51 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
     }
 
     /**
-     * Set facebook
+     * Set instagramId
      *
-     * @param string $facebook
+     * @param integer $instagramId
      *
      * @return Users
      */
-    public function setFacebook($facebook)
+    public function setInstagramId($instagramId)
     {
-        $this->facebook = $facebook;
+        $this->instagramId = $instagramId;
 
         return $this;
     }
 
     /**
-     * Get facebook
+     * Get instagramId
      *
-     * @return string
+     * @return integer
      */
-    public function getFacebook()
+    public function getInstagramId()
     {
-        return $this->facebook;
+        return $this->instagramId;
     }
 
     /**
-     * Set facebookAccessToken
+     * Set instagramAccessToken
      *
-     * @param string $facebookAccessToken
+     * @param string $instagramAccessToken
      *
      * @return Users
      */
-    public function setFacebookAccessToken($facebookAccessToken)
+    public function setInstagramAccessToken($instagramAccessToken)
     {
-        $this->facebookAccessToken = $facebookAccessToken;
+        $this->instagramAccessToken = $instagramAccessToken;
 
         return $this;
     }
 
     /**
-     * Get facebookAccessToken
+     * Get instagramAccessToken
      *
      * @return string
      */
-    public function getFacebookAccessToken()
+    public function getInstagramAccessToken()
     {
-        return $this->facebookAccessToken;
-    }
-
-    /**
-     * Set google
-     *
-     * @param string $google
-     *
-     * @return Users
-     */
-    public function setGoogle($google)
-    {
-        $this->google = $google;
-
-        return $this;
-    }
-
-    /**
-     * Get google
-     *
-     * @return string
-     */
-    public function getGoogle()
-    {
-        return $this->google;
-    }
-
-    /**
-     * Set googleAccessToken
-     *
-     * @param string $googleAccessToken
-     *
-     * @return Users
-     */
-    public function setGoogleAccessToken($googleAccessToken)
-    {
-        $this->googleAccessToken = $googleAccessToken;
-
-        return $this;
-    }
-
-    /**
-     * Get googleAccessToken
-     *
-     * @return string
-     */
-    public function getGoogleAccessToken()
-    {
-        return $this->googleAccessToken;
+        return $this->instagramAccessToken;
     }
 
     /**

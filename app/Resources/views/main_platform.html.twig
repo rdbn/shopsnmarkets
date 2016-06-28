@@ -50,17 +50,15 @@
                                 <span class="glyphicon glyphicon-comment"></span> Сообщения
                                 <span class="badge">{{ app.user.id|notReadMessage }}</span>
                             </a>
+                            <a class="btn btn-success" href="{{ path('basket') }}">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Корзина
+                            </a>
                         {% else %}
                             <a class="btn btn-success" href="{{ path('login') }}">
-                                <span class="glyphicon glyphicon-check"></span> Вход
-                            </a>
-                            <a class="btn btn-success" href="{{ path('register') }}">
+                                <span class="glyphicon glyphicon-check"></span> Вход /
                                 <span class="glyphicon glyphicon-edit"></span> Регистрация
                             </a>
                         {% endif %}
-                        <a class="btn btn-success" href="{{ path('basket') }}">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Корзина
-                        </a>
                     </div><!-- /input-group -->
                 </div>
             </div>

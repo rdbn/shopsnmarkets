@@ -45,11 +45,8 @@ hwi_oauth_connect:
 vkontakte_login:
     path: /login/check-vkontakte
     
-facebook_login:
-    path: /login/check-facebook
-    
-google_login:
-    path: /login/check-google
+instagram_login:
+    path: /login/check-instagram
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"

@@ -40,8 +40,7 @@ security:
             oauth:
                 resource_owners:
                     vkontakte: "/login/check-vkontakte"
-                    facebook: "/login/check-facebook"
-                    google: "/login/check-google"
+                    instagram: "/login/check-instagram"
                 login_path: /login
                 failure_path: /login
 

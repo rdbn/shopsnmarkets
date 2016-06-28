@@ -123,3 +123,27 @@ body {
     margin-left: 10px;
     margin-top: 2px;
 }
+
+.instagram {
+    background: #517fa4;
+}
+
+.instagram {
+    background: #517fa4;
+    border-color: #517fa4;
+}
+
+.instagram:hover {
+    background: #1c5380;
+    border-color: #1c5380;
+}
+
+.vk {
+    background: #507299;
+    border-color: #507299;
+}
+
+.vk:hover {
+    background: #43648c;
+    border-color: #43648c;
+}

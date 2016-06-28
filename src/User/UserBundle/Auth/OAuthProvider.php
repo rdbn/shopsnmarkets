@@ -34,48 +34,44 @@ class OAuthProvider extends OAuthUserProvider
         $this->doctrine = $doctrine;
     }
 
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($id)
     {
-        if(empty($username)){
+        if(empty($id)){
             return null;
         }
 
         /** @var $user \User\UserBundle\Entity\Users */
-        $user = $this->getUserByUsername($username);
-        if($user && $user->getId()){
+        $user = $this->getUserByUsername($id);
+        if($user) {
             return $user;
         }
 
-        throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.',$username));
+        throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.',$id));
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $name = $response->getRealName();// имя пользователя на стороне oAuth-сервера
-        $username = $response->getUsername();// уникальный ID пользователя на стороне oAuth-сервера, например:8d86a051742940e3
-        $token = $response->getAccessToken();// токен (уникальный идентификатор) для авторизации, например:ZxC1/2+3 (более 255 символов)
-        $path = $response->getProfilePicture();// изображение профиля, может не быть, например:пусто
+        $name = $response->getRealName();
+        $email = $response->getEmail();
+        $clientId = $response->getUsername();
+        $token = $response->getAccessToken();
 
-        if(empty($username)){
-            throw new UsernameNotFoundException('Вы не идентифицированы т.к. не получен Email-адрес');
-        }
-        
-        $user = $this->getUserByUsername($username);// находим пользователя
-        /** @var $user \User\UserBundle\Entity\Users */
+        $user = $this->doctrine->getRepository('UserUserBundle:Users')
+            ->findOneByOAuthUser($clientId);
 
-        // если пользователя нет в базе данных - добавим его
-        if(!$user || !$user->getId()){
+        /** @var Users $user */
+        if(!$user) {
             $service = $response->getResourceOwner()->getName();
             $setter = 'set'.ucfirst($service);
-            $setter_id = $setter;
-            $setter_token = $setter.'AccessToken';
+            $setterId = $setter."Id";
+            $setterToken = $setter.'AccessToken';
             
             $user = new Users();
             $user->setRealname($name);
-            $user->setUsername($username);
-            $user->$setter_id($username);
-            $user->$setter_token($token);
-            $user->setPassword(sha1($username));
+            $user->setUsername($email);
+            $user->$setterId($clientId);
+            $user->$setterToken($token);
+            $user->setPassword(sha1($clientId));
             
             $roles = $this->doctrine->getRepository('UserUserBundle:Roles')
                     ->findOneBy(['role' => 'ROLE_USER']);
@@ -85,16 +81,16 @@ class OAuthProvider extends OAuthUserProvider
             $this->doctrine->getManager()->persist($user);
             $this->doctrine->getManager()->flush();
 
-            $user_id = $user->getId();
-        }else{
-            $user_id = $user->getId();
+            $userId = $user->getId();
+        } else {
+            $userId = $user->getId();
         }
 
-        if(!$user_id){
+        if(!$userId){
             throw new UsernameNotFoundException('Возникла проблема добавления или определения пользователя');
         }
 
-        return $this->loadUserByUsername($username);
+        return $this->loadUserByUsername($userId);
     }
     
     public function refreshUser(UserInterface $user)
@@ -102,7 +98,7 @@ class OAuthProvider extends OAuthUserProvider
         if(!$user instanceof User){
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.',get_class($user)));
         }
-        return $this->loadUserByUsername($user->getUsername());
+        return $this->loadUserByUsername($user->getId());
     }
 
     public function supportsClass($class)
@@ -110,10 +106,10 @@ class OAuthProvider extends OAuthUserProvider
         return $class === 'User\\UserBundle\\Entity\\Users';
     }
     
-    private function getUserByUsername($username = '')
+    private function getUserByUsername($id = -1)
     {
-        return $user = $this->doctrine->getRepository('UserUserBundle:Users')
-            ->findOneBy(['username' => $username]);
+        return $this->doctrine->getRepository('UserUserBundle:Users')
+            ->findOneBy(['id' => $id]);
     }
     
     /**

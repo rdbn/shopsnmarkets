@@ -199,42 +199,24 @@ fos_user:
 
 # HWI
 hwi_oauth:
-    #connect:
-        #account_connector: ib_user.oauth_user_provider
     firewall_name: main
-    
     resource_owners:
         vkontakte:
             type:                vkontakte
             client_id:           "%vk_client%"
             client_secret:       "%vk_secret%"
             scope:               offline,friends,groups,stats
-               
-        facebook:
-            type:                facebook
-            client_id:           204092453113554
-            client_secret:       e700b5ff56839ec5fec9e41c4cc84302
-            scope:               email,user_photos,user_location
-                
-        google:
-            type:                google
-            client_id:           826122149430.apps.googleusercontent.com
-            client_secret:       d4SV01a09W8TCwdfoHy_pW63
-            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
-            paths:
-                email:           email
-                profilepicture:  picture
-               
+        instagram:
+            type:                instagram
+            client_id:           "%instagram_client%"
+            client_secret:       "%instagram_secret%"
     fosub:
         # try 30 times to check if a username is available (foo, foo1, foo2 etc)
         username_iterations: 30
-
         # mapping between resource owners (see below) and properties
         properties:
-            vkontakte: vkontakte_id
-            facebook: facebook_id
-            google: google_id
-    
+            vkontakte: vkontakte
+            instagram: instagram
     http_client:
         timeout:       5
         verify_peer:   true
