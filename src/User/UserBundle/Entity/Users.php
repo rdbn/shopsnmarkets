@@ -26,20 +26,14 @@ Class Users implements UserInterface, EquatableInterface, \Serializable
      */
     protected $id;
     
-    /**
-     * @ORM\Column(name="vkontakte_id", type="bigint", nullable=true, options={"default": 0})
-     */
-    protected $vkontakteId;
+
     
     /** 
      * @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true, options={"default":""}) 
      */
     protected $vkontakteAccessToken;
     
-    /**
-     * @ORM\Column(name="instagram_id", type="bigint", nullable=true, options={"default": 0})
-     */
-    protected $instagramId;
+    
  
     /** 
      * @ORM\Column(name="instagram_access_token", type="string", length=255, nullable=true, options={"default":""})
