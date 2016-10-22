@@ -201,15 +201,15 @@ fos_user:
 hwi_oauth:
     firewall_name: main
     resource_owners:
-        vkontakte:
-            type:                vkontakte
-            client_id:           "%vk_client%"
-            client_secret:       "%vk_secret%"
-            scope:               offline,friends,groups,stats
-        instagram:
-            type:                instagram
-            client_id:           "%instagram_client%"
-            client_secret:       "%instagram_secret%"
+#        vkontakte:
+#            type:                vkontakte
+#            client_id:           "%vk_client%"
+#            client_secret:       "%vk_secret%"
+#            scope:               offline,friends,groups,stats
+#        instagram:
+#            type:                instagram
+#            client_id:           "%instagram_client%"
+#            client_secret:       "%instagram_secret%"
     fosub:
         # try 30 times to check if a username is available (foo, foo1, foo2 etc)
         username_iterations: 30

@@ -12,6 +12,26 @@ use Shop\PartnersBundle\Services\Tools\AbstractSearch;
 class Search extends AbstractSearch
 {
     /**
+     * Ищем в базе продукты
+     *
+     * @return array
+     */
+    private function find()
+    {
+        $repository = $this->em->getRepository('ShopProductBundle:Product');
+        $select = $repository->createQueryBuilder('p')
+            ->select('p.id, p.name, p.price, p.path');
+
+        $query = $select->where($select->expr()->like('p.keywords', ':words'))
+            ->setParameter('words', "%{$this->keywords}%")
+            ->setFirstResult(0)
+            ->setMaxResults(16)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
      * Отдаем резльтаты поиска
      *
      * @return array
@@ -24,35 +44,5 @@ class Search extends AbstractSearch
         } else {
             return [];
         }
-    }
-
-    /**
-     * Ищем в базе продукты
-     *
-     * @return array
-     */
-    private function find()
-    {
-        $repository = $this->em->getRepository('ShopProductBundle:Product');
-        $select = $repository->createQueryBuilder('p')
-            ->select('p.id, p.name, p.price, p.path');
-
-        $query = $select->where($select->expr()->like('p.keywords', ':words'))
-            ->setParameter('words', '%'.$this->getKeywords().'%')
-            ->setFirstResult(0)
-            ->setMaxResults(16)
-            ->getQuery();
-
-        return $query->getResult();
-    }
-    
-    private function getKeywords()
-    {
-        $lengthString = substr($this->keywords, 0, 255);
-        $validString = preg_replace('/[^\w\x7F-\xFF\s]/', '', $lengthString);
-        $lengthWords = trim(preg_replace('/\s(\S{1,2})\s/', ' ', preg_replace('/ +/', ' ', $validString)));
-        $string = preg_replace('/ +/', ' ', $lengthWords);
-        
-        return $string;
     }
 }

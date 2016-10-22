@@ -19,8 +19,9 @@ Class SearchType extends AbstractType
     {
         $builder->add('hashTags', TextType::class, array(
             'label' => false,
-            'attr' => ["class" => "form-control"],
-            'data' => isset($options['data']) ? $options['data']->getHashTags() : NULL,
+            'attr' => [
+                "class" => "form-control"
+            ],
         ));
     }
     

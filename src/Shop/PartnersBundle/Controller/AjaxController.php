@@ -32,7 +32,7 @@ class AjaxController extends FOSRestController
     {
         $id = $this->getUser()->getId();
         $shops = $this->getDoctrine()->getRepository('ShopCreateBundle:Shops')
-            ->findByManager($id);
+            ->findBy(['manager' => $id]);
 
         return $shops;
     }
@@ -54,10 +54,10 @@ class AjaxController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $shop = $em->getRepository('ShopCreateBundle:Shops')
-            ->findOneById($shop);
+            ->findOneBy(['id' => $shop]);
 
         $partner = $em->getRepository('ShopCreateBundle:Shops')
-            ->findOneById($partner);
+            ->findOneBy(['id' => $partner]);
 
         $partners = new Partners();
         $partners->setPartners($partner);
@@ -91,10 +91,10 @@ class AjaxController extends FOSRestController
         $shopPartners->setCheckPartners(true);
 
         $shop = $em->getRepository('ShopCreateBundle:Shops')
-            ->findOneById($shop);
+            ->findOneBy(['id' => $shop]);
 
         $partner = $em->getRepository('ShopCreateBundle:Shops')
-            ->findOneById($partner);
+            ->findOneBy(['id' => $partner]);
 
         $add = new Partners();
         $add->setShops($shop);

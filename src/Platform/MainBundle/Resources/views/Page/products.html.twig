@@ -22,9 +22,11 @@
                 </a>
                 <h4>
                     <span class="text-danger">{{ product.price }}</span> <span class="label label-danger">руб.</span>
-                    <button class="btn btn-success btn-xs add-like-product" data-toggle="{{ product.id }}">
-                        Хочу <span class="badge">{{ product.likeProduct[0].id }}</span>
-                    </button>
+                    {% if is_granted('ROLE_USER') %}
+                        <button class="btn btn-success btn-xs add-like-product" data-toggle="{{ product.id }}">
+                            Хочу <span class="badge">{{ product.likeProduct[0].id }}</span>
+                        </button>
+                    {% endif %}
                 </h4>
             </div>
         {% endfor %}

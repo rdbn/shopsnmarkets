@@ -97,7 +97,7 @@ class AjaxController extends FOSRestController
      *
      * @return array
      */
-    public function resultAction(Request $request)
+    public function searchAction(Request $request)
     {
         $product = new Product();
         $form = $this->createForm(SearchType::class, $product);
@@ -106,7 +106,7 @@ class AjaxController extends FOSRestController
         if ($form->isValid()) {
             return [];
         }
-        
+
         return $form->getErrors();
     }
 }

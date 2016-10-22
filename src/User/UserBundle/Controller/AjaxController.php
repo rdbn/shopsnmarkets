@@ -61,7 +61,7 @@ class AjaxController extends FOSRestController
      *
      * @Rest\View()
      *
-     * @return boolean
+     * @return string
      */
     public function emailAction($mail)
     {

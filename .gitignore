@@ -1,15 +1,11 @@
 /.idea/
 /app/cache/
 /app/logs/
-/app/*.php
 /app/config/parameters.yml
 /app/bootstrap.php.cache
-/app/console
-/app/*.dist
 /app/.htaccess
 !/app/cache/.gitkeep
 !/app/logs/.gitkeep
-!/app/AppKernel.php
 /bin/
 /vendor/
 /web/bundles
