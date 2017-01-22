@@ -3,17 +3,11 @@
 /app/logs/
 /app/config/parameters.yml
 /app/bootstrap.php.cache
-/app/.htaccess
 !/app/cache/.gitkeep
 !/app/logs/.gitkeep
 /bin/
 /vendor/
 /web/bundles
-/web/.htaccess
-/web/app.php
-/web/app_dev.php
-/web/config.php
-/web/favicon.ico
 /web/media
 /web/public/images/product/
 /web/public/images/advertising/
